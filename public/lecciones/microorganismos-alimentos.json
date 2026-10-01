@@ -1,0 +1,313 @@
+{
+  "id": "microorganismos-alimentos",
+  "titulo": "Buenos hábitos: microorganismos en los alimentos",
+  "materia": "Ciencias Naturales",
+  "grado": "5.º EGB",
+  "idioma": "es",
+  "duracionMinutos": 20,
+  "emoji": "🦠",
+  "narracion": false,
+  "descripcion": "Los estudiantes se encogen hasta el tamaño de un microbio, descubren qué microorganismos viven en los alimentos, cuáles nos ayudan y cuáles nos enferman, y practican los hábitos de higiene que nos protegen.",
+  "objetivos": [
+    "Reconocer que existen seres vivos tan pequeños que solo se ven con microscopio: bacterias, hongos, virus y protozoos.",
+    "Distinguir microorganismos que nos ayudan (levadura, lactobacilos) de los que causan enfermedades.",
+    "Identificar alimentos seguros y alimentos en mal estado.",
+    "Ordenar correctamente los pasos del lavado de manos.",
+    "Clasificar hábitos de higiene que previenen enfermedades."
+  ],
+  "escenas": [
+    {
+      "tipo": "narrativa",
+      "entorno": "aula",
+      "titulo": "¡Bienvenidos, exploradores!",
+      "pasos": [
+        {
+          "emoji": "👋",
+          "texto": "¡Hola! Hoy serás un explorador de la ciencia. Vamos a descubrir seres vivos tan pequeños que no los puedes ver con tus ojos.",
+          "modelo": "microscopio"
+        },
+        {
+          "emoji": "🎮",
+          "texto": "Para elegir, apunta con el rayo y presiona el gatillo. Si usas tus manos, junta la punta del dedo índice con el pulgar.",
+          "modelo": "mano_limpia"
+        },
+        {
+          "emoji": "🔬",
+          "texto": "Estos seres se llaman microorganismos o microbios. Para verlos, los científicos usan un microscopio. ¡Nosotros vamos a encogernos hasta su tamaño!",
+          "modelo": "lupa"
+        }
+      ]
+    },
+    {
+      "tipo": "exploracion",
+      "entorno": "microscopico",
+      "titulo": "El mundo microscópico",
+      "instruccion": "¡Te encogiste! Toca cada microbio para conocerlo. Algunos son amigos y otros nos pueden enfermar.",
+      "elementos": [
+        {
+          "modelo": "bacilo",
+          "nombre": "Bacteria bacilo",
+          "etiqueta": "malo",
+          "texto": "Tiene forma de bastón. Algunas, como la E. coli, llegan a la comida cuando no nos lavamos las manos o el agua está sucia."
+        },
+        {
+          "modelo": "salmonela",
+          "nombre": "Salmonela",
+          "etiqueta": "malo",
+          "texto": "Vive en huevos y pollo crudos. Si no se cocinan bien, puede darnos dolor de barriga, vómito y fiebre."
+        },
+        {
+          "modelo": "estafilococo",
+          "nombre": "Estafilococo",
+          "etiqueta": "malo",
+          "texto": "Son bacterias redondas que forman racimos, como uvas. Viven en la piel y la nariz, y pasan a la comida si no nos lavamos las manos."
+        },
+        {
+          "modelo": "virus",
+          "nombre": "Virus",
+          "etiqueta": "malo",
+          "texto": "Es mucho más pequeño que una bacteria. Algunos, como el norovirus, se pasan por las manos sucias y causan diarrea."
+        },
+        {
+          "modelo": "moho",
+          "nombre": "Moho",
+          "etiqueta": "malo",
+          "texto": "Es un hongo. Es la pelusa verde, blanca o negra que sale en el pan o la fruta vieja. ¡Esa comida no se debe comer!"
+        },
+        {
+          "modelo": "protozoo",
+          "nombre": "Ameba",
+          "etiqueta": "malo",
+          "texto": "Es un parásito que vive en el agua sucia. Por eso tomamos agua hervida o purificada."
+        },
+        {
+          "modelo": "levadura",
+          "nombre": "Levadura",
+          "etiqueta": "bueno",
+          "texto": "¡Es un hongo amigo! Ayuda a que el pan se infle y quede suave y esponjoso."
+        },
+        {
+          "modelo": "lactobacilo",
+          "nombre": "Lactobacilo",
+          "etiqueta": "bueno",
+          "texto": "¡Es una bacteria amiga! Convierte la leche en yogur y ayuda a que tu barriga funcione bien."
+        }
+      ]
+    },
+    {
+      "tipo": "narrativa",
+      "entorno": "microscopico",
+      "titulo": "¿Cómo llegan a la comida?",
+      "pasos": [
+        {
+          "emoji": "🤔",
+          "texto": "No todos los microbios son malos. Pero los que nos enferman se llaman patógenos, y les encanta la comida que no cuidamos.",
+          "modelo": "bacilo"
+        },
+        {
+          "emoji": "🪰",
+          "texto": "Las moscas se paran en la basura y luego en la comida. ¡Llevan microbios en sus patas! Por eso siempre tapamos los alimentos.",
+          "modelo": "mosca"
+        },
+        {
+          "emoji": "🖐️",
+          "texto": "Nuestras manos tocan muchas cosas durante el día. Si comemos sin lavarlas, los microbios pasan de las manos a la boca.",
+          "modelo": "mano_sucia"
+        },
+        {
+          "emoji": "🧊",
+          "texto": "A los microbios les gusta el calor. En la refrigeradora hace frío y crecen mucho más lento. Por eso guardamos ahí la leche, la carne y las sobras.",
+          "modelo": "refrigeradora"
+        }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "cocina",
+      "titulo": "¿Lo comerías?",
+      "instruccion": "Agarra cada alimento y ponlo en la caja correcta: ¿es seguro comerlo o hay que tener cuidado?",
+      "categorias": [
+        { "id": "seguro", "nombre": "Seguro", "emoji": "✅" },
+        { "id": "peligro", "nombre": "¡Cuidado!", "emoji": "⚠️" }
+      ],
+      "elementos": [
+        {
+          "modelo": "manzana",
+          "nombre": "Manzana lavada",
+          "categoria": "seguro",
+          "explicacion": "Las frutas lavadas con agua limpia están listas para comer."
+        },
+        {
+          "modelo": "pan_con_moho",
+          "nombre": "Pan con moho",
+          "categoria": "peligro",
+          "pista": "Mira bien esas manchas verdes…",
+          "explicacion": "Las manchas verdes son moho. Si un pan tiene moho, se bota entero."
+        },
+        {
+          "modelo": "yogur",
+          "nombre": "Yogur de la refri",
+          "categoria": "seguro",
+          "explicacion": "El yogur frío y bien guardado es seguro. ¡Además tiene lactobacilos amigos!"
+        },
+        {
+          "modelo": "plato_comida",
+          "opciones": { "moscas": true },
+          "nombre": "Comida destapada",
+          "categoria": "peligro",
+          "pista": "¿Quiénes están volando sobre el plato?",
+          "explicacion": "Las moscas dejaron microbios en la comida. Siempre hay que taparla."
+        },
+        {
+          "modelo": "manzana_podrida",
+          "nombre": "Fruta podrida",
+          "categoria": "peligro",
+          "explicacion": "La fruta podrida está llena de hongos y bacterias. No se come."
+        },
+        {
+          "modelo": "vaso_agua",
+          "nombre": "Agua hervida",
+          "categoria": "seguro",
+          "explicacion": "Hervir el agua elimina los microbios y parásitos como la ameba."
+        },
+        {
+          "modelo": "agua_sucia",
+          "nombre": "Agua de la llave sin hervir",
+          "categoria": "peligro",
+          "pista": "¿Qué parásito vimos que vive en el agua?",
+          "explicacion": "El agua sin hervir ni purificar puede tener parásitos y bacterias."
+        },
+        {
+          "modelo": "carne_cruda",
+          "nombre": "Carne olvidada al sol",
+          "categoria": "peligro",
+          "explicacion": "Con el calor, las bacterias de la carne crecen muy rápido. La carne va a la refrigeradora."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenar",
+      "entorno": "lavabo",
+      "titulo": "Lávate las manos como un experto",
+      "instruccion": "Toca las tarjetas en el orden correcto para lavarte bien las manos.",
+      "mensajeFinal": "🎉 ¡Así se lavan las manos! Hazlo antes de comer y después de ir al baño.",
+      "pasos": [
+        { "emoji": "💧", "texto": "Mojar las manos con agua limpia", "pista": "Antes del jabón necesitamos agua." },
+        { "emoji": "🧼", "texto": "Poner jabón", "pista": "¿Ya tienes las manos mojadas? Ahora falta algo que hace espuma." },
+        { "emoji": "👐", "texto": "Frotar palmas, dedos y uñas por 20 segundos", "pista": "Con el jabón puesto, ¿qué hacemos?" },
+        { "emoji": "🚿", "texto": "Enjuagar con agua", "pista": "Hay que quitar la espuma con los microbios." },
+        { "emoji": "🧻", "texto": "Secar con una toalla limpia", "pista": "Esto se hace al final." }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "cocina",
+      "titulo": "Buenos hábitos",
+      "instruccion": "¿Este hábito nos protege de los microbios o nos pone en peligro? Ponlo en la caja correcta.",
+      "categorias": [
+        { "id": "bueno", "nombre": "Buen hábito", "emoji": "👍" },
+        { "id": "malo", "nombre": "Mal hábito", "emoji": "👎" }
+      ],
+      "elementos": [
+        {
+          "emoji": "🧼",
+          "nombre": "Lavarme las manos antes de comer",
+          "categoria": "bueno",
+          "explicacion": "Así los microbios de las manos no llegan a tu boca."
+        },
+        {
+          "emoji": "🍎",
+          "nombre": "Comer fruta sin lavarla",
+          "categoria": "malo",
+          "explicacion": "La fruta puede tener tierra y microbios. Siempre se lava primero."
+        },
+        {
+          "emoji": "🥘",
+          "nombre": "Tapar la comida",
+          "categoria": "bueno",
+          "explicacion": "Tapada, las moscas y el polvo no llegan a la comida."
+        },
+        {
+          "emoji": "🥛",
+          "nombre": "Dejar la leche fuera de la refri todo el día",
+          "categoria": "malo",
+          "explicacion": "Con el calor, las bacterias de la leche se multiplican y se daña."
+        },
+        {
+          "emoji": "🚽",
+          "nombre": "Lavarme las manos después de ir al baño",
+          "categoria": "bueno",
+          "explicacion": "Es uno de los momentos más importantes para lavarse las manos."
+        },
+        {
+          "emoji": "💧",
+          "nombre": "Tomar agua hervida o purificada",
+          "categoria": "bueno",
+          "explicacion": "Así evitamos parásitos como la ameba."
+        },
+        {
+          "emoji": "🍪",
+          "nombre": "Comer algo que cayó al suelo sucio",
+          "categoria": "malo",
+          "explicacion": "El suelo tiene muchos microbios, aunque no los veamos."
+        },
+        {
+          "emoji": "🤧",
+          "nombre": "Estornudar sobre la comida",
+          "categoria": "malo",
+          "explicacion": "Al estornudar salen microbios. Cúbrete con el codo."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "entorno": "aula",
+      "titulo": "Reto final",
+      "preguntas": [
+        {
+          "pregunta": "¿Qué son los microorganismos?",
+          "opciones": [
+            "Seres vivos muy pequeños que solo se ven con microscopio",
+            "Insectos que viven en la cocina",
+            "Un tipo de comida"
+          ],
+          "correcta": 0,
+          "explicacion": "Son seres vivos diminutos: bacterias, hongos, virus y protozoos.",
+          "modelo": "microscopio"
+        },
+        {
+          "pregunta": "¿Cuál de estos microbios es nuestro amigo?",
+          "opciones": ["La salmonela", "El lactobacilo del yogur", "La ameba", "El moho del pan"],
+          "correcta": 1,
+          "explicacion": "El lactobacilo convierte la leche en yogur y ayuda a la digestión.",
+          "modelo": "lactobacilo"
+        },
+        {
+          "pregunta": "Encontraste un pan con manchas verdes. ¿Qué haces?",
+          "opciones": ["Le quito las manchas y me lo como", "Lo boto, tiene moho", "Lo caliento y me lo como"],
+          "correcta": 1,
+          "explicacion": "El moho se extiende por dentro del pan aunque no lo veamos. Se bota entero.",
+          "modelo": "pan_con_moho"
+        },
+        {
+          "pregunta": "¿Por cuánto tiempo debes frotar tus manos con jabón?",
+          "opciones": ["2 segundos", "20 segundos", "5 minutos"],
+          "correcta": 1,
+          "explicacion": "Unos 20 segundos: lo que dura cantar dos veces «Cumpleaños feliz».",
+          "modelo": "jabon"
+        },
+        {
+          "pregunta": "¿Por qué guardamos la leche en la refrigeradora?",
+          "opciones": [
+            "Porque el frío hace que los microbios crezcan más lento",
+            "Porque así sabe más dulce",
+            "Porque el frío hace que crezcan más microbios"
+          ],
+          "correcta": 0,
+          "explicacion": "A los microbios les gusta el calor. El frío los frena y la comida dura más.",
+          "modelo": "leche"
+        }
+      ]
+    }
+  ]
+}
