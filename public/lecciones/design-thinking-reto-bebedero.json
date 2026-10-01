@@ -1,0 +1,413 @@
+{
+  "id": "design-thinking-reto-bebedero",
+  "titulo": "Design Thinking: el reto del bebedero",
+  "materia": "Emprendimiento",
+  "grado": "6.º EGB",
+  "idioma": "es",
+  "duracionMinutos": 22,
+  "emoji": "💡",
+  "narracion": false,
+  "descripcion": "Los estudiantes aprenden las 5 fases del Design Thinking resolviendo un reto real: ayudar a Camila, una niña de 2.º de básica que no alcanza el bebedero del patio. La entrevistan, definen el problema, hacen una lluvia de ideas, construyen un prototipo con material reciclado y lo prueban con ella.",
+  "objetivos": [
+    "Explicar qué es el Design Thinking y nombrar sus 5 fases en orden: Empatizar, Definir, Idear, Prototipar y Testear.",
+    "Empatizar con una persona observando, haciendo buenas preguntas y escuchando sus opiniones.",
+    "Organizar la información y escribir el problema en una frase clara.",
+    "Generar muchas ideas sin juzgar y elegir una solución con criterios.",
+    "Comprender que un prototipo es una versión simple para probar y que las opiniones sirven para mejorarlo."
+  ],
+  "escenas": [
+    {
+      "tipo": "narrativa",
+      "entorno": "taller",
+      "titulo": "¡Bienvenido al Laboratorio de Innovación!",
+      "pasos": [
+        {
+          "emoji": "👋",
+          "texto": "¡Hola, innovador! Estás en el Laboratorio de Innovación. Aquí aprenderás a resolver problemas como lo hacen los diseñadores.",
+          "modelo": "bombilla"
+        },
+        {
+          "emoji": "🧠",
+          "texto": "Vas a usar el Design Thinking o «pensamiento de diseño»: una forma de crear soluciones pensando primero en las personas.",
+          "modelo": "corazon"
+        },
+        {
+          "emoji": "🎯",
+          "texto": "Mira la pizarra que está al frente: muestra las 5 fases que vas a recorrer. Hoy tendrás un reto real… ¡y una compañera necesita tu ayuda!",
+          "modelo": "portapapeles"
+        }
+      ]
+    },
+    {
+      "tipo": "exploracion",
+      "entorno": "taller",
+      "titulo": "Las 5 fases del Design Thinking",
+      "instruccion": "Toca cada objeto para descubrir una fase del Design Thinking. Fíjate en su color: cada fase tiene el suyo.",
+      "elementos": [
+        {
+          "modelo": "corazon",
+          "nombre": "1. Empatizar",
+          "insignia": "Fase 1",
+          "color": "#ff5aa5",
+          "texto": "Conocer y entender a las personas, sus necesidades y emociones.\n👀 Observar · ❓ Preguntar · 👂 Escuchar"
+        },
+        {
+          "modelo": "lupa",
+          "nombre": "2. Definir",
+          "insignia": "Fase 2",
+          "color": "#1fa7c4",
+          "texto": "Identificar el problema real a partir de lo que descubrimos.\n🗂️ Organizar la información · ✍️ Escribir el problema en una frase clara"
+        },
+        {
+          "modelo": "bombilla",
+          "nombre": "3. Idear",
+          "insignia": "Fase 3",
+          "color": "#e09b00",
+          "texto": "Generar muchas ideas para encontrar posibles soluciones.\n🌧️ Lluvia de ideas · ✏️ Dibujar ideas · 🙅 Sin juzgar"
+        },
+        {
+          "modelo": "caja_carton",
+          "nombre": "4. Prototipar",
+          "insignia": "Fase 4",
+          "color": "#21a366",
+          "texto": "Crear una versión simple de la idea para probarla. Puede ser física o digital.\n♻️ Maqueta con reciclaje · 🖼️ Dibujo o cartel · 💻 App o video"
+        },
+        {
+          "modelo": "portapapeles",
+          "nombre": "5. Testear",
+          "insignia": "Fase 5",
+          "color": "#8b5cf6",
+          "texto": "Probar la solución y recibir opiniones para mejorarla.\n🤝 Compartir · ❓ Preguntar qué les gusta y qué mejorarían · 🔧 Hacer cambios"
+        }
+      ]
+    },
+    {
+      "tipo": "ordenar",
+      "entorno": "taller",
+      "titulo": "El camino del diseñador",
+      "instruccion": "Toca las fases en el orden correcto. Si te equivocas, ¡no pasa nada! Los diseñadores aprenden probando.",
+      "mensajeFinal": "🎉 ¡Ese es el camino! Empatizar → Definir → Idear → Prototipar → Testear. Y si algo no funciona, volvemos a mejorar.",
+      "pasos": [
+        { "emoji": "❤️", "texto": "Empatizar", "pista": "Todo empieza conociendo a las personas." },
+        { "emoji": "🔍", "texto": "Definir", "pista": "Antes de buscar ideas, hay que saber cuál es el problema." },
+        { "emoji": "💡", "texto": "Idear", "pista": "Con el problema claro, ¡llega el momento de las ideas!" },
+        { "emoji": "📦", "texto": "Prototipar", "pista": "Primero tenemos la idea y después la construimos." },
+        { "emoji": "📋", "texto": "Testear", "pista": "Probamos al final, junto con la persona." }
+      ]
+    },
+    {
+      "tipo": "narrativa",
+      "entorno": "patio",
+      "titulo": "El reto: conoce a Camila",
+      "pasos": [
+        {
+          "emoji": "🏫",
+          "texto": "Este es el patio de la escuela. Mira el bebedero que está frente a ti: ahí comienza tu reto como diseñador.",
+          "modelo": "bebedero"
+        },
+        {
+          "emoji": "👧",
+          "texto": "Ella es Camila, de 2.º de básica. Su profesora notó que casi nunca toma agua en el recreo y regresa a clase con sed.",
+          "modelo": "estudiante",
+          "opciones": { "expresion": "triste" }
+        },
+        {
+          "emoji": "❤️",
+          "texto": "Antes de inventar una solución hay que EMPATIZAR: observar, hacer preguntas y escuchar. ¡Vamos a conversar con ella!",
+          "modelo": "binoculares"
+        }
+      ]
+    },
+    {
+      "tipo": "entrevista",
+      "entorno": "patio",
+      "titulo": "Fase 1 · Empatizar: entrevista a Camila",
+      "instruccion": "Elige buenas preguntas para conocer a Camila. Las mejores empiezan con «¿Cómo…?» o «¿Qué…?» y no la juzgan.",
+      "saludo": "Hola… soy Camila. ¿Tú también vienes al bebedero?",
+      "mensajeFinal": "🎉 ¡Excelente entrevista! Observaste, preguntaste y escuchaste: eso es EMPATIZAR.",
+      "minimo": 4,
+      "personaje": { "nombre": "Camila", "modelo": "estudiante", "expresion": "triste", "posicion": [0, 0, -1.75] },
+      "preguntas": [
+        {
+          "texto": "¿Cómo te sientes cuando tienes sed en el recreo?",
+          "tipo": "buena",
+          "respuesta": "Me pongo triste y cansada. Después de jugar me da muchísima sed.",
+          "hallazgo": "Se siente triste y cansada cuando tiene sed.",
+          "expresion": "triste"
+        },
+        {
+          "texto": "¿Qué pasa cuando intentas usar el bebedero?",
+          "tipo": "buena",
+          "respuesta": "¡Es muy alto! Me paro de puntitas y el agua me cae en la ropa.",
+          "hallazgo": "El bebedero es muy alto para ella.",
+          "expresion": "sorpresa"
+        },
+        {
+          "texto": "¿Qué haces cuando no puedes tomar agua?",
+          "tipo": "buena",
+          "respuesta": "Espero hasta volver a clase… pero a veces olvido mi botella en casa.",
+          "hallazgo": "Espera hasta la clase y a veces olvida su botella.",
+          "expresion": "neutral"
+        },
+        {
+          "texto": "¿Qué te gustaría que fuera diferente?",
+          "tipo": "buena",
+          "respuesta": "¡Me gustaría tomar agua sola, como los grandes, sin pedir ayuda!",
+          "hallazgo": "Quiere tomar agua sola, sin pedir ayuda.",
+          "expresion": "feliz"
+        },
+        {
+          "texto": "¿Te gusta el agua?",
+          "tipo": "mala",
+          "respuesta": "Sí.",
+          "expresion": "neutral",
+          "retro": "Esa pregunta solo se responde con «sí» o «no» y no nos enseña nada nuevo. Prueba una que empiece con «¿Cómo…?» o «¿Qué…?»."
+        },
+        {
+          "texto": "¿Por qué no le pides a alguien que te cargue?",
+          "tipo": "mala",
+          "respuesta": "Es que… me da vergüenza.",
+          "expresion": "triste",
+          "retro": "Esa pregunta hace sentir que Camila tiene la culpa. Para empatizar escuchamos sin juzgar."
+        }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "taller",
+      "titulo": "Fase 2 · Definir: organiza la información",
+      "instruccion": "Después de la entrevista tenemos muchos datos. Separa lo que es importante para el problema de lo que no lo es.",
+      "categorias": [
+        { "id": "importante", "nombre": "Importante", "emoji": "🎯" },
+        { "id": "otro", "nombre": "No es el problema", "emoji": "💭" }
+      ],
+      "elementos": [
+        {
+          "emoji": "📏",
+          "nombre": "El bebedero es muy alto para ella",
+          "categoria": "importante",
+          "explicacion": "¡Sí! Es la causa principal del problema."
+        },
+        {
+          "emoji": "🙋‍♀️",
+          "nombre": "Quiere tomar agua sola, sin ayuda",
+          "categoria": "importante",
+          "explicacion": "Es su necesidad más importante: ser independiente."
+        },
+        {
+          "emoji": "😓",
+          "nombre": "Se siente triste y cansada con sed",
+          "categoria": "importante",
+          "explicacion": "Sus emociones nos muestran por qué vale la pena ayudarla."
+        },
+        {
+          "emoji": "🎨",
+          "nombre": "Su color favorito es el morado",
+          "categoria": "otro",
+          "pista": "¿Esto explica por qué no puede tomar agua?",
+          "explicacion": "Es un dato bonito, pero no explica por qué no toma agua."
+        },
+        {
+          "emoji": "🐶",
+          "nombre": "Tiene un perrito llamado Coco",
+          "categoria": "otro",
+          "pista": "¿Tiene que ver con el bebedero?",
+          "explicacion": "Nos ayuda a conocerla, pero no es parte del problema."
+        },
+        {
+          "emoji": "🎂",
+          "nombre": "Su cumpleaños es en junio",
+          "categoria": "otro",
+          "pista": "¿Cambia en algo lo que pasa en el recreo?",
+          "explicacion": "Es información que no cambia el problema del recreo."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenar",
+      "entorno": "taller",
+      "titulo": "Fase 2 · Definir: la frase del problema",
+      "instruccion": "Arma la frase del problema tocando las partes en orden. Una buena frase dice QUIÉN, QUÉ NECESITA, DÓNDE y POR QUÉ.",
+      "mensajeFinal": "🎯 «Camila necesita tomar agua sola en el recreo porque el bebedero es muy alto para ella». ¡Problema bien definido!",
+      "pasos": [
+        { "emoji": "👧", "texto": "Camila", "pista": "¿De quién hablamos? Empieza por la persona." },
+        { "emoji": "💧", "texto": "necesita tomar agua sola", "pista": "Después va lo que la persona necesita." },
+        { "emoji": "🏫", "texto": "en el recreo", "pista": "¿Dónde o cuándo ocurre?" },
+        { "emoji": "📏", "texto": "porque el bebedero es muy alto para ella", "pista": "Al final va el porqué." }
+      ]
+    },
+    {
+      "tipo": "lluvia",
+      "entorno": "taller",
+      "titulo": "Fase 3 · Idear: lluvia de ideas",
+      "instruccion": "💡 Toca la bombilla una y otra vez. En la lluvia de ideas vale todo: ¡todavía no juzgamos!",
+      "instruccionElegir": "Elige UNA idea que cumpla todo: ✔ Camila la usa sola ✔ Es segura ✔ La podemos construir nosotros con material reciclado.",
+      "ideas": [
+        {
+          "emoji": "🪜",
+          "texto": "Un escalón firme junto al bebedero",
+          "correcta": true,
+          "retro": "¡Excelente elección! Camila lo usa sola, es seguro y lo podemos construir con una caja y botellas recicladas."
+        },
+        {
+          "emoji": "🚰",
+          "texto": "Instalar un bebedero más bajito",
+          "correcta": false,
+          "retro": "¡Muy buena idea! Pero necesita un plomero y dinero: no la podemos construir nosotros."
+        },
+        {
+          "emoji": "🧴",
+          "texto": "Una botella con su nombre para el recreo",
+          "correcta": false,
+          "retro": "Ayuda, pero si la olvida en casa sigue sin poder usar el bebedero."
+        },
+        {
+          "emoji": "🚁",
+          "texto": "Un dron que le lleve agua",
+          "correcta": false,
+          "retro": "¡Qué creativa! Pero es muy cara y difícil de construir."
+        },
+        {
+          "emoji": "🦒",
+          "texto": "Esperar a que Camila crezca",
+          "correcta": false,
+          "retro": "Eso tardaría años. Camila necesita una solución ahora."
+        },
+        {
+          "emoji": "🙋",
+          "texto": "Que un adulto la cargue siempre",
+          "correcta": false,
+          "retro": "Así no tomaría agua sola, y ella quiere ser independiente."
+        },
+        {
+          "emoji": "🛝",
+          "texto": "Un tobogán que termine en el bebedero",
+          "correcta": false,
+          "retro": "¡Divertidísima! Pero no es segura para los más pequeños."
+        },
+        {
+          "emoji": "🔔",
+          "texto": "Una alarma que le recuerde tomar agua",
+          "correcta": false,
+          "retro": "Le recordaría tomar agua, pero igual no alcanzaría el bebedero."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenar",
+      "entorno": "taller",
+      "titulo": "Fase 4 · Prototipar: construye el escalón",
+      "instruccion": "Un prototipo es una versión simple de la idea para probarla. Ordena los pasos y mira a tu DERECHA cómo se arma en la mesa de trabajo.",
+      "mensajeFinal": "🎉 ¡Prototipo listo! No tiene que ser perfecto: sirve para probar la idea con Camila.",
+      "construccion": { "modelo": "maqueta_escalon" },
+      "pasos": [
+        { "emoji": "📦", "texto": "Conseguir una caja de cartón resistente", "pista": "¿Qué necesitamos primero como base?" },
+        { "emoji": "🧴", "texto": "Rellenarla con botellas plásticas tapadas", "pista": "Antes de cerrarla hay que hacerla fuerte por dentro." },
+        { "emoji": "🔒", "texto": "Cerrarla y forrarla con cinta", "pista": "Ya está rellena: ¿qué falta para que no se abra?" },
+        { "emoji": "🎨", "texto": "Decorarla con colores llamativos", "pista": "Primero se arma y después se decora." },
+        { "emoji": "🦶", "texto": "Pegar caucho antideslizante arriba", "pista": "Este es el toque final de seguridad." }
+      ]
+    },
+    {
+      "tipo": "entrevista",
+      "entorno": "patio",
+      "titulo": "Fase 5 · Testear: Camila prueba el escalón",
+      "instruccion": "Ahora TESTEA: pregúntale a Camila qué opina del prototipo para saber cómo mejorarlo.",
+      "saludo": "¡Mira! ¡Ya alcanzo el agua yo sola!",
+      "mensajeFinal": "🔧 ¡Gracias a Camila sabemos cómo mejorarlo! Volvemos a prototipar y a testear hasta que funcione: eso se llama ITERAR.",
+      "minimo": 3,
+      "utileria": [{ "modelo": "maqueta_escalon", "posicion": [0, 0, -2.25], "opciones": { "etapa": 5 } }],
+      "personaje": { "nombre": "Camila", "modelo": "estudiante", "expresion": "feliz", "posicion": [0, 0.24, -2.25] },
+      "preguntas": [
+        {
+          "texto": "¿Qué es lo que más te gusta del escalón?",
+          "tipo": "buena",
+          "respuesta": "¡Que ahora tomo agua sola, sin pedir ayuda! Y los colores están lindos.",
+          "hallazgo": "Le encanta poder tomar agua sola.",
+          "expresion": "feliz"
+        },
+        {
+          "texto": "¿Qué le cambiarías o mejorarías?",
+          "tipo": "buena",
+          "respuesta": "Mmm… se mueve un poquito cuando me subo.",
+          "hallazgo": "Se mueve un poco: hay que hacerlo más firme.",
+          "expresion": "neutral"
+        },
+        {
+          "texto": "¿Cómo te sientes cuando lo usas con el piso mojado?",
+          "tipo": "buena",
+          "respuesta": "Me da un poco de miedo resbalarme cuando cae agua.",
+          "hallazgo": "Con agua puede resbalar: hay que poner más antideslizante.",
+          "expresion": "triste"
+        },
+        {
+          "texto": "¿Verdad que está perfecto?",
+          "tipo": "mala",
+          "respuesta": "Eh… sí, creo…",
+          "expresion": "neutral",
+          "retro": "Esa pregunta empuja a Camila a decir que sí. En el testeo buscamos opiniones sinceras."
+        },
+        {
+          "texto": "¿Te gusta? ¿Sí o no?",
+          "tipo": "mala",
+          "respuesta": "Sí.",
+          "expresion": "neutral",
+          "retro": "Con «sí» o «no» no sabemos qué mejorar. Pregúntale qué le gusta y qué cambiaría."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "entorno": "taller",
+      "titulo": "Reto final: diseñador experto",
+      "preguntas": [
+        {
+          "pregunta": "¿Cuál es el orden de las fases del Design Thinking?",
+          "opciones": [
+            "Empatizar, Definir, Idear, Prototipar, Testear",
+            "Idear, Prototipar, Empatizar, Testear, Definir",
+            "Prototipar, Testear, Idear, Definir, Empatizar"
+          ],
+          "correcta": 0,
+          "explicacion": "Siempre empezamos por las personas (Empatizar) y terminamos probando la solución (Testear).",
+          "modelo": "corazon"
+        },
+        {
+          "pregunta": "¿Cuál es una buena pregunta para empatizar?",
+          "opciones": ["¿Te gusta el recreo?", "¿Cómo te sientes cuando tienes sed?", "¿Por qué no pides ayuda?"],
+          "correcta": 1,
+          "explicacion": "Las preguntas abiertas, que empiezan con «¿Cómo…?» o «¿Qué…?», nos ayudan a entender emociones y necesidades.",
+          "modelo": "globo_dialogo"
+        },
+        {
+          "pregunta": "En la fase de Definir, ¿qué hacemos?",
+          "opciones": ["Construimos la maqueta", "Escribimos el problema en una frase clara", "Pedimos opiniones del prototipo"],
+          "correcta": 1,
+          "explicacion": "Definir es organizar lo que descubrimos y escribir el problema real en una frase clara.",
+          "modelo": "pieza_rompecabezas"
+        },
+        {
+          "pregunta": "Durante una lluvia de ideas…",
+          "opciones": ["Decimos «esa idea es mala»", "Solo vale la idea del más grande", "Proponemos muchas ideas sin juzgar"],
+          "correcta": 2,
+          "explicacion": "Primero generamos muchas ideas sin juzgar; después elegimos una con criterios.",
+          "modelo": "bombilla"
+        },
+        {
+          "pregunta": "Un prototipo es…",
+          "opciones": ["El producto final perfecto", "Una versión simple de la idea para probarla", "Un dibujo que guardamos sin mostrar"],
+          "correcta": 1,
+          "explicacion": "Puede ser una maqueta con reciclaje, un dibujo, un cartel o algo digital, como una app o un video.",
+          "modelo": "caja_carton"
+        },
+        {
+          "pregunta": "Camila dijo que el escalón se mueve. ¿Qué hacemos?",
+          "opciones": ["Lo mejoramos y lo volvemos a probar", "Lo botamos y nos rendimos", "Le decimos que no se queje"],
+          "correcta": 0,
+          "explicacion": "Testear sirve para mejorar: hacemos cambios según los comentarios y volvemos a probar.",
+          "modelo": "portapapeles"
+        }
+      ]
+    }
+  ]
+}

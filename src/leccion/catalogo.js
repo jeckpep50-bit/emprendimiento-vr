@@ -1,0 +1,100 @@
+// Catálogo de lo que el motor sabe dibujar. Lo usan el validador, el generador
+// con IA (para no inventar modelos que no existen) y el propio motor.
+// Este archivo no importa three.js para poder usarse también desde Node.
+
+export const MODELOS = {
+  // Microbios (se muestran "gigantes", con carita). Admiten `caracter` y `color`.
+  coco: 'Bacteria redonda (coco).',
+  estafilococo: 'Racimo de bacterias redondas, como uvas (estafilococo; vive en la piel y la nariz).',
+  estreptococo: 'Cadena de bacterias redondas (estreptococo).',
+  bacilo: 'Bacteria con forma de bastón (bacilo, p. ej. E. coli).',
+  salmonela: 'Bacilo con muchos flagelos (Salmonela; huevos y pollo mal cocinados).',
+  espirilo: 'Bacteria en espiral (espirilo).',
+  virus: 'Virus con espículas (p. ej. norovirus, hepatitis A).',
+  moho: 'Hongo moho: pelusa con esporas (aparece en pan y fruta viejos).',
+  levadura: 'Levadura: hongo amigo que hace crecer el pan.',
+  lactobacilo: 'Lactobacilo: bacteria amiga que convierte la leche en yogur.',
+  protozoo: 'Protozoo/ameba: parásito del agua sin hervir.',
+  celula: 'Célula animal genérica con núcleo.',
+  // Alimentos
+  manzana: 'Manzana fresca.',
+  manzana_podrida: 'Manzana podrida con manchas y moho.',
+  banano: 'Banano (guineo).',
+  naranja: 'Naranja.',
+  zanahoria: 'Zanahoria.',
+  pan: 'Pan fresco.',
+  pan_con_moho: 'Pan con manchas de moho verde.',
+  leche: 'Cartón de leche.',
+  queso: 'Trozo de queso.',
+  yogur: 'Vaso de yogur.',
+  huevo: 'Huevo.',
+  carne_cruda: 'Filete de carne cruda.',
+  pollo_crudo: 'Presa de pollo cruda.',
+  pescado: 'Pescado.',
+  sandwich: 'Sánduche.',
+  plato_comida: 'Plato de comida servido (arroz, carne, ensalada). Opción `moscas: true` para mostrarlo destapado con moscas.',
+  vaso_agua: 'Vaso de agua limpia.',
+  agua_sucia: 'Vaso de agua turbia sin hervir.',
+  jugo: 'Vaso de jugo (color configurable).',
+  // Objetos
+  mosca: 'Mosca (transporta microbios).',
+  jabon: 'Barra de jabón con burbujas.',
+  gel_antibacterial: 'Botella de gel antibacterial.',
+  toalla: 'Toalla doblada.',
+  lavamanos: 'Lavamanos con grifo.',
+  refrigeradora: 'Refrigeradora.',
+  basurero: 'Basurero con tapa.',
+  recipiente_tapado: 'Recipiente con tapa para guardar comida.',
+  olla: 'Olla con vapor (cocinar bien los alimentos).',
+  mano_sucia: 'Mano con manchas de microbios.',
+  mano_limpia: 'Mano limpia y brillante.',
+  lupa: 'Lupa.',
+  microscopio: 'Microscopio.',
+  termometro: 'Termómetro.',
+  cepillo_dientes: 'Cepillo de dientes.',
+  planta: 'Planta en maceta.',
+  sol: 'Sol sonriente.',
+  corazon: 'Corazón (símbolo de salud).',
+  trofeo: 'Trofeo dorado.',
+  estrella: 'Estrella dorada.',
+  tarjeta: 'Tarjeta con `texto` y `emoji` (sirve para hábitos, pasos y conceptos sin modelo 3D).',
+  // Personas, escuela y Design Thinking
+  estudiante: 'Estudiante de tamaño real con uniforme escolar. Opciones: peinado ("colitas" | "corto"), expresion. Ideal como personaje de una entrevista.',
+  bebedero: 'Bebedero escolar de pedestal (~1 m). Opción `agua: true` muestra el chorro.',
+  bombilla: 'Bombilla encendida (símbolo de Idear).',
+  binoculares: 'Binoculares (observar, Empatizar).',
+  pieza_rompecabezas: 'Pieza de rompecabezas con la palabra PROBLEMA (Definir).',
+  nota_adhesiva: 'Nota adhesiva (post-it). Opción `color`.',
+  caja_carton: 'Caja de cartón abierta (prototipar con material reciclado).',
+  botella_plastica: 'Botella plástica reciclada.',
+  cinta_adhesiva: 'Rollo de cinta adhesiva.',
+  maqueta_escalon: 'Maqueta de un escalón hecho con caja y botellas recicladas. Opción `etapa` 1..5 para verla a medio construir.',
+  portapapeles: 'Portapapeles con lista de chequeo (Testear).',
+  lapiz: 'Lápiz.',
+  globo_dialogo: 'Globo de diálogo con signo de pregunta (hacer preguntas).',
+};
+
+export const ENTORNOS = {
+  aula: 'Salón de clases luminoso con pizarra.',
+  cocina: 'Cocina con mesón, refrigeradora y ventana.',
+  microscopico: 'Mundo microscópico: fondo azul profundo con burbujas flotando.',
+  lavabo: 'Baño con lavamanos, espejo y azulejos.',
+  naturaleza: 'Prado al aire libre con árboles y cielo.',
+  espacio: 'Espacio exterior con estrellas.',
+  taller: 'Laboratorio de innovación: pizarra con las 5 fases del Design Thinking, muro de notas adhesivas y estantes con material reciclado.',
+  patio: 'Patio de una escuela ecuatoriana: bebedero al frente, cancha, bancas, edificio escolar, bandera del Ecuador y volcanes al fondo.',
+};
+
+export const TIPOS_ESCENA = {
+  narrativa: 'Paneles de texto que se avanzan con "Siguiente", opcionalmente con un modelo 3D girando al lado.',
+  exploracion: 'Modelos flotando alrededor; el estudiante los toca para descubrir un dato de cada uno.',
+  clasificar: 'El estudiante arrastra cada elemento a la caja (categoría) correcta.',
+  ordenar: 'El estudiante toca tarjetas en el orden correcto de una secuencia.',
+  quiz: 'Preguntas de opción múltiple con retroalimentación inmediata.',
+  entrevista: 'Conversación con un personaje de tamaño real: el estudiante elige preguntas; las buenas revelan hallazgos y las malas reciben una explicación.',
+  lluvia: 'Lluvia de ideas: al tocar una bombilla salen ideas en notas adhesivas; luego se elige la que cumple los criterios.',
+};
+
+export const IDIOMAS = ['es', 'en'];
+export const CARACTERES = ['bueno', 'malo', 'neutral'];
+export const EXPRESIONES = ['neutral', 'feliz', 'triste', 'sorpresa', 'bueno', 'malo'];

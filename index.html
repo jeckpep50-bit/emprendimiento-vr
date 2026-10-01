@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1b2440" />
+    <title>Emprendimiento VR · Design Thinking</title>
+    <link rel="stylesheet" href="./src/estilos.css" />
+  </head>
+  <body>
+    <div id="escenario"></div>
+
+    <main id="portada" class="portada">
+      <header class="portada__cabecera">
+        <div class="marca">💡 Emprendimiento VR</div>
+        <p class="portada__sub">Laboratorio de Innovación · Design Thinking en realidad virtual para Meta Quest</p>
+      </header>
+
+      <section id="lista" class="lista" aria-label="Lecciones disponibles"></section>
+
+      <section id="detalle" class="detalle" hidden>
+        <button id="volver" class="enlace">← Todas las lecciones</button>
+        <div class="detalle__tarjeta">
+          <div id="detalle-emoji" class="detalle__emoji"></div>
+          <p id="detalle-meta" class="detalle__meta"></p>
+          <h1 id="detalle-titulo"></h1>
+          <p id="detalle-descripcion"></p>
+          <h2>Al terminar podrás…</h2>
+          <ul id="detalle-objetivos"></ul>
+          <div class="acciones">
+            <button id="btn-vr" class="boton boton--grande">🥽 Entrar en realidad virtual</button>
+            <button id="btn-pantalla" class="boton boton--secundario">🖥️ Vista previa en pantalla</button>
+          </div>
+          <p id="aviso-vr" class="aviso" hidden></p>
+        </div>
+      </section>
+    </main>
+
+    <div id="ayuda-pantalla" class="ayuda" hidden>
+      <span>🖱️ Arrastra para mirar · Clic para elegir · Mantén el clic para agarrar · WASD para caminar</span>
+      <button id="salir-pantalla" class="boton boton--chico">Salir</button>
+    </div>
+    <div id="cargando" class="cargando" hidden>Cargando…</div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
