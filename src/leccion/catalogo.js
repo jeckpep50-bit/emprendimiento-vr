@@ -72,6 +72,17 @@ export const MODELOS = {
   portapapeles: 'Portapapeles con lista de chequeo (Testear).',
   lapiz: 'Lápiz.',
   globo_dialogo: 'Globo de diálogo con signo de pregunta (hacer preguntas).',
+  // Cocina avanzada y laboratorio
+  tabla_picar: 'Tabla de picar. Opción `color` (p. ej. roja para carnes crudas, verde para verduras).',
+  esponja: 'Esponja de cocina (uno de los lugares con más bacterias de una cocina).',
+  celular: 'Teléfono celular.',
+  mazorca_cacao: 'Mazorca de cacao ecuatoriano. Opción `abierta: true` muestra las pepas.',
+  frasco_conserva: 'Frasco de conserva o encurtido en vinagre. Opción `color`.',
+  lata: 'Lata de conserva. Opción `abombada: true` (señal de peligro: botulismo).',
+  placa_petri: 'Placa de Petri con colonias de microbios.',
+  torta: 'Torta de cumpleaños.',
+  frasco_mayonesa: 'Frasco de mayonesa casera.',
+  tubo_ensayo: 'Tubo de ensayo con líquido de color. Opción `color`.',
 };
 
 export const ENTORNOS = {
@@ -82,6 +93,7 @@ export const ENTORNOS = {
   naturaleza: 'Prado al aire libre con árboles y cielo.',
   espacio: 'Espacio exterior con estrellas.',
   taller: 'Laboratorio de innovación: pizarra con las 5 fases del Design Thinking, muro de notas adhesivas y estantes con material reciclado.',
+  laboratorio: 'Laboratorio de microbiología futurista: mesones con microscopios, pantallas animadas y un proyector holográfico de microbios.',
   patio: 'Patio de una escuela ecuatoriana: bebedero al frente, cancha, bancas, edificio escolar, bandera del Ecuador y volcanes al fondo.',
 };
 
@@ -92,6 +104,8 @@ export const TIPOS_ESCENA = {
   ordenar: 'El estudiante toca tarjetas en el orden correcto de una secuencia.',
   quiz: 'Preguntas de opción múltiple con retroalimentación inmediata.',
   entrevista: 'Conversación con un personaje de tamaño real: el estudiante elige preguntas; las buenas revelan hallazgos y las malas reciben una explicación.',
+  simulacion: 'Simulador de crecimiento bacteriano: el estudiante predice cuántas bacterias habrá según temperatura y tiempo, y lo comprueba en una placa de Petri.',
+  linterna: 'Linterna UV: escena a oscuras; al iluminar cada objeto se revelan microbios escondidos y un dato (mismos campos que exploracion).',
   lluvia: 'Lluvia de ideas: al tocar una bombilla salen ideas en notas adhesivas; luego se elige la que cumple los criterios.',
 };
 

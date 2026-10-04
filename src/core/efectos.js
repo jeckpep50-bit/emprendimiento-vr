@@ -98,6 +98,47 @@ export class Efectos {
     }
   }
 
+  /**
+   * Explosión de "píxeles": cubitos brillantes que salen disparados y se
+   * desvanecen. Se usa cuando un microbio se desintegra.
+   */
+  pixeles(posMundo, color = '#7dff9a', cantidad = 40, radio = 0.6) {
+    const geo = new THREE.BoxGeometry(0.012, 0.012, 0.012);
+    const mat = new THREE.MeshBasicMaterial({ color, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+    const malla = new THREE.InstancedMesh(geo, mat, cantidad);
+    malla.frustumCulled = false;
+    const piezas = Array.from({ length: cantidad }, () => ({
+      p: posMundo.clone(),
+      v: new THREE.Vector3().randomDirection().multiplyScalar(radio * (0.4 + Math.random())),
+      s: 0.6 + Math.random() * 1.2,
+    }));
+    this.app.escena.add(malla);
+    const m = new THREE.Matrix4();
+    const q = new THREE.Quaternion();
+    const e = new THREE.Vector3();
+    this.tween({
+      duracion: 1.1,
+      persistente: true,
+      curva: suavizado.lineal,
+      alActualizar: (k, dt) => {
+        mat.opacity = 1 - k;
+        piezas.forEach((pz, i) => {
+          pz.v.multiplyScalar(0.94);
+          pz.p.addScaledVector(pz.v, dt);
+          e.setScalar(pz.s * (1 - k * 0.7));
+          malla.setMatrixAt(i, m.compose(pz.p, q, e));
+        });
+        malla.instanceMatrix.needsUpdate = true;
+      },
+      alTerminar: () => {
+        malla.removeFromParent();
+        geo.dispose();
+        mat.dispose();
+        malla.dispose();
+      },
+    });
+  }
+
   confeti(posMundo, cantidad = 50) {
     const geo = new THREE.PlaneGeometry(0.022, 0.012);
     const mat = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide });

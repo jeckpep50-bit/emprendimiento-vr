@@ -37,7 +37,7 @@ export function validarLeccion(l) {
       });
     }
 
-    if (e.tipo === 'exploracion' && lista(e.elementos, 2, 10, `${r}.elementos`)) {
+    if ((e.tipo === 'exploracion' || e.tipo === 'linterna') && lista(e.elementos, 2, 10, `${r}.elementos`)) {
       e.elementos.forEach((el, j) => {
         const rr = `${r}.elementos[${j}]`;
         if (!(el.modelo in MODELOS)) err(`${rr}.modelo`, `modelo desconocido "${el.modelo}"`);
@@ -109,6 +109,19 @@ export function validarLeccion(l) {
         if (idea.correcta === false && !texto(idea.retro)) err(`${r}.ideas[${j}].retro`, 'explica por qué no se elige');
       });
       if (!e.ideas.some((i) => i.correcta === true)) err(`${r}.ideas`, 'al menos una idea debe ser correcta');
+    }
+
+    if (e.tipo === 'simulacion' && lista(e.retos, 1, 8, `${r}.retos`)) {
+      e.retos.forEach((q, j) => {
+        const rr = `${r}.retos[${j}]`;
+        if (!texto(q.pregunta)) err(`${rr}.pregunta`, 'falta la pregunta');
+        if (lista(q.opciones, 2, 4, `${rr}.opciones`) && !q.opciones.every(texto)) err(`${rr}.opciones`, 'todas deben ser textos');
+        if (!(Number.isInteger(q.correcta) && q.correcta >= 0 && q.correcta < (q.opciones?.length ?? 0))) err(`${rr}.correcta`, 'índice fuera de rango');
+        if (!texto(q.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+        if (!Number.isFinite(q.temperatura)) err(`${rr}.temperatura`, 'debe ser un número (°C)');
+        if (!(Number.isFinite(q.horas) && q.horas > 0 && q.horas <= 6)) err(`${rr}.horas`, 'debe estar entre 0 y 6');
+        if (q.inicial !== undefined && !(Number.isFinite(q.inicial) && q.inicial >= 1)) err(`${rr}.inicial`, 'debe ser 1 o más');
+      });
     }
 
     if (e.tipo === 'quiz' && lista(e.preguntas, 1, 10, `${r}.preguntas`)) {

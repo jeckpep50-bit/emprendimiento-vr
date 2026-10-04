@@ -3,6 +3,7 @@ import { microbios } from './prefabs/microbios.js';
 import { objetos, mosca } from './prefabs/objetos.js';
 import { mat, malla } from './materiales.js';
 import { envolver, fuente } from '../ui/lienzo.js';
+import { holograma } from './holograma.js';
 
 // Elementos animados que dan vida a cada entorno (se agregan después de fusionar
 // el decorado estático). `ctx` ofrece: app, audio, titulo, subtitulo,
@@ -17,6 +18,7 @@ const AMBIENTES = {
   espacio: { frecuencia: 140, volumen: 0.05, oleaje: 0.05 },
   taller: { frecuencia: 480, volumen: 0.012 },
   patio: { frecuencia: 900, filtro: 'bandpass', volumen: 0.025, oleaje: 0.15 },
+  laboratorio: { frecuencia: 160, volumen: 0.04, oleaje: 0.08 },
 };
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
@@ -427,7 +429,182 @@ function banderaEcuador(g, ctx) {
   });
 }
 
+// ── Laboratorio de microbiología ──────────────────────────────────────────
+
+/** Pantalla de pared con un canvas que se redibuja ~12 veces por segundo. */
+function pantalla(g, ctx, { x, y, z, ancho = 1.6, alto = 0.9, titulo, dibujar }) {
+  const c = document.createElement('canvas');
+  c.width = 640;
+  c.height = 360;
+  const x2 = c.getContext('2d');
+  const textura = new THREE.CanvasTexture(c);
+  textura.colorSpace = THREE.SRGBColorSpace;
+  g.add(malla(new THREE.BoxGeometry(ancho + 0.08, alto + 0.08, 0.04), mat('#0d1426'), [x, y, z - 0.02]));
+  g.add(malla(new THREE.PlaneGeometry(ancho, alto), new THREE.MeshBasicMaterial({ map: textura }), [x, y, z + 0.002]));
+  let acumulado = 1;
+  ctx.cada((dt, t) => {
+    acumulado += dt;
+    if (acumulado < 0.08) return;
+    acumulado = 0;
+    x2.fillStyle = '#071022';
+    x2.fillRect(0, 0, 640, 360);
+    x2.strokeStyle = 'rgba(95, 247, 255, 0.12)';
+    x2.lineWidth = 1;
+    for (let i = 0; i < 640; i += 32) {
+      x2.beginPath();
+      x2.moveTo(i, 0);
+      x2.lineTo(i, 360);
+      x2.stroke();
+    }
+    for (let j = 0; j < 360; j += 32) {
+      x2.beginPath();
+      x2.moveTo(0, j);
+      x2.lineTo(640, j);
+      x2.stroke();
+    }
+    dibujar(x2, t);
+    x2.fillStyle = '#5ff7ff';
+    x2.font = fuente(30, 800);
+    x2.textAlign = 'left';
+    x2.textBaseline = 'top';
+    x2.fillText(titulo, 20, 14);
+    textura.needsUpdate = true;
+  });
+}
+
+function pantallasLaboratorio(g, ctx) {
+  pantalla(g, ctx, {
+    x: -2.9,
+    y: 1.75,
+    z: -4.43,
+    titulo: '📈 CRECIMIENTO BACTERIANO',
+    dibujar: (c, t) => {
+      const k = (t * 0.25) % 1.15;
+      c.strokeStyle = '#7dff9a';
+      c.lineWidth = 6;
+      c.beginPath();
+      for (let i = 0; i <= 100 * Math.min(k, 1); i++) {
+        const u = i / 100;
+        const xx = 40 + u * 560;
+        const yy = 320 - (Math.pow(2, u * 8) / 256) * 250;
+        i ? c.lineTo(xx, yy) : c.moveTo(xx, yy);
+      }
+      c.stroke();
+      const u = Math.min(k, 1);
+      c.fillStyle = '#ffffff';
+      c.font = fuente(34, 800);
+      c.fillText(`${Math.round(Math.pow(2, u * 8))} bacterias`, 400, 60);
+    },
+  });
+  const celulas = Array.from({ length: 28 }, () => ({ x: Math.random(), y: Math.random(), vx: (Math.random() - 0.5) * 0.08, vy: (Math.random() - 0.5) * 0.08, r: 6 + Math.random() * 12, c: ['#7dff9a', '#ff8fd1', '#ffc23c', '#5ff7ff'][Math.floor(Math.random() * 4)] }));
+  let ultimo = 0;
+  pantalla(g, ctx, {
+    x: 0,
+    y: 1.75,
+    z: -4.43,
+    titulo: '🔬 MICROSCOPIO EN VIVO',
+    dibujar: (c, t) => {
+      const dt = Math.min(0.2, t - ultimo);
+      ultimo = t;
+      c.save();
+      c.beginPath();
+      c.arc(320, 195, 150, 0, Math.PI * 2);
+      c.fillStyle = '#10304a';
+      c.fill();
+      c.clip();
+      for (const cel of celulas) {
+        cel.x = (cel.x + cel.vx * dt + 1) % 1;
+        cel.y = (cel.y + cel.vy * dt + 1) % 1;
+        c.fillStyle = cel.c;
+        c.globalAlpha = 0.85;
+        c.beginPath();
+        c.ellipse(170 + cel.x * 300, 45 + cel.y * 300, cel.r, cel.r * 0.6, t + cel.x * 6, 0, Math.PI * 2);
+        c.fill();
+      }
+      c.restore();
+      c.globalAlpha = 1;
+      c.strokeStyle = '#5ff7ff';
+      c.lineWidth = 5;
+      c.beginPath();
+      c.arc(320, 195, 150, 0, Math.PI * 2);
+      c.stroke();
+    },
+  });
+  pantalla(g, ctx, {
+    x: 2.9,
+    y: 1.75,
+    z: -4.43,
+    titulo: '🌡️ TEMPERATURA',
+    dibujar: (c, t) => {
+      c.fillStyle = 'rgba(255, 90, 95, 0.18)';
+      c.fillRect(30, 110, 580, 120);
+      c.fillStyle = '#ff8a8d';
+      c.font = fuente(22, 700);
+      c.fillText('ZONA DE PELIGRO 5 °C – 60 °C', 40, 116);
+      c.strokeStyle = '#ffc23c';
+      c.lineWidth = 5;
+      c.beginPath();
+      for (let i = 0; i <= 580; i += 6) {
+        const yy = 230 - (Math.sin(i * 0.03 + t * 3) * 0.5 + 0.5) * 100 - Math.sin(i * 0.11 + t * 7) * 8;
+        i ? c.lineTo(30 + i, yy) : c.moveTo(30, yy);
+      }
+      c.stroke();
+      c.fillStyle = '#ffffff';
+      c.font = fuente(46, 800);
+      c.fillText(`${(36.8 + Math.sin(t * 2) * 0.3).toFixed(1)} °C`, 410, 270);
+    },
+  });
+}
+
+function proyectorHolografico(g, ctx) {
+  const base = new THREE.Vector3(-2.7, 0, -2.6);
+  const anillos = [0.35, 0.95, 1.55].map((y, i) => {
+    const a = malla(new THREE.TorusGeometry(0.42 - i * 0.06, 0.008, 6, 48), mat('#5ff7ff', { tipo: 'basica', opacidad: 0.7 }), [base.x, y, base.z], [Math.PI / 2, 0, 0]);
+    g.add(a);
+    return a;
+  });
+  const haz = malla(new THREE.CylinderGeometry(0.35, 0.45, 1.8, 32, 1, true), mat('#5ff7ff', { tipo: 'basica', opacidad: 0.08, lados: THREE.DoubleSide }), [base.x, 1.0, base.z]);
+  g.add(haz);
+  const tipos = ['virus', 'bacilo', 'levadura', 'protozoo'];
+  const soporte = new THREE.Group();
+  soporte.position.set(base.x, 1.35, base.z);
+  g.add(soporte);
+  let actual = null;
+  let indice = -1;
+  const cambiar = () => {
+    indice = (indice + 1) % tipos.length;
+    if (actual) soporte.remove(actual);
+    actual = holograma(microbios[tipos[indice]](), ['#5ff7ff', '#7dff9a', '#ffc23c', '#ff8fd1'][indice]);
+    actual.scale.setScalar(2.6);
+    soporte.add(actual);
+  };
+  cambiar();
+  let reloj = 0;
+  ctx.cada((dt, t) => {
+    reloj += dt;
+    if (reloj > 7) {
+      reloj = 0;
+      cambiar();
+    }
+    const transicion = Math.min(1, reloj / 0.6, (7 - reloj) / 0.6);
+    soporte.scale.setScalar(Math.max(0.01, transicion));
+    soporte.rotation.y = t * 0.6;
+    soporte.position.y = 1.35 + Math.sin(t * 1.2) * 0.05;
+    actual.userData.animar?.(t);
+    anillos.forEach((a, i) => {
+      a.rotation.z = t * (0.6 + i * 0.4) * (i % 2 ? -1 : 1);
+      a.position.y = [0.35, 0.95, 1.55][i] + Math.sin(t * 1.5 + i) * 0.04;
+    });
+    haz.material.opacity = 0.07 + Math.sin(t * 3) * 0.02;
+  });
+}
+
 const VIDA = {
+  laboratorio(g, ctx) {
+    pantallasLaboratorio(g, ctx);
+    proyectorHolografico(g, ctx);
+    motas(g, ctx, { caja: [-4.5, 4.5, 0.2, 3.2, -4, 4], cantidad: 160, color: '#5ff7ff', tam: 0.025, opacidad: 0.5, velocidad: 0.05 });
+  },
   taller(g, ctx) {
     lamparasColgantes(g, ctx);
     notasQueSeMueven(g, ctx);

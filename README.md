@@ -38,8 +38,9 @@ compila y publica; en los pull requests solo valida y compila. La dirección es:
 
 **https://jeckpep50-bit.github.io/emprendimiento-vr/**
 
-En cada gafa, abre esa dirección y guárdala en favoritos. La portada muestra las dos actividades:
-**Microorganismos en los alimentos** (5.º EGB) y **Design Thinking: el reto del bebedero** (6.º EGB).
+En cada gafa, abre esa dirección y guárdala en favoritos. La portada muestra las actividades:
+**Microorganismos en los alimentos** (5.º EGB), **Detectives de microbios: ciencia de los alimentos** (6.º EGB)
+y **Design Thinking: el reto del bebedero** (6.º EGB).
 También se puede abrir una directamente con `?leccion=microorganismos-alimentos` o `?leccion=design-thinking-reto-bebedero`.
 
 Si una lección tiene errores, el validador detiene la publicación y la versión anterior sigue en línea.
@@ -115,6 +116,9 @@ Actividades adicionales (ver la lección `design-thinking-reto-bebedero.json`):
   `{ texto, tipo: "buena" | "mala", respuesta, hallazgo, expresion, retro }`. Las buenas llenan el cuaderno de hallazgos.
 - `lluvia`: `ideas: [{ texto, emoji, correcta, retro }]` + `instruccionElegir`. Primero se generan tocando la bombilla y luego se elige una.
 - `ordenar` con `construccion: { modelo: "maqueta_escalon" }`: el prototipo se arma por etapas en una mesa de trabajo.
+- `simulacion`: simulador de crecimiento bacteriano con retos de predicción `{ pregunta, opciones, correcta, explicacion, temperatura, horas, inicial }`.
+- `linterna`: linterna UV en una escena a oscuras; mismos campos que `exploracion`.
+- En `exploracion`, `holograma: true` muestra el modelo como holograma.
 - `utileria` (en cualquier escena): objetos colocados en la escena, p. ej. `{ modelo, posicion: [x, y, z], opciones }`.
 
 - Modelos 3D disponibles y entornos: [`src/leccion/catalogo.js`](src/leccion/catalogo.js).
