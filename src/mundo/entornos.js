@@ -3,6 +3,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { mat, malla, fusionar } from './materiales.js';
 import { objetos, mesa } from './prefabs/objetos.js';
 import { diseno } from './prefabs/diseno.js';
+import { laboratorio as labPrefabs } from './prefabs/laboratorio.js';
 import { darVida } from './vida.js';
 import { FUENTE } from '../ui/lienzo.js';
 
@@ -420,6 +421,78 @@ const ENTORNOS = {
     g.add(malla(new THREE.CylinderGeometry(0.04, 0.05, 5, 10), mat('#c9d2de'), [3.8, 2.5, -5.2]));
     g.add(malla(new THREE.SphereGeometry(0.08, 12, 10), mat('#ffc23c'), [3.8, 5.05, -5.2]));
     return { fondo: '#bfe6ff', niebla: ['#d5efff', 25, 75], luz: [0xffffff, 0x8fb06a, 2.6] };
+  },
+
+  laboratorio(g) {
+    const piso = texturaLienzo(256, 256, (x, w) => {
+      x.fillStyle = '#1c2740';
+      x.fillRect(0, 0, w, w);
+      x.strokeStyle = 'rgba(95, 247, 255, 0.35)';
+      x.lineWidth = 3;
+      x.strokeRect(0, 0, w, w);
+    });
+    piso.wrapS = piso.wrapT = THREE.RepeatWrapping;
+    piso.repeat.set(10, 9);
+    habitacion(g, { ancho: 10, fondo: 9, alto: 3.4, suelo: matTextura(piso), pared: mat('#2a3a60', { tipo: 'lambert' }), techo: mat('#18213a', { tipo: 'basica' }) });
+    // Tiras de luz de neón
+    const neon = mat('#5ff7ff', { tipo: 'basica' });
+    for (const [w, d, x, z] of [[10, 0.03, 0, -4.47], [10, 0.03, 0, 4.47], [0.03, 9, -4.97, 0], [0.03, 9, 4.97, 0]]) {
+      g.add(malla(new THREE.BoxGeometry(w, 0.04, d), neon, [x, 3.1, z]));
+      g.add(malla(new THREE.BoxGeometry(w, 0.02, d), mat('#b56cff', { tipo: 'basica' }), [x, 0.05, z]));
+    }
+    for (const x of [-2.5, 0, 2.5]) g.add(malla(new THREE.BoxGeometry(1.6, 0.03, 0.2), mat('#e8f6ff', { tipo: 'basica' }), [x, 3.38, -1]));
+
+    // Letrero
+    const letrero = texturaLienzo(1600, 170, (x, w, h) => {
+      x.fillStyle = '#0d1426';
+      x.beginPath();
+      x.roundRect(0, 0, w, h, 40);
+      x.fill();
+      x.strokeStyle = '#5ff7ff';
+      x.lineWidth = 6;
+      x.stroke();
+      x.fillStyle = '#5ff7ff';
+      x.font = `800 78px ${FUENTE_TIZA}`;
+      x.textAlign = 'center';
+      x.fillText('🔬 LABORATORIO DE MICROBIOLOGÍA', w / 2, 112, w - 80);
+    });
+    g.add(malla(new THREE.PlaneGeometry(3.2, 0.34), new THREE.MeshBasicMaterial({ map: letrero, transparent: true }), [0, 2.95, -4.45]));
+
+    // Mesones blancos con equipo a los lados
+    for (const lado of [-1, 1]) {
+      const x = lado * 3.9;
+      g.add(malla(new RoundedBoxGeometry(0.9, 0.06, 5, 2, 0.02), mat('#eef3f8'), [x, 0.92, -0.5]));
+      g.add(malla(new THREE.BoxGeometry(0.85, 0.88, 4.9), mat('#b8c4d6'), [x, 0.44, -0.5]));
+      for (let i = 0; i < 3; i++) {
+        const micro = objetos.microscopio();
+        micro.scale.setScalar(1.6);
+        micro.position.set(x, 0.95, -2.3 + i * 1.6);
+        micro.rotation.y = -lado * Math.PI / 2;
+        g.add(micro);
+      }
+      for (let i = 0; i < 6; i++) {
+        const tubo = labPrefabs.tubo_ensayo({ color: ['#7fdc6b', '#ff8fd1', '#ffc23c'][i % 3] });
+        tubo.position.set(x + lado * -0.15, 0.95, -1.6 + i * 0.08);
+        g.add(tubo);
+      }
+      for (let i = 0; i < 3; i++) {
+        const placa = labPrefabs.placa_petri();
+        placa.position.set(x - lado * 0.1, 0.95, 0.5 + i * 0.22);
+        g.add(placa);
+      }
+      // Matraces
+      for (let i = 0; i < 2; i++) {
+        g.add(malla(new THREE.ConeGeometry(0.08, 0.16, 20, 1, true), mat('#dff4ff', { opacidad: 0.45, lados: THREE.DoubleSide }), [x + lado * 0.2, 1.03, 1.5 + i * 0.3]));
+        g.add(malla(new THREE.ConeGeometry(0.065, 0.09, 20), mat(i ? '#b56cff' : '#5ff7ff', { opacidad: 0.8, emisivo: 0.4 }), [x + lado * 0.2, 0.995, 1.5 + i * 0.3]));
+      }
+    }
+    // Incubadora al fondo
+    g.add(malla(new RoundedBoxGeometry(1.2, 1.8, 0.7, 3, 0.05), mat('#dfe6ee'), [3.4, 0.9, -3.9]));
+    g.add(malla(new THREE.PlaneGeometry(0.8, 0.9), mat('#ffb26b', { tipo: 'basica', opacidad: 0.85 }), [3.4, 1.1, -3.54]));
+    // Proyector holográfico (la parte animada está en vida.js)
+    g.add(malla(new THREE.CylinderGeometry(0.55, 0.62, 0.12, 40), mat('#3a4a72'), [-2.7, 0.06, -2.6]));
+    g.add(malla(new THREE.RingGeometry(0.4, 0.5, 48), mat('#5ff7ff', { tipo: 'basica' }), [-2.7, 0.125, -2.6], [-Math.PI / 2, 0, 0]));
+    return { fondo: '#16203a', luz: [0xdff7ff, 0x3a3f6a, 2.1] };
   },
 
   espacio(g, contexto) {

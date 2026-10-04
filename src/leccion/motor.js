@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { crearTraductor } from '../core/i18n.js';
 import { suavizado } from '../core/efectos.js';
+import { actualizarHologramas } from '../mundo/holograma.js';
 import { crearEntorno } from '../mundo/entornos.js';
 import { liberar } from '../mundo/materiales.js';
 import { EscenaNarrativa } from '../escenas/narrativa.js';
@@ -10,6 +11,8 @@ import { EscenaOrdenar } from '../escenas/ordenar.js';
 import { EscenaQuiz } from '../escenas/quiz.js';
 import { EscenaEntrevista } from '../escenas/entrevista.js';
 import { EscenaLluvia } from '../escenas/lluvia.js';
+import { EscenaSimulacion } from '../escenas/simulacion.js';
+import { EscenaLinterna } from '../escenas/linterna.js';
 import { EscenaFinal } from '../escenas/final.js';
 
 const TIPOS = {
@@ -20,6 +23,8 @@ const TIPOS = {
   quiz: EscenaQuiz,
   entrevista: EscenaEntrevista,
   lluvia: EscenaLluvia,
+  simulacion: EscenaSimulacion,
+  linterna: EscenaLinterna,
 };
 
 /** Reproduce una lección: crea cada escena, cambia de entorno y hace las transiciones. */
@@ -34,6 +39,7 @@ export class Motor {
     this._ocupado = false;
     app.alActualizar((dt, t) => {
       this.entorno?.actualizar?.(dt, t);
+      actualizarHologramas(t);
       audio.actualizarOyente(app.camara);
     });
     app.alReiniciarReferencia(() => this.escena && this.irA(this.indice, true));

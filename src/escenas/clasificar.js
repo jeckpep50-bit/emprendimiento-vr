@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { EscenaBase } from './base.js';
 import { suavizado } from '../core/efectos.js';
 import { PanelLienzo, COLORES, escribir } from '../ui/lienzo.js';
-import { mat, malla } from '../mundo/materiales.js';
+import { mat, malla, fusionar } from '../mundo/materiales.js';
 
 const PALETA = [COLORES.verde, COLORES.rojo, COLORES.primario, COLORES.morado];
 
@@ -56,11 +56,14 @@ export class EscenaClasificar extends EscenaBase {
     const caja = new THREE.Group();
     const m = mat(color);
     const [w, h, d, g] = [0.42, 0.16, 0.3, 0.015];
-    caja.add(malla(new THREE.BoxGeometry(w, g, d), mat('#ffffff'), [0, g / 2, 0]));
-    caja.add(malla(new THREE.BoxGeometry(w, h, g), m, [0, h / 2, -d / 2]));
-    caja.add(malla(new THREE.BoxGeometry(w, h, g), m, [0, h / 2, d / 2]));
-    caja.add(malla(new THREE.BoxGeometry(g, h, d), m, [-w / 2, h / 2, 0]));
-    caja.add(malla(new THREE.BoxGeometry(g, h, d), m, [w / 2, h / 2, 0]));
+    // Fondo y paredes fusionados en pocas mallas (menos trabajo para las Quest 2)
+    const cuerpo = new THREE.Group();
+    cuerpo.add(malla(new THREE.BoxGeometry(w, g, d), mat('#ffffff'), [0, g / 2, 0]));
+    cuerpo.add(malla(new THREE.BoxGeometry(w, h, g), m, [0, h / 2, -d / 2]));
+    cuerpo.add(malla(new THREE.BoxGeometry(w, h, g), m, [0, h / 2, d / 2]));
+    cuerpo.add(malla(new THREE.BoxGeometry(g, h, d), m, [-w / 2, h / 2, 0]));
+    cuerpo.add(malla(new THREE.BoxGeometry(g, h, d), m, [w / 2, h / 2, 0]));
+    caja.add(fusionar(cuerpo));
 
     const cartel = new PanelLienzo(0.44, 0.13, (ctx, cw, ch) => {
       ctx.fillStyle = color;

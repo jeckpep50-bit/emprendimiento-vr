@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { EscenaBase } from './base.js';
 import { suavizado } from '../core/efectos.js';
+import { holograma } from '../mundo/holograma.js';
 import { PanelLienzo, COLORES, escribir, tarjeta, pastilla } from '../ui/lienzo.js';
 
 const COLOR_ETIQUETA = { bueno: COLORES.verde, malo: COLORES.rojo, neutral: COLORES.primario };
@@ -44,6 +45,7 @@ export class EscenaExploracion extends EscenaBase {
     const nodo = new THREE.Group();
     const tam = el.tamano ?? 0.3;
     const modelo = this.modelo(el.modelo, { tamano: tam, ...el.opciones });
+    if (el.holograma) holograma(modelo, el.color ?? '#5ff7ff');
     nodo.add(modelo);
     const etiqueta = this.etiqueta(el.nombre, { ancho: 0.32, alto: 0.07, tam: 32 });
     etiqueta.position.set(0, -modelo.userData.tam.y / 2 - 0.07, 0);
@@ -54,6 +56,9 @@ export class EscenaExploracion extends EscenaBase {
     this.enArco(nodo, angulo, 1.45, y);
     nodo.userData.base = nodo.position.clone();
     nodo.userData.modelo = modelo;
+    nodo.userData.el = el;
+    nodo.userData.etiqueta = etiqueta;
+    nodo.userData.halo = halo;
     this.raiz.add(nodo);
 
     this.interactivo(nodo, {
@@ -112,7 +117,7 @@ export class EscenaExploracion extends EscenaBase {
     const el = this.seleccion;
     if (!el) {
       tarjeta(ctx, w, h, { radio: 40, fondo: 'rgba(255, 253, 247, 0.92)' });
-      escribir(ctx, this.t('apuntaExplorar'), w / 2, h / 2, { tam: 40, peso: 600, color: COLORES.suave, maxAncho: w - 120, alinear: 'center', base: 'middle' });
+      escribir(ctx, this.textoAyuda ?? this.t('apuntaExplorar'), w / 2, h / 2, { tam: 40, peso: 600, color: COLORES.suave, maxAncho: w - 120, alinear: 'center', base: 'middle' });
       return;
     }
     const tipo = el.etiqueta ?? 'neutral';
