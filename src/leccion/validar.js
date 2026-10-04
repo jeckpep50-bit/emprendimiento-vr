@@ -21,6 +21,7 @@ export function validarLeccion(l) {
   if (!texto(l.titulo)) err('titulo', 'falta el título');
   if (!IDIOMAS.includes(l.idioma)) err('idioma', `debe ser uno de: ${IDIOMAS.join(', ')}`);
   if (l.narracion !== undefined && typeof l.narracion !== 'boolean') err('narracion', 'debe ser true o false');
+  if (l.gamificacion !== undefined && typeof l.gamificacion !== 'boolean') err('gamificacion', 'debe ser true o false');
   if (l.objetivos !== undefined && !(Array.isArray(l.objetivos) && l.objetivos.every(texto))) err('objetivos', 'debe ser una lista de textos');
   if (!lista(l.escenas, 1, 20, 'escenas')) return errores;
 
@@ -109,6 +110,13 @@ export function validarLeccion(l) {
         if (idea.correcta === false && !texto(idea.retro)) err(`${r}.ideas[${j}].retro`, 'explica por qué no se elige');
       });
       if (!e.ideas.some((i) => i.correcta === true)) err(`${r}.ideas`, 'al menos una idea debe ser correcta');
+    }
+
+    if (e.tipo === 'atrapar') {
+      if (lista(e.malos, 1, 8, `${r}.malos`)) e.malos.forEach((m, j) => modelo(m, `${r}.malos[${j}]`));
+      if (e.buenos !== undefined && lista(e.buenos, 0, 8, `${r}.buenos`)) e.buenos.forEach((m, j) => modelo(m, `${r}.buenos[${j}]`));
+      if (e.objetivo !== undefined) modelo(e.objetivo?.modelo, `${r}.objetivo.modelo`);
+      if (e.duracion !== undefined && !(Number.isFinite(e.duracion) && e.duracion >= 15 && e.duracion <= 120)) err(`${r}.duracion`, 'debe estar entre 15 y 120 segundos');
     }
 
     if (e.tipo === 'simulacion' && lista(e.retos, 1, 8, `${r}.retos`)) {

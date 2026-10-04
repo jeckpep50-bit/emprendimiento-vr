@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { crearTraductor } from '../core/i18n.js';
 import { suavizado } from '../core/efectos.js';
+import { PanelLienzo, escribir } from '../ui/lienzo.js';
 import { actualizarHologramas } from '../mundo/holograma.js';
 import { crearEntorno } from '../mundo/entornos.js';
 import { liberar } from '../mundo/materiales.js';
@@ -13,6 +14,7 @@ import { EscenaEntrevista } from '../escenas/entrevista.js';
 import { EscenaLluvia } from '../escenas/lluvia.js';
 import { EscenaSimulacion } from '../escenas/simulacion.js';
 import { EscenaLinterna } from '../escenas/linterna.js';
+import { EscenaAtrapar } from '../escenas/atrapar.js';
 import { EscenaFinal } from '../escenas/final.js';
 
 const TIPOS = {
@@ -25,6 +27,7 @@ const TIPOS = {
   lluvia: EscenaLluvia,
   simulacion: EscenaSimulacion,
   linterna: EscenaLinterna,
+  atrapar: EscenaAtrapar,
 };
 
 /** Reproduce una lección: crea cada escena, cambia de entorno y hace las transiciones. */
@@ -49,6 +52,70 @@ export class Motor {
     this.leccion = leccion;
     this.t = crearTraductor(leccion.idioma);
     this.audio.idioma = leccion.idioma;
+    this._reiniciarPuntos();
+  }
+
+  // ── Gamificación (solo si la lección tiene "gamificacion": true) ─────────
+
+  get gamificado() {
+    return Boolean(this.leccion?.gamificacion);
+  }
+
+  _reiniciarPuntos() {
+    this.puntaje = { puntos: 0, racha: 0, mejorRacha: 0, aciertos: 0, errores: 0 };
+    this.marcador?.redibujar();
+  }
+
+  /** Suma puntos con bono por racha (3 o más aciertos seguidos) y muestra "+100" flotando. */
+  premiar(posMundo, valor = 100) {
+    if (!this.gamificado) return;
+    const p = this.puntaje;
+    p.racha++;
+    p.aciertos++;
+    p.mejorRacha = Math.max(p.mejorRacha, p.racha);
+    const bono = p.racha >= 3 ? Math.min(p.racha - 2, 5) * 0.2 : 0;
+    const total = Math.round((valor * (1 + bono)) / 10) * 10;
+    p.puntos += total;
+    this.fx.textoFlotante(posMundo, `+${total}`, p.racha >= 3 ? `🔥 x${p.racha}` : '');
+    this.audio.moneda(posMundo);
+    if (this.marcador) {
+      this.marcador.redibujar();
+      this.fx.latido(this.marcador, 0.15);
+    }
+  }
+
+  fallar() {
+    if (!this.gamificado) return;
+    this.puntaje.racha = 0;
+    this.puntaje.errores++;
+    this.marcador?.redibujar();
+  }
+
+  /** Marcador de puntos flotante arriba a la izquierda (sigue a la escena). */
+  _colocarMarcador() {
+    if (!this.gamificado) {
+      this.marcador?.removeFromParent();
+      return;
+    }
+    if (!this.marcador) {
+      this.marcador = new PanelLienzo(0.5, 0.13, (ctx, w, h) => {
+        const p = this.puntaje;
+        ctx.fillStyle = 'rgba(13, 20, 38, 0.88)';
+        ctx.beginPath();
+        ctx.roundRect(4, 4, w - 8, h - 8, (h - 8) / 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffc23c';
+        ctx.lineWidth = 6;
+        ctx.stroke();
+        escribir(ctx, `⭐ ${p.puntos.toLocaleString('es-EC')}`, 34, h / 2, { tam: 58, peso: 800, color: '#ffc23c', base: 'middle' });
+        if (p.racha >= 2) escribir(ctx, `🔥 ${p.racha}`, w - 34, h / 2, { tam: 50, peso: 800, color: '#ff8a5c', alinear: 'right', base: 'middle' });
+      });
+    }
+    const H = this.app.alturaOjos;
+    this.marcador.position.set(-1.1, H + 0.62, -1.7);
+    this.marcador.lookAt(0, H, 0);
+    this.anclaje.add(this.marcador);
+    this.marcador.redibujar();
   }
 
   get total() {
@@ -84,6 +151,7 @@ export class Motor {
     }
     this.app.anclarDelanteDelUsuario(this.anclaje);
     if (entornoNuevo) this._entradaAlEntorno(nombreEntorno);
+    this._colocarMarcador();
 
     const Clase = datos ? TIPOS[datos.tipo] : EscenaFinal;
     const escena = new Clase(this, datos ?? { titulo: this.leccion.titulo }, indice, this.total);
@@ -99,6 +167,7 @@ export class Motor {
   }
 
   reiniciar() {
+    this._reiniciarPuntos();
     this.irA(0);
   }
 

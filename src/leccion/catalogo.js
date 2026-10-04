@@ -105,6 +105,7 @@ export const TIPOS_ESCENA = {
   quiz: 'Preguntas de opción múltiple con retroalimentación inmediata.',
   entrevista: 'Conversación con un personaje de tamaño real: el estudiante elige preguntas; las buenas revelan hallazgos y las malas reciben una explicación.',
   simulacion: 'Simulador de crecimiento bacteriano: el estudiante predice cuántas bacterias habrá según temperatura y tiempo, y lo comprueba en una placa de Petri.',
+  atrapar: 'Minijuego arcade: microbios vuelan hacia un alimento y el estudiante dispara a los dañinos sin tocar a los amigos. Campos: duracion (s), vidas, meta, objetivo { modelo }, malos [modelos], buenos [modelos].',
   linterna: 'Linterna UV: escena a oscuras; al iluminar cada objeto se revelan microbios escondidos y un dato (mismos campos que exploracion).',
   lluvia: 'Lluvia de ideas: al tocar una bombilla salen ideas en notas adhesivas; luego se elige la que cumple los criterios.',
 };

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { PanelLienzo, fuente } from '../ui/lienzo.js';
 
 export const suavizado = {
   lineal: (t) => t,
@@ -135,6 +136,50 @@ export class Efectos {
         geo.dispose();
         mat.dispose();
         malla.dispose();
+      },
+    });
+  }
+
+  /** Texto que sube y se desvanece (p. ej. "+100" al ganar puntos). */
+  textoFlotante(posMundo, texto, extra = '') {
+    const panel = new PanelLienzo(0.36, 0.16, (ctx, w, h) => {
+      ctx.lineJoin = 'round';
+      ctx.font = fuente(78, 900);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.lineWidth = 14;
+      ctx.strokeStyle = '#1d1d27';
+      ctx.strokeText(texto, w / 2, h * 0.42);
+      ctx.fillStyle = '#ffc23c';
+      ctx.fillText(texto, w / 2, h * 0.42);
+      if (extra) {
+        ctx.font = fuente(34, 800);
+        ctx.lineWidth = 8;
+        ctx.strokeText(extra, w / 2, h * 0.86);
+        ctx.fillStyle = '#ff8a5c';
+        ctx.fillText(extra, w / 2, h * 0.86);
+      }
+    }, { pxPorMetro: 900 });
+    panel.material.depthTest = false;
+    panel.renderOrder = 900;
+    const inicio = posMundo.clone().add(new THREE.Vector3(0, 0.12, 0));
+    panel.position.copy(inicio);
+    panel.lookAt(this.app.camara.getWorldPosition(new THREE.Vector3()));
+    this.app.escena.add(panel);
+    this.tween({
+      duracion: 1.3,
+      persistente: true,
+      curva: suavizado.salida,
+      alActualizar: (k) => {
+        panel.position.y = inicio.y + k * 0.3;
+        panel.material.opacity = k < 0.6 ? 1 : 1 - (k - 0.6) / 0.4;
+        panel.scale.setScalar(k < 0.15 ? 0.6 + (k / 0.15) * 0.4 : 1);
+      },
+      alTerminar: () => {
+        panel.removeFromParent();
+        panel.geometry.dispose();
+        panel.textura.dispose();
+        panel.material.dispose();
       },
     });
   }

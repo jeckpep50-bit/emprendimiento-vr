@@ -130,6 +130,11 @@ export class Audio {
     this.tono(f * 1.1, 0.1, { hasta: f * 1.45, volumen: 0.035, retardo: 0.12, pos });
   }
 
+  moneda(pos) {
+    this.tono(988, 0.08, { tipo: 'square', volumen: 0.05, pos });
+    this.tono(1319, 0.22, { tipo: 'square', volumen: 0.05, retardo: 0.07, pos });
+  }
+
   teletransporte() {
     this.tono(900, 0.18, { hasta: 300, volumen: 0.06 });
   }

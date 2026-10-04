@@ -9,13 +9,22 @@
     "emoji": "🦠"
   },
   {
+    "id": "guardianes-alimentos",
+    "titulo": "Guardianes de los alimentos: microbios en la comida",
+    "materia": "Ciencias Naturales",
+    "grado": "6.º EGB",
+    "duracionMinutos": 25,
+    "idioma": "es",
+    "emoji": "🛡️"
+  },
+  {
     "id": "detectives-microbios-alimentos",
-    "titulo": "Detectives de microbios: ciencia de los alimentos",
+    "titulo": "Evaluación: Detectives de microbios",
     "materia": "Ciencias Naturales",
     "grado": "6.º EGB",
     "duracionMinutos": 35,
     "idioma": "es",
-    "emoji": "🔬"
+    "emoji": "📝"
   },
   {
     "id": "design-thinking-reto-bebedero",

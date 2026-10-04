@@ -191,8 +191,13 @@ export class EscenaSimulacion extends EscenaBase {
       b.setModo(k === r.correcta ? 'correcto' : k === i ? 'incorrecto' : 'apagado');
     });
     const pos = this.posMundo(this.botones[i]);
-    if (bien) this.m.audio.acierto(pos);
-    else this.m.audio.error(pos);
+    if (bien) {
+      this.m.audio.acierto(pos);
+      this.ganar(pos, 200);
+    } else {
+      this.m.audio.error(pos);
+      this.perder();
+    }
     this.cabecera.mensaje(`${bien ? '✅' : '💡'} ${r.explicacion}`, bien ? COLORES.verde : COLORES.naranja);
     this.narrar(r.explicacion);
     this._simular(r);

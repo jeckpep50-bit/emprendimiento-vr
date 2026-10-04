@@ -104,6 +104,7 @@ export class EscenaExploracion extends EscenaBase {
 
     etiqueta.actualizar({ texto: `✔ ${el.nombre}`, fondo: el.color ?? COLOR_ETIQUETA[el.etiqueta ?? 'neutral'], color: '#ffffff' });
     this.m.fx.confeti(this.posMundo(nodo), 14);
+    this.ganar(nodo, 50);
     const total = this.datos.elementos.length;
     this.cabecera.derecha(this.t('descubiertos', { n: this.descubiertos.size, total }));
     if (this.descubiertos.size === this.minimo) {
