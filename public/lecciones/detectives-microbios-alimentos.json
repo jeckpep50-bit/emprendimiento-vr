@@ -1,13 +1,14 @@
 {
   "id": "detectives-microbios-alimentos",
-  "titulo": "Detectives de microbios: ciencia de los alimentos",
+  "titulo": "Evaluación: Detectives de microbios",
   "materia": "Ciencias Naturales",
   "grado": "6.º EGB",
   "idioma": "es",
   "duracionMinutos": 35,
-  "emoji": "🔬",
+  "emoji": "📝",
   "narracion": false,
-  "descripcion": "Nivel experto de «Buenos hábitos». Los estudiantes piensan como científicos: clasifican microorganismos, predicen su crecimiento en un simulador, cazan microbios con una linterna UV, aprenden por qué funcionan los métodos de conservación, descubren la fermentación del cacao ecuatoriano y resuelven un caso real de intoxicación alimentaria.",
+  "gamificacion": true,
+  "descripcion": "Evaluación de 6.º EGB sobre los microorganismos en los alimentos. Los estudiantes piensan como científicos: clasifican microorganismos, predicen su crecimiento en un simulador, cazan microbios con una linterna UV, aprenden por qué funcionan los métodos de conservación, descubren la fermentación del cacao ecuatoriano y resuelven un caso real de intoxicación alimentaria.",
   "objetivos": [
     "Diferenciar bacterias, virus, hongos y protozoos según si son células y si tienen núcleo.",
     "Predecir el crecimiento exponencial de las bacterias y explicar la «zona de peligro» (5 °C a 60 °C).",
@@ -102,10 +103,30 @@
       "titulo": "¿A qué grupo pertenece?",
       "instruccion": "Clasifica cada microorganismo en su grupo. Cuidado: que sea bueno o malo no tiene nada que ver con su grupo.",
       "categorias": [
-        { "id": "bacteria", "nombre": "Bacteria", "emoji": "🟢", "color": "#21a366" },
-        { "id": "virus", "nombre": "Virus", "emoji": "🔴", "color": "#e5486f" },
-        { "id": "hongo", "nombre": "Hongo", "emoji": "🟣", "color": "#8b5cf6" },
-        { "id": "protozoo", "nombre": "Protozoo", "emoji": "🟡", "color": "#d98a00" }
+        {
+          "id": "bacteria",
+          "nombre": "Bacteria",
+          "emoji": "🟢",
+          "color": "#21a366"
+        },
+        {
+          "id": "virus",
+          "nombre": "Virus",
+          "emoji": "🔴",
+          "color": "#e5486f"
+        },
+        {
+          "id": "hongo",
+          "nombre": "Hongo",
+          "emoji": "🟣",
+          "color": "#8b5cf6"
+        },
+        {
+          "id": "protozoo",
+          "nombre": "Protozoo",
+          "emoji": "🟡",
+          "color": "#d98a00"
+        }
       ],
       "elementos": [
         {
@@ -135,7 +156,9 @@
         },
         {
           "modelo": "virus",
-          "opciones": { "color": "#ffb347" },
+          "opciones": {
+            "color": "#ffb347"
+          },
           "nombre": "Virus de la hepatitis A",
           "categoria": "virus",
           "explicacion": "Se transmite por agua o alimentos contaminados y manos sucias. Existe una vacuna."
@@ -161,7 +184,9 @@
         },
         {
           "modelo": "protozoo",
-          "opciones": { "color": "#8fd3ff" },
+          "opciones": {
+            "color": "#8fd3ff"
+          },
           "nombre": "Giardia",
           "categoria": "protozoo",
           "pista": "Vive en agua sucia, tiene núcleo y se mueve.",
@@ -177,7 +202,11 @@
       "retos": [
         {
           "pregunta": "A 37 °C, una bacteria se divide en dos cada 20 minutos. Si empezamos con 1, ¿cuántas habrá en 1 hora?",
-          "opciones": ["3", "6", "8"],
+          "opciones": [
+            "3",
+            "6",
+            "8"
+          ],
           "correcta": 2,
           "explicacion": "20 min → 2, 40 min → 4, 60 min → 8. ¡Se duplican, no se suman!",
           "temperatura": 37,
@@ -185,7 +214,11 @@
         },
         {
           "pregunta": "Con las mismas condiciones (37 °C), ¿cuántas habrá en 3 horas?",
-          "opciones": ["24", "90", "512"],
+          "opciones": [
+            "24",
+            "90",
+            "512"
+          ],
           "correcta": 2,
           "explicacion": "Son 9 duplicaciones: 2 × 2 × 2… nueve veces = 512. Esto se llama crecimiento exponencial.",
           "temperatura": 37,
@@ -193,7 +226,11 @@
         },
         {
           "pregunta": "Sobre una mesa a 25 °C se duplican cada 40 minutos. En 3 horas, comparado con 37 °C, habrá…",
-          "opciones": ["Más bacterias", "Menos, pero igual crecen", "Ninguna"],
+          "opciones": [
+            "Más bacterias",
+            "Menos, pero igual crecen",
+            "Ninguna"
+          ],
           "correcta": 1,
           "explicacion": "A 25 °C crecen más lento (unas 22 en 3 horas), ¡pero siguen creciendo! Por eso la comida no debe quedarse fuera.",
           "temperatura": 25,
@@ -201,7 +238,11 @@
         },
         {
           "pregunta": "Guardamos 22 bacterias en la refrigeradora (4 °C) durante 3 horas. ¿Qué pasa?",
-          "opciones": ["Se mueren todas", "Casi no se multiplican", "Crecen más rápido"],
+          "opciones": [
+            "Se mueren todas",
+            "Casi no se multiplican",
+            "Crecen más rápido"
+          ],
           "correcta": 1,
           "explicacion": "El frío FRENA a los microbios, pero no los mata. Si sacas el alimento, vuelven a crecer.",
           "temperatura": 4,
@@ -210,7 +251,11 @@
         },
         {
           "pregunta": "Un alimento tiene 512 bacterias. Lo cocinamos a más de 70 °C. ¿Qué pasa?",
-          "opciones": ["Se multiplican más", "La mayoría muere", "No pasa nada"],
+          "opciones": [
+            "Se multiplican más",
+            "La mayoría muere",
+            "No pasa nada"
+          ],
           "correcta": 1,
           "explicacion": "El calor alto destruye a la mayoría de bacterias. Por eso cocinamos bien la carne, el pollo y los huevos.",
           "temperatura": 72,
@@ -219,7 +264,11 @@
         },
         {
           "pregunta": "Entonces, ¿en qué temperaturas los microbios crecen más? (la «zona de peligro»)",
-          "opciones": ["Entre 5 °C y 60 °C", "Bajo 0 °C", "Sobre 100 °C"],
+          "opciones": [
+            "Entre 5 °C y 60 °C",
+            "Bajo 0 °C",
+            "Sobre 100 °C"
+          ],
           "correcta": 0,
           "explicacion": "Entre 5 °C y 60 °C está la zona de peligro. Fuera de ella se frenan (frío) o mueren (calor).",
           "temperatura": 30,
@@ -264,7 +313,9 @@
         },
         {
           "modelo": "tabla_picar",
-          "opciones": { "color": "#e5484d" },
+          "opciones": {
+            "color": "#e5484d"
+          },
           "nombre": "Tabla de picar",
           "etiqueta": "malo",
           "texto": "Si cortas pollo crudo y luego la ensalada en la misma tabla, pasas bacterias de un alimento a otro: eso es contaminación cruzada."
@@ -301,9 +352,24 @@
       "titulo": "Contaminación cruzada: una tabla para cada cosa",
       "instruccion": "En una cocina segura, los alimentos crudos NO comparten tabla ni cuchillo con los que se comen sin cocinar. Clasifica cada alimento.",
       "categorias": [
-        { "id": "crudos", "nombre": "Crudos", "emoji": "🥩", "color": "#e5484d" },
-        { "id": "verduras", "nombre": "Frutas y verduras", "emoji": "🥬", "color": "#21a366" },
-        { "id": "listos", "nombre": "Listos", "emoji": "🍞", "color": "#2f8be6" }
+        {
+          "id": "crudos",
+          "nombre": "Crudos",
+          "emoji": "🥩",
+          "color": "#e5484d"
+        },
+        {
+          "id": "verduras",
+          "nombre": "Frutas y verduras",
+          "emoji": "🥬",
+          "color": "#21a366"
+        },
+        {
+          "id": "listos",
+          "nombre": "Listos",
+          "emoji": "🍞",
+          "color": "#2f8be6"
+        }
       ],
       "elementos": [
         {
@@ -358,10 +424,30 @@
       "titulo": "¿Cómo detiene a los microbios?",
       "instruccion": "Cada método de conservación le quita a los microbios una condición que necesitan. ¿Cuál le quita cada uno?",
       "categorias": [
-        { "id": "frio", "nombre": "Frío: los frena", "emoji": "❄️", "color": "#2f8be6" },
-        { "id": "calor", "nombre": "Calor: los destruye", "emoji": "🔥", "color": "#e5484d" },
-        { "id": "agua", "nombre": "Les quita el agua", "emoji": "🧂", "color": "#d98a00" },
-        { "id": "acido", "nombre": "Acidez", "emoji": "🍋", "color": "#21a366" }
+        {
+          "id": "frio",
+          "nombre": "Frío: los frena",
+          "emoji": "❄️",
+          "color": "#2f8be6"
+        },
+        {
+          "id": "calor",
+          "nombre": "Calor: los destruye",
+          "emoji": "🔥",
+          "color": "#e5484d"
+        },
+        {
+          "id": "agua",
+          "nombre": "Les quita el agua",
+          "emoji": "🧂",
+          "color": "#d98a00"
+        },
+        {
+          "id": "acido",
+          "nombre": "Acidez",
+          "emoji": "🍋",
+          "color": "#21a366"
+        }
       ],
       "elementos": [
         {
@@ -430,7 +516,9 @@
       "elementos": [
         {
           "modelo": "mazorca_cacao",
-          "opciones": { "abierta": true },
+          "opciones": {
+            "abierta": true
+          },
           "nombre": "Cacao ecuatoriano",
           "etiqueta": "bueno",
           "insignia": "Fermentación",
@@ -463,7 +551,9 @@
         },
         {
           "modelo": "frasco_conserva",
-          "opciones": { "color": "#c0543c" },
+          "opciones": {
+            "color": "#c0543c"
+          },
           "nombre": "Vinagre",
           "etiqueta": "bueno",
           "insignia": "Fermentación",
@@ -522,7 +612,9 @@
         },
         {
           "modelo": "jugo",
-          "opciones": { "color": "#c3d84a" },
+          "opciones": {
+            "color": "#c3d84a"
+          },
           "nombre": "D · Jugo de naranjilla",
           "insignia": "Evidencia D",
           "color": "#8b5cf6",
@@ -551,28 +643,44 @@
       "preguntas": [
         {
           "pregunta": "¿Qué alimento causó el brote?",
-          "opciones": ["La torta", "El sánduche con mayonesa casera", "El jugo de naranjilla"],
+          "opciones": [
+            "La torta",
+            "El sánduche con mayonesa casera",
+            "El jugo de naranjilla"
+          ],
           "correcta": 1,
           "explicacion": "Todos los enfermos lo comieron y casi ningún sano. El jugo no puede ser: lo tomaron todos, enfermos y sanos.",
           "modelo": "sandwich"
         },
         {
           "pregunta": "¿Cuál es el microbio sospechoso más probable?",
-          "opciones": ["El virus de la gripe", "La levadura", "La Salmonela"],
+          "opciones": [
+            "El virus de la gripe",
+            "La levadura",
+            "La Salmonela"
+          ],
           "correcta": 2,
           "explicacion": "La Salmonela puede venir en huevos crudos y sus síntomas aparecen entre 6 y 72 horas después. ¡Coincide con la evidencia!",
           "modelo": "salmonela"
         },
         {
           "pregunta": "¿Qué error permitió que creciera?",
-          "opciones": ["Dejar la mayonesa 5 horas a 28 °C", "Usar agua hervida", "Refrigerar la torta"],
+          "opciones": [
+            "Dejar la mayonesa 5 horas a 28 °C",
+            "Usar agua hervida",
+            "Refrigerar la torta"
+          ],
           "correcta": 0,
           "explicacion": "28 °C está en la zona de peligro. Se duplican cada 40 minutos: en 5 horas, cada bacteria se convierte en más de 100.",
           "modelo": "frasco_mayonesa"
         },
         {
           "pregunta": "¿Cómo se podía evitar el brote?",
-          "opciones": ["Ponerle más sal a los sánduches", "Usar huevos pasteurizados y refrigerar la mayonesa", "Servir más jugo"],
+          "opciones": [
+            "Ponerle más sal a los sánduches",
+            "Usar huevos pasteurizados y refrigerar la mayonesa",
+            "Servir más jugo"
+          ],
           "correcta": 1,
           "explicacion": "Los huevos pasteurizados casi no tienen Salmonela, y el frío evita que las pocas que haya se multipliquen.",
           "modelo": "refrigeradora"
@@ -586,12 +694,36 @@
       "instruccion": "Ordena el protocolo que sigue un cocinero profesional para que nadie se enferme.",
       "mensajeFinal": "🎉 ¡Protocolo completo! Así trabajan las cocinas profesionales para evitar intoxicaciones.",
       "pasos": [
-        { "emoji": "🧼", "texto": "Lavarse las manos 20 segundos con jabón", "pista": "Antes de tocar cualquier alimento…" },
-        { "emoji": "🥬", "texto": "Lavar y desinfectar frutas y verduras", "pista": "Antes de cortar, hay que limpiar." },
-        { "emoji": "🔪", "texto": "Cortar verduras y carne cruda en tablas distintas", "pista": "Ya están limpias: ¿cómo evitamos la contaminación cruzada?" },
-        { "emoji": "🍗", "texto": "Cocinar la carne hasta 75 °C por dentro", "pista": "Después de cortar viene la cocción." },
-        { "emoji": "⏱️", "texto": "Refrigerar las sobras antes de 2 horas", "pista": "Terminó la comida… ¿qué hacemos con lo que sobró?" },
-        { "emoji": "♨️", "texto": "Recalentar las sobras hasta que estén bien calientes", "pista": "Esto se hace al día siguiente, al final." }
+        {
+          "emoji": "🧼",
+          "texto": "Lavarse las manos 20 segundos con jabón",
+          "pista": "Antes de tocar cualquier alimento…"
+        },
+        {
+          "emoji": "🥬",
+          "texto": "Lavar y desinfectar frutas y verduras",
+          "pista": "Antes de cortar, hay que limpiar."
+        },
+        {
+          "emoji": "🔪",
+          "texto": "Cortar verduras y carne cruda en tablas distintas",
+          "pista": "Ya están limpias: ¿cómo evitamos la contaminación cruzada?"
+        },
+        {
+          "emoji": "🍗",
+          "texto": "Cocinar la carne hasta 75 °C por dentro",
+          "pista": "Después de cortar viene la cocción."
+        },
+        {
+          "emoji": "⏱️",
+          "texto": "Refrigerar las sobras antes de 2 horas",
+          "pista": "Terminó la comida… ¿qué hacemos con lo que sobró?"
+        },
+        {
+          "emoji": "♨️",
+          "texto": "Recalentar las sobras hasta que estén bien calientes",
+          "pista": "Esto se hace al día siguiente, al final."
+        }
       ]
     },
     {
@@ -601,57 +733,91 @@
       "preguntas": [
         {
           "pregunta": "Una comida huele bien y se ve bien. ¿Es segura?",
-          "opciones": ["Sí, siempre", "No necesariamente", "Solo si es de casa"],
+          "opciones": [
+            "Sí, siempre",
+            "No necesariamente",
+            "Solo si es de casa"
+          ],
           "correcta": 1,
           "explicacion": "Muchos microbios peligrosos, como la Salmonela, no cambian el olor, el sabor ni el aspecto de la comida.",
           "modelo": "lupa"
         },
         {
           "pregunta": "Un arroz quedó toda la noche fuera de la refrigeradora. ¿Recalentarlo lo vuelve seguro?",
-          "opciones": ["Sí, el calor lo arregla todo", "No siempre: algunas bacterias dejan toxinas que el calor no destruye", "Sí, si se recalienta dos veces"],
+          "opciones": [
+            "Sí, el calor lo arregla todo",
+            "No siempre: algunas bacterias dejan toxinas que el calor no destruye",
+            "Sí, si se recalienta dos veces"
+          ],
           "correcta": 1,
           "explicacion": "Algunas bacterias producen toxinas resistentes al calor. Lo seguro es refrigerar las sobras antes de 2 horas.",
           "modelo": "plato_comida"
         },
         {
           "pregunta": "¿Por qué los antibióticos no curan la gripe?",
-          "opciones": ["Porque la gripe la causa un virus", "Porque la gripe es un hongo", "Sí la curan"],
+          "opciones": [
+            "Porque la gripe la causa un virus",
+            "Porque la gripe es un hongo",
+            "Sí la curan"
+          ],
           "correcta": 0,
           "explicacion": "Los antibióticos atacan bacterias. Los virus no son células, así que los antibióticos no les hacen nada.",
           "modelo": "virus"
         },
         {
           "pregunta": "Encuentras una lata de atún abombada (hinchada). ¿Qué haces?",
-          "opciones": ["La abro y la huelo", "La como si no huele mal", "No la abro ni la pruebo"],
+          "opciones": [
+            "La abro y la huelo",
+            "La como si no huele mal",
+            "No la abro ni la pruebo"
+          ],
           "correcta": 2,
           "explicacion": "Puede tener la toxina del botulismo, que es muy peligrosa aunque no huela. Se desecha sin abrir.",
           "modelo": "lata",
-          "opciones3d": { "abombada": true }
+          "opciones3d": {
+            "abombada": true
+          }
         },
         {
           "pregunta": "A 37 °C, duplicándose cada 20 minutos, ¿cuántas bacterias habrá en 2 horas si empezamos con 1?",
-          "opciones": ["12", "64", "120"],
+          "opciones": [
+            "12",
+            "64",
+            "120"
+          ],
           "correcta": 1,
           "explicacion": "2 horas = 6 duplicaciones: 2, 4, 8, 16, 32, 64.",
           "modelo": "placa_petri"
         },
         {
           "pregunta": "Le cortas la parte con moho a un pan. ¿Ya se puede comer el resto?",
-          "opciones": ["Sí, ya no tiene moho", "No: las hifas pueden estar por dentro", "Sí, si lo tuestas"],
+          "opciones": [
+            "Sí, ya no tiene moho",
+            "No: las hifas pueden estar por dentro",
+            "Sí, si lo tuestas"
+          ],
           "correcta": 1,
           "explicacion": "Las hifas del moho se meten dentro del pan aunque no se vean. Si un pan tiene moho, se bota entero.",
           "modelo": "pan_con_moho"
         },
         {
           "pregunta": "La refrigeradora…",
-          "opciones": ["Mata a todos los microbios", "Frena a los microbios, pero no los mata", "No sirve para nada"],
+          "opciones": [
+            "Mata a todos los microbios",
+            "Frena a los microbios, pero no los mata",
+            "No sirve para nada"
+          ],
           "correcta": 1,
           "explicacion": "El frío los frena. Por eso, incluso en la refri, los alimentos tienen fecha límite.",
           "modelo": "refrigeradora"
         },
         {
           "pregunta": "¿Qué es la contaminación cruzada?",
-          "opciones": ["Pasar microbios de un alimento crudo a uno listo para comer", "Mezclar dos jugos", "Cocinar dos veces"],
+          "opciones": [
+            "Pasar microbios de un alimento crudo a uno listo para comer",
+            "Mezclar dos jugos",
+            "Cocinar dos veces"
+          ],
           "correcta": 0,
           "explicacion": "Pasa cuando usamos la misma tabla, cuchillo o manos para un alimento crudo y luego para uno que no se cocina.",
           "modelo": "tabla_picar"

@@ -210,6 +210,7 @@ export class EscenaClasificar extends EscenaBase {
 
     if (el.categoria !== caja.userData.cat.id) {
       this.m.audio.error(pos);
+      this.perder();
       this.cabecera.mensaje(`🤔 ${el.pista || this.t('pistaGenerica')}`, COLORES.naranja);
       this._volver(nodo);
       this.m.fx.tween({ duracion: 0.35 }).then(() => !this._destruida && this.m.fx.sacudir(nodo));
@@ -218,6 +219,7 @@ export class EscenaClasificar extends EscenaBase {
 
     this.m.entrada.habilitar(nodo, false);
     this.m.audio.acierto(pos);
+    this.ganar(pos, 100);
     this.m.fx.confeti(pos.clone().add(new THREE.Vector3(0, 0.2, 0)), 30);
     this.cabecera.mensaje(`✅ ${this.t('correcto')} ${el.explicacion ?? ''}`, COLORES.verde);
     this.narrar(el.explicacion);

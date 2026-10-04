@@ -75,6 +75,7 @@ export class EscenaOrdenar extends EscenaBase {
     const pos = this.posMundo(nodo);
     if (paso.indice !== this.siguiente) {
       this.m.audio.error(pos);
+      this.perder();
       this.m.fx.sacudir(nodo);
       this.cabecera.mensaje(`🤔 ${paso.pista || this.t('pistaOrden')}`, COLORES.naranja);
       return;
@@ -82,6 +83,7 @@ export class EscenaOrdenar extends EscenaBase {
 
     this.m.entrada.habilitar(nodo, false);
     this.m.audio.acierto(pos);
+    this.ganar(pos, 100);
     const ranura = this.ranuras[this.siguiente];
     const destino = ranura.position.clone().add(new THREE.Vector3(0, 0, 0.015).applyQuaternion(ranura.quaternion));
     this.m.fx.moverA(nodo, destino, 0.45);

@@ -153,6 +153,17 @@ export class EscenaBase {
     return obj;
   }
 
+  /** Gamificación: suma puntos en la posición de `obj` (objeto 3D o Vector3 en mundo). */
+  ganar(obj, valor = 100) {
+    const pos = obj?.isObject3D ? this.posMundo(obj) : obj;
+    this.m.premiar?.(pos, valor);
+  }
+
+  /** Gamificación: corta la racha de aciertos. */
+  perder() {
+    this.m.fallar?.();
+  }
+
   /** Botón que se ilumina al apuntarlo y ejecuta `accion` al seleccionarlo. */
   boton(texto, accion, opciones = {}) {
     const b = crearBoton({ texto, ...opciones });

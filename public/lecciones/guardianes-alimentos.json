@@ -1,0 +1,375 @@
+{
+  "id": "guardianes-alimentos",
+  "titulo": "Guardianes de los alimentos: microbios en la comida",
+  "materia": "Ciencias Naturales",
+  "grado": "6.º EGB",
+  "idioma": "es",
+  "duracionMinutos": 25,
+  "emoji": "🛡️",
+  "narracion": false,
+  "gamificacion": true,
+  "descripcion": "Los estudiantes se convierten en guardianes de los alimentos y completan 7 misiones con puntos, rachas y medallas: conocen a los microbios, separan amigos de enemigos, defienden un almuerzo en un minijuego arcade, ven cómo la temperatura cambia el crecimiento de las bacterias, conservan alimentos, cazan microbios con linterna UV y se lavan las manos como expertos.",
+  "objetivos": [
+    "Reconocer bacterias, virus, hongos y protozoos, y distinguir microbios amigos de los que nos enferman.",
+    "Explicar cómo llegan los microbios a la comida: manos, moscas, agua sin hervir y contaminación cruzada.",
+    "Comprender que el frío frena a los microbios y que el calor los destruye.",
+    "Relacionar métodos de conservación (frío, calor y quitar el agua) con la seguridad de los alimentos.",
+    "Aplicar hábitos de higiene, como el lavado de manos correcto, para prevenir enfermedades."
+  ],
+  "escenas": [
+    {
+      "tipo": "narrativa",
+      "entorno": "laboratorio",
+      "titulo": "¡Misión: Guardianes de los alimentos!",
+      "pasos": [
+        {
+          "emoji": "🛡️",
+          "texto": "¡Hola, guardián! Los alimentos están en peligro: hay microbios invisibles por todas partes. Tu misión es aprender a protegerlos.",
+          "modelo": "placa_petri"
+        },
+        {
+          "emoji": "⭐",
+          "texto": "Cada acierto te da puntos. Si aciertas varias veces seguidas, ganas una RACHA 🔥 y más puntos. Tu puntaje está arriba, a la izquierda.",
+          "modelo": "estrella"
+        },
+        {
+          "emoji": "🏅",
+          "texto": "Completa las 7 misiones y gana tu medalla de oro, plata o bronce. ¿Listo? ¡Vamos!",
+          "modelo": "trofeo"
+        }
+      ]
+    },
+    {
+      "tipo": "exploracion",
+      "entorno": "microscopico",
+      "titulo": "Misión 1: Conoce a los microbios",
+      "instruccion": "Toca cada microbio para conocerlo. ¡Cada descubrimiento suma puntos!",
+      "elementos": [
+        {
+          "modelo": "bacilo",
+          "nombre": "Bacteria",
+          "etiqueta": "malo",
+          "texto": "Las bacterias son seres de una sola célula. Algunas, como la E. coli, nos enferman si llegan a la comida por manos o agua sucias."
+        },
+        {
+          "modelo": "salmonela",
+          "nombre": "Salmonela",
+          "etiqueta": "malo",
+          "texto": "Es una bacteria que vive en huevos y pollo crudos. Cocinarlos bien la destruye."
+        },
+        {
+          "modelo": "virus",
+          "nombre": "Virus",
+          "etiqueta": "malo",
+          "texto": "Son aún más pequeños que las bacterias y necesitan entrar en una célula para multiplicarse. El norovirus se pasa por manos sucias."
+        },
+        {
+          "modelo": "moho",
+          "nombre": "Moho",
+          "etiqueta": "malo",
+          "texto": "El moho es un hongo. Sus «raíces» invisibles se meten dentro del pan o la fruta: por eso se bota todo el alimento."
+        },
+        {
+          "modelo": "protozoo",
+          "nombre": "Ameba",
+          "etiqueta": "malo",
+          "texto": "Las amebas son parásitos que viven en el agua sucia. Por eso tomamos agua hervida o purificada."
+        },
+        {
+          "modelo": "levadura",
+          "nombre": "Levadura",
+          "etiqueta": "bueno",
+          "texto": "¡Hongo amigo! La levadura hace que el pan se infle y quede suave."
+        },
+        {
+          "modelo": "lactobacilo",
+          "nombre": "Lactobacilo",
+          "etiqueta": "bueno",
+          "texto": "¡Bacteria amiga! Convierte la leche en yogur y ayuda a tu digestión."
+        }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "microscopico",
+      "titulo": "Misión 2: ¿Amigo o enemigo?",
+      "instruccion": "Agarra cada microbio y ponlo en la caja correcta: ¿nos ayuda o nos puede enfermar?",
+      "categorias": [
+        { "id": "amigo", "nombre": "Amigo", "emoji": "😊", "color": "#21a366" },
+        { "id": "enemigo", "nombre": "Enemigo", "emoji": "⚠️", "color": "#e5484d" }
+      ],
+      "elementos": [
+        {
+          "modelo": "lactobacilo",
+          "nombre": "Lactobacilo",
+          "categoria": "amigo",
+          "explicacion": "Hace el yogur y cuida tu barriga."
+        },
+        {
+          "modelo": "levadura",
+          "nombre": "Levadura",
+          "categoria": "amigo",
+          "explicacion": "Infla el pan y ayuda a preparar muchos alimentos."
+        },
+        {
+          "modelo": "salmonela",
+          "nombre": "Salmonela",
+          "categoria": "enemigo",
+          "explicacion": "Causa fiebre, dolor de barriga y diarrea."
+        },
+        {
+          "modelo": "virus",
+          "nombre": "Norovirus",
+          "categoria": "enemigo",
+          "explicacion": "Se pasa por manos sucias y causa vómito y diarrea."
+        },
+        {
+          "modelo": "moho",
+          "nombre": "Moho del pan",
+          "categoria": "enemigo",
+          "explicacion": "Un pan con moho no se come: se bota entero."
+        },
+        {
+          "modelo": "estafilococo",
+          "nombre": "Estafilococo",
+          "categoria": "enemigo",
+          "pista": "Vive en la piel y pasa a la comida si no nos lavamos las manos…",
+          "explicacion": "Puede contaminar la comida que tocamos con las manos sucias."
+        },
+        {
+          "modelo": "protozoo",
+          "nombre": "Ameba",
+          "categoria": "enemigo",
+          "explicacion": "Llega en agua sucia y causa dolor de barriga."
+        }
+      ]
+    },
+    {
+      "tipo": "atrapar",
+      "entorno": "cocina",
+      "titulo": "Misión 3: ¡Defiende el almuerzo!",
+      "duracion": 45,
+      "vidas": 5,
+      "meta": 12,
+      "objetivo": { "modelo": "sandwich" },
+      "malos": ["bacilo", "salmonela", "virus", "moho", "estafilococo"],
+      "buenos": ["lactobacilo", "levadura"]
+    },
+    {
+      "tipo": "narrativa",
+      "entorno": "cocina",
+      "titulo": "¿Cómo llegan los microbios a la comida?",
+      "pasos": [
+        {
+          "emoji": "🖐️",
+          "texto": "Por las manos sucias: tocamos muchas cosas al día y, si no nos lavamos, llevamos microbios a la comida.",
+          "modelo": "mano_sucia"
+        },
+        {
+          "emoji": "🪰",
+          "texto": "Por las moscas: se paran en la basura y luego en la comida. ¡Siempre hay que tapar los alimentos!",
+          "modelo": "mosca"
+        },
+        {
+          "emoji": "🔪",
+          "texto": "Por contaminación cruzada: si cortas pollo crudo y luego la ensalada en la misma tabla, los microbios pasan de un alimento a otro.",
+          "modelo": "tabla_picar",
+          "opciones": { "color": "#e5484d" }
+        },
+        {
+          "emoji": "💧",
+          "texto": "Por el agua sin hervir: puede traer bacterias y parásitos. Tomamos agua hervida o purificada.",
+          "modelo": "agua_sucia"
+        }
+      ]
+    },
+    {
+      "tipo": "simulacion",
+      "entorno": "laboratorio",
+      "titulo": "Misión 4: El laboratorio del tiempo",
+      "instruccion": "🧪 Lee cada reto, elige tu predicción y mira qué pasa con las bacterias en la placa de Petri.",
+      "retos": [
+        {
+          "pregunta": "A la temperatura del cuerpo (37 °C), una bacteria se divide en dos cada 20 minutos. ¿Cuántas habrá en 1 hora?",
+          "opciones": ["3", "8", "60"],
+          "correcta": 1,
+          "explicacion": "20 min → 2, 40 min → 4, 60 min → 8. ¡No se suman, se duplican!",
+          "temperatura": 37,
+          "horas": 1
+        },
+        {
+          "pregunta": "Guardamos esas 8 bacterias en la refrigeradora (4 °C). ¿Qué pasa en 3 horas?",
+          "opciones": ["Casi no crecen", "Crecen muchísimo", "Desaparecen"],
+          "correcta": 0,
+          "explicacion": "El frío las frena. Por eso guardamos la leche, la carne y las sobras en la refri.",
+          "temperatura": 4,
+          "horas": 3,
+          "inicial": 8
+        },
+        {
+          "pregunta": "Ahora cocinamos bien la comida, a más de 70 °C. ¿Qué les pasa a 512 bacterias?",
+          "opciones": ["Crecen más", "La mayoría muere", "No pasa nada"],
+          "correcta": 1,
+          "explicacion": "El calor alto destruye a la mayoría. Por eso cocinamos bien el pollo, la carne y los huevos.",
+          "temperatura": 72,
+          "horas": 0.2,
+          "inicial": 512
+        }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "cocina",
+      "titulo": "Misión 5: Conserva los alimentos",
+      "instruccion": "Cada forma de conservar los alimentos frena a los microbios de una manera. Pon cada tarjeta en su caja.",
+      "categorias": [
+        { "id": "frio", "nombre": "Frío", "emoji": "❄️", "color": "#2f8be6" },
+        { "id": "calor", "nombre": "Calor", "emoji": "🔥", "color": "#e5484d" },
+        { "id": "seco", "nombre": "Sin agua", "emoji": "☀️", "color": "#d98a00" }
+      ],
+      "elementos": [
+        {
+          "emoji": "🥛",
+          "nombre": "Guardar la leche en la refri",
+          "categoria": "frio",
+          "explicacion": "El frío frena a los microbios."
+        },
+        {
+          "emoji": "🧊",
+          "nombre": "Congelar la carne",
+          "categoria": "frio",
+          "explicacion": "Congelada, la carne dura mucho más."
+        },
+        {
+          "emoji": "💧",
+          "nombre": "Hervir el agua",
+          "categoria": "calor",
+          "explicacion": "Hervir destruye bacterias y parásitos."
+        },
+        {
+          "emoji": "🍗",
+          "nombre": "Cocinar bien el pollo",
+          "categoria": "calor",
+          "explicacion": "Bien cocido por dentro, la Salmonela se destruye."
+        },
+        {
+          "emoji": "🍇",
+          "nombre": "Uvas pasas secadas al sol",
+          "categoria": "seco",
+          "explicacion": "Sin agua, los microbios no pueden crecer."
+        },
+        {
+          "emoji": "🐟",
+          "nombre": "Pescado seco y salado",
+          "categoria": "seco",
+          "pista": "La sal saca algo del alimento… ¿qué será?",
+          "explicacion": "La sal le quita el agua al alimento y los microbios no pueden vivir."
+        }
+      ]
+    },
+    {
+      "tipo": "linterna",
+      "entorno": "cocina",
+      "titulo": "Misión 6: Cazadores con linterna UV",
+      "instruccion": "🔦 Apunta tu linterna a cada objeto y mantenla quieta un momento. ¡Los microbios escondidos van a brillar!",
+      "elementos": [
+        {
+          "modelo": "esponja",
+          "nombre": "Esponja",
+          "etiqueta": "malo",
+          "texto": "¡Es de lo más sucio de la cocina! Húmeda y con restos de comida, es el hogar perfecto para las bacterias. Hay que cambiarla seguido."
+        },
+        {
+          "modelo": "tabla_picar",
+          "opciones": { "color": "#e5484d" },
+          "nombre": "Tabla de picar",
+          "etiqueta": "malo",
+          "texto": "Si se usa para carne cruda y luego para verduras sin lavarla, pasa microbios de un alimento a otro."
+        },
+        {
+          "modelo": "celular",
+          "nombre": "Celular",
+          "etiqueta": "malo",
+          "texto": "Lo tocamos todo el día y casi nunca lo limpiamos. ¡Lávate las manos después de usarlo y antes de comer!"
+        },
+        {
+          "modelo": "mano_sucia",
+          "nombre": "Manos",
+          "etiqueta": "malo",
+          "texto": "Las manos llevan microbios a todas partes. Lavarlas con jabón por 20 segundos elimina la mayoría."
+        }
+      ]
+    },
+    {
+      "tipo": "ordenar",
+      "entorno": "lavabo",
+      "titulo": "Misión 7: Lavado de manos experto",
+      "instruccion": "Toca los pasos en orden. Un experto no se salta ninguno.",
+      "mensajeFinal": "🎉 ¡Manos de experto! Lávalas antes de comer, después del baño y después de tocar basura o animales.",
+      "pasos": [
+        { "emoji": "💧", "texto": "Mojar las manos con agua limpia", "pista": "Primero, agua." },
+        { "emoji": "🧼", "texto": "Poner jabón", "pista": "Con las manos mojadas, ¿qué sigue?" },
+        { "emoji": "👐", "texto": "Frotar palmas y dorso", "pista": "Empieza frotando por delante y por detrás." },
+        { "emoji": "🖐️", "texto": "Frotar entre los dedos y las uñas", "pista": "Después, los lugares donde más se esconden." },
+        { "emoji": "🚿", "texto": "Enjuagar con agua", "pista": "Hay que quitar la espuma con los microbios." },
+        { "emoji": "🧻", "texto": "Secar con una toalla limpia", "pista": "Esto va al final." }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "entorno": "laboratorio",
+      "titulo": "Desafío final del guardián",
+      "preguntas": [
+        {
+          "pregunta": "¿Qué microbio nos ayuda a hacer yogur?",
+          "opciones": ["La Salmonela", "El lactobacilo", "El moho"],
+          "correcta": 1,
+          "explicacion": "El lactobacilo convierte la leche en yogur.",
+          "modelo": "lactobacilo"
+        },
+        {
+          "pregunta": "Un pan tiene moho solo en una esquina. ¿Qué haces?",
+          "opciones": ["Corto la esquina y me como el resto", "Lo boto entero", "Lo caliento y me lo como"],
+          "correcta": 1,
+          "explicacion": "El moho tiene «raíces» invisibles dentro del pan. Se bota entero.",
+          "modelo": "pan_con_moho"
+        },
+        {
+          "pregunta": "¿Por qué guardamos la comida en la refrigeradora?",
+          "opciones": ["El frío mata a todos los microbios", "Para que sepa más rica", "El frío frena a los microbios"],
+          "correcta": 2,
+          "explicacion": "El frío los frena, pero no los mata. Por eso la comida igual tiene fecha límite.",
+          "modelo": "refrigeradora"
+        },
+        {
+          "pregunta": "¿Qué es la contaminación cruzada?",
+          "opciones": ["Pasar microbios de un alimento crudo a otro con la misma tabla o cuchillo", "Cruzar la calle con comida", "Mezclar dos jugos"],
+          "correcta": 0,
+          "explicacion": "Por eso usamos tablas distintas para lo crudo y para lo que se come sin cocinar.",
+          "modelo": "tabla_picar"
+        },
+        {
+          "pregunta": "¿Cuánto tiempo debes frotar tus manos con jabón?",
+          "opciones": ["5 segundos", "20 segundos", "2 minutos"],
+          "correcta": 1,
+          "explicacion": "Unos 20 segundos: lo que dura cantar dos veces «Cumpleaños feliz».",
+          "modelo": "jabon"
+        },
+        {
+          "pregunta": "A 37 °C una bacteria se duplica cada 20 minutos. En 1 hora, 1 bacteria se convierte en…",
+          "opciones": ["8", "3", "20"],
+          "correcta": 0,
+          "explicacion": "2, luego 4, luego 8. ¡Crecen muy rápido!",
+          "modelo": "placa_petri"
+        },
+        {
+          "pregunta": "Una comida huele bien. ¿Siempre es segura?",
+          "opciones": ["Sí, siempre", "No siempre: muchos microbios no cambian el olor"],
+          "correcta": 1,
+          "explicacion": "Muchos microbios peligrosos no cambian el olor ni el sabor. Por eso cuidamos la higiene y la temperatura.",
+          "modelo": "lupa"
+        }
+      ]
+    }
+  ]
+}

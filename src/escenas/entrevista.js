@@ -90,6 +90,7 @@ export class EscenaEntrevista extends EscenaBase {
       boton.setModo('incorrecto');
       this.decir(q.respuesta || '…', q.expresion ?? 'sorpresa');
       this.m.audio.error(this.posMundo(boton));
+      this.perder();
       this.cabecera.mensaje(`🤔 ${q.retro || this.t('preguntaMala')}`, COLORES.naranja);
       return;
     }
@@ -100,6 +101,7 @@ export class EscenaEntrevista extends EscenaBase {
     this.cuaderno.redibujar();
     this.m.fx.latido(this.cuaderno, 0.06);
     this.m.audio.acierto(this.posMundo(this.cuaderno));
+    this.ganar(this.cuaderno, 100);
     this.m.fx.confeti(this.posMundo(this.cuaderno).add(new THREE.Vector3(0, 0.25, 0)), 18);
     this.cabecera.mensaje(this.t('buenaPregunta'), COLORES.verde);
     this.cabecera.derecha(this.t('hallazgosProgreso', { n: Math.min(this.hallazgos.length, this.minimo), total: this.minimo }));

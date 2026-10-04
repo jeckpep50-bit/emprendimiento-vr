@@ -85,9 +85,11 @@ export class EscenaQuiz extends EscenaBase {
     const pos = this.posMundo(this.botones[i]);
     if (bien) {
       this.m.audio.acierto(pos);
+      this.ganar(pos, 200);
       this.m.fx.confeti(pos, 30);
     } else {
       this.m.audio.error(pos);
+      this.perder();
       this.m.fx.sacudir(this.botones[i]);
     }
     this.panel.redibujar();

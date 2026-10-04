@@ -130,10 +130,12 @@ export class EscenaLluvia extends EscenaBase {
       this.m.entrada.habilitar(nota, false);
       this.m.fx.sacudir(nota);
       this.m.audio.error(this.posMundo(nota));
+      this.perder();
       this.cabecera.mensaje(`🤔 ${idea.retro || this.t('ideaNoCumple')}`, COLORES.naranja);
       return;
     }
     this.fase = 'elegida';
+    this.ganar(nota, 300);
     nota.userData.estado.elegida = true;
     nota.redibujar();
     for (const n of this.notas) {
