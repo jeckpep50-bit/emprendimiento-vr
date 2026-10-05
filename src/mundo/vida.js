@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { microbios } from './prefabs/microbios.js';
 import { objetos, mosca } from './prefabs/objetos.js';
-import { mat, malla } from './materiales.js';
+import { mercado as prefabsMercado } from './prefabs/mercado.js';
+import { mat, malla, fusionar } from './materiales.js';
 import { envolver, fuente } from '../ui/lienzo.js';
 import { holograma } from './holograma.js';
 
@@ -19,6 +20,9 @@ const AMBIENTES = {
   taller: { frecuencia: 480, volumen: 0.012 },
   patio: { frecuencia: 900, filtro: 'bandpass', volumen: 0.025, oleaje: 0.15 },
   laboratorio: { frecuencia: 160, volumen: 0.04, oleaje: 0.08 },
+  mercado: { frecuencia: 700, filtro: 'bandpass', volumen: 0.04, oleaje: 0.35 },
+  planta: { frecuencia: 140, volumen: 0.05, oleaje: 0.6 },
+  cuerpo: { frecuencia: 120, volumen: 0.07, oleaje: 0.9 },
 };
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
@@ -599,7 +603,363 @@ function proyectorHolografico(g, ctx) {
   });
 }
 
+// ── Mercado ────────────────────────────────────────────────────────────────
+
+function vendedores(g, ctx) {
+  const lista = [
+    [{ camisa: '#e5484d', delantal: '#ffffff', gorro: 'sombrero', piel: '#b9794f' }, [0.55, 0, -3.25], 0],
+    [{ camisa: '#ffffff', delantal: '#e5484d', gorro: 'gorra', piel: '#c98b5e', cabello: '#1d1d27' }, [-3.25, 0, 0.35], Math.PI / 2],
+    [{ camisa: '#2dbe78', delantal: '#ffc23c', gorro: 'ninguno', piel: '#8d5a3b' }, [3.25, 0, -1.0], -Math.PI / 2],
+    [{ camisa: '#8b5cf6', delantal: '#ffffff', gorro: 'sombrero', piel: '#d9a06f' }, [0.7, 0, 3.05], Math.PI],
+  ];
+  for (const [opciones, [x, y, z], ry] of lista) {
+    const v = prefabsMercado.vendedor(opciones);
+    v.position.set(x, y, z);
+    v.rotation.y = ry;
+    g.add(v);
+    ctx.cada((_dt, t) => v.userData.animar(t));
+  }
+}
+
+/** Cuerdas de banderines de colores que cruzan sobre el mercado y se mecen con el viento. */
+function banderines(g, ctx) {
+  const cuerdas = [[[-4.5, -4.5], [4.5, 4.5]], [[4.5, -4.5], [-4.5, 4.5]], [[-5, 0.2], [5, 0.2]], [[0, -5], [0, 5]]];
+  const porCuerda = 18;
+  const forma = new THREE.Shape();
+  forma.moveTo(-0.11, 0);
+  forma.lineTo(0.11, 0);
+  forma.lineTo(0, -0.26);
+  forma.closePath();
+  const banderas = new THREE.InstancedMesh(new THREE.ShapeGeometry(forma), new THREE.MeshLambertMaterial({ side: THREE.DoubleSide }), cuerdas.length * porCuerda);
+  banderas.frustumCulled = false;
+  const colores = ['#ff5a5f', '#ffc23c', '#2dbe78', '#4f7cff', '#ff8fd1', '#ffffff'];
+  const color = new THREE.Color();
+  const datos = [];
+  const puntosCuerda = [];
+  cuerdas.forEach(([a, b], c) => {
+    const yuyu = (k) => 3.35 - Math.sin(k * Math.PI) * 0.45; // la cuerda cuelga en el centro
+    for (let i = 0; i < porCuerda; i++) {
+      const k = (i + 0.5) / porCuerda;
+      datos.push({ pos: V(a[0] + (b[0] - a[0]) * k, yuyu(k), a[1] + (b[1] - a[1]) * k), giro: Math.atan2(b[0] - a[0], b[1] - a[1]) + Math.PI / 2, fase: i * 0.7 + c });
+      banderas.setColorAt(c * porCuerda + i, color.set(colores[(i + c) % colores.length]));
+    }
+    for (let i = 0; i < 16; i++) {
+      for (const k of [i / 16, (i + 1) / 16]) puntosCuerda.push(V(a[0] + (b[0] - a[0]) * k, yuyu(k) + 0.005, a[1] + (b[1] - a[1]) * k));
+    }
+  });
+  g.add(banderas);
+  g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(puntosCuerda), new THREE.LineBasicMaterial({ color: '#5d4037' })));
+  const m = new THREE.Matrix4();
+  const q = new THREE.Quaternion();
+  const e = new THREE.Euler();
+  const uno = V(1, 1, 1);
+  ctx.cada((_dt, t) => {
+    datos.forEach((d, i) => {
+      e.set(Math.sin(t * 2.2 + d.fase) * 0.35, d.giro, 0, 'YXZ');
+      banderas.setMatrixAt(i, m.compose(d.pos, q.setFromEuler(e), uno));
+    });
+    banderas.instanceMatrix.needsUpdate = true;
+  });
+}
+
+/** Palomas que caminan y picotean el piso. */
+function palomas(g, ctx) {
+  for (let i = 0; i < 2; i++) {
+    const p = new THREE.Group();
+    const cuerpo = new THREE.Group();
+    cuerpo.add(malla(new THREE.SphereGeometry(0.09, 14, 10), mat('#8a94a3'), [0, 0.11, 0], [0, 0, 0], [1, 0.85, 1.5]));
+    cuerpo.add(malla(new THREE.ConeGeometry(0.05, 0.12, 8), mat('#5f6875'), [0, 0.12, -0.15], [-Math.PI / 2 - 0.3, 0, 0]));
+    for (const lado of [-1, 1]) cuerpo.add(malla(new THREE.CylinderGeometry(0.006, 0.006, 0.06, 4), mat('#d0574a'), [lado * 0.03, 0.03, 0]));
+    fusionar(cuerpo);
+    const cabeza = new THREE.Group();
+    cabeza.add(malla(new THREE.SphereGeometry(0.045, 12, 10), mat('#6a7b8f'), [0, 0, 0]));
+    cabeza.add(malla(new THREE.ConeGeometry(0.012, 0.035, 6), mat('#d9a35e'), [0, -0.005, 0.05], [Math.PI / 2, 0, 0]));
+    fusionar(cabeza);
+    cabeza.position.set(0, 0.2, 0.1);
+    p.add(cuerpo, cabeza);
+    g.add(p);
+    const centro = i ? V(3.9, 0, 3.6) : V(-3.8, 0, -3.7);
+    let destino = centro.clone();
+    let espera = azar(1, 3);
+    p.position.copy(centro);
+    ctx.cada((dt, t) => {
+      const falta = destino.clone().sub(p.position).setY(0);
+      if (falta.length() > 0.05) {
+        p.position.addScaledVector(falta.normalize(), dt * 0.35);
+        p.rotation.y = Math.atan2(falta.x, falta.z);
+        cabeza.position.z = 0.1 + Math.abs(Math.sin(t * 9)) * 0.03;
+        cabeza.position.y = 0.2;
+      } else {
+        // Picotea
+        cabeza.position.y = 0.2 - Math.max(0, Math.sin(t * 6 + i)) * 0.12;
+        espera -= dt;
+        if (espera <= 0) {
+          espera = azar(2, 5);
+          destino = centro.clone().add(V(azar(-0.9, 0.9), 0, azar(-0.9, 0.9)));
+        }
+      }
+    });
+  }
+}
+
+// ── Planta procesadora ─────────────────────────────────────────────────────
+
+/** Brazo robótico que empaca cajas sin parar. */
+function robotEmpacador(g, ctx, posicion) {
+  const base = new THREE.Group();
+  base.position.copy(posicion);
+  const amarillo = mat('#ffb300');
+  const gris = mat('#3a4250');
+  base.add(malla(new THREE.CylinderGeometry(0.32, 0.38, 0.25, 24), gris, [0, 0.125, 0]));
+  const torre = new THREE.Group();
+  torre.position.y = 0.25;
+  torre.add(malla(new THREE.CylinderGeometry(0.22, 0.24, 0.35, 20), amarillo, [0, 0.175, 0]));
+  const hombro = new THREE.Group();
+  hombro.position.y = 0.4;
+  hombro.add(malla(new THREE.BoxGeometry(0.16, 0.9, 0.16), amarillo, [0, 0.45, 0]));
+  hombro.add(malla(new THREE.SphereGeometry(0.12, 14, 10), gris));
+  const codo = new THREE.Group();
+  codo.position.y = 0.9;
+  codo.add(malla(new THREE.SphereGeometry(0.1, 14, 10), gris));
+  codo.add(malla(new THREE.BoxGeometry(0.12, 0.75, 0.12), amarillo, [0, 0.375, 0]));
+  const pinza = new THREE.Group();
+  pinza.position.y = 0.78;
+  pinza.add(malla(new THREE.BoxGeometry(0.24, 0.05, 0.1), gris));
+  const caja = malla(new THREE.BoxGeometry(0.3, 0.24, 0.26), mat('#c8a06a'), [0, -0.15, 0]);
+  pinza.add(caja);
+  codo.add(pinza);
+  hombro.add(codo);
+  torre.add(hombro);
+  base.add(torre);
+  g.add(base);
+  ctx.cada((_dt, t) => {
+    const k = (t * 0.25) % 1;
+    const ida = Math.sin(k * Math.PI * 2);
+    torre.rotation.y = ida * 1.1;
+    hombro.rotation.z = 0.5 + Math.sin(k * Math.PI * 4) * 0.25;
+    codo.rotation.z = 1.4 + Math.sin(k * Math.PI * 4 + 1) * 0.3;
+    pinza.rotation.z = -1.9 - hombro.rotation.z - codo.rotation.z + Math.PI;
+    caja.visible = k < 0.5;
+  });
+}
+
+function balizas(g, ctx, posiciones) {
+  for (const p of posiciones) {
+    const b = new THREE.Group();
+    b.position.copy(p);
+    b.add(malla(new THREE.CylinderGeometry(0.08, 0.1, 0.08, 14), mat('#3a4250')));
+    b.add(malla(new THREE.SphereGeometry(0.08, 14, 10), mat('#ff9f1c', { tipo: 'basica' }), [0, 0.08, 0]));
+    const haz = malla(new THREE.ConeGeometry(0.5, 2.2, 20, 1, true), new THREE.MeshBasicMaterial({ color: '#ff9f1c', transparent: true, opacity: 0.12, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }), [0, 0.08, 1.1], [-Math.PI / 2, 0, 0]);
+    const giro = new THREE.Group();
+    giro.add(haz);
+    b.add(giro);
+    g.add(b);
+    ctx.cada((dt) => (giro.rotation.y += dt * 3));
+  }
+}
+
+function vapor(g, ctx, origen) {
+  const nubes = Array.from({ length: 6 }, () => {
+    const n = malla(new THREE.SphereGeometry(0.12, 10, 8), new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0, depthWrite: false }));
+    g.add(n);
+    return n;
+  });
+  let vida = -1;
+  cadaTanto(ctx, [6, 11], () => {
+    vida = 0;
+    ctx.audio.rafaga({ duracion: 1.2, filtro: 'highpass', frecuencia: 1800, volumen: 0.05, pos: g.localToWorld(origen.clone()) });
+  });
+  ctx.cada((dt) => {
+    if (vida < 0) return;
+    vida += dt;
+    nubes.forEach((n, i) => {
+      const k = THREE.MathUtils.clamp(vida * 0.8 - i * 0.12, 0, 1);
+      n.position.set(origen.x + Math.sin(i * 2) * k * 0.3, origen.y + k * 1.2, origen.z + Math.cos(i * 3) * k * 0.2);
+      n.scale.setScalar(0.5 + k * 2.5);
+      n.material.opacity = k > 0 && k < 1 ? 0.45 * (1 - k) : 0;
+    });
+    if (vida > 2.5) vida = -1;
+  });
+}
+
+// ── Cuerpo humano ──────────────────────────────────────────────────────────
+
+/** Burbujas que suben del lago de ácido y revientan. */
+function burbujasAcido(zona, ctx) {
+  const n = 70;
+  const malla_ = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 10, 8), new THREE.MeshBasicMaterial({ color: '#e4ff7a', transparent: true, opacity: 0.65, depthWrite: false }), n);
+  malla_.frustumCulled = false;
+  zona.add(malla_);
+  const datos = Array.from({ length: n }, () => {
+    const a = Math.random() * Math.PI * 2;
+    const r = azar(1.5, 5.8);
+    return { x: Math.cos(a) * r, z: Math.sin(a) * r - 1, k: Math.random(), v: azar(0.25, 0.6), s: azar(0.03, 0.09) };
+  });
+  const m = new THREE.Matrix4();
+  ctx.cada((dt) => {
+    if (!zona.visible) return;
+    datos.forEach((d, i) => {
+      d.k += dt * d.v;
+      if (d.k > 1) d.k = 0;
+      const s = d.s * (d.k > 0.85 ? (1 - d.k) * 6.7 : 0.4 + d.k);
+      m.makeScale(s, s, s).setPosition(d.x, -0.04 + d.k * 0.35, d.z);
+      malla_.setMatrixAt(i, m);
+    });
+    malla_.instanceMatrix.needsUpdate = true;
+  });
+  cadaTanto(ctx, [0.3, 0.9], () => {
+    if (!zona.visible) return;
+    const d = datos[Math.floor(Math.random() * n)];
+    ctx.audio.burbuja(zona.localToWorld(V(d.x, 0.2, d.z)));
+  });
+}
+
+/** Vellosidades del intestino que se mecen y la microbiota que nada entre ellas. */
+function vellosidades(zona, ctx) {
+  const lista = [];
+  for (let i = 0; i < 420 && lista.length < 260; i++) {
+    const enPared = i % 3 === 0;
+    let pos;
+    let normal;
+    if (enPared) {
+      const a = azar(-1.25, 1.25) + (i % 2 ? Math.PI : 0);
+      const z = azar(-20, 8);
+      pos = V(Math.sin(a) * 3.85, 1.4 + Math.cos(a) * 3.85, z);
+      normal = V(-Math.sin(a), -Math.cos(a), 0);
+      if (pos.y < 0.3) continue;
+    } else {
+      pos = V(azar(-3.6, 3.6), 0, azar(-20, 8));
+      normal = V(0, 1, 0);
+      if (Math.hypot(pos.x, pos.z) < 1.5 || (Math.abs(pos.x) < 1.2 && pos.z > -2.6 && pos.z < 0)) continue;
+    }
+    lista.push({ pos, q: new THREE.Quaternion().setFromUnitVectors(V(0, 1, 0), normal), fase: Math.random() * 6, s: azar(0.8, 1.3) });
+  }
+  const geo = new THREE.CapsuleGeometry(0.11, 0.5, 4, 10);
+  geo.translate(0, 0.36, 0);
+  const villi = new THREE.InstancedMesh(geo, mat('#f2a5b0'), lista.length);
+  villi.frustumCulled = false;
+  const color = new THREE.Color();
+  lista.forEach((_, i) => villi.setColorAt(i, color.set(i % 3 ? '#f2a5b0' : '#e8899a')));
+  zona.add(villi);
+
+  const n = 140;
+  const geoBicho = new THREE.CapsuleGeometry(0.03, 0.09, 4, 8);
+  geoBicho.rotateZ(Math.PI / 2);
+  const bichos = new THREE.InstancedMesh(geoBicho, mat('#ffffff', { emisivo: 0.4 }), n);
+  bichos.frustumCulled = false;
+  const coloresBichos = ['#6cc4ff', '#7fdc6b', '#b56cff', '#ffc23c'];
+  const datosBichos = Array.from({ length: n }, (_, i) => {
+    bichos.setColorAt(i, color.set(coloresBichos[i % 4]));
+    return { c: V(azar(-3, 3), azar(0.3, 2.6), azar(-16, 6)), r: azar(0.15, 0.6), w: azar(0.4, 1.2) * (i % 2 ? 1 : -1), f: Math.random() * 6 };
+  });
+  datosBichos.forEach((d) => {
+    if (Math.hypot(d.c.x, d.c.z) < 1.4) d.c.x += d.c.x < 0 ? -1.6 : 1.6;
+  });
+  zona.add(bichos);
+
+  const m = new THREE.Matrix4();
+  const q = new THREE.Quaternion();
+  const ondula = new THREE.Quaternion();
+  const eje = V(1, 0, 0);
+  const escala = V();
+  const p = V();
+  ctx.cada((_dt, t) => {
+    if (!zona.visible) return;
+    lista.forEach((d, i) => {
+      ondula.setFromAxisAngle(eje, Math.sin(t * 1.6 + d.fase + d.pos.z * 0.4) * 0.25);
+      q.copy(d.q).multiply(ondula);
+      escala.set(1, d.s * (1 + Math.sin(t * 2 + d.fase) * 0.06), 1);
+      villi.setMatrixAt(i, m.compose(d.pos, q, escala));
+    });
+    villi.instanceMatrix.needsUpdate = true;
+    datosBichos.forEach((d, i) => {
+      const a = t * d.w + d.f;
+      p.set(d.c.x + Math.cos(a) * d.r, d.c.y + Math.sin(a * 1.3) * 0.15, d.c.z + Math.sin(a) * d.r);
+      q.setFromAxisAngle(V(0, 1, 0), -a);
+      bichos.setMatrixAt(i, m.compose(p, q, escala.set(1, 1, 1)));
+    });
+    bichos.instanceMatrix.needsUpdate = true;
+  });
+}
+
+/** Glóbulos rojos que pasan por el vaso sanguíneo dando vueltas. */
+function torrenteSanguineo(zona, ctx) {
+  const perfil = [[0, 0.03], [0.075, 0.04], [0.15, 0.065], [0.19, 0.045], [0.2, 0], [0.19, -0.045], [0.15, -0.065], [0.075, -0.04], [0, -0.03]].map(([x, y]) => new THREE.Vector2(x, y));
+  const n = 150;
+  const celulas = new THREE.InstancedMesh(new THREE.LatheGeometry(perfil, 20), mat('#d8323f'), n);
+  celulas.frustumCulled = false;
+  zona.add(celulas);
+  const datos = [];
+  while (datos.length < n) {
+    const r = Math.sqrt(Math.random()) * 3.0;
+    const a = Math.random() * Math.PI * 2;
+    const y = 1.5 + Math.sin(a) * r;
+    const z = -0.5 + Math.cos(a) * r;
+    if (Math.hypot(y - 1.4, z) < 1.4) continue; // no atraviesan la cabeza del usuario
+    datos.push({ x: azar(-20, 20), y, z, v: azar(1.0, 1.8), giro: V(Math.random(), Math.random(), Math.random()).normalize(), f: Math.random() * 6 });
+  }
+  const m = new THREE.Matrix4();
+  const q = new THREE.Quaternion();
+  const p = V();
+  const uno = V(1, 1, 1);
+  ctx.cada((dt, t) => {
+    if (!zona.visible) return;
+    datos.forEach((d, i) => {
+      d.x += d.v * dt;
+      if (d.x > 20) d.x = -20;
+      q.setFromAxisAngle(d.giro, t * 0.8 + d.f);
+      p.set(d.x, d.y + Math.sin(t + d.f) * 0.1, d.z);
+      celulas.setMatrixAt(i, m.compose(p, q, uno));
+    });
+    celulas.instanceMatrix.needsUpdate = true;
+  });
+}
+
+function vidaCuerpo(g, ctx) {
+  const { boca, estomago, intestino, defensas } = ctx.zonas;
+  motas(boca, ctx, { caja: [-3, 3, 0.3, 3.5, -5, 3], cantidad: 110, color: '#e8f6ff', tam: 0.05, opacidad: 0.6, velocidad: 0.05 });
+  burbujasAcido(estomago, ctx);
+  motas(estomago, ctx, { caja: [-5, 5, 0.2, 4, -6, 4], cantidad: 120, color: '#f4ff9a', tam: 0.06, opacidad: 0.45, velocidad: 0.15 });
+  vellosidades(intestino, ctx);
+  torrenteSanguineo(defensas, ctx);
+  motas(defensas, ctx, { caja: [-6, 6, -1, 4, -3.5, 2.5], cantidad: 140, color: '#ffd38a', tam: 0.04, opacidad: 0.6, velocidad: 0.2 });
+  // Latido del corazón de fondo: "pum-pum" grave cada segundo.
+  let reloj = 0;
+  ctx.cada((dt) => {
+    reloj += dt;
+    if (reloj < 1.0) return;
+    reloj = 0;
+    ctx.audio.tono(58, 0.16, { tipo: 'triangle', volumen: 0.16 });
+    ctx.audio.tono(52, 0.2, { tipo: 'triangle', volumen: 0.12, retardo: 0.22 });
+  });
+}
+
 const VIDA = {
+  mercado(g, ctx) {
+    vendedores(g, ctx);
+    banderines(g, ctx);
+    palomas(g, ctx);
+    motas(g, ctx, { caja: [-5, 5, 0.3, 3, -5, 5], cantidad: 80, color: '#fffbd0', tam: 0.03 });
+    cadaTanto(ctx, [3, 7], () => {
+      const a = Math.random() * Math.PI * 2;
+      ctx.audio.pajaro(g.localToWorld(V(Math.cos(a) * 7, 4, Math.sin(a) * 7)));
+    });
+    cadaTanto(ctx, [4, 9], () => {
+      const a = Math.random() * Math.PI * 2;
+      const pos = g.localToWorld(V(Math.cos(a) * 3.5, 1, Math.sin(a) * 3.5));
+      ctx.audio.tono(2600, 0.05, { tipo: 'square', volumen: 0.015, pos });
+      ctx.audio.tono(3100, 0.08, { tipo: 'square', volumen: 0.012, retardo: 0.06, pos });
+    });
+  },
+  planta(g, ctx) {
+    robotEmpacador(g, ctx, V(4.7, 0, -3.6));
+    balizas(g, ctx, [V(-6.85, 3.3, 2.5), V(6.85, 3.3, -3.5)]);
+    vapor(g, ctx, V(-5.4, 4.0, -4.4));
+    const motor = ctx.audio.fuenteEspacial('motor', g.localToWorld(V(-4.5, 1.5, -4.5)));
+    ctx.alDetener(() => motor.detener());
+    motas(g, ctx, { caja: [-6, 6, 0.4, 4.5, -5, 5], cantidad: 90, color: '#ffffff', tam: 0.025, opacidad: 0.4 });
+  },
+  cuerpo: vidaCuerpo,
   laboratorio(g, ctx) {
     pantallasLaboratorio(g, ctx);
     proyectorHolografico(g, ctx);

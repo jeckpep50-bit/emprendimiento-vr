@@ -100,6 +100,7 @@ export function estudiante({ peinado = 'colitas', expresion = 'neutral', cabello
       liberar(hijo);
     }
     ponerCara(cara, { r, caracter: e, y: 0.0, z: r, escalaBoca: 1.45 });
+    fusionar(cara);
     g.userData.expresion = e;
   };
   setExpresion(expresion);

@@ -66,22 +66,32 @@ export class Audio {
     ganancia.gain.exponentialRampToValueAtTime(volumen, t0 + 0.012);
     ganancia.gain.exponentialRampToValueAtTime(0.0001, t0 + duracion);
     osc.connect(ganancia);
-
-    if (pos) {
-      const panner = this.ctx.createPanner();
-      panner.panningModel = 'HRTF';
-      panner.distanceModel = 'inverse';
-      panner.refDistance = 0.8;
-      panner.positionX.value = pos.x;
-      panner.positionY.value = pos.y;
-      panner.positionZ.value = pos.z;
-      ganancia.connect(panner);
-      panner.connect(this.maestro);
-    } else {
-      ganancia.connect(this.maestro);
-    }
+    this._conectar(ganancia, pos);
     osc.start(t0);
     osc.stop(t0 + duracion + 0.05);
+  }
+
+  /** Conecta un nodo a la salida; con `pos` suena desde ese punto del espacio. */
+  _conectar(nodo, pos) {
+    if (!pos) return nodo.connect(this.maestro);
+    const panner = this.ctx.createPanner();
+    panner.panningModel = 'HRTF';
+    panner.distanceModel = 'inverse';
+    panner.refDistance = 0.8;
+    panner.positionX.value = pos.x;
+    panner.positionY.value = pos.y;
+    panner.positionZ.value = pos.z;
+    nodo.connect(panner).connect(this.maestro);
+  }
+
+  _ruidoBlanco() {
+    if (!this._bufferBlanco) {
+      const n = Math.round(this.ctx.sampleRate * 1.5);
+      this._bufferBlanco = this.ctx.createBuffer(1, n, this.ctx.sampleRate);
+      const datos = this._bufferBlanco.getChannelData(0);
+      for (let i = 0; i < n; i++) datos[i] = Math.random() * 2 - 1;
+    }
+    return this._bufferBlanco;
   }
 
   tic() {
@@ -133,6 +143,63 @@ export class Audio {
   moneda(pos) {
     this.tono(988, 0.08, { tipo: 'square', volumen: 0.05, pos });
     this.tono(1319, 0.22, { tipo: 'square', volumen: 0.05, retardo: 0.07, pos });
+  }
+
+  /** Fanfarria corta (subir de rango). */
+  fanfarria() {
+    [523, 659, 784].forEach((f, i) => this.tono(f, 0.13, { tipo: 'triangle', volumen: 0.12, retardo: i * 0.1 }));
+    for (const f of [523, 659, 784, 1047]) this.tono(f, 0.7, { tipo: 'triangle', volumen: 0.07, retardo: 0.32 });
+  }
+
+  /** Ráfaga de ruido filtrado: base de chisporroteos, soplidos y golpes. */
+  rafaga({ duracion = 0.4, filtro = 'bandpass', frecuencia = 1000, hasta = null, q = 1, volumen = 0.08, retardo = 0, pos = null } = {}) {
+    if (!this.ctx) return;
+    const t0 = this.ctx.currentTime + retardo;
+    const fuente = this.ctx.createBufferSource();
+    fuente.buffer = this._ruidoBlanco();
+    const filtroNodo = this.ctx.createBiquadFilter();
+    filtroNodo.type = filtro;
+    filtroNodo.Q.value = q;
+    filtroNodo.frequency.setValueAtTime(frecuencia, t0);
+    if (hasta) filtroNodo.frequency.exponentialRampToValueAtTime(hasta, t0 + duracion);
+    const ganancia = this.ctx.createGain();
+    ganancia.gain.setValueAtTime(0.0001, t0);
+    ganancia.gain.exponentialRampToValueAtTime(volumen, t0 + Math.min(0.05, duracion * 0.3));
+    ganancia.gain.exponentialRampToValueAtTime(0.0001, t0 + duracion);
+    fuente.connect(filtroNodo).connect(ganancia);
+    this._conectar(ganancia, pos);
+    fuente.start(t0, Math.random() * 0.5);
+    fuente.stop(t0 + duracion + 0.05);
+  }
+
+  /** Un microbio que se disuelve en ácido. */
+  chisporroteo(pos) {
+    this.rafaga({ duracion: 0.7, filtro: 'highpass', frecuencia: 2500, volumen: 0.09, pos });
+    this.tono(600, 0.4, { hasta: 120, volumen: 0.04, pos });
+  }
+
+  /** Soplido de viaje a toda velocidad. */
+  soplido() {
+    this.rafaga({ duracion: 0.9, frecuencia: 250, hasta: 2200, q: 0.8, volumen: 0.14 });
+    this.rafaga({ duracion: 1.0, frecuencia: 2200, hasta: 180, q: 0.8, volumen: 0.12, retardo: 0.8 });
+  }
+
+  /** Sello de "RECHAZADO". */
+  sello(pos) {
+    this.tono(140, 0.16, { tipo: 'triangle', hasta: 70, volumen: 0.2, pos });
+    this.rafaga({ duracion: 0.12, filtro: 'lowpass', frecuencia: 900, volumen: 0.1, pos });
+  }
+
+  /** Aviso de un problema nuevo. */
+  alarma(pos) {
+    this.tono(880, 0.11, { tipo: 'square', volumen: 0.045, pos });
+    this.tono(660, 0.14, { tipo: 'square', volumen: 0.045, retardo: 0.13, pos });
+  }
+
+  /** Golpecito mecánico (banda transportadora, máquinas). */
+  clac(pos) {
+    this.tono(1800, 0.025, { tipo: 'square', volumen: 0.02, pos });
+    this.tono(260, 0.06, { tipo: 'triangle', volumen: 0.05, retardo: 0.02, pos });
   }
 
   teletransporte() {

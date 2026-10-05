@@ -23,6 +23,14 @@ export function validarLeccion(l) {
   if (l.narracion !== undefined && typeof l.narracion !== 'boolean') err('narracion', 'debe ser true o false');
   if (l.gamificacion !== undefined && typeof l.gamificacion !== 'boolean') err('gamificacion', 'debe ser true o false');
   if (l.objetivos !== undefined && !(Array.isArray(l.objetivos) && l.objetivos.every(texto))) err('objetivos', 'debe ser una lista de textos');
+  if (l.rangos !== undefined && lista(l.rangos, 2, 8, 'rangos')) {
+    l.rangos.forEach((r, j) => {
+      if (!texto(r.nombre)) err(`rangos[${j}].nombre`, 'falta el nombre');
+      if (!(Number.isFinite(r.puntos) && r.puntos >= 0)) err(`rangos[${j}].puntos`, 'debe ser un número de 0 o más');
+      if (j > 0 && !(r.puntos > l.rangos[j - 1].puntos)) err(`rangos[${j}].puntos`, 'deben ir de menor a mayor');
+    });
+  }
+  if (l.titulosMedalla !== undefined && !['oro', 'plata', 'bronce'].every((k) => l.titulosMedalla[k] === undefined || texto(l.titulosMedalla[k]))) err('titulosMedalla', 'oro, plata y bronce deben ser textos');
   if (!lista(l.escenas, 1, 20, 'escenas')) return errores;
 
   l.escenas.forEach((e, i) => {
@@ -30,6 +38,75 @@ export function validarLeccion(l) {
     if (!(e.tipo in TIPOS_ESCENA)) return err(`${r}.tipo`, `tipo desconocido "${e.tipo}"`);
     if (e.entorno !== undefined && !(e.entorno in ENTORNOS)) err(`${r}.entorno`, `entorno desconocido "${e.entorno}"`);
     if (!texto(e.titulo)) err(`${r}.titulo`, 'falta el título');
+    if (e.insignia !== undefined && !(texto(e.insignia?.nombre) && (e.insignia.emoji === undefined || texto(e.insignia.emoji)))) err(`${r}.insignia`, 'debe ser { nombre, emoji? }');
+
+    const categoriasValidas = (ruta) => {
+      if (!lista(e.categorias, 2, 6, ruta)) return new Set();
+      const ids = new Set(e.categorias.map((c) => c.id));
+      if (ids.size !== e.categorias.length) err(ruta, 'los id deben ser únicos');
+      e.categorias.forEach((c, j) => {
+        if (!texto(c.id)) err(`${ruta}[${j}].id`, 'falta el id');
+        if (!texto(c.nombre)) err(`${ruta}[${j}].nombre`, 'falta el nombre');
+      });
+      return ids;
+    };
+    const posicionValida = (p) => Array.isArray(p) && p.length === 3 && p.every(Number.isFinite);
+
+    if (e.tipo === 'inspeccion') {
+      const ids = categoriasValidas(`${r}.categorias`);
+      if (lista(e.elementos, 2, 16, `${r}.elementos`)) {
+        e.elementos.forEach((el, j) => {
+          const rr = `${r}.elementos[${j}]`;
+          if (!(el.modelo in MODELOS)) err(`${rr}.modelo`, `modelo desconocido "${el.modelo}"`);
+          if (!texto(el.nombre)) err(`${rr}.nombre`, 'falta el nombre');
+          if (!texto(el.texto)) err(`${rr}.texto`, 'falta el texto');
+          if (!posicionValida(el.posicion)) err(`${rr}.posicion`, 'debe ser [x, y, z]');
+          if (el.categoria !== 'ok' && !ids.has(el.categoria)) err(`${rr}.categoria`, `"${el.categoria}" no es una categoría (usa "ok" si no hay riesgo)`);
+          (el.acompanantes ?? []).forEach((a, k) => modelo(a.modelo, `${rr}.acompanantes[${k}].modelo`));
+        });
+        if (!e.elementos.some((el) => el.categoria !== 'ok')) err(`${r}.elementos`, 'debe haber al menos un riesgo');
+      }
+    }
+
+    if (e.tipo === 'cinta' && lista(e.productos, 4, 24, `${r}.productos`)) {
+      e.productos.forEach((p, j) => {
+        const rr = `${r}.productos[${j}]`;
+        if (!(p.modelo in MODELOS)) err(`${rr}.modelo`, `modelo desconocido "${p.modelo}"`);
+        if (!texto(p.nombre)) err(`${rr}.nombre`, 'falta el nombre');
+        if (typeof p.apto !== 'boolean') err(`${rr}.apto`, 'debe ser true o false');
+        if (!texto(p.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+      });
+      if (!e.productos.some((p) => p.apto === false)) err(`${r}.productos`, 'debe haber al menos un producto que se rechace');
+    }
+
+    if (e.tipo === 'viaje' && lista(e.estaciones, 1, 4, `${r}.estaciones`)) {
+      const zonas = ['boca', 'estomago', 'intestino', 'defensas'];
+      e.estaciones.forEach((s, j) => {
+        const rr = `${r}.estaciones[${j}]`;
+        if (!zonas.includes(s.zona)) err(`${rr}.zona`, `debe ser ${zonas.join(' | ')}`);
+        if (!texto(s.nombre)) err(`${rr}.nombre`, 'falta el nombre');
+        if (!texto(s.texto)) err(`${rr}.texto`, 'falta el texto');
+        if (!texto(s.pregunta)) err(`${rr}.pregunta`, 'falta la pregunta');
+        if (lista(s.opciones, 2, 3, `${rr}.opciones`) && !s.opciones.every(texto)) err(`${rr}.opciones`, 'todas deben ser textos');
+        if (!(Number.isInteger(s.correcta) && s.correcta >= 0 && s.correcta < (s.opciones?.length ?? 0))) err(`${rr}.correcta`, 'índice fuera de rango');
+        if (!texto(s.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+      });
+    }
+
+    if (e.tipo === 'caos') {
+      const ids = categoriasValidas(`${r}.categorias`);
+      if (lista(e.incidentes, 3, 16, `${r}.incidentes`)) {
+        e.incidentes.forEach((inc, j) => {
+          const rr = `${r}.incidentes[${j}]`;
+          if (!(inc.modelo in MODELOS)) err(`${rr}.modelo`, `modelo desconocido "${inc.modelo}"`);
+          if (!texto(inc.nombre)) err(`${rr}.nombre`, 'falta el nombre');
+          if (!ids.has(inc.categoria)) err(`${rr}.categoria`, `"${inc.categoria}" no es una categoría`);
+          if (!texto(inc.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+          if (inc.resuelto !== undefined) modelo(inc.resuelto?.modelo, `${rr}.resuelto.modelo`);
+        });
+      }
+      if (e.duracion !== undefined && !(Number.isFinite(e.duracion) && e.duracion >= 30 && e.duracion <= 180)) err(`${r}.duracion`, 'debe estar entre 30 y 180 segundos');
+    }
 
     if (e.tipo === 'narrativa' && lista(e.pasos, 1, 8, `${r}.pasos`)) {
       e.pasos.forEach((p, j) => {
