@@ -40,8 +40,9 @@ compila y publica; en los pull requests solo valida y compila. La dirección es:
 
 En cada gafa, abre esa dirección y guárdala en favoritos. La portada muestra las actividades:
 **Microorganismos en los alimentos** (5.º EGB), **Guardianes de los alimentos** (6.º EGB),
-**Evaluación: Detectives de microbios** (6.º EGB) y **Design Thinking: el reto del bebedero** (6.º EGB).
-También se puede abrir una directamente con `?leccion=microorganismos-alimentos` o `?leccion=design-thinking-reto-bebedero`.
+**Evaluación: Detectives de microbios** (6.º EGB), **Operación Alimento Seguro** (7.º EGB) y
+**Design Thinking: el reto del bebedero** (6.º EGB).
+También se puede abrir una directamente, por ejemplo con `?leccion=operacion-alimento-seguro`.
 
 Si una lección tiene errores, el validador detiene la publicación y la versión anterior sigue en línea.
 
@@ -121,6 +122,18 @@ Actividades adicionales (ver la lección `design-thinking-reto-bebedero.json`):
 - En `exploracion`, `holograma: true` muestra el modelo como holograma.
 - `atrapar`: minijuego arcade «¡Defiende el almuerzo!» `{ duracion, vidas, meta, objetivo: { modelo }, malos: [...], buenos: [...] }`.
 - `"gamificacion": true` en la lección activa puntos, rachas, marcador y medalla final.
+  Opcionales: `rangos: [{ nombre, emoji, puntos }]` (se sube de rango con los puntos), `insignia: { emoji, nombre }`
+  en cualquier escena (se entrega al completarla) y `titulosMedalla: { oro, plata, bronce }`.
+
+Actividades de 7.º (ver `operacion-alimento-seguro.json`):
+
+- `inspeccion` (entorno `mercado`): objetos repartidos alrededor; al tocar uno se acerca y se elige qué clave
+  (`categorias`) incumple o si está bien (`categoria: "ok"`). Elementos `{ modelo, posicion, nombre, categoria, texto, pista, moscas, acompanantes }`.
+- `cinta` (entorno `planta`): control de calidad en una banda transportadora; se dispara a los productos no seguros.
+  `{ hoy, vidas, productos: [{ modelo, nombre, etiqueta, apto, explicacion }] }`.
+- `viaje` (entorno `cuerpo`): paradas en boca, estómago, intestino y defensas, con una acción y una pregunta en cada una.
+- `caos`: problemas que aparecen alrededor (360°) contra reloj; se elige la clave que los soluciona.
+  `{ duracion, vidas, meta, categorias, incidentes: [{ modelo, nombre, categoria, explicacion, resuelto: { modelo } }] }`.
 - `utileria` (en cualquier escena): objetos colocados en la escena, p. ej. `{ modelo, posicion: [x, y, z], opciones }`.
 
 - Modelos 3D disponibles y entornos: [`src/leccion/catalogo.js`](src/leccion/catalogo.js).
@@ -133,13 +146,13 @@ Actividades adicionales (ver la lección `design-thinking-reto-bebedero.json`):
 | `src/core/` | Renderizador y sesión WebXR, entrada (mandos, manos y ratón), audio espacial, efectos y textos de la interfaz |
 | `src/ui/` | Paneles, botones y tarjetas dibujados en canvas |
 | `src/mundo/` | Entornos y modelos 3D generados por código (sin archivos externos) |
-| `src/escenas/` | Los 5 tipos de actividad y la pantalla final |
+| `src/escenas/` | Los tipos de actividad y la pantalla final |
 | `src/leccion/` | Motor que reproduce la lección, catálogo y validador |
 | `scripts/` | Generador con IA, validador y servidor local |
 
 ## Rendimiento en Quest 2
 
-- Los modelos se fusionan en pocas mallas: de 1 a 7 llamadas de dibujo por modelo.
-- Las escenas usan entre 12 y 85 llamadas de dibujo y hasta ~60.000 triángulos.
+- Los modelos y decorados se fusionan con colores por vértice: casi siempre 1 o 2 llamadas de dibujo por modelo.
+- Las escenas usan entre 12 y 60 llamadas de dibujo y hasta ~60.000 triángulos.
 - Tiene *foveated rendering* activado y ninguna sombra en tiempo real.
 - Todo se genera por código, así que la app pesa ~200 KB comprimida y carga rápido con 20 gafas en el mismo Wi-Fi.

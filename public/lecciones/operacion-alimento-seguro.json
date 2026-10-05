@@ -1,0 +1,650 @@
+{
+  "id": "operacion-alimento-seguro",
+  "titulo": "Operación Alimento Seguro: microbios en los alimentos",
+  "materia": "Buenos Hábitos",
+  "grado": "7.º EGB",
+  "idioma": "es",
+  "duracionMinutos": 45,
+  "emoji": "🚨",
+  "narracion": false,
+  "gamificacion": true,
+  "rangos": [
+    { "nombre": "Recluta", "emoji": "🔰", "puntos": 0 },
+    { "nombre": "Agente", "emoji": "🛡️", "puntos": 3000 },
+    { "nombre": "Agente especial", "emoji": "🎖️", "puntos": 7000 },
+    { "nombre": "Inspector jefe", "emoji": "🕵️", "puntos": 12000 },
+    { "nombre": "Comandante", "emoji": "👑", "puntos": 18000 }
+  ],
+  "titulosMedalla": {
+    "oro": "¡Medalla de oro! Agente legendario",
+    "plata": "¡Medalla de plata! Agente experto",
+    "bronce": "¡Medalla de bronce! Agente en entrenamiento"
+  },
+  "descripcion": "Los estudiantes de 7.º se convierten en agentes de la Agencia de Inocuidad Alimentaria para investigar un brote en la feria gastronómica de una escuela. Estudian los expedientes de los microbios que causan enfermedades transmitidas por alimentos, distinguen una infección de una intoxicación, inspeccionan un mercado con las 5 claves de la OMS, controlan la calidad en una planta procesadora, viajan al interior del cuerpo humano, salvan una cocina en caos, separan mitos de verdades y resuelven el caso. Con puntos, rachas, rangos e insignias.",
+  "objetivos": [
+    "Identificar los principales microorganismos que causan enfermedades transmitidas por alimentos y cómo llegan a la comida.",
+    "Diferenciar una infección de una intoxicación alimentaria.",
+    "Aplicar las 5 claves de la OMS para la inocuidad de los alimentos en situaciones reales.",
+    "Evaluar si un producto es seguro según su estado, empaque, fecha de vencimiento y registro sanitario.",
+    "Explicar cómo se defiende el cuerpo humano de los microbios que ingerimos.",
+    "Distinguir mitos y verdades sobre la higiene de los alimentos.",
+    "Reconstruir la cadena de contagio de un brote y proponer cómo romperla."
+  ],
+  "escenas": [
+    {
+      "tipo": "narrativa",
+      "entorno": "laboratorio",
+      "titulo": "🚨 Alerta en la Agencia",
+      "pasos": [
+        {
+          "emoji": "🚨",
+          "texto": "¡Alerta, agente! Ayer hubo una feria gastronómica en una escuela. Pocas horas después de comer, 28 estudiantes tuvieron vómito y dolor de barriga.",
+          "modelo": "plato_comida"
+        },
+        {
+          "emoji": "🕵️",
+          "texto": "Eres recluta de la Agencia de Inocuidad Alimentaria. Inocuidad significa que un alimento NO nos hace daño al comerlo.",
+          "modelo": "lupa"
+        },
+        {
+          "emoji": "🗺️",
+          "texto": "Para resolver el caso cumplirás misiones: estudiar a los sospechosos, inspeccionar un mercado, controlar una fábrica, viajar dentro del cuerpo humano y salvar una cocina en caos.",
+          "modelo": "microscopio"
+        },
+        {
+          "emoji": "🎖️",
+          "texto": "Cada acierto suma puntos ⭐ y las rachas 🔥 dan más. Con tus puntos subirás de rango: Recluta → Agente → Agente especial → Inspector jefe → Comandante. Cada misión cumplida te da una insignia.",
+          "modelo": "trofeo"
+        },
+        {
+          "emoji": "🧠",
+          "texto": "Un agente de 7.º no adivina: observa, compara y justifica. Lee con atención, porque algunas preguntas tienen trampa. ¡Empecemos!",
+          "modelo": "placa_petri"
+        }
+      ]
+    },
+    {
+      "tipo": "exploracion",
+      "entorno": "microscopico",
+      "titulo": "Expedientes: los sospechosos",
+      "instruccion": "Toca cada sospechoso para abrir su expediente: ¿qué es?, ¿dónde se esconde? y ¿qué provoca?",
+      "insignia": { "emoji": "🔬", "nombre": "Microbiólogo" },
+      "elementos": [
+        {
+          "modelo": "salmonela",
+          "nombre": "Salmonela",
+          "insignia": "Bacteria",
+          "color": "#21a366",
+          "texto": "Vive en el intestino de aves y otros animales. Llega en huevos crudos y pollo mal cocinado. Provoca fiebre, diarrea y cólicos entre 6 y 72 horas después."
+        },
+        {
+          "modelo": "bacilo",
+          "nombre": "E. coli",
+          "insignia": "Bacteria",
+          "color": "#21a366",
+          "texto": "Casi todas son inofensivas, pero algunas son peligrosas. Llegan en carne molida mal cocida, leche sin pasteurizar y verduras regadas con agua contaminada."
+        },
+        {
+          "modelo": "estafilococo",
+          "nombre": "Estafilococo dorado",
+          "insignia": "Bacteria · toxina",
+          "color": "#21a366",
+          "texto": "Vive en la piel, la nariz y las heridas. Si pasa a una comida que se queda sin refrigerar, fabrica una TOXINA que provoca vómito en pocas horas."
+        },
+        {
+          "modelo": "espirilo",
+          "nombre": "Vibrio del cólera",
+          "insignia": "Bacteria",
+          "color": "#21a366",
+          "texto": "Causó una gran epidemia en Ecuador en 1991. Viaja en agua y mariscos contaminados y provoca una diarrea tan fuerte que deshidrata."
+        },
+        {
+          "modelo": "virus",
+          "nombre": "Norovirus",
+          "insignia": "Virus",
+          "color": "#e5486f",
+          "texto": "No es una célula: se copia dentro de nuestras células. Es la causa más común de vómito y diarrea por alimentos, y se pasa por manos sin lavar."
+        },
+        {
+          "modelo": "virus",
+          "opciones": { "color": "#ffb347" },
+          "nombre": "Hepatitis A",
+          "insignia": "Virus",
+          "color": "#e5486f",
+          "texto": "Viaja en agua contaminada, mariscos crudos y manos sucias, y ataca al hígado. Existe una vacuna que nos protege."
+        },
+        {
+          "modelo": "protozoo",
+          "nombre": "Ameba",
+          "insignia": "Protozoo",
+          "color": "#d98a00",
+          "texto": "Parásito que vive en agua sin tratar y en verduras mal lavadas. Por eso el agua se hierve o se purifica antes de beberla."
+        },
+        {
+          "modelo": "moho",
+          "nombre": "Moho de los granos",
+          "insignia": "Hongo · toxina",
+          "color": "#8b5cf6",
+          "texto": "En maní, maíz o granos guardados con humedad, algunos mohos fabrican aflatoxinas: toxinas peligrosas que el calor no destruye."
+        }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "laboratorio",
+      "titulo": "¿Infección o intoxicación?",
+      "instruccion": "INFECCIÓN: el microbio vivo entra al cuerpo y se multiplica. INTOXICACIÓN: el microbio dejó una toxina en la comida y la toxina nos enferma. Clasifica cada caso.",
+      "categorias": [
+        { "id": "infeccion", "nombre": "Infección", "emoji": "🦠", "color": "#2f8be6" },
+        { "id": "intoxicacion", "nombre": "Intoxicación", "emoji": "🧪", "color": "#e5484d" }
+      ],
+      "elementos": [
+        {
+          "modelo": "huevo",
+          "nombre": "Salmonela en huevo crudo",
+          "categoria": "infeccion",
+          "explicacion": "La Salmonela viva entra al intestino y se multiplica: es una infección."
+        },
+        {
+          "modelo": "sandwich",
+          "nombre": "Sánduche tocado con una herida, 5 h sin refri",
+          "categoria": "intoxicacion",
+          "pista": "¿Lo que enferma es el microbio vivo o lo que dejó en la comida?",
+          "explicacion": "El estafilococo dejó su toxina en el sánduche: aunque ya no haya bacterias vivas, la toxina enferma."
+        },
+        {
+          "modelo": "lata",
+          "opciones": { "abombada": true },
+          "nombre": "Conserva abombada",
+          "categoria": "intoxicacion",
+          "explicacion": "La toxina botulínica es una de las más peligrosas que existen."
+        },
+        {
+          "modelo": "agua_sucia",
+          "nombre": "Agua con amebas",
+          "categoria": "infeccion",
+          "explicacion": "Las amebas vivas se instalan en el intestino: es una infección."
+        },
+        {
+          "modelo": "plato_comida",
+          "nombre": "Arroz que pasó la noche fuera de la refri",
+          "categoria": "intoxicacion",
+          "pista": "Recalentar mata bacterias… pero ¿y lo que ellas dejaron?",
+          "explicacion": "Algunas bacterias del arroz dejan toxinas que no se destruyen al recalentar."
+        },
+        {
+          "modelo": "virus",
+          "opciones": { "color": "#ffb347" },
+          "nombre": "Hepatitis A en mariscos crudos",
+          "categoria": "infeccion",
+          "explicacion": "El virus entra al cuerpo y se copia dentro de las células del hígado."
+        },
+        {
+          "modelo": "moho",
+          "nombre": "Maní húmedo con moho",
+          "categoria": "intoxicacion",
+          "pista": "El moho fabricó algo que el calor no destruye.",
+          "explicacion": "Las aflatoxinas del moho son toxinas: enferman aunque el moho ya no esté."
+        },
+        {
+          "modelo": "carne_cruda",
+          "nombre": "Carne molida mal cocida con E. coli",
+          "categoria": "infeccion",
+          "explicacion": "La E. coli viva llega al intestino y se multiplica."
+        }
+      ]
+    },
+    {
+      "tipo": "narrativa",
+      "entorno": "cocina",
+      "titulo": "Las 5 claves de la inocuidad (OMS)",
+      "pasos": [
+        {
+          "emoji": "🌎",
+          "texto": "La Organización Mundial de la Salud (OMS) resumió en 5 claves cómo evitar las enfermedades transmitidas por alimentos. Las usarás en todas tus misiones.",
+          "modelo": "lupa"
+        },
+        {
+          "emoji": "🧼",
+          "texto": "1. Mantén la LIMPIEZA: lávate las manos antes y durante la preparación, limpia superficies y utensilios, y protege la comida de insectos.",
+          "modelo": "jabon"
+        },
+        {
+          "emoji": "↔️",
+          "texto": "2. SEPARA crudos y cocinados: tablas, cuchillos y recipientes distintos para carnes, pollo y mariscos crudos.",
+          "modelo": "tabla_picar",
+          "opciones": { "color": "#e5484d" }
+        },
+        {
+          "emoji": "🔥",
+          "texto": "3. COCINA completamente: sobre todo carnes, pollo, huevos y mariscos, hasta que no queden partes rosadas.",
+          "modelo": "olla"
+        },
+        {
+          "emoji": "❄️",
+          "texto": "4. Mantén TEMPERATURAS SEGURAS: no dejes comida cocinada más de 2 horas fuera de la refrigeradora.",
+          "modelo": "refrigeradora"
+        },
+        {
+          "emoji": "💧",
+          "texto": "5. Usa AGUA E INSUMOS SEGUROS: agua hervida o purificada, y alimentos frescos, sin vencer, en buen estado y con registro sanitario.",
+          "modelo": "vaso_agua"
+        }
+      ]
+    },
+    {
+      "tipo": "inspeccion",
+      "entorno": "mercado",
+      "titulo": "Misión 1: Inspección del mercado",
+      "instruccion": "🕵️ Gira y recorre el mercado (palanca hacia adelante para moverte). Toca cada producto con 🔍 y decide qué clave se incumple… o si todo está bien.",
+      "insignia": { "emoji": "📋", "nombre": "Inspector sanitario" },
+      "categorias": [
+        { "id": "limpieza", "nombre": "Limpieza", "emoji": "🧼", "color": "#2f8be6" },
+        { "id": "separar", "nombre": "Separar crudos", "emoji": "↔️", "color": "#8b5cf6" },
+        { "id": "cocinar", "nombre": "Cocinar bien", "emoji": "🔥", "color": "#e5484d" },
+        { "id": "temperatura", "nombre": "Temperatura segura", "emoji": "❄️", "color": "#1aa3c4" },
+        { "id": "agua", "nombre": "Agua e insumos seguros", "emoji": "💧", "color": "#21a366" }
+      ],
+      "elementos": [
+        {
+          "modelo": "canasta_frutas",
+          "tamano": 0.34,
+          "posicion": [-0.85, 0.9, -2.45],
+          "nombre": "Canasta de frutas",
+          "categoria": "ok",
+          "texto": "Frutas enteras, sanas y sin golpes, en una canasta limpia y lejos del suelo."
+        },
+        {
+          "modelo": "recipiente_tapado",
+          "tamano": 0.3,
+          "posicion": [0, 0.9, -2.45],
+          "nombre": "Ensalada de frutas",
+          "categoria": "ok",
+          "texto": "La ensalada está tapada: así no le llegan moscas ni polvo. ¡Bien hecho!"
+        },
+        {
+          "modelo": "balde",
+          "opciones": { "sucia": true },
+          "tamano": 0.3,
+          "posicion": [0.85, 0.9, -2.45],
+          "nombre": "Balde para lavar la fruta",
+          "categoria": "agua",
+          "pista": "Fíjate en el color del agua.",
+          "texto": "El agua está turbia y se usa todo el día: en vez de limpiar, ensucia la fruta con microbios como la ameba. Se debe lavar con agua potable."
+        },
+        {
+          "modelo": "tabla_picar",
+          "opciones": { "color": "#c9a27a" },
+          "tamano": 0.36,
+          "rotacion": 90,
+          "posicion": [-2.45, 0.9, -1.1],
+          "moscas": 2,
+          "acompanantes": [{ "modelo": "carne_cruda", "tamano": 0.12, "posicion": [0.05, 0.02, 0.02] }],
+          "nombre": "Tabla de picar",
+          "categoria": "limpieza",
+          "pista": "¿Qué ves encima de la tabla?",
+          "texto": "Tiene restos de carne de toda la mañana y moscas encima. Las tablas y cuchillos se lavan con agua y jabón después de cada uso."
+        },
+        {
+          "modelo": "pescado",
+          "tamano": 0.34,
+          "rotacion": 90,
+          "posicion": [-2.45, 0.9, -0.3],
+          "nombre": "Pescado",
+          "categoria": "temperatura",
+          "pista": "¿Dónde debería estar el pescado fresco?",
+          "texto": "Lleva toda la mañana fuera del hielo, al calor. El pescado y la carne cruda deben estar sobre hielo o refrigerados."
+        },
+        {
+          "modelo": "hielera",
+          "tamano": 0.38,
+          "rotacion": 90,
+          "posicion": [-2.45, 0.9, 0.55],
+          "nombre": "Hielera de mariscos",
+          "categoria": "ok",
+          "texto": "Los mariscos están cubiertos de hielo: el frío frena a los microbios. ¡Así se hace!"
+        },
+        {
+          "modelo": "hamburguesa",
+          "opciones": { "cruda": true },
+          "tamano": 0.22,
+          "posicion": [2.45, 0.9, -1.1],
+          "nombre": "Hamburguesa para servir",
+          "categoria": "cocinar",
+          "pista": "Mira el color de la carne.",
+          "texto": "La carne está rosada: la carne molida se cocina completamente, porque las bacterias como la E. coli pueden estar en todo su interior."
+        },
+        {
+          "modelo": "plato_comida",
+          "tamano": 0.3,
+          "posicion": [2.45, 0.9, -0.3],
+          "acompanantes": [{ "modelo": "pollo_crudo", "tamano": 0.18, "posicion": [0, 0.05, 0] }],
+          "nombre": "Bandeja de la ensalada",
+          "categoria": "separar",
+          "pista": "¿Qué hay encima de la comida lista para servir?",
+          "texto": "Hay pollo crudo encima de una ensalada lista para servir: sus jugos pasan bacterias como la Salmonela. Lo crudo siempre va separado, abajo y en otro recipiente."
+        },
+        {
+          "modelo": "mano_sucia",
+          "tamano": 0.22,
+          "posicion": [2.45, 0.9, 0.55],
+          "acompanantes": [{ "modelo": "pan", "tamano": 0.18, "posicion": [0, 0, 0.16] }],
+          "nombre": "Mano de la vendedora",
+          "categoria": "limpieza",
+          "pista": "¿Qué tocó esa mano antes del pan?",
+          "texto": "La vendedora cobra el dinero y con la misma mano sirve el pan. El dinero pasa por muchas manos: hay que lavarse o usar una pinza."
+        },
+        {
+          "modelo": "leche",
+          "tamano": 0.24,
+          "posicion": [-0.85, 0.9, 2.25],
+          "acompanantes": [{ "modelo": "yogur", "tamano": 0.12, "posicion": [0.15, 0, 0] }],
+          "nombre": "Leche y yogur",
+          "categoria": "temperatura",
+          "pista": "Mira dónde están y dónde deberían estar los lácteos.",
+          "texto": "Están al sol, fuera de la vitrina refrigerada, desde la mañana. Los lácteos frescos deben mantenerse en frío."
+        },
+        {
+          "modelo": "lata",
+          "opciones": { "abombada": true },
+          "tamano": 0.2,
+          "posicion": [0, 0.9, 2.25],
+          "nombre": "Lata de atún",
+          "categoria": "agua",
+          "pista": "Mira su forma.",
+          "texto": "¡Está abombada! Puede tener la toxina del botulismo. Un alimento dañado no es un insumo seguro: se desecha sin abrirlo."
+        },
+        {
+          "modelo": "cuchillo",
+          "opciones": { "sucio": true },
+          "tamano": 0.26,
+          "posicion": [0.85, 0.9, 2.25],
+          "acompanantes": [{ "modelo": "queso", "tamano": 0.14, "posicion": [0, 0, -0.12] }],
+          "nombre": "Cuchillo del queso",
+          "categoria": "separar",
+          "pista": "El problema es que un utensilio pasa de lo crudo a lo que ya está listo.",
+          "texto": "El mismo cuchillo cortó carne cruda y ahora corta el queso, que se come sin cocinar: eso es contaminación cruzada."
+        }
+      ]
+    },
+    {
+      "tipo": "cinta",
+      "entorno": "planta",
+      "titulo": "Misión 2: Control de calidad",
+      "hoy": "05/10/2026",
+      "vidas": 4,
+      "insignia": { "emoji": "🏭", "nombre": "Control de calidad" },
+      "productos": [
+        { "modelo": "leche", "tamano": 0.2, "nombre": "Leche entera", "etiqueta": "Vence: 20/10/2026\nEmpaque sellado", "apto": true, "explicacion": "Está sellada y vence el 20 de octubre: todavía es segura." },
+        { "modelo": "leche", "tamano": 0.2, "nombre": "Leche entera", "etiqueta": "Vence: 28/09/2026\nEmpaque sellado", "apto": false, "explicacion": "venció el 28 de septiembre." },
+        { "modelo": "yogur", "tamano": 0.15, "nombre": "Yogur", "etiqueta": "Vence: 15/10/2026\nSello: intacto", "apto": true, "explicacion": "Tiene el sello intacto y la fecha vigente." },
+        { "modelo": "yogur", "tamano": 0.15, "nombre": "Yogur", "etiqueta": "Vence: 18/10/2026\nSello: roto", "apto": false, "explicacion": "el sello está roto: pudieron entrar microbios aunque no haya vencido." },
+        { "modelo": "lata", "tamano": 0.17, "nombre": "Atún en lata", "etiqueta": "Vence: 03/2028\nReg. sanitario: 05812-ARCSA", "apto": true, "explicacion": "La lata está lisa, sin golpes, y vence en 2028." },
+        { "modelo": "lata", "opciones": { "abombada": true }, "tamano": 0.18, "nombre": "Atún en lata", "etiqueta": "Vence: 03/2028\nReg. sanitario: 05812-ARCSA", "apto": false, "explicacion": "está abombada: puede tener la toxina del botulismo aunque no haya vencido." },
+        { "modelo": "pan", "tamano": 0.24, "nombre": "Pan", "etiqueta": "Elaborado: hoy", "apto": true, "explicacion": "Es pan fresco del día." },
+        { "modelo": "pan_con_moho", "tamano": 0.24, "nombre": "Pan", "etiqueta": "Elaborado: 28/09/2026", "apto": false, "explicacion": "tiene moho, y sus hifas ya están por dentro." },
+        { "modelo": "manzana", "tamano": 0.15, "nombre": "Manzanas", "etiqueta": "Cosecha: esta semana", "apto": true, "explicacion": "Son frutas frescas y sin golpes." },
+        { "modelo": "manzana_podrida", "tamano": 0.15, "nombre": "Manzanas", "etiqueta": "Cosecha: esta semana", "apto": false, "explicacion": "está podrida y con moho, aunque sea de esta semana." },
+        { "modelo": "huevo", "tamano": 0.12, "nombre": "Huevos", "etiqueta": "Granja Santa Rosa", "apto": true, "explicacion": "La cáscara está entera y limpia." },
+        { "modelo": "huevo_roto", "tamano": 0.13, "nombre": "Huevos", "etiqueta": "Granja Santa Rosa", "apto": false, "explicacion": "la cáscara está trizada: por ahí entran bacterias como la Salmonela." },
+        { "modelo": "frasco_mayonesa", "tamano": 0.17, "nombre": "Mayonesa", "etiqueta": "Reg. sanitario: 02718-ARCSA\nVence: 12/2026", "apto": true, "explicacion": "Tiene registro sanitario y su fecha está vigente." },
+        { "modelo": "frasco_mayonesa", "tamano": 0.17, "nombre": "Mayonesa casera", "etiqueta": "Reg. sanitario: no tiene\nVence: no indica", "apto": false, "explicacion": "no tiene registro sanitario: nadie controló cómo se hizo." },
+        { "modelo": "queso", "tamano": 0.18, "nombre": "Queso fresco", "etiqueta": "Vence: 25/10/2026\nLeche pasteurizada", "apto": true, "explicacion": "Está hecho con leche pasteurizada y su fecha está vigente." },
+        { "modelo": "queso", "tamano": 0.18, "nombre": "Queso fresco", "etiqueta": "Vence: 01/10/2026\nLeche pasteurizada", "apto": false, "explicacion": "venció el 1 de octubre." }
+      ]
+    },
+    {
+      "tipo": "viaje",
+      "entorno": "cuerpo",
+      "titulo": "Misión 3: Viaje al interior del cuerpo",
+      "insignia": { "emoji": "🫀", "nombre": "Explorador del cuerpo" },
+      "estaciones": [
+        {
+          "zona": "boca",
+          "nombre": "La boca",
+          "texto": "Te encogiste y entraste a la boca de un estudiante que comió un bocado contaminado. La saliva tiene sustancias, como la lisozima, que destruyen a algunas bacterias.",
+          "tarea": "Toca los microbios del bocado",
+          "pregunta": "¿La saliva elimina a TODOS los microbios de la comida?",
+          "opciones": ["Sí, a todos", "Solo a algunos: muchos siguen el viaje", "No hace nada"],
+          "correcta": 1,
+          "explicacion": "La saliva es la primera defensa, pero muchos microbios bajan por el esófago hasta el estómago."
+        },
+        {
+          "zona": "estomago",
+          "nombre": "El estómago",
+          "texto": "El jugo gástrico es tan ácido que destruye a la mayoría de los microbios que tragamos. Es una barrera química del cuerpo.",
+          "tarea": "Lanza los microbios al lago de ácido",
+          "pregunta": "Un microbio resistió el ácido. ¿Por qué algunos logran pasar?",
+          "opciones": ["Algunos resisten la acidez, y si llegan muchos, unos sobreviven", "Porque el estómago se apaga de noche", "Porque el ácido solo ataca a la comida"],
+          "correcta": 0,
+          "explicacion": "Algunos microbios aguantan la acidez y, si llegan en gran cantidad, unos cuantos sobreviven y siguen al intestino."
+        },
+        {
+          "zona": "intestino",
+          "nombre": "El intestino",
+          "texto": "Aquí viven billones de bacterias buenas: la microbiota. Ocupan el espacio y el alimento, y no dejan que los invasores se instalen.",
+          "tarea": "Toca a los invasores: la microbiota los sacará",
+          "pregunta": "¿Cómo nos protege la microbiota?",
+          "opciones": ["Compite con los invasores por espacio y alimento", "Fabrica el ácido del estómago", "Hace que la comida sepa mejor"],
+          "correcta": 0,
+          "explicacion": "Por eso la cuidamos con frutas, verduras y alimentos fermentados como el yogur, y no tomamos antibióticos sin receta: también eliminan a las bacterias buenas."
+        },
+        {
+          "zona": "defensas",
+          "nombre": "Las defensas",
+          "texto": "Si un invasor pasa a la sangre, llegan los glóbulos blancos: células que persiguen a los microbios y se los comen. La fiebre, el vómito y la diarrea son formas en que el cuerpo intenta expulsarlos.",
+          "tarea": "Toca las bacterias para que el glóbulo blanco las atrape",
+          "pregunta": "Con diarrea y vómito, ¿qué es lo más importante?",
+          "opciones": ["Tomar suero oral, beber líquidos y acudir al médico", "Dejar de tomar agua", "Tomar cualquier antibiótico de la casa"],
+          "correcta": 0,
+          "explicacion": "El mayor peligro es la deshidratación: el suero oral repone el agua y las sales. Los antibióticos solo los receta un médico."
+        }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "aula",
+      "titulo": "Misión 4: ¿Mito o verdad?",
+      "instruccion": "Un agente no cree todo lo que escucha. Lleva cada frase a MITO o a VERDAD.",
+      "insignia": { "emoji": "🧠", "nombre": "Cazamitos" },
+      "categorias": [
+        { "id": "mito", "nombre": "Mito", "emoji": "❌", "color": "#e5484d" },
+        { "id": "verdad", "nombre": "Verdad", "emoji": "✅", "color": "#21a366" }
+      ],
+      "elementos": [
+        { "emoji": "👃", "texto": "Si huele y se ve bien, no tiene microbios peligrosos", "nombre": "Olor y aspecto", "categoria": "mito", "explicacion": "Muchos microbios peligrosos no cambian el olor, el sabor ni el aspecto de la comida." },
+        { "emoji": "🍞", "texto": "Si le cortas el moho al pan, el resto se puede comer", "nombre": "Pan con moho", "categoria": "mito", "explicacion": "Las hifas del moho ya están por dentro, aunque no se vean." },
+        { "emoji": "🍗", "texto": "Lavar el pollo crudo en el fregadero elimina sus bacterias", "nombre": "Lavar el pollo", "categoria": "mito", "pista": "¿Qué pasa con las gotas que salpican?", "explicacion": "Al lavarlo, las salpicaduras reparten bacterias por la cocina. Lo que las elimina es cocinarlo bien." },
+        { "emoji": "🍋", "texto": "El limón del ceviche mata a todos los microbios", "nombre": "Limón del ceviche", "categoria": "mito", "explicacion": "La acidez del limón no elimina a todos. Por eso en Ecuador el camarón del ceviche se cocina antes." },
+        { "emoji": "🧊", "texto": "Congelar la carne NO mata a todas las bacterias", "nombre": "Congelar", "categoria": "verdad", "explicacion": "El frío las detiene; al descongelar, vuelven a multiplicarse." },
+        { "emoji": "💧", "texto": "El suero oral ayuda a recuperarse de una diarrea", "nombre": "Suero oral", "categoria": "verdad", "explicacion": "Repone el agua y las sales que se pierden." },
+        { "emoji": "♨️", "texto": "Recalentar la comida siempre la vuelve segura", "nombre": "Recalentar", "categoria": "mito", "pista": "Recuerda la diferencia entre microbio y toxina.", "explicacion": "Algunas toxinas, como la del estafilococo, resisten el calor." },
+        { "emoji": "🥛", "texto": "Las bacterias del yogur pueden ayudar a tu intestino", "nombre": "Yogur", "categoria": "verdad", "explicacion": "Los lactobacilos forman parte de las bacterias buenas." },
+        { "emoji": "💊", "texto": "Los antibióticos curan las diarreas causadas por virus", "nombre": "Antibióticos", "categoria": "mito", "explicacion": "Los antibióticos solo actúan contra bacterias, y solo los receta un médico." },
+        { "emoji": "🧼", "texto": "Lavarse las manos 20 segundos con jabón elimina la mayoría de microbios", "nombre": "Lavado de manos", "categoria": "verdad", "explicacion": "El jabón despega a los microbios de la piel y el agua se los lleva." }
+      ]
+    },
+    {
+      "tipo": "caos",
+      "entorno": "cocina",
+      "titulo": "Misión 5: ¡Cocina en caos!",
+      "duracion": 75,
+      "vidas": 4,
+      "meta": 12,
+      "insignia": { "emoji": "🛡️", "nombre": "Guardián de la cocina" },
+      "categorias": [
+        { "id": "limpieza", "nombre": "Limpiar", "emoji": "🧼", "color": "#2f8be6" },
+        { "id": "separar", "nombre": "Separar", "emoji": "↔️", "color": "#8b5cf6" },
+        { "id": "cocinar", "nombre": "Cocinar", "emoji": "🔥", "color": "#e5484d" },
+        { "id": "temperatura", "nombre": "Refrigerar", "emoji": "❄️", "color": "#1aa3c4" },
+        { "id": "agua", "nombre": "Insumo seguro", "emoji": "💧", "color": "#21a366" }
+      ],
+      "incidentes": [
+        { "modelo": "mano_sucia", "nombre": "Manos sucias para cocinar", "categoria": "limpieza", "explicacion": "Primero se lavan las manos con jabón.", "resuelto": { "modelo": "mano_limpia" } },
+        { "modelo": "esponja", "nombre": "Esponja apestosa en el mesón", "categoria": "limpieza", "explicacion": "La esponja se lava, se desinfecta o se cambia." },
+        { "modelo": "plato_comida", "opciones": { "moscas": true }, "nombre": "Moscas sobre el almuerzo", "categoria": "limpieza", "explicacion": "La comida se tapa para protegerla de los insectos.", "resuelto": { "modelo": "recipiente_tapado" } },
+        { "modelo": "pollo_crudo", "nombre": "Pollo crudo goteando sobre el pan", "categoria": "separar", "explicacion": "Lo crudo se guarda abajo y separado de lo que está listo." },
+        { "modelo": "tabla_picar", "opciones": { "color": "#e5484d" }, "nombre": "Ensalada en la tabla de la carne", "categoria": "separar", "explicacion": "Las verduras se cortan en otra tabla, nunca en la de la carne cruda." },
+        { "modelo": "hamburguesa", "opciones": { "cruda": true }, "nombre": "Hamburguesa cruda por dentro", "categoria": "cocinar", "explicacion": "La carne molida se cocina hasta que no quede rosada.", "resuelto": { "modelo": "hamburguesa" } },
+        { "modelo": "huevo", "nombre": "Huevo crudo para el sánduche", "categoria": "cocinar", "explicacion": "El huevo se cocina bien, hasta que la yema esté firme." },
+        { "modelo": "plato_comida", "nombre": "Sobras fuera de la refri desde ayer", "categoria": "temperatura", "explicacion": "La comida cocinada va a la refrigeradora antes de 2 horas.", "resuelto": { "modelo": "refrigeradora", "opciones": {} } },
+        { "modelo": "leche", "nombre": "Leche olvidada junto a la estufa", "categoria": "temperatura", "explicacion": "La leche se guarda en la refrigeradora." },
+        { "modelo": "agua_sucia", "nombre": "Agua sin hervir para el jugo", "categoria": "agua", "explicacion": "El agua se hierve o se purifica antes de usarla.", "resuelto": { "modelo": "vaso_agua" } },
+        { "modelo": "lata", "opciones": { "abombada": true }, "nombre": "Lata abombada para el almuerzo", "categoria": "agua", "explicacion": "Una lata abombada se desecha sin abrirla.", "resuelto": { "modelo": "basurero" } },
+        { "modelo": "pan_con_moho", "nombre": "Pan con moho para el refrigerio", "categoria": "agua", "explicacion": "El pan con moho se desecha completo.", "resuelto": { "modelo": "basurero" } }
+      ]
+    },
+    {
+      "tipo": "narrativa",
+      "entorno": "laboratorio",
+      "titulo": "🕵️ El caso de la feria",
+      "pasos": [
+        {
+          "emoji": "🎪",
+          "texto": "Volvamos al brote. En la feria hubo 4 puestos: empanadas fritas, arroz con pollo, ensalada de frutas y jugo de mora hecho con agua hervida.",
+          "modelo": "plato_comida"
+        },
+        {
+          "emoji": "⏱️",
+          "texto": "Pista 1: los síntomas empezaron entre 2 y 4 horas después de comer: vómito fuerte y dolor de barriga, casi sin fiebre.",
+          "modelo": "termometro"
+        },
+        {
+          "emoji": "📋",
+          "texto": "Pista 2: el arroz con pollo se preparó a las 6 de la mañana y se sirvió a las 2 de la tarde. Estuvo 8 horas sin refrigerar.",
+          "modelo": "olla"
+        },
+        {
+          "emoji": "🩹",
+          "texto": "Pista 3: la persona que preparó el arroz tenía una herida infectada en la mano y no usó guantes.",
+          "modelo": "mano_sucia"
+        },
+        {
+          "emoji": "📊",
+          "texto": "Pista 4: los 28 enfermos comieron arroz con pollo. De los estudiantes sanos, casi ninguno lo comió.",
+          "modelo": "lupa"
+        },
+        {
+          "emoji": "🧩",
+          "texto": "Con todo lo que aprendiste, ahora reconstruirás la cadena de contagio y resolverás el caso.",
+          "modelo": "estrella"
+        }
+      ]
+    },
+    {
+      "tipo": "ordenar",
+      "entorno": "laboratorio",
+      "titulo": "Reconstruye la cadena de contagio",
+      "instruccion": "Ordena cómo llegó el problema desde la herida hasta los estudiantes.",
+      "mensajeFinal": "🎉 ¡Cadena reconstruida! Si se rompe cualquier eslabón, no hay brote.",
+      "pasos": [
+        { "emoji": "🩹", "texto": "El estafilococo vive en la herida de la mano", "pista": "Todo empezó en la persona que preparó la comida." },
+        { "emoji": "🤚", "texto": "Al preparar el arroz sin guantes, pasa de la mano a la comida", "pista": "¿Cómo llegó del cuerpo a la comida?" },
+        { "emoji": "⏰", "texto": "El arroz pasa 8 horas sin refrigerar", "pista": "Ya está en la comida… ¿qué le permitió crecer?" },
+        { "emoji": "🧪", "texto": "Las bacterias se multiplican y fabrican su toxina", "pista": "¿Qué hicieron las bacterias en esas horas?" },
+        { "emoji": "🍽️", "texto": "Los estudiantes comen el arroz con la toxina", "pista": "La toxina ya está lista… ¿qué pasa en la feria?" },
+        { "emoji": "🤢", "texto": "En 2 a 4 horas aparecen el vómito y el dolor de barriga", "pista": "Esto es lo último que ocurre." }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "entorno": "laboratorio",
+      "titulo": "Resuelve el caso",
+      "insignia": { "emoji": "🕵️", "nombre": "Detective de brotes" },
+      "preguntas": [
+        {
+          "pregunta": "¿Qué alimento causó el brote?",
+          "opciones": ["Las empanadas fritas", "El arroz con pollo", "El jugo de mora"],
+          "correcta": 1,
+          "explicacion": "Todos los enfermos comieron arroz con pollo y casi ningún sano lo comió.",
+          "modelo": "plato_comida"
+        },
+        {
+          "pregunta": "¿Fue una infección o una intoxicación?",
+          "opciones": ["Infección: el microbio vivo se multiplicó dentro de ellos", "Intoxicación: la toxina ya estaba en la comida"],
+          "correcta": 1,
+          "explicacion": "Los síntomas empezaron muy rápido (2 a 4 horas) y con vómito fuerte: es típico de la toxina del estafilococo.",
+          "modelo": "estafilococo"
+        },
+        {
+          "pregunta": "Si hubieran recalentado bien el arroz antes de servirlo, ¿se evitaba el brote?",
+          "opciones": ["Sí, el calor lo arregla todo", "No: la toxina del estafilococo resiste el calor", "Sí, si se recalienta dos veces"],
+          "correcta": 1,
+          "explicacion": "El calor puede matar a las bacterias, pero su toxina sigue ahí. Por eso hay que prevenir, no intentar arreglar.",
+          "modelo": "olla"
+        },
+        {
+          "pregunta": "¿Qué dos claves de la OMS se rompieron?",
+          "opciones": ["Limpieza y temperatura segura", "Cocinar bien y separar crudos", "Agua segura y separar crudos"],
+          "correcta": 0,
+          "explicacion": "La herida sin protección (limpieza) y el arroz 8 horas fuera del frío (temperatura segura).",
+          "modelo": "jabon"
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "entorno": "laboratorio",
+      "titulo": "Examen final de rango",
+      "preguntas": [
+        {
+          "pregunta": "¿Qué significa que un alimento es inocuo?",
+          "opciones": ["Que no nos hace daño al comerlo", "Que tiene muchas vitaminas", "Que es barato"],
+          "correcta": 0,
+          "explicacion": "Inocuidad es seguridad: el alimento no tiene microbios, toxinas ni sustancias que nos enfermen.",
+          "modelo": "lupa"
+        },
+        {
+          "pregunta": "En el mercado ves pescado sin hielo, al sol. ¿Qué clave se incumple?",
+          "opciones": ["Separar crudos", "Temperatura segura", "Cocinar bien"],
+          "correcta": 1,
+          "explicacion": "El pescado fresco debe estar sobre hielo o refrigerado.",
+          "modelo": "pescado"
+        },
+        {
+          "pregunta": "¿Cuál es una diferencia entre una bacteria y un virus?",
+          "opciones": ["El virus no es una célula y necesita nuestras células para copiarse", "La bacteria es más pequeña que el virus", "Los virus se curan con antibióticos"],
+          "correcta": 0,
+          "explicacion": "Las bacterias son células; los virus no. Por eso los antibióticos no sirven contra los virus.",
+          "modelo": "virus"
+        },
+        {
+          "pregunta": "Una lata está abombada, pero todavía no vence. ¿Qué haces?",
+          "opciones": ["La abro y la huelo", "La uso porque no ha vencido", "La desecho sin abrirla"],
+          "correcta": 2,
+          "explicacion": "Puede tener la toxina del botulismo, que no siempre huele mal.",
+          "modelo": "lata",
+          "opciones3d": { "abombada": true }
+        },
+        {
+          "pregunta": "¿Qué hace el ácido del estómago con los microbios que tragamos?",
+          "opciones": ["Destruye a la mayoría", "Los alimenta", "Los vuelve buenos"],
+          "correcta": 0,
+          "explicacion": "Es una barrera química: destruye a la mayoría, aunque algunos resisten.",
+          "modelo": "salmonela"
+        },
+        {
+          "pregunta": "¿Por qué NO se lava el pollo crudo en el fregadero?",
+          "opciones": ["Porque las salpicaduras reparten bacterias por la cocina", "Porque se pone duro", "Porque el agua lo cocina"],
+          "correcta": 0,
+          "explicacion": "Lo que elimina a las bacterias del pollo es cocinarlo completamente.",
+          "modelo": "pollo_crudo"
+        },
+        {
+          "pregunta": "¿Qué indica el registro sanitario de un producto?",
+          "opciones": ["Que una autoridad controló cómo se fabrica", "Que es importado", "Que nunca se vence"],
+          "correcta": 0,
+          "explicacion": "En Ecuador lo otorga la ARCSA. Un producto sin registro no tiene garantía de ser seguro.",
+          "modelo": "leche"
+        },
+        {
+          "pregunta": "¿Cuál es la mejor forma de evitar un brote en tu casa?",
+          "opciones": ["Aplicar las 5 claves todos los días", "Comer solo comida recalentada", "Tomar antibióticos cada semana"],
+          "correcta": 0,
+          "explicacion": "Limpieza, separar, cocinar, temperaturas seguras y agua e insumos seguros: así se rompe la cadena de contagio.",
+          "modelo": "trofeo"
+        }
+      ]
+    }
+  ]
+}

@@ -27,6 +27,15 @@
     "emoji": "📝"
   },
   {
+    "id": "operacion-alimento-seguro",
+    "titulo": "Operación Alimento Seguro: microbios en los alimentos",
+    "materia": "Buenos Hábitos",
+    "grado": "7.º EGB",
+    "duracionMinutos": 45,
+    "idioma": "es",
+    "emoji": "🚨"
+  },
+  {
     "id": "design-thinking-reto-bebedero",
     "titulo": "Design Thinking: el reto del bebedero",
     "materia": "Emprendimiento",

@@ -40,6 +40,12 @@ export class EscenaBase {
   terminar() {
     if (this._terminada) return;
     this._terminada = true;
+    // Gamificación: las misiones con "insignia" la entregan antes de pasar a la siguiente.
+    const insignia = this.datos.insignia;
+    if (insignia && this.m.gamificado && this.m.otorgarInsignia) {
+      this.m.otorgarInsignia(insignia).then(() => !this._destruida && this.alTerminar?.());
+      return;
+    }
     this.alTerminar?.();
   }
 
@@ -145,6 +151,50 @@ export class EscenaBase {
 
   cadaCuadro(fn) {
     this._quitar.push(this.m.app.alActualizar(fn));
+  }
+
+  /**
+   * Cabeza del usuario en coordenadas de la escena y hacia dónde mira (en el plano
+   * del suelo). Sirve cuando el estudiante camina o gira por la escena.
+   */
+  mirada() {
+    const cam = this.m.app.camara;
+    const cab = this.raiz.worldToLocal(cam.getWorldPosition(new THREE.Vector3()));
+    const q = this.raiz.getWorldQuaternion(new THREE.Quaternion()).invert();
+    const dir = cam.getWorldDirection(new THREE.Vector3()).applyQuaternion(q).setY(0);
+    if (dir.lengthSq() < 1e-4) dir.set(0, 0, -1);
+    dir.normalize();
+    return { cab, dir, der: new THREE.Vector3(-dir.z, 0, dir.x) };
+  }
+
+  /** Coloca `obj` delante de donde mira el usuario, de frente a él. */
+  anteMirada(obj, { distancia = 1.2, dy = 0, dx = 0 } = {}) {
+    const { cab, dir, der } = this.mirada();
+    obj.position.copy(cab).addScaledVector(dir, distancia).addScaledVector(der, dx);
+    obj.position.y = cab.y + dy;
+    obj.rotation.set(0, Math.atan2(-dir.x, -dir.z), 0);
+    return obj;
+  }
+
+  /**
+   * Mantiene `obj` delante del usuario de forma "perezosa": solo lo acomoda cuando
+   * la cabeza gira más que `umbral` (radianes). Así los paneles importantes siguen
+   * al estudiante cuando recorre el lugar, sin pegarse a su cara.
+   */
+  seguirMirada(obj, { distancia = 1.7, altura = this.H + 0.45, umbral = 0.85 } = {}) {
+    let yaw = null;
+    let objetivo = 0;
+    const angulo = (a) => Math.atan2(Math.sin(a), Math.cos(a));
+    this.cadaCuadro((dt) => {
+      if (!obj.parent) return;
+      const { cab, dir } = this.mirada();
+      const yawCabeza = Math.atan2(dir.x, dir.z);
+      if (yaw === null) yaw = objetivo = yawCabeza;
+      if (Math.abs(angulo(yawCabeza - objetivo)) > umbral) objetivo = yawCabeza;
+      yaw += angulo(objetivo - yaw) * Math.min(1, dt * 3);
+      obj.position.set(cab.x + Math.sin(yaw) * distancia, altura, cab.z + Math.cos(yaw) * distancia);
+      obj.rotation.set(0, yaw + Math.PI, 0);
+    });
   }
 
   interactivo(obj, cfg) {

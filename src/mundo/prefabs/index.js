@@ -4,6 +4,7 @@ import { alimentos } from './alimentos.js';
 import { objetos } from './objetos.js';
 import { diseno } from './diseno.js';
 import { laboratorio } from './laboratorio.js';
+import { mercado } from './mercado.js';
 import { crearTarjetaTexto } from '../../ui/componentes.js';
 import { cajaLocal } from '../../core/entrada.js';
 
@@ -13,6 +14,7 @@ const FABRICAS = {
   ...objetos,
   ...diseno,
   ...laboratorio,
+  ...mercado,
   tarjeta: (op) => crearTarjetaTexto({ texto: op.texto ?? '', emoji: op.emoji ?? '', ancho: 0.3, alto: 0.22, color: op.color }),
 };
 

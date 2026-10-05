@@ -108,8 +108,36 @@ export function ponerCara(grupo, { r = 0.1, caracter = 'neutral', x = 0, y = 0, 
   grupo.add(boca);
 }
 
+// Materiales con "colores por vértice": muchas piezas de colores distintos se
+// dibujan juntas en una sola llamada (cada vértice guarda su propio color).
+const materialesVC = new Map();
+function materialVC(tipo, lados) {
+  const clave = `${tipo}|${lados}`;
+  let m = materialesVC.get(clave);
+  if (!m) {
+    if (tipo === 'toon') m = new THREE.MeshToonMaterial({ gradientMap: mapaToon(), vertexColors: true });
+    else if (tipo === 'lambert') m = new THREE.MeshLambertMaterial({ vertexColors: true });
+    else m = new THREE.MeshBasicMaterial({ vertexColors: true });
+    m.side = lados;
+    m.userData.compartido = true;
+    materialesVC.set(clave, m);
+  }
+  return m;
+}
+
+/** Solo los materiales lisos (sin textura, sin transparencia ni brillo propio) se pueden juntar así. */
+function tipoVC(m) {
+  if (!m || m.map || m.transparent || m.vertexColors || m.alphaTest > 0) return null;
+  if (m.emissive && m.emissiveIntensity > 0 && (m.emissive.r || m.emissive.g || m.emissive.b)) return null;
+  if (m.isMeshToonMaterial) return m.gradientMap === mapaToon() ? 'toon' : null;
+  if (m.isMeshLambertMaterial) return 'lambert';
+  if (m.isMeshBasicMaterial) return 'basica';
+  return null;
+}
+
 /**
- * Fusiona todas las mallas estáticas de un grupo en una malla por material.
+ * Fusiona todas las mallas estáticas de un grupo. Las de material liso se juntan
+ * en una sola malla con colores por vértice; las demás, en una malla por material.
  * Reduce muchísimo las "draw calls", clave para el rendimiento en Quest 2.
  */
 export function fusionar(grupo) {
@@ -123,16 +151,30 @@ export function fusionar(grupo) {
     if (!o.isMesh || o.userData.noFusionar || o.isInstancedMesh) return;
     for (let p = o.parent; p && p !== grupo; p = p.parent) if (p.userData.noFusionar) return;
     let g = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
+    // Una pieza que ya venía fusionada con colores por vértice conserva sus colores.
+    const yaVC = Boolean(o.material.vertexColors && g.attributes.color?.itemSize === 3);
     for (const nombre of Object.keys(g.attributes)) {
-      if (!['position', 'normal', 'uv'].includes(nombre)) g.deleteAttribute(nombre);
+      if (!['position', 'normal', 'uv'].includes(nombre) && !(yaVC && nombre === 'color')) g.deleteAttribute(nombre);
     }
     if (!g.attributes.normal) g.computeVertexNormals();
     if (!g.attributes.uv) g.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
     g.morphAttributes = {};
     g.clearGroups();
     g.applyMatrix4(m.multiplyMatrices(inversa, o.matrixWorld));
-    if (!porMaterial.has(o.material)) porMaterial.set(o.material, []);
-    porMaterial.get(o.material).push(g);
+    const vc = yaVC ? (o.material.isMeshToonMaterial ? 'toon' : o.material.isMeshLambertMaterial ? 'lambert' : 'basica') : tipoVC(o.material);
+    if (vc && !yaVC) {
+      const { r, g: verde, b } = o.material.color;
+      const colores = new Float32Array(g.attributes.position.count * 3);
+      for (let i = 0; i < colores.length; i += 3) {
+        colores[i] = r;
+        colores[i + 1] = verde;
+        colores[i + 2] = b;
+      }
+      g.setAttribute('color', new THREE.BufferAttribute(colores, 3));
+    }
+    const material = vc ? materialVC(vc, o.material.side) : o.material;
+    if (!porMaterial.has(material)) porMaterial.set(material, []);
+    porMaterial.get(material).push(g);
     quitar.push(o);
   });
 
@@ -142,8 +184,14 @@ export function fusionar(grupo) {
   }
   for (const [material, geos] of porMaterial) {
     const unida = mergeGeometries(geos);
-    geos.forEach((g) => g.dispose());
-    if (unida) grupo.add(new THREE.Mesh(unida, material));
+    if (unida) {
+      geos.forEach((g) => g.dispose());
+      grupo.add(new THREE.Mesh(unida, material));
+    } else {
+      // Nunca se pierde una pieza: si no se pudieron juntar, se agregan por separado.
+      console.warn('fusionar: no se pudieron juntar las geometrías; se dibujan por separado');
+      for (const g of geos) grupo.add(new THREE.Mesh(g, material));
+    }
   }
   return grupo;
 }

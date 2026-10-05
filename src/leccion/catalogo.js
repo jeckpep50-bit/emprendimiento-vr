@@ -83,6 +83,16 @@ export const MODELOS = {
   torta: 'Torta de cumpleaños.',
   frasco_mayonesa: 'Frasco de mayonesa casera.',
   tubo_ensayo: 'Tubo de ensayo con líquido de color. Opción `color`.',
+  // Mercado, planta procesadora y cuerpo humano
+  hamburguesa: 'Hamburguesa. Opción `cruda: true`: la carne está rosada (mal cocinada).',
+  balde: 'Balde plástico con agua. Opción `sucia: true`: agua turbia.',
+  canasta_frutas: 'Canasta de mimbre con frutas sanas.',
+  hielera: 'Hielera abierta con pescado y camarones sobre hielo.',
+  huevo_roto: 'Huevo trizado (las bacterias pueden entrar).',
+  cuchillo: 'Cuchillo de cocina. Opción `sucio: true`: con restos de carne cruda.',
+  vendedor: 'Persona adulta de tamaño real con delantal (vendedor o cocinero). Opciones: camisa, delantal, piel, cabello, gorro ("sombrero" | "gorra" | "ninguno"), expresion.',
+  globulo_blanco: 'Glóbulo blanco: célula de defensa del cuerpo.',
+  globulo_rojo: 'Glóbulo rojo (disco rojo).',
 };
 
 export const ENTORNOS = {
@@ -95,6 +105,9 @@ export const ENTORNOS = {
   taller: 'Laboratorio de innovación: pizarra con las 5 fases del Design Thinking, muro de notas adhesivas y estantes con material reciclado.',
   laboratorio: 'Laboratorio de microbiología futurista: mesones con microscopios, pantallas animadas y un proyector holográfico de microbios.',
   patio: 'Patio de una escuela ecuatoriana: bebedero al frente, cancha, bancas, edificio escolar, bandera del Ecuador y volcanes al fondo.',
+  mercado: 'Mercado ecuatoriano con 4 puestos bajo toldos alrededor del usuario: frutas (al frente, mesón en z = -2,6), carnes y mariscos (izquierda, x = -2,6), comidas y jugos (derecha, x = 2,6) y lácteos y abarrotes (atrás, z = 2,4). Los mesones miden 0,9 m de alto.',
+  planta: 'Planta procesadora de alimentos: nave industrial con tanques, tuberías, robot empacador y luces de seguridad.',
+  cuerpo: 'Interior del cuerpo humano en cuatro zonas: boca, estómago (lago de ácido), intestino (vellosidades y microbiota) y vaso sanguíneo (glóbulos rojos). Lo usa la escena "viaje".',
 };
 
 export const TIPOS_ESCENA = {
@@ -107,6 +120,10 @@ export const TIPOS_ESCENA = {
   simulacion: 'Simulador de crecimiento bacteriano: el estudiante predice cuántas bacterias habrá según temperatura y tiempo, y lo comprueba en una placa de Petri.',
   atrapar: 'Minijuego arcade: microbios vuelan hacia un alimento y el estudiante dispara a los dañinos sin tocar a los amigos. Campos: duracion (s), vidas, meta, objetivo { modelo }, malos [modelos], buenos [modelos].',
   linterna: 'Linterna UV: escena a oscuras; al iluminar cada objeto se revelan microbios escondidos y un dato (mismos campos que exploracion).',
+  inspeccion: 'Inspección sanitaria: objetos repartidos alrededor (hay que girar y moverse). Al tocar uno, se acerca y el estudiante elige qué clave (categoría) se incumple o si todo está bien. Campos: categorias [{ id, nombre, emoji, color }], elementos [{ modelo, posicion [x,y,z], nombre, categoria (id o "ok"), texto, pista?, acompanantes?, moscas? }].',
+  cinta: 'Control de calidad en una banda transportadora: los productos avanzan y el estudiante dispara a los que NO son seguros; los buenos se dejan pasar. Campos: hoy (fecha), vidas, productos [{ modelo, nombre, etiqueta, apto, explicacion }].',
+  viaje: 'Viaje por el cuerpo humano (entorno cuerpo): paradas en boca, estómago, intestino y defensas; en cada una hay una acción interactiva y una pregunta. Campos: estaciones [{ zona, nombre, texto, tarea, pregunta, opciones, correcta, explicacion }].',
+  caos: 'Minijuego contra reloj: aparecen problemas alrededor del estudiante y debe tocar cada uno y elegir la clave (categoría) que lo soluciona antes de que se acabe su tiempo. Campos: categorias, incidentes [{ modelo, nombre, categoria, explicacion, resuelto? }], duracion, vidas, meta.',
   lluvia: 'Lluvia de ideas: al tocar una bombilla salen ideas en notas adhesivas; luego se elige la que cumple los criterios.',
 };
 

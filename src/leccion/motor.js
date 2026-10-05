@@ -15,7 +15,13 @@ import { EscenaLluvia } from '../escenas/lluvia.js';
 import { EscenaSimulacion } from '../escenas/simulacion.js';
 import { EscenaLinterna } from '../escenas/linterna.js';
 import { EscenaAtrapar } from '../escenas/atrapar.js';
+import { EscenaInspeccion } from '../escenas/inspeccion.js';
+import { EscenaCinta } from '../escenas/cinta.js';
+import { EscenaViaje } from '../escenas/viaje.js';
+import { EscenaCaos } from '../escenas/caos.js';
 import { EscenaFinal } from '../escenas/final.js';
+
+const RADIO_MOVIMIENTO = 2.3;
 
 const TIPOS = {
   narrativa: EscenaNarrativa,
@@ -28,6 +34,10 @@ const TIPOS = {
   simulacion: EscenaSimulacion,
   linterna: EscenaLinterna,
   atrapar: EscenaAtrapar,
+  inspeccion: EscenaInspeccion,
+  cinta: EscenaCinta,
+  viaje: EscenaViaje,
+  caos: EscenaCaos,
 };
 
 /** Reproduce una lección: crea cada escena, cambia de entorno y hace las transiciones. */
@@ -52,6 +62,12 @@ export class Motor {
     this.leccion = leccion;
     this.t = crearTraductor(leccion.idioma);
     this.audio.idioma = leccion.idioma;
+    // El marcador se rehace: su tamaño depende de si la lección tiene rangos.
+    if (this.marcador) {
+      this.marcador.removeFromParent();
+      liberar(this.marcador);
+      this.marcador = null;
+    }
     this._reiniciarPuntos();
   }
 
@@ -63,7 +79,112 @@ export class Motor {
 
   _reiniciarPuntos() {
     this.puntaje = { puntos: 0, racha: 0, mejorRacha: 0, aciertos: 0, errores: 0 };
+    this.insignias = [];
+    this.rangoActual = this._rangoPara(0);
     this.marcador?.redibujar();
+  }
+
+  /** Rangos opcionales de la lección: [{ nombre, emoji, puntos }] en orden creciente. */
+  get rangos() {
+    const r = this.leccion?.rangos;
+    return this.gamificado && Array.isArray(r) && r.length ? r : null;
+  }
+
+  _rangoPara(puntos) {
+    const lista = this.rangos;
+    if (!lista) return null;
+    let actual = lista[0];
+    for (const r of lista) if (puntos >= r.puntos) actual = r;
+    return actual;
+  }
+
+  _revisarRango() {
+    const nuevo = this._rangoPara(this.puntaje.puntos);
+    if (!nuevo || nuevo === this.rangoActual) return;
+    const sube = this.rangos.indexOf(nuevo) > this.rangos.indexOf(this.rangoActual);
+    this.rangoActual = nuevo;
+    this.marcador?.redibujar();
+    if (sube) {
+      this.audio.fanfarria();
+      this._anuncio({ titulo: this.t('ascenso'), texto: this.t('ahoraEres', { rango: nuevo.nombre }), emoji: nuevo.emoji ?? '🎖️', color: '#ffc23c' });
+    }
+  }
+
+  /** Al completar una misión con "insignia" se muestra la insignia ganada. Resuelve al terminar la animación. */
+  otorgarInsignia(insignia) {
+    if (!this.gamificado || !insignia) return Promise.resolve();
+    this.insignias.push(insignia);
+    this.audio.exito();
+    return this._anuncio({ titulo: this.t('insigniaDesbloqueada'), texto: insignia.nombre, emoji: insignia.emoji ?? '🏅', color: '#8b5cf6', grande: true });
+  }
+
+  /**
+   * Anuncio flotante delante del usuario (insignia o ascenso de rango). No se puede
+   * tocar: aparece con un rebote, se queda un momento y se desvanece hacia arriba.
+   */
+  _anuncio({ titulo, texto, emoji, color, grande = false }) {
+    const [ancho, alto] = grande ? [0.62, 0.5] : [0.66, 0.2];
+    const panel = new PanelLienzo(ancho, alto, (ctx, w, h) => {
+      ctx.fillStyle = 'rgba(13, 20, 38, 0.92)';
+      ctx.beginPath();
+      ctx.roundRect(6, 6, w - 12, h - 12, grande ? 60 : (h - 12) / 2);
+      ctx.fill();
+      ctx.lineWidth = 10;
+      ctx.strokeStyle = color;
+      ctx.stroke();
+      if (grande) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(w / 2, 150, 104, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.lineWidth = 12;
+        ctx.strokeStyle = '#ffc23c';
+        ctx.stroke();
+        escribir(ctx, emoji, w / 2, 150, { tam: 120, alinear: 'center', base: 'middle' });
+        escribir(ctx, titulo, w / 2, 282, { tam: 40, peso: 800, color: '#ffc23c', alinear: 'center', maxAncho: w - 60 });
+        escribir(ctx, texto, w / 2, 350, { tam: 56, peso: 900, color: '#ffffff', alinear: 'center', maxAncho: w - 60, maxAlto: h - 370 });
+        return;
+      }
+      escribir(ctx, emoji, 70, h / 2, { tam: 96, alinear: 'center', base: 'middle' });
+      escribir(ctx, titulo, 140, 34, { tam: 40, peso: 800, color, maxAncho: w - 170 });
+      escribir(ctx, texto, 140, 92, { tam: 46, peso: 900, color: '#ffffff', maxAncho: w - 170, maxAlto: h - 100 });
+    });
+    panel.material.depthTest = false;
+    panel.renderOrder = 950;
+    const cam = this.app.camara;
+    const cabeza = cam.getWorldPosition(new THREE.Vector3());
+    const dir = cam.getWorldDirection(new THREE.Vector3()).setY(0);
+    if (dir.lengthSq() < 1e-4) dir.set(0, 0, -1);
+    dir.normalize();
+    const pos = cabeza.clone().addScaledVector(dir, grande ? 0.95 : 1.25);
+    pos.y += grande ? 0.02 : 0.34;
+    panel.position.copy(pos);
+    panel.lookAt(cabeza.x, pos.y, cabeza.z);
+    this.app.escena.add(panel);
+    for (const p of this.entrada.punteros) p.vibrar(0.7, 90);
+    if (grande) this.fx.confeti(pos.clone().add(new THREE.Vector3(0, 0.15, 0)), 70);
+
+    const visible = grande ? 1.9 : 2.3;
+    const y0 = pos.y;
+    this.fx.tween({
+      duracion: visible + 0.45,
+      persistente: true,
+      curva: suavizado.lineal,
+      alActualizar: (k) => {
+        const s = k * (visible + 0.45);
+        panel.scale.setScalar(s < 0.4 ? Math.max(0.01, suavizado.rebote(s / 0.4)) : 1);
+        const salida = Math.max(0, (s - visible) / 0.45);
+        panel.material.opacity = 1 - salida;
+        panel.position.y = y0 + salida * 0.15;
+      },
+      alTerminar: () => {
+        panel.removeFromParent();
+        panel.geometry.dispose();
+        panel.textura.dispose();
+        panel.material.dispose();
+      },
+    });
+    return this.fx.tween({ duracion: visible, persistente: true });
   }
 
   /** Suma puntos con bono por racha (3 o más aciertos seguidos) y muestra "+100" flotando. */
@@ -82,6 +203,7 @@ export class Motor {
       this.marcador.redibujar();
       this.fx.latido(this.marcador, 0.15);
     }
+    this._revisarRango();
   }
 
   fallar() {
@@ -98,17 +220,24 @@ export class Motor {
       return;
     }
     if (!this.marcador) {
-      this.marcador = new PanelLienzo(0.5, 0.13, (ctx, w, h) => {
+      // Con rangos, el marcador tiene una segunda línea con el rango actual.
+      const conRango = Boolean(this.rangos);
+      this.marcador = new PanelLienzo(conRango ? 0.56 : 0.5, conRango ? 0.2 : 0.13, (ctx, w, h) => {
         const p = this.puntaje;
         ctx.fillStyle = 'rgba(13, 20, 38, 0.88)';
         ctx.beginPath();
-        ctx.roundRect(4, 4, w - 8, h - 8, (h - 8) / 2);
+        ctx.roundRect(4, 4, w - 8, h - 8, conRango ? 50 : (h - 8) / 2);
         ctx.fill();
         ctx.strokeStyle = '#ffc23c';
         ctx.lineWidth = 6;
         ctx.stroke();
-        escribir(ctx, `⭐ ${p.puntos.toLocaleString('es-EC')}`, 34, h / 2, { tam: 58, peso: 800, color: '#ffc23c', base: 'middle' });
-        if (p.racha >= 2) escribir(ctx, `🔥 ${p.racha}`, w - 34, h / 2, { tam: 50, peso: 800, color: '#ff8a5c', alinear: 'right', base: 'middle' });
+        const yPuntos = conRango ? 62 : h / 2;
+        escribir(ctx, `⭐ ${p.puntos.toLocaleString('es-EC')}`, 34, yPuntos, { tam: 58, peso: 800, color: '#ffc23c', base: 'middle' });
+        if (p.racha >= 2) escribir(ctx, `🔥 ${p.racha}`, w - 34, yPuntos, { tam: 50, peso: 800, color: '#ff8a5c', alinear: 'right', base: 'middle' });
+        if (conRango && this.rangoActual) {
+          const r = this.rangoActual;
+          escribir(ctx, `${r.emoji ?? '🎖️'} ${r.nombre}`, 34, 148, { tam: 44, peso: 800, color: '#ffffff', base: 'middle', maxAncho: w - 68 });
+        }
       });
     }
     const H = this.app.alturaOjos;
@@ -150,6 +279,8 @@ export class Motor {
       this.anclaje.add(this.entorno.grupo);
     }
     this.app.anclarDelanteDelUsuario(this.anclaje);
+    // Cada escena puede ampliar el área de movimiento (p. ej. recorrer el mercado).
+    this.app.limites.radio = RADIO_MOVIMIENTO;
     if (entornoNuevo) this._entradaAlEntorno(nombreEntorno);
     this._colocarMarcador();
 
