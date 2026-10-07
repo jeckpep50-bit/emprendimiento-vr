@@ -56,6 +56,12 @@ export class Locomocion {
   }
 
   _actualizar(dt) {
+    // Algunas escenas (películas, realidad aumentada) desactivan el movimiento con la palanca.
+    if (this.app.sinLocomocion) {
+      this.puntos.visible = this.marca.visible = false;
+      for (const p of this.entrada.punteros) p.suspendido = false;
+      return;
+    }
     if (this.app.enVR) this._actualizarVR();
     else if (this.entrada.habilitarRaton) this._actualizarTeclado(dt);
     if (this.marca.visible) {

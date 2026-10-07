@@ -1,5 +1,14 @@
 [
   {
+    "id": "types-of-soil",
+    "titulo": "Types of Soil: an adventure with Wiggles",
+    "materia": "Science",
+    "grado": "3.º EGB",
+    "duracionMinutos": 18,
+    "idioma": "en",
+    "emoji": "🪱"
+  },
+  {
     "id": "microorganismos-alimentos",
     "titulo": "Buenos hábitos: microorganismos en los alimentos",
     "materia": "Ciencias Naturales",

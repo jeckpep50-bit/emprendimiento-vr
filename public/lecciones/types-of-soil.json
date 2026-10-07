@@ -1,0 +1,27 @@
+{
+  "id": "types-of-soil",
+  "titulo": "Types of Soil: an adventure with Wiggles",
+  "materia": "Science",
+  "grado": "3.º EGB",
+  "idioma": "en",
+  "duracionMinutos": 18,
+  "emoji": "🪱",
+  "modo": "ar",
+  "narracion": false,
+  "descripcion": "An immersive mixed-reality movie. Wiggles the earthworm comes out of a magic hole in the classroom floor and takes the students on a soil adventure: what soil is made of, how rocks become soil, a trip down an elevator through the layers of soil, and visits to a beach (sandy soil), a river (clay soil) and an Andean farm (loamy soil). Students wave, repeat new words, break a rock, make a clay pot, plant seeds, do the water test, clean up trash, play a quiz and sing the soil song. Fully narrated in English with subtitles.",
+  "objetivos": [
+    "Say what soil is made of: rock pieces, humus, water, air and living things.",
+    "Explain that soil forms very slowly when rocks break into tiny pieces.",
+    "Name the layers of soil: topsoil, subsoil and bedrock.",
+    "Compare sandy, clay and loamy soil by how they feel and how they hold water.",
+    "Recognize soil helpers and simple ways to take care of the soil."
+  ],
+  "escenas": [
+    {
+      "tipo": "pelicula",
+      "entorno": "ninguno",
+      "titulo": "Types of Soil",
+      "guion": "tipos-de-suelo"
+    }
+  ]
+}

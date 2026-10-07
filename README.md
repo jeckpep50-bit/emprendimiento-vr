@@ -39,7 +39,7 @@ compila y publica; en los pull requests solo valida y compila. La dirección es:
 **https://jeckpep50-bit.github.io/emprendimiento-vr/**
 
 En cada gafa, abre esa dirección y guárdala en favoritos. La portada muestra las actividades:
-**Microorganismos en los alimentos** (5.º EGB), **Guardianes de los alimentos** (6.º EGB),
+**Types of Soil** (3.º EGB, película en inglés), **Microorganismos en los alimentos** (5.º EGB), **Guardianes de los alimentos** (6.º EGB),
 **Evaluación: Detectives de microbios** (6.º EGB), **Operación Alimento Seguro** (7.º EGB) y
 **Design Thinking: el reto del bebedero** (6.º EGB).
 También se puede abrir una directamente, por ejemplo con `?leccion=operacion-alimento-seguro`.
@@ -47,6 +47,22 @@ También se puede abrir una directamente, por ejemplo con `?leccion=operacion-al
 Si una lección tiene errores, el validador detiene la publicación y la versión anterior sigue en línea.
 
 No hay cuentas ni se guardan datos de los estudiantes. Cada gafa funciona por su cuenta.
+
+## Películas inmersivas en realidad aumentada
+
+**Types of Soil** (`?leccion=types-of-soil`) es una película en inglés de unos 18 minutos para 3.º EGB.
+Su lección tiene `"modo": "ar"`: en las Quest se entra con **«Entrar en realidad aumentada»** y se ve el aula
+real (*passthrough*). Algunos capítulos llevan a mundos completos y luego se vuelve al aula.
+
+- Avanza sola, con narración, subtítulos, música y momentos para participar que nunca la bloquean.
+- Botón ⏸ junto a los subtítulos: continuar, repetir la parte o pasar a la siguiente.
+- Úsala con 1,5 m libres delante del estudiante, sentado en una silla, porque Wiggles sale de un hueco en el piso.
+- Vista previa en el PC: `?leccion=types-of-soil&capitulo=5` empieza en el capítulo 5.
+
+La narración está en `public/peliculas/types-of-soil/` (un MP3 por línea). El guion está en
+`src/pelicula/guion-suelos.js`. Al cambiar un texto, `npm run narracion` vuelve a grabar solo esas líneas
+con la voz en inglés de Windows (Microsoft Zira). También se puede grabar una voz real con el mismo nombre de archivo.
+La coreografía de cada capítulo está en `src/pelicula/suelos.js`, y el reproductor (director) en `src/pelicula/director.js`.
 
 ## Controles dentro de la VR
 

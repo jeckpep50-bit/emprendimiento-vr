@@ -72,13 +72,24 @@ export class App {
     }
   }
 
-  async entrarVR() {
-    const sesion = await navigator.xr.requestSession('immersive-vr', {
+  static async arDisponible() {
+    try {
+      return Boolean(navigator.xr) && (await navigator.xr.isSessionSupported('immersive-ar'));
+    } catch {
+      return false;
+    }
+  }
+
+  /** modo: 'vr' (inmersivo) o 'ar' (realidad aumentada con el aula real de fondo). */
+  async entrarVR(modo = 'vr') {
+    const sesion = await navigator.xr.requestSession(modo === 'ar' ? 'immersive-ar' : 'immersive-vr', {
       requiredFeatures: ['local-floor'],
       optionalFeatures: ['hand-tracking'],
     });
+    this.enAR = modo === 'ar';
     await this.renderer.xr.setSession(sesion);
     sesion.addEventListener('end', () => {
+      this.enAR = false;
       this.camara.position.set(0, ALTURA_ESCRITORIO, 0);
       this.rig.position.set(0, 0, 0);
       this.rig.rotation.set(0, 0, 0);

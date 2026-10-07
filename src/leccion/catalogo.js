@@ -107,6 +107,7 @@ export const ENTORNOS = {
   patio: 'Patio de una escuela ecuatoriana: bebedero al frente, cancha, bancas, edificio escolar, bandera del Ecuador y volcanes al fondo.',
   mercado: 'Mercado ecuatoriano con 4 puestos bajo toldos alrededor del usuario: frutas (al frente, mesón en z = -2,6), carnes y mariscos (izquierda, x = -2,6), comidas y jugos (derecha, x = 2,6) y lácteos y abarrotes (atrás, z = 2,4). Los mesones miden 0,9 m de alto.',
   planta: 'Planta procesadora de alimentos: nave industrial con tanques, tuberías, robot empacador y luces de seguridad.',
+  ninguno: 'Sin decorado (lo pone la propia escena; p. ej. una película en realidad aumentada).',
   cuerpo: 'Interior del cuerpo humano en cuatro zonas: boca, estómago (lago de ácido), intestino (vellosidades y microbiota) y vaso sanguíneo (glóbulos rojos). Lo usa la escena "viaje".',
 };
 
@@ -124,9 +125,12 @@ export const TIPOS_ESCENA = {
   cinta: 'Control de calidad en una banda transportadora: los productos avanzan y el estudiante dispara a los que NO son seguros; los buenos se dejan pasar. Campos: hoy (fecha), vidas, productos [{ modelo, nombre, etiqueta, apto, explicacion }].',
   viaje: 'Viaje por el cuerpo humano (entorno cuerpo): paradas en boca, estómago, intestino y defensas; en cada una hay una acción interactiva y una pregunta. Campos: estaciones [{ zona, nombre, texto, tarea, pregunta, opciones, correcta, explicacion }].',
   caos: 'Minijuego contra reloj: aparecen problemas alrededor del estudiante y debe tocar cada uno y elegir la clave (categoría) que lo soluciona antes de que se acabe su tiempo. Campos: categorias, incidentes [{ modelo, nombre, categoria, explicacion, resuelto? }], duracion, vidas, meta.',
+  pelicula: 'Película inmersiva que avanza sola (narración, subtítulos, música y momentos para participar). Campo: guion (id de la película, ver PELICULAS_DISPONIBLES).',
   lluvia: 'Lluvia de ideas: al tocar una bombilla salen ideas en notas adhesivas; luego se elige la que cumple los criterios.',
 };
 
+export const PELICULAS_DISPONIBLES = ['tipos-de-suelo'];
+export const MODOS = ['vr', 'ar'];
 export const IDIOMAS = ['es', 'en'];
 export const CARACTERES = ['bueno', 'malo', 'neutral'];
 export const EXPRESIONES = ['neutral', 'feliz', 'triste', 'sorpresa', 'bueno', 'malo'];
