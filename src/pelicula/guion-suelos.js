@@ -1,0 +1,208 @@
+// Guion de la película "Types of Soil" (3.º EGB, en inglés). Solo datos: lo usan
+// el reproductor (subtítulos) y scripts/generar-narracion.mjs (audios con voz).
+// quien: "n" = narrador, "w" = Wiggles (el gusano; su voz suena un poco más aguda).
+// Las palabras entre *asteriscos* se resaltan en los subtítulos.
+
+export const CARPETA_AUDIO = 'peliculas/types-of-soil';
+
+export const CAPITULOS = [
+  { id: 'c1', titulo: 'Hello, Wiggles!', emoji: '🪱' },
+  { id: 'c2', titulo: 'What Is Soil?', emoji: '🟫' },
+  { id: 'c3', titulo: 'How Is Soil Made?', emoji: '🪨' },
+  { id: 'c4', titulo: 'The Layers of Soil', emoji: '🍰' },
+  { id: 'c5', titulo: 'Sandy Soil', emoji: '🏖️' },
+  { id: 'c6', titulo: 'Clay Soil', emoji: '🏺' },
+  { id: 'c7', titulo: 'Loamy Soil', emoji: '🌱' },
+  { id: 'c8', titulo: 'The Water Test', emoji: '💧' },
+  { id: 'c9', titulo: 'Soil Helpers', emoji: '🐜' },
+  { id: 'c10', titulo: 'Soil Quiz and Song', emoji: '🎵' },
+];
+
+export const LINEAS = {
+  // Títulos de los capítulos
+  t1: ['n', 'Part one. Hello, Wiggles!'],
+  t2: ['n', 'Part two. What is soil?'],
+  t3: ['n', 'Part three. How is soil made?'],
+  t4: ['n', 'Part four. The layers of soil.'],
+  t5: ['n', 'Part five. Sandy soil.'],
+  t6: ['n', 'Part six. Clay soil.'],
+  t7: ['n', 'Part seven. Loamy soil.'],
+  t8: ['n', 'Part eight. The water test.'],
+  t9: ['n', 'Part nine. Soil helpers.'],
+  t10: ['n', 'Part ten. Soil quiz and song.'],
+
+  // 1. Hello, Wiggles!
+  c1_1: ['n', 'Hello, friends! Welcome to a very special adventure.'],
+  c1_2: ['n', 'Look down at the floor, in front of you. Something is moving!'],
+  c1_3: ['w', 'Hi there! Hello! Can you see me? I am Wiggles, the earthworm!'],
+  c1_4: ['w', 'I live under the ground, in the *soil*. The soil is my home!'],
+  c1_5: ['w', 'Wave hello to me! Come on, wave your hand!'],
+  c1_6: ['w', 'Hello, hello! Great waving!'],
+  c1_7: ['w', 'Today, we are going on a soil adventure! We will learn about different *types of soil*.'],
+  c1_8: ['w', 'We will meet *sand*, *clay* and *loam*.'],
+  c1_9: ['w', 'Can you say soil? Say it with me: soil!'],
+  c1_10: ['w', 'Great job! Are you ready? Let’s go!'],
+  c1_11: ['w', 'Here is a tip! When you see a yellow ring, point at it and press the trigger to touch it.'],
+  c1_12: ['w', 'Try it now! Touch the three little piles of soil!'],
+  c1_13: ['w', 'Great! You know how to play. Now, let’s fly on my magic leaf!'],
+
+  // 2. What is soil?
+  c2_1: ['n', 'This is *soil*. Soil covers the ground almost everywhere on Earth.'],
+  c2_2: ['w', 'Soil looks like dirt. But soil is not just dirt! It is made of many things.'],
+  c2_3: ['w', 'Let’s look inside!'],
+  c2_4: ['w', 'First: tiny pieces of *rock*. Big rocks break into very, very small pieces.'],
+  c2_5: ['w', 'Next: old leaves and dead plants. They rot and become dark and soft. This is called *humus*.'],
+  c2_6: ['w', 'Can you say humus? Humus!'],
+  c2_7: ['w', 'Soil has *water*, too. Plants drink this water with their roots.'],
+  c2_8: ['w', 'Soil also has *air*! There are tiny spaces between the pieces, and air lives in those spaces.'],
+  c2_9: ['w', 'And soil has *living things*, like me! Worms, ants, beetles, and tiny, tiny helpers called bacteria.'],
+  c2_10: ['w', 'Touch each thing to say hello!'],
+  c2_11: ['n', 'So, soil is a mix of rock pieces, humus, water, air and living things.'],
+  c2_12: ['w', 'Let’s count them with our fingers! Rocks, one. Humus, two. Water, three. Air, four. Living things, five!'],
+  c2_13: ['w', 'Soil is very important. Plants grow in soil, and we eat plants!'],
+  c2_14: ['w', 'Fruits, vegetables, rice and corn all grow in soil. Yummy!'],
+  c2_15: ['w', 'Hmm... But where does soil come from? Let’s find out!'],
+  c2_16: ['n', 'Rock pieces make the soil feel rough or smooth. Humus makes it dark and rich. Water and air help the roots drink and breathe.'],
+  p_rocas: ['w', 'Rocks!'],
+  p_humus: ['w', 'Humus!'],
+  p_agua: ['w', 'Water!'],
+  p_aire: ['w', 'Air!'],
+  p_vida: ['w', 'Living things!'],
+
+  // 3. How is soil made?
+  c3_1: ['n', 'Close your eyes... and open them! We are in the mountains.'],
+  c3_2: ['w', 'Wow! Look at this big rock. It is very old and very hard.'],
+  c3_3: ['w', 'In the day, the sun makes the rock hot.'],
+  c3_4: ['w', 'At night, the rock gets cold. Hot, cold, hot, cold. Little cracks appear!'],
+  c3_5: ['w', 'Then the rain comes. Water gets into the tiny cracks.'],
+  c3_6: ['w', 'When it is very cold, the water turns into ice. The ice pushes, and pushes, and... crack!'],
+  c3_7: ['w', 'Plant roots grow into the cracks, too. They push the rock apart.'],
+  c3_8: ['w', 'And the wind blows sand against the rock. It rubs, and rubs, and rubs.'],
+  c3_9: ['w', 'Now it’s your turn! Tap the rock to help the weather break it!'],
+  c3_10: ['w', 'Look! The big rock breaks into small rocks. And the small rocks break into tiny pieces.'],
+  c3_11: ['n', 'Leaves fall and rot. Worms and bugs move in. The tiny rock pieces and the humus mix together.'],
+  c3_12: ['n', 'And that is how soil is made!'],
+  c3_13: ['w', 'But it is very, very slow. It takes hundreds of years to make just a little bit of soil!'],
+  c3_14: ['w', 'That is why soil is a treasure. We must take care of it.'],
+
+  // 4. The layers of soil
+  c4_1: ['w', 'Now, let’s go down, under the ground! We are on an elevator. Hold on tight!'],
+  c4_2: ['n', 'Soil has layers, like a big chocolate cake. Look at the walls around you.'],
+  c4_3: ['w', 'This is the top layer. It is called *topsoil*. It is dark and soft.'],
+  c4_4: ['w', 'Topsoil has lots of humus. Plant roots, worms and ants live here. This is where I live!'],
+  c4_5: ['w', 'Let’s go down a little more.'],
+  c4_6: ['w', 'This layer is called *subsoil*. It is lighter in color. It has more rocks and clay.'],
+  c4_7: ['w', 'Only big, long roots reach the subsoil, like the roots of trees.'],
+  c4_8: ['w', 'And now, all the way to the bottom...'],
+  c4_9: ['w', 'This is *bedrock*! It is solid rock. Very, very hard. Soil comes from rock like this.'],
+  c4_10: ['n', 'Let’s remember the layers: *topsoil* on top, *subsoil* in the middle, and *bedrock* at the bottom.'],
+  c4_11: ['w', 'Quiz time! Which layer has the most living things?'],
+  c4_12: ['w', 'The answer is *topsoil*! It has roots, worms and lots of humus.'],
+  c4_13: ['w', 'Now, let’s go back up and meet three types of soil!'],
+  c4_r1: ['w', 'Say it with me: topsoil!'],
+  c4_r2: ['w', 'Say it with me: subsoil!'],
+  c4_r3: ['w', 'Say it with me: bedrock!'],
+
+  // 5. Sandy soil
+  c5_1: ['n', 'Welcome to the beach! Here we find our first type of soil: *sandy soil*.'],
+  c5_2: ['w', 'Sand is made of big pieces of rock. They are called *grains*. Look, I made them really big for you!'],
+  c5_3: ['w', 'When you touch sand, it feels *rough* and *dry*. Can you say rough? Rough!'],
+  c5_4: ['w', 'Sand grains are big, so there are big spaces between them. Watch the water!'],
+  c5_5: ['w', 'Whoosh! The water goes down very fast. Sandy soil does not hold water.'],
+  c5_6: ['n', 'Sandy soil dries out quickly, and it has very little humus. Many plants do not like it.'],
+  c5_7: ['w', 'But some plants love sandy soil! Like the cactus, and the coconut palm. They do not need a lot of water.'],
+  c5_8: ['w', 'Touch the sand grains and make them sparkle!'],
+  c5_9: ['w', 'Remember: *sandy soil* is rough, dry, and the water goes through fast!'],
+  c5_10: ['w', 'Beach sand comes from rocks and shells. The waves break them into tiny pieces, again and again.'],
+  c5_11: ['w', 'Can you say sandy soil? Sandy soil!'],
+
+  // 6. Clay soil
+  c6_1: ['n', 'Now we are next to a river. Here we find *clay soil*.'],
+  c6_2: ['w', 'Clay is made of tiny, tiny pieces. They are much smaller than sand!'],
+  c6_3: ['w', 'When clay is wet, it feels *sticky*. Squish, squish! When clay is dry, it gets very hard.'],
+  c6_4: ['w', 'Clay pieces are so small that they stick together. Water cannot go through easily. Watch!'],
+  c6_5: ['w', 'Splash! A puddle! Clay soil *holds water*.'],
+  c6_6: ['n', 'Some plants, like rice, grow well in wet clay soil.'],
+  c6_7: ['w', 'People also use clay to make things: pots, plates, and bricks for houses!'],
+  c6_8: ['w', 'Let’s make a pot! Touch the clay!'],
+  c6_9: ['w', 'Wow! You made a beautiful pot!'],
+  c6_10: ['w', 'Remember: *clay soil* is sticky and smooth, and it holds a lot of water.'],
+  c6_11: ['w', 'Can you say clay soil? Clay soil!'],
+  c6_12: ['n', 'When clay soil dries in the sun, it cracks. Look at the ground around you!'],
+
+  // 7. Loamy soil
+  c7_1: ['n', 'Our last stop is a farm in the mountains of Ecuador. Here we find *loamy soil*.'],
+  c7_2: ['w', 'Loam is my favorite! Loam is a mix of sand, clay, a fine powder called *silt*, and lots of humus.'],
+  c7_3: ['w', 'Loam is dark brown. It feels *soft* and crumbly, like cake crumbs!'],
+  c7_4: ['w', 'Loam holds *just the right* amount of water and air. Not too much, not too little. Just right!'],
+  c7_5: ['n', 'That is why farmers love loamy soil. Most plants grow very well in it.'],
+  c7_6: ['w', 'Corn, potatoes, beans, lettuce, and many fruits grow in loam. Yum, yum!'],
+  c7_7: ['w', 'Let’s plant some seeds! Touch the little holes to plant them.'],
+  c7_8: ['w', 'Look! Your seeds are growing! You are a great farmer!'],
+  c7_9: ['w', 'Remember: *loamy soil* is dark, soft, and just right for plants.'],
+  c7_10: ['n', 'In Ecuador, the volcanoes help, too! Long ago, volcanic ash fell on the land and made the soil very rich.'],
+  c7_11: ['w', 'That is why Ecuador grows so many yummy foods: corn, potatoes, beans, bananas, and cacao for chocolate!'],
+  c7_12: ['w', 'Can you say loamy soil? Loamy soil!'],
+
+  // 8. The water test
+  c8_1: ['n', 'Now we are back in the classroom. Let’s do a science experiment!'],
+  c8_2: ['w', 'Here are three pots. One has *sand*, one has *clay*, and one has *loam*.'],
+  c8_3: ['w', 'We will pour the same water into each pot. The water that goes through falls into the glass below.'],
+  c8_4: ['w', 'Think! In which pot will the water go through the fastest? Choose one!'],
+  c8_5: ['n', 'Let’s watch carefully.'],
+  c8_6: ['w', 'Look at the sand! The water runs through very fast. The glass is full!'],
+  c8_7: ['w', 'The loam lets some water through, but it keeps some for the plants.'],
+  c8_8: ['w', 'And the clay? Only a few little drops! Clay holds the water.'],
+  c8_9: ['n', 'So: *sand* drains fast, *clay* holds water, and *loam* is just right!'],
+
+  // 9. Soil helpers
+  c9_1: ['w', 'Do you know who helps the soil? Me! Worms are *soil helpers*!'],
+  c9_2: ['w', 'I dig tunnels. Air and water go into my tunnels.'],
+  c9_3: ['w', 'I eat old leaves, and my poop makes the soil healthy. Ha ha!'],
+  c9_4: ['w', 'Ants, beetles and tiny bacteria help, too. They turn dead leaves into humus.'],
+  c9_5: ['n', 'We can help the soil, too! Here are three ways.'],
+  c9_6: ['w', 'One: don’t throw trash on the ground. Help me clean up! Touch the trash to put it in the trash can!'],
+  c9_7: ['w', 'Thank you! Clean soil is happy soil!'],
+  c9_8: ['w', 'Two: plant trees and plants. Their roots hold the soil, so the rain and the wind cannot take it away.'],
+  c9_9: ['w', 'Three: make *compost*! Fruit peels and old leaves can become new humus for the soil.'],
+  c9_10: ['w', 'You are great soil helpers!'],
+  c9_11: ['w', 'Do you want to know a secret? I have no eyes, no ears and no legs!'],
+  c9_12: ['w', 'I breathe through my skin, so I like wet soil. When it rains a lot, I come up to the top!'],
+
+  // 10. Quiz and song
+  c10_1: ['w', 'Now, let’s play a game! I describe a soil, and you choose the right one.'],
+  c10_2: ['w', 'This soil is rough and dry. The water goes through very fast. Which soil is it?'],
+  c10_3: ['w', 'It’s *sand*!'],
+  c10_4: ['w', 'This soil is sticky when it is wet, and it makes puddles. Which soil is it?'],
+  c10_5: ['w', 'It’s *clay*!'],
+  c10_6: ['w', 'This soil is dark and soft, and it is just right for plants. Which soil is it?'],
+  c10_7: ['w', 'It’s *loam*!'],
+  c10_8: ['w', 'Last one! Which of these is NOT part of soil?'],
+  c10_9: ['w', '*Plastic*! Plastic is trash. It does not belong in the soil.'],
+  c10_10: ['w', 'Now, let’s sing the soil song! Repeat after me!'],
+  c10_11: ['w', 'Sand is rough, and sand is dry!'],
+  c10_12: ['w', 'Clay is sticky, oh my, oh my!'],
+  c10_13: ['w', 'Loam is soft, and loam is just right!'],
+  c10_14: ['w', 'Take care of soil, day and night!'],
+  c10_15: ['w', 'You are amazing soil scientists!'],
+  c10_16: ['w', 'Remember: take care of the soil, and the soil will take care of us.'],
+  c10_17: ['w', 'Now I have to go back home. Bye-bye, friends! See you in the garden!'],
+  c10_18: ['n', 'The end. Thank you for watching!'],
+  c10_19: ['n', 'Let’s review what we learned today.'],
+  c10_20: ['w', 'Soil is made of rock pieces, humus, water, air and living things.'],
+  c10_21: ['w', 'Soil has layers: topsoil, subsoil and bedrock.'],
+  c10_22: ['w', 'And there are different types of soil: sandy soil, clay soil and loamy soil.'],
+  c10_23: ['w', 'Wave goodbye to me!'],
+
+  // Frases cortas de reacción
+  bien_1: ['w', 'Yes! Well done!'],
+  bien_2: ['w', 'Correct! Super!'],
+  bien_3: ['w', 'Great job!'],
+  intento: ['w', 'Good try!'],
+  wow: ['w', 'Wow!'],
+};
+
+/** Texto sin las marcas de resaltado (para la voz). */
+export function textoPlano(texto) {
+  return texto.replace(/\*/g, '');
+}

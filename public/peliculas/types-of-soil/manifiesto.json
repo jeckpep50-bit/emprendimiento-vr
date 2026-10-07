@@ -1,0 +1,792 @@
+{
+ "t1": {
+  "quien": "n",
+  "texto": "Part one. Hello, Wiggles!",
+  "seg": 4
+ },
+ "t2": {
+  "quien": "n",
+  "texto": "Part two. What is soil?",
+  "seg": 3.37
+ },
+ "t3": {
+  "quien": "n",
+  "texto": "Part three. How is soil made?",
+  "seg": 3.7
+ },
+ "t4": {
+  "quien": "n",
+  "texto": "Part four. The layers of soil.",
+  "seg": 3.83
+ },
+ "t5": {
+  "quien": "n",
+  "texto": "Part five. Sandy soil.",
+  "seg": 3.66
+ },
+ "t6": {
+  "quien": "n",
+  "texto": "Part six. Clay soil.",
+  "seg": 3.57
+ },
+ "t7": {
+  "quien": "n",
+  "texto": "Part seven. Loamy soil.",
+  "seg": 3.56
+ },
+ "t8": {
+  "quien": "n",
+  "texto": "Part eight. The water test.",
+  "seg": 3.48
+ },
+ "t9": {
+  "quien": "n",
+  "texto": "Part nine. Soil helpers.",
+  "seg": 3.71
+ },
+ "t10": {
+  "quien": "n",
+  "texto": "Part ten. Soil quiz and song.",
+  "seg": 4.02
+ },
+ "c1_1": {
+  "quien": "n",
+  "texto": "Hello, friends! Welcome to a very special adventure.",
+  "seg": 5.55
+ },
+ "c1_2": {
+  "quien": "n",
+  "texto": "Look down at the floor, in front of you. Something is moving!",
+  "seg": 5.74
+ },
+ "c1_3": {
+  "quien": "w",
+  "texto": "Hi there! Hello! Can you see me? I am Wiggles, the earthworm!",
+  "seg": 8.69
+ },
+ "c1_4": {
+  "quien": "w",
+  "texto": "I live under the ground, in the *soil*. The soil is my home!",
+  "seg": 6.26
+ },
+ "c1_5": {
+  "quien": "w",
+  "texto": "Wave hello to me! Come on, wave your hand!",
+  "seg": 5.45
+ },
+ "c1_6": {
+  "quien": "w",
+  "texto": "Hello, hello! Great waving!",
+  "seg": 4.53
+ },
+ "c1_7": {
+  "quien": "w",
+  "texto": "Today, we are going on a soil adventure! We will learn about different *types of soil*.",
+  "seg": 7.96
+ },
+ "c1_8": {
+  "quien": "w",
+  "texto": "We will meet *sand*, *clay* and *loam*.",
+  "seg": 3.61
+ },
+ "c1_9": {
+  "quien": "w",
+  "texto": "Can you say soil? Say it with me: soil!",
+  "seg": 5.52
+ },
+ "c1_10": {
+  "quien": "w",
+  "texto": "Great job! Are you ready? Let’s go!",
+  "seg": 5.39
+ },
+ "c2_1": {
+  "quien": "n",
+  "texto": "This is *soil*. Soil covers the ground almost everywhere on Earth.",
+  "seg": 5.77
+ },
+ "c2_2": {
+  "quien": "w",
+  "texto": "Soil looks like dirt. But soil is not just dirt! It is made of many things.",
+  "seg": 8.47
+ },
+ "c2_3": {
+  "quien": "w",
+  "texto": "Let’s look inside!",
+  "seg": 2.25
+ },
+ "c2_4": {
+  "quien": "w",
+  "texto": "First: tiny pieces of *rock*. Big rocks break into very, very small pieces.",
+  "seg": 8.48
+ },
+ "c2_5": {
+  "quien": "w",
+  "texto": "Next: old leaves and dead plants. They rot and become dark and soft. This is called *humus*.",
+  "seg": 9.92
+ },
+ "c2_6": {
+  "quien": "w",
+  "texto": "Can you say humus? Humus!",
+  "seg": 4.34
+ },
+ "c2_7": {
+  "quien": "w",
+  "texto": "Soil has *water*, too. Plants drink this water with their roots.",
+  "seg": 6.71
+ },
+ "c2_8": {
+  "quien": "w",
+  "texto": "Soil also has *air*! There are tiny spaces between the pieces, and air lives in those spaces.",
+  "seg": 8.6
+ },
+ "c2_9": {
+  "quien": "w",
+  "texto": "And soil has *living things*, like me! Worms, ants, beetles, and tiny, tiny helpers called bacteria.",
+  "seg": 11.55
+ },
+ "c2_10": {
+  "quien": "w",
+  "texto": "Touch each thing to say hello!",
+  "seg": 2.9
+ },
+ "c2_11": {
+  "quien": "n",
+  "texto": "So, soil is a mix of rock pieces, humus, water, air and living things.",
+  "seg": 6.72
+ },
+ "c2_12": {
+  "quien": "w",
+  "texto": "Let’s count them with our fingers! Rocks, one. Humus, two. Water, three. Air, four. Living things, five!",
+  "seg": 16.23
+ },
+ "c2_13": {
+  "quien": "w",
+  "texto": "Soil is very important. Plants grow in soil, and we eat plants!",
+  "seg": 7.31
+ },
+ "c2_14": {
+  "quien": "w",
+  "texto": "Fruits, vegetables, rice and corn all grow in soil. Yummy!",
+  "seg": 6.8
+ },
+ "c2_15": {
+  "quien": "w",
+  "texto": "Hmm... But where does soil come from? Let’s find out!",
+  "seg": 6.78
+ },
+ "p_rocas": {
+  "quien": "w",
+  "texto": "Rocks!",
+  "seg": 1.76
+ },
+ "p_humus": {
+  "quien": "w",
+  "texto": "Humus!",
+  "seg": 1.89
+ },
+ "p_agua": {
+  "quien": "w",
+  "texto": "Water!",
+  "seg": 1.59
+ },
+ "p_aire": {
+  "quien": "w",
+  "texto": "Air!",
+  "seg": 1.44
+ },
+ "p_vida": {
+  "quien": "w",
+  "texto": "Living things!",
+  "seg": 2.09
+ },
+ "c3_1": {
+  "quien": "n",
+  "texto": "Close your eyes... and open them! We are in the mountains.",
+  "seg": 5.37
+ },
+ "c3_2": {
+  "quien": "w",
+  "texto": "Wow! Look at this big rock. It is very old and very hard.",
+  "seg": 6.91
+ },
+ "c3_3": {
+  "quien": "w",
+  "texto": "In the day, the sun makes the rock hot.",
+  "seg": 3.87
+ },
+ "c3_4": {
+  "quien": "w",
+  "texto": "At night, the rock gets cold. Hot, cold, hot, cold. Little cracks appear!",
+  "seg": 10.22
+ },
+ "c3_5": {
+  "quien": "w",
+  "texto": "Then the rain comes. Water gets into the tiny cracks.",
+  "seg": 5.65
+ },
+ "c3_6": {
+  "quien": "w",
+  "texto": "When it is very cold, the water turns into ice. The ice pushes, and pushes, and... crack!",
+  "seg": 10.92
+ },
+ "c3_7": {
+  "quien": "w",
+  "texto": "Plant roots grow into the cracks, too. They push the rock apart.",
+  "seg": 6.67
+ },
+ "c3_8": {
+  "quien": "w",
+  "texto": "And the wind blows sand against the rock. It rubs, and rubs, and rubs.",
+  "seg": 7.05
+ },
+ "c3_9": {
+  "quien": "w",
+  "texto": "Now it’s your turn! Tap the rock to help the weather break it!",
+  "seg": 5.79
+ },
+ "c3_10": {
+  "quien": "w",
+  "texto": "Look! The big rock breaks into small rocks. And the small rocks break into tiny pieces.",
+  "seg": 9.16
+ },
+ "c3_11": {
+  "quien": "n",
+  "texto": "Leaves fall and rot. Worms and bugs move in. The tiny rock pieces and the humus mix together.",
+  "seg": 8.38
+ },
+ "c3_12": {
+  "quien": "n",
+  "texto": "And that is how soil is made!",
+  "seg": 2.55
+ },
+ "c3_13": {
+  "quien": "w",
+  "texto": "But it is very, very slow. It takes hundreds of years to make just a little bit of soil!",
+  "seg": 8.14
+ },
+ "c3_14": {
+  "quien": "w",
+  "texto": "That is why soil is a treasure. We must take care of it.",
+  "seg": 5.44
+ },
+ "c4_1": {
+  "quien": "w",
+  "texto": "Now, let’s go down, under the ground! We are on an elevator. Hold on tight!",
+  "seg": 9.04
+ },
+ "c4_2": {
+  "quien": "n",
+  "texto": "Soil has layers, like a big chocolate cake. Look at the walls around you.",
+  "seg": 6.67
+ },
+ "c4_3": {
+  "quien": "w",
+  "texto": "This is the top layer. It is called *topsoil*. It is dark and soft.",
+  "seg": 7.56
+ },
+ "c4_4": {
+  "quien": "w",
+  "texto": "Topsoil has lots of humus. Plant roots, worms and ants live here. This is where I live!",
+  "seg": 9.56
+ },
+ "c4_5": {
+  "quien": "w",
+  "texto": "Let’s go down a little more.",
+  "seg": 2.76
+ },
+ "c4_6": {
+  "quien": "w",
+  "texto": "This layer is called *subsoil*. It is lighter in color. It has more rocks and clay.",
+  "seg": 8.56
+ },
+ "c4_7": {
+  "quien": "w",
+  "texto": "Only big, long roots reach the subsoil, like the roots of trees.",
+  "seg": 6.37
+ },
+ "c4_8": {
+  "quien": "w",
+  "texto": "And now, all the way to the bottom...",
+  "seg": 3.42
+ },
+ "c4_9": {
+  "quien": "w",
+  "texto": "This is *bedrock*! It is solid rock. Very, very hard. Soil comes from rock like this.",
+  "seg": 10.75
+ },
+ "c4_10": {
+  "quien": "n",
+  "texto": "Let’s remember the layers: *topsoil* on top, *subsoil* in the middle, and *bedrock* at the bottom.",
+  "seg": 7.58
+ },
+ "c4_11": {
+  "quien": "w",
+  "texto": "Quiz time! Which layer has the most living things?",
+  "seg": 5.4
+ },
+ "c4_12": {
+  "quien": "w",
+  "texto": "The answer is *topsoil*! It has roots, worms and lots of humus.",
+  "seg": 6.93
+ },
+ "c4_13": {
+  "quien": "w",
+  "texto": "Now, let’s go back up and meet three types of soil!",
+  "seg": 4.91
+ },
+ "c5_1": {
+  "quien": "n",
+  "texto": "Welcome to the beach! Here we find our first type of soil: *sandy soil*.",
+  "seg": 6.74
+ },
+ "c5_2": {
+  "quien": "w",
+  "texto": "Sand is made of big pieces of rock. They are called *grains*. Look, I made them really big for you!",
+  "seg": 9.91
+ },
+ "c5_3": {
+  "quien": "w",
+  "texto": "When you touch sand, it feels *rough* and *dry*. Can you say rough? Rough!",
+  "seg": 8.09
+ },
+ "c5_4": {
+  "quien": "w",
+  "texto": "Sand grains are big, so there are big spaces between them. Watch the water!",
+  "seg": 7.49
+ },
+ "c5_5": {
+  "quien": "w",
+  "texto": "Whoosh! The water goes down very fast. Sandy soil does not hold water.",
+  "seg": 8.47
+ },
+ "c5_6": {
+  "quien": "n",
+  "texto": "Sandy soil dries out quickly, and it has very little humus. Many plants do not like it.",
+  "seg": 7.81
+ },
+ "c5_7": {
+  "quien": "w",
+  "texto": "But some plants love sandy soil! Like the cactus, and the coconut palm. They do not need a lot of water.",
+  "seg": 10.36
+ },
+ "c5_8": {
+  "quien": "w",
+  "texto": "Touch the sand grains and make them sparkle!",
+  "seg": 3.72
+ },
+ "c5_9": {
+  "quien": "w",
+  "texto": "Remember: *sandy soil* is rough, dry, and the water goes through fast!",
+  "seg": 6.55
+ },
+ "c6_1": {
+  "quien": "n",
+  "texto": "Now we are next to a river. Here we find *clay soil*.",
+  "seg": 5.18
+ },
+ "c6_2": {
+  "quien": "w",
+  "texto": "Clay is made of tiny, tiny pieces. They are much smaller than sand!",
+  "seg": 7.19
+ },
+ "c6_3": {
+  "quien": "w",
+  "texto": "When clay is wet, it feels *sticky*. Squish, squish! When clay is dry, it gets very hard.",
+  "seg": 10.95
+ },
+ "c6_4": {
+  "quien": "w",
+  "texto": "Clay pieces are so small that they stick together. Water cannot go through easily. Watch!",
+  "seg": 8.75
+ },
+ "c6_5": {
+  "quien": "w",
+  "texto": "Splash! A puddle! Clay soil *holds water*.",
+  "seg": 6.46
+ },
+ "c6_6": {
+  "quien": "n",
+  "texto": "Some plants, like rice, grow well in wet clay soil.",
+  "seg": 5.23
+ },
+ "c6_7": {
+  "quien": "w",
+  "texto": "People also use clay to make things: pots, plates, and bricks for houses!",
+  "seg": 7.62
+ },
+ "c6_8": {
+  "quien": "w",
+  "texto": "Let’s make a pot! Touch the clay!",
+  "seg": 4.18
+ },
+ "c6_9": {
+  "quien": "w",
+  "texto": "Wow! You made a beautiful pot!",
+  "seg": 4.02
+ },
+ "c6_10": {
+  "quien": "w",
+  "texto": "Remember: *clay soil* is sticky and smooth, and it holds a lot of water.",
+  "seg": 6.7
+ },
+ "c7_1": {
+  "quien": "n",
+  "texto": "Our last stop is a farm in the mountains of Ecuador. Here we find *loamy soil*.",
+  "seg": 6.53
+ },
+ "c7_2": {
+  "quien": "w",
+  "texto": "Loam is my favorite! Loam is a mix of sand, clay, a fine powder called *silt*, and lots of humus.",
+  "seg": 10.25
+ },
+ "c7_3": {
+  "quien": "w",
+  "texto": "Loam is dark brown. It feels *soft* and crumbly, like cake crumbs!",
+  "seg": 7.18
+ },
+ "c7_4": {
+  "quien": "w",
+  "texto": "Loam holds *just the right* amount of water and air. Not too much, not too little. Just right!",
+  "seg": 9.82
+ },
+ "c7_5": {
+  "quien": "n",
+  "texto": "That is why farmers love loamy soil. Most plants grow very well in it.",
+  "seg": 6.09
+ },
+ "c7_6": {
+  "quien": "w",
+  "texto": "Corn, potatoes, beans, lettuce, and many fruits grow in loam. Yum, yum!",
+  "seg": 8.32
+ },
+ "c7_7": {
+  "quien": "w",
+  "texto": "Let’s plant some seeds! Touch the little holes to plant them.",
+  "seg": 5.95
+ },
+ "c7_8": {
+  "quien": "w",
+  "texto": "Look! Your seeds are growing! You are a great farmer!",
+  "seg": 6.43
+ },
+ "c7_9": {
+  "quien": "w",
+  "texto": "Remember: *loamy soil* is dark, soft, and just right for plants.",
+  "seg": 6.29
+ },
+ "c8_1": {
+  "quien": "n",
+  "texto": "Now we are back in the classroom. Let’s do a science experiment!",
+  "seg": 5.66
+ },
+ "c8_2": {
+  "quien": "w",
+  "texto": "Here are three pots. One has *sand*, one has *clay*, and one has *loam*.",
+  "seg": 7.74
+ },
+ "c8_3": {
+  "quien": "w",
+  "texto": "We will pour the same water into each pot. The water that goes through falls into the glass below.",
+  "seg": 7.85
+ },
+ "c8_4": {
+  "quien": "w",
+  "texto": "Think! In which pot will the water go through the fastest? Choose one!",
+  "seg": 7.61
+ },
+ "c8_5": {
+  "quien": "n",
+  "texto": "Let’s watch carefully.",
+  "seg": 2.23
+ },
+ "c8_6": {
+  "quien": "w",
+  "texto": "Look at the sand! The water runs through very fast. The glass is full!",
+  "seg": 7.67
+ },
+ "c8_7": {
+  "quien": "w",
+  "texto": "The loam lets some water through, but it keeps some for the plants.",
+  "seg": 5.47
+ },
+ "c8_8": {
+  "quien": "w",
+  "texto": "And the clay? Only a few little drops! Clay holds the water.",
+  "seg": 7.04
+ },
+ "c8_9": {
+  "quien": "n",
+  "texto": "So: *sand* drains fast, *clay* holds water, and *loam* is just right!",
+  "seg": 6.54
+ },
+ "c9_1": {
+  "quien": "w",
+  "texto": "Do you know who helps the soil? Me! Worms are *soil helpers*!",
+  "seg": 7.25
+ },
+ "c9_2": {
+  "quien": "w",
+  "texto": "I dig tunnels. Air and water go into my tunnels.",
+  "seg": 4.2
+ },
+ "c9_3": {
+  "quien": "w",
+  "texto": "I eat old leaves, and my poop makes the soil healthy. Ha ha!",
+  "seg": 6.69
+ },
+ "c9_4": {
+  "quien": "w",
+  "texto": "Ants, beetles and tiny bacteria help, too. They turn dead leaves into humus.",
+  "seg": 8.31
+ },
+ "c9_5": {
+  "quien": "n",
+  "texto": "We can help the soil, too! Here are three ways.",
+  "seg": 5.12
+ },
+ "c9_6": {
+  "quien": "w",
+  "texto": "One: don’t throw trash on the ground. Help me clean up! Touch the trash to put it in the trash can!",
+  "seg": 10
+ },
+ "c9_7": {
+  "quien": "w",
+  "texto": "Thank you! Clean soil is happy soil!",
+  "seg": 4.85
+ },
+ "c9_8": {
+  "quien": "w",
+  "texto": "Two: plant trees and plants. Their roots hold the soil, so the rain and the wind cannot take it away.",
+  "seg": 9.39
+ },
+ "c9_9": {
+  "quien": "w",
+  "texto": "Three: make *compost*! Fruit peels and old leaves can become new humus for the soil.",
+  "seg": 8.2
+ },
+ "c9_10": {
+  "quien": "w",
+  "texto": "You are great soil helpers!",
+  "seg": 2.92
+ },
+ "c10_1": {
+  "quien": "w",
+  "texto": "Now, let’s play a game! I describe a soil, and you choose the right one.",
+  "seg": 7.58
+ },
+ "c10_2": {
+  "quien": "w",
+  "texto": "This soil is rough and dry. The water goes through very fast. Which soil is it?",
+  "seg": 8.22
+ },
+ "c10_3": {
+  "quien": "w",
+  "texto": "It’s *sand*!",
+  "seg": 1.87
+ },
+ "c10_4": {
+  "quien": "w",
+  "texto": "This soil is sticky when it is wet, and it makes puddles. Which soil is it?",
+  "seg": 7.18
+ },
+ "c10_5": {
+  "quien": "w",
+  "texto": "It’s *clay*!",
+  "seg": 1.79
+ },
+ "c10_6": {
+  "quien": "w",
+  "texto": "This soil is dark and soft, and it is just right for plants. Which soil is it?",
+  "seg": 7.73
+ },
+ "c10_7": {
+  "quien": "w",
+  "texto": "It’s *loam*!",
+  "seg": 1.83
+ },
+ "c10_8": {
+  "quien": "w",
+  "texto": "Last one! Which of these is NOT part of soil?",
+  "seg": 5.08
+ },
+ "c10_9": {
+  "quien": "w",
+  "texto": "*Plastic*! Plastic is trash. It does not belong in the soil.",
+  "seg": 7.57
+ },
+ "c10_10": {
+  "quien": "w",
+  "texto": "Now, let’s sing the soil song! Repeat after me!",
+  "seg": 5.85
+ },
+ "c10_11": {
+  "quien": "w",
+  "texto": "Sand is rough, and sand is dry!",
+  "seg": 3.91
+ },
+ "c10_12": {
+  "quien": "w",
+  "texto": "Clay is sticky, oh my, oh my!",
+  "seg": 4.12
+ },
+ "c10_13": {
+  "quien": "w",
+  "texto": "Loam is soft, and loam is just right!",
+  "seg": 4.19
+ },
+ "c10_14": {
+  "quien": "w",
+  "texto": "Take care of soil, day and night!",
+  "seg": 3.56
+ },
+ "c10_15": {
+  "quien": "w",
+  "texto": "You are amazing soil scientists!",
+  "seg": 3.49
+ },
+ "c10_16": {
+  "quien": "w",
+  "texto": "Remember: take care of the soil, and the soil will take care of us.",
+  "seg": 6.12
+ },
+ "c10_17": {
+  "quien": "w",
+  "texto": "Now I have to go back home. Bye-bye, friends! See you in the garden!",
+  "seg": 8.12
+ },
+ "c10_18": {
+  "quien": "n",
+  "texto": "The end. Thank you for watching!",
+  "seg": 3.68
+ },
+ "bien_1": {
+  "quien": "w",
+  "texto": "Yes! Well done!",
+  "seg": 3.39
+ },
+ "bien_2": {
+  "quien": "w",
+  "texto": "Correct! Super!",
+  "seg": 3.4
+ },
+ "bien_3": {
+  "quien": "w",
+  "texto": "Great job!",
+  "seg": 1.85
+ },
+ "intento": {
+  "quien": "w",
+  "texto": "Good try!",
+  "seg": 1.73
+ },
+ "wow": {
+  "quien": "w",
+  "texto": "Wow!",
+  "seg": 1.4
+ },
+ "c1_11": {
+  "quien": "w",
+  "texto": "Here is a tip! When you see a yellow ring, point at it and press the trigger to touch it.",
+  "seg": 7.62
+ },
+ "c1_12": {
+  "quien": "w",
+  "texto": "Try it now! Touch the three little piles of soil!",
+  "seg": 5.27
+ },
+ "c1_13": {
+  "quien": "w",
+  "texto": "Great! You know how to play. Now, let’s fly on my magic leaf!",
+  "seg": 7.9
+ },
+ "c2_16": {
+  "quien": "n",
+  "texto": "Rock pieces make the soil feel rough or smooth. Humus makes it dark and rich. Water and air help the roots drink and breathe.",
+  "seg": 9.82
+ },
+ "c4_r1": {
+  "quien": "w",
+  "texto": "Say it with me: topsoil!",
+  "seg": 3.4
+ },
+ "c4_r2": {
+  "quien": "w",
+  "texto": "Say it with me: subsoil!",
+  "seg": 3.53
+ },
+ "c4_r3": {
+  "quien": "w",
+  "texto": "Say it with me: bedrock!",
+  "seg": 3.31
+ },
+ "c5_10": {
+  "quien": "w",
+  "texto": "Beach sand comes from rocks and shells. The waves break them into tiny pieces, again and again.",
+  "seg": 8.81
+ },
+ "c5_11": {
+  "quien": "w",
+  "texto": "Can you say sandy soil? Sandy soil!",
+  "seg": 5.04
+ },
+ "c6_11": {
+  "quien": "w",
+  "texto": "Can you say clay soil? Clay soil!",
+  "seg": 4.61
+ },
+ "c6_12": {
+  "quien": "n",
+  "texto": "When clay soil dries in the sun, it cracks. Look at the ground around you!",
+  "seg": 6.63
+ },
+ "c7_10": {
+  "quien": "n",
+  "texto": "In Ecuador, the volcanoes help, too! Long ago, volcanic ash fell on the land and made the soil very rich.",
+  "seg": 9.71
+ },
+ "c7_11": {
+  "quien": "w",
+  "texto": "That is why Ecuador grows so many yummy foods: corn, potatoes, beans, bananas, and cacao for chocolate!",
+  "seg": 9.48
+ },
+ "c7_12": {
+  "quien": "w",
+  "texto": "Can you say loamy soil? Loamy soil!",
+  "seg": 4.72
+ },
+ "c9_11": {
+  "quien": "w",
+  "texto": "Do you want to know a secret? I have no eyes, no ears and no legs!",
+  "seg": 6.93
+ },
+ "c9_12": {
+  "quien": "w",
+  "texto": "I breathe through my skin, so I like wet soil. When it rains a lot, I come up to the top!",
+  "seg": 8.73
+ },
+ "c10_19": {
+  "quien": "n",
+  "texto": "Let’s review what we learned today.",
+  "seg": 2.68
+ },
+ "c10_20": {
+  "quien": "w",
+  "texto": "Soil is made of rock pieces, humus, water, air and living things.",
+  "seg": 6.48
+ },
+ "c10_21": {
+  "quien": "w",
+  "texto": "Soil has layers: topsoil, subsoil and bedrock.",
+  "seg": 5.81
+ },
+ "c10_22": {
+  "quien": "w",
+  "texto": "And there are different types of soil: sandy soil, clay soil and loamy soil.",
+  "seg": 7.18
+ },
+ "c10_23": {
+  "quien": "w",
+  "texto": "Wave goodbye to me!",
+  "seg": 2.28
+ }
+}

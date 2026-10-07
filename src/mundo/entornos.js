@@ -13,7 +13,7 @@ const FUENTE_TIZA = FUENTE;
 // del usuario, que está en el origen mirando hacia -Z. Todo el contenido
 // interactivo va dentro de ~2 m, así el estudiante no necesita caminar.
 
-function texturaLienzo(ancho, alto, dibujar, repetir = null) {
+export function texturaLienzo(ancho, alto, dibujar, repetir = null) {
   const c = document.createElement('canvas');
   c.width = ancho;
   c.height = alto;
@@ -28,7 +28,7 @@ function texturaLienzo(ancho, alto, dibujar, repetir = null) {
   return t;
 }
 
-function matTextura(textura, tipo = 'lambert') {
+export function matTextura(textura, tipo = 'lambert') {
   return tipo === 'basica' ? new THREE.MeshBasicMaterial({ map: textura }) : new THREE.MeshLambertMaterial({ map: textura });
 }
 
@@ -84,7 +84,7 @@ function degradado(arriba, abajo) {
   });
 }
 
-function cielo(arriba, abajo) {
+export function cielo(arriba, abajo) {
   const m = new THREE.MeshBasicMaterial({ map: degradado(arriba, abajo), side: THREE.BackSide, fog: false });
   const esfera = new THREE.Mesh(new THREE.SphereGeometry(40, 32, 16), m);
   esfera.userData.noFusionar = true;
@@ -92,7 +92,7 @@ function cielo(arriba, abajo) {
 }
 
 /** Suelo, cuatro paredes y techo. Las paredes miran hacia dentro. */
-function habitacion(g, { ancho = 9, fondo = 9, alto = 3.2, suelo, pared, techo = mat('#f7f4ee', { tipo: 'basica' }) }) {
+export function habitacion(g, { ancho = 9, fondo = 9, alto = 3.2, suelo, pared, techo = mat('#f7f4ee', { tipo: 'basica' }) }) {
   g.add(malla(new THREE.PlaneGeometry(ancho, fondo), suelo, [0, 0, 0], [-Math.PI / 2, 0, 0]));
   g.add(malla(new THREE.PlaneGeometry(ancho, fondo), techo, [0, alto, 0], [Math.PI / 2, 0, 0]));
   g.add(malla(new THREE.PlaneGeometry(ancho, alto), pared, [0, alto / 2, -fondo / 2]));
@@ -117,7 +117,7 @@ function ventana(g, x, y, z, ry, ancho = 1.4, alto = 1.1) {
 }
 
 /** Cartel con texto centrado (letreros de puestos, señales de la planta). */
-function cartel(texto, ancho, alto, { fondo = '#23304a', color = '#ffffff', borde = null, tam = 0.58, px = 1400 } = {}) {
+export function cartel(texto, ancho, alto, { fondo = '#23304a', color = '#ffffff', borde = null, tam = 0.58, px = 1400 } = {}) {
   const tex = texturaLienzo(px, Math.round((px * alto) / ancho), (x, w, h) => {
     x.fillStyle = fondo;
     x.beginPath();
@@ -236,7 +236,7 @@ function edificio(g, angulo, radio, ancho, alto, color) {
   g.add(e);
 }
 
-function volcanes(g, lista) {
+export function volcanes(g, lista) {
   for (const [x, z, h, r] of lista) {
     g.add(malla(new THREE.ConeGeometry(r, h, 24), mat('#6d8a96', { tipo: 'lambert' }), [x, h / 2, z]));
     g.add(malla(new THREE.ConeGeometry(r * 0.3, h * 0.3, 24), mat('#ffffff', { tipo: 'lambert' }), [x, h * 0.85 + 0.01, z]));
@@ -900,7 +900,7 @@ const ENTORNOS = {
         api.actual = nombre;
         for (const [n, z] of Object.entries(zonas)) z.visible = n === nombre;
         const { fondo, niebla, luz } = ZONAS_CUERPO[nombre];
-        app.escena.background = new THREE.Color(fondo);
+        app.escena.background = fondo ? new THREE.Color(fondo) : null;
         app.escena.fog = new THREE.Fog(niebla[0], niebla[1], niebla[2]);
         app.hemi.color.set(luz[0]);
         app.hemi.groundColor.set(luz[1]);
@@ -908,6 +908,11 @@ const ENTORNOS = {
       },
     };
     return { ...ZONAS_CUERPO.boca, api };
+  },
+
+  /** Sin decorado: la escena dibuja su propio mundo (o se ve el aula real en AR). */
+  ninguno() {
+    return { fondo: null, luz: [0xffffff, 0x8a7a66, 2.3] };
   },
 
   espacio(g, contexto) {

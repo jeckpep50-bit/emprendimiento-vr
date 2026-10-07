@@ -10,13 +10,15 @@
     "build": "vite build",
     "preview": "vite preview --host",
     "validar": "node scripts/validar-lecciones.mjs",
-    "generar": "node scripts/generar-leccion.mjs"
+    "generar": "node scripts/generar-leccion.mjs",
+    "narracion": "node scripts/generar-narracion.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
     "three": "^0.186.1"
   },
   "devDependencies": {
+    "@breezystack/lamejs": "^1.2.7",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "vite": "^8.3.1"
   }

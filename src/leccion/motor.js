@@ -19,6 +19,7 @@ import { EscenaInspeccion } from '../escenas/inspeccion.js';
 import { EscenaCinta } from '../escenas/cinta.js';
 import { EscenaViaje } from '../escenas/viaje.js';
 import { EscenaCaos } from '../escenas/caos.js';
+import { EscenaPelicula } from '../escenas/pelicula.js';
 import { EscenaFinal } from '../escenas/final.js';
 
 const RADIO_MOVIMIENTO = 2.3;
@@ -38,6 +39,7 @@ const TIPOS = {
   cinta: EscenaCinta,
   viaje: EscenaViaje,
   caos: EscenaCaos,
+  pelicula: EscenaPelicula,
 };
 
 /** Reproduce una lección: crea cada escena, cambia de entorno y hace las transiciones. */

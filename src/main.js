@@ -18,6 +18,8 @@ const locomocion = new Locomocion(app, entrada, audio, fx);
 const parametros = new URLSearchParams(location.search);
 let indice = [];
 let leccionActual = null;
+let hayVR = false;
+let hayAR = false;
 
 async function cargarIndice() {
   const r = await fetch('./lecciones/index.json', { cache: 'no-cache' });
@@ -47,12 +49,19 @@ async function abrirLeccion(id) {
     return;
   }
   leccionActual = leccion;
-  history.replaceState(null, '', `?leccion=${encodeURIComponent(id)}`);
+  // Se conservan los demás parámetros (p. ej. ?escena=4 o ?capitulo=3 para probar).
+  const consulta = new URLSearchParams(location.search);
+  consulta.set('leccion', id);
+  history.replaceState(null, '', `?${consulta}`);
 
   $('detalle-emoji').textContent = leccion.emoji ?? '📘';
   $('detalle-meta').textContent = [leccion.materia, leccion.grado, leccion.duracionMinutos && `${leccion.duracionMinutos} minutos`].filter(Boolean).join(' · ');
   $('detalle-titulo').textContent = leccion.titulo;
   $('detalle-descripcion').textContent = leccion.descripcion ?? '';
+  // Las lecciones en realidad aumentada muestran el aula real (passthrough) en las Quest.
+  const esAR = leccion.modo === 'ar';
+  $('btn-vr').textContent = esAR ? '🥽 Entrar en realidad aumentada' : '🥽 Entrar en realidad virtual';
+  $('btn-vr').disabled = !(esAR ? hayAR || hayVR : hayVR);
   $('detalle-objetivos').replaceChildren(
     ...(leccion.objetivos ?? []).map((o) => {
       const li = document.createElement('li');
@@ -77,7 +86,7 @@ async function empezar(enVR) {
   const inicio = Math.max(0, Number(parametros.get('escena') ?? 1) - 1);
   if (enVR) {
     try {
-      await app.entrarVR();
+      await app.entrarVR(leccionActual.modo === 'ar' && hayAR ? 'ar' : 'vr');
     } catch (e) {
       console.error(e);
       $('portada').hidden = false;
@@ -107,7 +116,8 @@ $('btn-pantalla').addEventListener('click', () => empezar(false));
 $('salir-pantalla').addEventListener('click', salir);
 
 (async () => {
-  const hayVR = await App.vrDisponible();
+  hayVR = await App.vrDisponible();
+  hayAR = await App.arDisponible();
   $('btn-vr').disabled = !hayVR;
   if (!hayVR) {
     $('aviso-vr').hidden = false;

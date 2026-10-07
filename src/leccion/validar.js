@@ -1,4 +1,4 @@
-import { MODELOS, ENTORNOS, TIPOS_ESCENA, IDIOMAS, CARACTERES, EXPRESIONES } from './catalogo.js';
+import { MODELOS, ENTORNOS, TIPOS_ESCENA, IDIOMAS, CARACTERES, EXPRESIONES, PELICULAS_DISPONIBLES, MODOS } from './catalogo.js';
 
 /**
  * Revisa que una lección (JSON) tenga la forma que espera el motor.
@@ -22,6 +22,7 @@ export function validarLeccion(l) {
   if (!IDIOMAS.includes(l.idioma)) err('idioma', `debe ser uno de: ${IDIOMAS.join(', ')}`);
   if (l.narracion !== undefined && typeof l.narracion !== 'boolean') err('narracion', 'debe ser true o false');
   if (l.gamificacion !== undefined && typeof l.gamificacion !== 'boolean') err('gamificacion', 'debe ser true o false');
+  if (l.modo !== undefined && !MODOS.includes(l.modo)) err('modo', `debe ser ${MODOS.join(' | ')}`);
   if (l.objetivos !== undefined && !(Array.isArray(l.objetivos) && l.objetivos.every(texto))) err('objetivos', 'debe ser una lista de textos');
   if (l.rangos !== undefined && lista(l.rangos, 2, 8, 'rangos')) {
     l.rangos.forEach((r, j) => {
@@ -92,6 +93,8 @@ export function validarLeccion(l) {
         if (!texto(s.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
       });
     }
+
+    if (e.tipo === 'pelicula' && !PELICULAS_DISPONIBLES.includes(e.guion)) err(`${r}.guion`, `debe ser ${PELICULAS_DISPONIBLES.join(' | ')}`);
 
     if (e.tipo === 'caos') {
       const ids = categoriasValidas(`${r}.categorias`);
