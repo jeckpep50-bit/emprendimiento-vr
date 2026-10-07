@@ -1,792 +1,792 @@
 {
  "t1": {
   "quien": "n",
-  "texto": "Part one. Hello, Wiggles!",
-  "seg": 4
+  "texto": "Parte uno. *Hello, Wiggles!*",
+  "seg": 2.55
  },
  "t2": {
   "quien": "n",
-  "texto": "Part two. What is soil?",
-  "seg": 3.37
+  "texto": "Parte dos. *What is soil?* ¿Qué es el suelo?",
+  "seg": 3.04
  },
  "t3": {
   "quien": "n",
-  "texto": "Part three. How is soil made?",
-  "seg": 3.7
+  "texto": "Parte tres. *How is soil made?* ¿Cómo se forma el suelo?",
+  "seg": 3.91
  },
  "t4": {
   "quien": "n",
-  "texto": "Part four. The layers of soil.",
-  "seg": 3.83
+  "texto": "Parte cuatro. *The layers of soil.* Las capas del suelo.",
+  "seg": 3.96
  },
  "t5": {
   "quien": "n",
-  "texto": "Part five. Sandy soil.",
-  "seg": 3.66
+  "texto": "Parte cinco. *Sandy soil.* El suelo de arena.",
+  "seg": 3.5
  },
  "t6": {
   "quien": "n",
-  "texto": "Part six. Clay soil.",
-  "seg": 3.57
+  "texto": "Parte seis. *Clay soil.* El suelo de arcilla.",
+  "seg": 3.4
  },
  "t7": {
   "quien": "n",
-  "texto": "Part seven. Loamy soil.",
-  "seg": 3.56
+  "texto": "Parte siete. *Loamy soil.* La tierra de cultivo.",
+  "seg": 3.53
  },
  "t8": {
   "quien": "n",
-  "texto": "Part eight. The water test.",
-  "seg": 3.48
+  "texto": "Parte ocho. *The water test.* El experimento del agua.",
+  "seg": 3.77
  },
  "t9": {
   "quien": "n",
-  "texto": "Part nine. Soil helpers.",
-  "seg": 3.71
+  "texto": "Parte nueve. *Soil helpers.* Los ayudantes del suelo.",
+  "seg": 4
  },
  "t10": {
   "quien": "n",
-  "texto": "Part ten. Soil quiz and song.",
-  "seg": 4.02
+  "texto": "Parte diez. *Quiz and song.* Juego y canción.",
+  "seg": 3.32
  },
  "c1_1": {
   "quien": "n",
-  "texto": "Hello, friends! Welcome to a very special adventure.",
-  "seg": 5.55
+  "texto": "*Hello, friends!* ¡Hola, amigos! Bienvenidos a una aventura muy especial.",
+  "seg": 6.86
  },
  "c1_2": {
   "quien": "n",
-  "texto": "Look down at the floor, in front of you. Something is moving!",
-  "seg": 5.74
+  "texto": "*Look down!* Mira el piso, delante de ti. ¡Algo se está moviendo!",
+  "seg": 5.57
  },
  "c1_3": {
   "quien": "w",
-  "texto": "Hi there! Hello! Can you see me? I am Wiggles, the earthworm!",
-  "seg": 8.69
+  "texto": "*Hi! Hello!* ¡Hola! ¿Me ves? *I am Wiggles, the earthworm!* Soy un gusano de tierra.",
+  "seg": 9.18
  },
  "c1_4": {
   "quien": "w",
-  "texto": "I live under the ground, in the *soil*. The soil is my home!",
-  "seg": 6.26
+  "texto": "Yo vivo bajo la tierra, en el *soil*. *Soil* significa suelo. ¡El *soil* es mi casa!",
+  "seg": 9.24
  },
  "c1_5": {
   "quien": "w",
-  "texto": "Wave hello to me! Come on, wave your hand!",
-  "seg": 5.45
+  "texto": "*Wave hello!* ¡Salúdame con tu mano!",
+  "seg": 2.78
  },
  "c1_6": {
   "quien": "w",
-  "texto": "Hello, hello! Great waving!",
-  "seg": 4.53
+  "texto": "*Hello, hello! Great job!* ¡Muy bien!",
+  "seg": 4.7
  },
  "c1_7": {
   "quien": "w",
-  "texto": "Today, we are going on a soil adventure! We will learn about different *types of soil*.",
-  "seg": 7.96
+  "texto": "Hoy vamos a aprender los *types of soil*, los tipos de suelo.",
+  "seg": 4.87
  },
  "c1_8": {
   "quien": "w",
-  "texto": "We will meet *sand*, *clay* and *loam*.",
-  "seg": 3.61
+  "texto": "Vamos a conocer la *sand*, la arena; la *clay*, la arcilla; y el *loam*, la tierra de cultivo.",
+  "seg": 8.79
  },
  "c1_9": {
   "quien": "w",
-  "texto": "Can you say soil? Say it with me: soil!",
-  "seg": 5.52
+  "texto": "*Say it with me!* Repite conmigo: *soil!*",
+  "seg": 3.62
  },
  "c1_10": {
   "quien": "w",
-  "texto": "Great job! Are you ready? Let’s go!",
-  "seg": 5.39
+  "texto": "*Great job!* ¡Muy bien! *Let’s go!* ¡Vamos!",
+  "seg": 3.61
  },
  "c2_1": {
   "quien": "n",
-  "texto": "This is *soil*. Soil covers the ground almost everywhere on Earth.",
-  "seg": 5.77
+  "texto": "*This is soil.* Este es el suelo. El *soil* cubre casi toda la tierra del planeta.",
+  "seg": 6.92
  },
  "c2_2": {
   "quien": "w",
-  "texto": "Soil looks like dirt. But soil is not just dirt! It is made of many things.",
-  "seg": 8.47
+  "texto": "El *soil* parece solo tierra, ¡pero tiene muchas cosas adentro!",
+  "seg": 5.6
  },
  "c2_3": {
   "quien": "w",
-  "texto": "Let’s look inside!",
-  "seg": 2.25
+  "texto": "*Let’s look inside!* ¡Miremos adentro!",
+  "seg": 2.83
  },
  "c2_4": {
   "quien": "w",
-  "texto": "First: tiny pieces of *rock*. Big rocks break into very, very small pieces.",
-  "seg": 8.48
+  "texto": "Primero: *rocks*, rocas. Pedacitos muy, muy pequeños de roca.",
+  "seg": 6.58
  },
  "c2_5": {
   "quien": "w",
-  "texto": "Next: old leaves and dead plants. They rot and become dark and soft. This is called *humus*.",
-  "seg": 9.92
+  "texto": "Después: hojas viejas y plantas que se pudren. Se vuelven negras y suaves. Esto se llama *humus*.",
+  "seg": 9.97
  },
  "c2_6": {
   "quien": "w",
-  "texto": "Can you say humus? Humus!",
-  "seg": 4.34
+  "texto": "Repite conmigo: *humus!*",
+  "seg": 2.45
  },
  "c2_7": {
   "quien": "w",
-  "texto": "Soil has *water*, too. Plants drink this water with their roots.",
-  "seg": 6.71
+  "texto": "El suelo tiene *water*, agua. Las plantas beben el agua con sus raíces.",
+  "seg": 6.55
  },
  "c2_8": {
   "quien": "w",
-  "texto": "Soil also has *air*! There are tiny spaces between the pieces, and air lives in those spaces.",
-  "seg": 8.6
+  "texto": "El suelo también tiene *air*, aire, en los espacios pequeñitos entre los pedacitos.",
+  "seg": 6.66
  },
  "c2_9": {
   "quien": "w",
-  "texto": "And soil has *living things*, like me! Worms, ants, beetles, and tiny, tiny helpers called bacteria.",
-  "seg": 11.55
+  "texto": "¡Y tiene *living things*, seres vivos, como yo! Gusanos, hormigas y bichitos muy pequeñitos.",
+  "seg": 9.06
  },
  "c2_10": {
   "quien": "w",
-  "texto": "Touch each thing to say hello!",
-  "seg": 2.9
+  "texto": "*Touch!* Toca cada cosa para saludarla.",
+  "seg": 3.22
  },
  "c2_11": {
   "quien": "n",
-  "texto": "So, soil is a mix of rock pieces, humus, water, air and living things.",
-  "seg": 6.72
+  "texto": "Entonces, el *soil* tiene *rocks*, *humus*, *water*, *air* y *living things*.",
+  "seg": 8.15
  },
  "c2_12": {
   "quien": "w",
-  "texto": "Let’s count them with our fingers! Rocks, one. Humus, two. Water, three. Air, four. Living things, five!",
-  "seg": 16.23
+  "texto": "¡Contemos con los dedos! *Rocks, one. Humus, two. Water, three. Air, four. Living things, five!*",
+  "seg": 15.56
  },
  "c2_13": {
   "quien": "w",
-  "texto": "Soil is very important. Plants grow in soil, and we eat plants!",
-  "seg": 7.31
+  "texto": "El *soil* es muy importante: las *plants*, las plantas, crecen en el suelo. ¡Y nosotros comemos plantas!",
+  "seg": 10.87
  },
  "c2_14": {
   "quien": "w",
-  "texto": "Fruits, vegetables, rice and corn all grow in soil. Yummy!",
-  "seg": 6.8
+  "texto": "Frutas, verduras, arroz y maíz crecen en el suelo. *Fruits and vegetables!* *Yummy!*",
+  "seg": 7.06
  },
  "c2_15": {
   "quien": "w",
-  "texto": "Hmm... But where does soil come from? Let’s find out!",
-  "seg": 6.78
+  "texto": "Mmm... ¿pero de dónde viene el suelo? *Let’s find out!* ¡Descubrámoslo!",
+  "seg": 6.82
  },
  "p_rocas": {
   "quien": "w",
-  "texto": "Rocks!",
-  "seg": 1.76
+  "texto": "*Rocks!*",
+  "seg": 0.91
  },
  "p_humus": {
   "quien": "w",
-  "texto": "Humus!",
-  "seg": 1.89
+  "texto": "*Humus!*",
+  "seg": 1.03
  },
  "p_agua": {
   "quien": "w",
-  "texto": "Water!",
-  "seg": 1.59
+  "texto": "*Water!*",
+  "seg": 0.73
  },
  "p_aire": {
   "quien": "w",
-  "texto": "Air!",
-  "seg": 1.44
+  "texto": "*Air!*",
+  "seg": 0.54
  },
  "p_vida": {
   "quien": "w",
-  "texto": "Living things!",
-  "seg": 2.09
+  "texto": "*Living things!*",
+  "seg": 1.28
  },
  "c3_1": {
   "quien": "n",
-  "texto": "Close your eyes... and open them! We are in the mountains.",
-  "seg": 5.37
+  "texto": "*Close your eyes...* cierra los ojos... *and open them!* ¡Ábrelos! Estamos en las montañas.",
+  "seg": 7.08
  },
  "c3_2": {
   "quien": "w",
-  "texto": "Wow! Look at this big rock. It is very old and very hard.",
-  "seg": 6.91
+  "texto": "¡Guau! Mira esta *rock*, esta roca grande. Es muy vieja y muy dura.",
+  "seg": 7.43
  },
  "c3_3": {
   "quien": "w",
-  "texto": "In the day, the sun makes the rock hot.",
-  "seg": 3.87
+  "texto": "En el día, el *sun*, el sol, calienta la roca. *Hot!* ¡Caliente!",
+  "seg": 6.28
  },
  "c3_4": {
   "quien": "w",
-  "texto": "At night, the rock gets cold. Hot, cold, hot, cold. Little cracks appear!",
-  "seg": 10.22
+  "texto": "En la noche, la roca se enfría. *Cold!* ¡Frío! *Hot, cold, hot, cold.* Y aparecen grietas pequeñitas.",
+  "seg": 10.24
  },
  "c3_5": {
   "quien": "w",
-  "texto": "Then the rain comes. Water gets into the tiny cracks.",
-  "seg": 5.65
+  "texto": "Luego llega la *rain*, la lluvia. El agua entra en las grietas.",
+  "seg": 5.79
  },
  "c3_6": {
   "quien": "w",
-  "texto": "When it is very cold, the water turns into ice. The ice pushes, and pushes, and... crack!",
-  "seg": 10.92
+  "texto": "Con mucho frío, el agua se vuelve *ice*, hielo. El hielo empuja, empuja y... *crack!*",
+  "seg": 8.31
  },
  "c3_7": {
   "quien": "w",
-  "texto": "Plant roots grow into the cracks, too. They push the rock apart.",
-  "seg": 6.67
+  "texto": "Las *roots*, las raíces de las plantas, también entran en las grietas y empujan la roca.",
+  "seg": 7.02
  },
  "c3_8": {
   "quien": "w",
-  "texto": "And the wind blows sand against the rock. It rubs, and rubs, and rubs.",
-  "seg": 7.05
+  "texto": "Y el *wind*, el viento, sopla arena contra la roca. Frota, frota y frota.",
+  "seg": 7.7
  },
  "c3_9": {
   "quien": "w",
-  "texto": "Now it’s your turn! Tap the rock to help the weather break it!",
-  "seg": 5.79
+  "texto": "*Your turn!* ¡Te toca! Toca la roca para ayudar a romperla.",
+  "seg": 5.3
  },
  "c3_10": {
   "quien": "w",
-  "texto": "Look! The big rock breaks into small rocks. And the small rocks break into tiny pieces.",
-  "seg": 9.16
+  "texto": "¡Mira! La roca grande se rompe en rocas pequeñas, y las pequeñas en pedacitos diminutos.",
+  "seg": 7.69
  },
  "c3_11": {
   "quien": "n",
-  "texto": "Leaves fall and rot. Worms and bugs move in. The tiny rock pieces and the humus mix together.",
-  "seg": 8.38
+  "texto": "Caen hojas y se pudren. Llegan gusanos y bichitos. Los pedacitos de roca y el *humus* se mezclan.",
+  "seg": 9.01
  },
  "c3_12": {
   "quien": "n",
-  "texto": "And that is how soil is made!",
-  "seg": 2.55
+  "texto": "¡Y así se forma el *soil*!",
+  "seg": 2.24
  },
  "c3_13": {
   "quien": "w",
-  "texto": "But it is very, very slow. It takes hundreds of years to make just a little bit of soil!",
-  "seg": 8.14
+  "texto": "Pero es muy, muy lento. Se necesitan cientos de años, *hundreds of years*, para hacer un poquito de suelo.",
+  "seg": 9.3
  },
  "c3_14": {
   "quien": "w",
-  "texto": "That is why soil is a treasure. We must take care of it.",
-  "seg": 5.44
+  "texto": "Por eso el suelo es un tesoro. *Take care of the soil!* ¡Cuidemos el suelo!",
+  "seg": 5.35
  },
  "c4_1": {
   "quien": "w",
-  "texto": "Now, let’s go down, under the ground! We are on an elevator. Hold on tight!",
-  "seg": 9.04
+  "texto": "*Let’s go down!* ¡Vamos debajo de la tierra! Estamos en un ascensor. *Hold on!* ¡Agárrate!",
+  "seg": 7.89
  },
  "c4_2": {
   "quien": "n",
-  "texto": "Soil has layers, like a big chocolate cake. Look at the walls around you.",
-  "seg": 6.67
+  "texto": "El suelo tiene capas, *layers*, como un pastel de chocolate. Mira las paredes a tu alrededor.",
+  "seg": 7.14
  },
  "c4_3": {
   "quien": "w",
-  "texto": "This is the top layer. It is called *topsoil*. It is dark and soft.",
-  "seg": 7.56
+  "texto": "Esta es la capa de arriba: el *topsoil*. Es oscura y suave.",
+  "seg": 5.37
  },
  "c4_4": {
   "quien": "w",
-  "texto": "Topsoil has lots of humus. Plant roots, worms and ants live here. This is where I live!",
-  "seg": 9.56
+  "texto": "El *topsoil* tiene mucho *humus*. Aquí viven raíces, gusanos y hormigas. ¡Aquí vivo yo!",
+  "seg": 9.22
  },
  "c4_5": {
   "quien": "w",
-  "texto": "Let’s go down a little more.",
-  "seg": 2.76
+  "texto": "*Let’s go down!* Bajemos un poco más.",
+  "seg": 3.16
  },
  "c4_6": {
   "quien": "w",
-  "texto": "This layer is called *subsoil*. It is lighter in color. It has more rocks and clay.",
-  "seg": 8.56
+  "texto": "Esta capa es el *subsoil*. Es más clara y tiene más rocas y arcilla.",
+  "seg": 5.9
  },
  "c4_7": {
   "quien": "w",
-  "texto": "Only big, long roots reach the subsoil, like the roots of trees.",
-  "seg": 6.37
+  "texto": "Solo las raíces largas, como las de los árboles, llegan al *subsoil*.",
+  "seg": 6.28
  },
  "c4_8": {
   "quien": "w",
-  "texto": "And now, all the way to the bottom...",
-  "seg": 3.42
+  "texto": "Y ahora, hasta el fondo...",
+  "seg": 2.12
  },
  "c4_9": {
   "quien": "w",
-  "texto": "This is *bedrock*! It is solid rock. Very, very hard. Soil comes from rock like this.",
-  "seg": 10.75
+  "texto": "¡Esta es la *bedrock*, la roca madre! Es roca sólida, muy, muy dura. El suelo viene de rocas como esta.",
+  "seg": 10.51
  },
  "c4_10": {
   "quien": "n",
-  "texto": "Let’s remember the layers: *topsoil* on top, *subsoil* in the middle, and *bedrock* at the bottom.",
-  "seg": 7.58
+  "texto": "Recordemos: *topsoil* arriba, *subsoil* en el medio y *bedrock* abajo.",
+  "seg": 6.71
  },
  "c4_11": {
   "quien": "w",
-  "texto": "Quiz time! Which layer has the most living things?",
-  "seg": 5.4
+  "texto": "*Quiz time!* ¿Qué capa tiene más seres vivos? *Choose!* ¡Elige!",
+  "seg": 5.07
  },
  "c4_12": {
   "quien": "w",
-  "texto": "The answer is *topsoil*! It has roots, worms and lots of humus.",
-  "seg": 6.93
+  "texto": "¡Es el *topsoil*! Tiene raíces, gusanos y mucho *humus*.",
+  "seg": 5.81
  },
  "c4_13": {
   "quien": "w",
-  "texto": "Now, let’s go back up and meet three types of soil!",
-  "seg": 4.91
+  "texto": "Ahora subamos para conocer tres *types of soil*. *Let’s go up!*",
+  "seg": 5.19
  },
  "c5_1": {
   "quien": "n",
-  "texto": "Welcome to the beach! Here we find our first type of soil: *sandy soil*.",
-  "seg": 6.74
+  "texto": "*Welcome to the beach!* ¡Bienvenidos a la playa! Aquí está el primer tipo de suelo: el *sandy soil*, el suelo de arena.",
+  "seg": 9.05
  },
  "c5_2": {
   "quien": "w",
-  "texto": "Sand is made of big pieces of rock. They are called *grains*. Look, I made them really big for you!",
-  "seg": 9.91
+  "texto": "La *sand* tiene pedacitos grandes de roca llamados *grains*, granos. ¡Mira, los hice gigantes!",
+  "seg": 9.53
  },
  "c5_3": {
   "quien": "w",
-  "texto": "When you touch sand, it feels *rough* and *dry*. Can you say rough? Rough!",
-  "seg": 8.09
+  "texto": "La arena se siente áspera y seca: *rough and dry*. Repite conmigo: *rough!*",
+  "seg": 5.83
  },
  "c5_4": {
   "quien": "w",
-  "texto": "Sand grains are big, so there are big spaces between them. Watch the water!",
-  "seg": 7.49
+  "texto": "Los granos son grandes y dejan espacios grandes entre ellos. *Watch the water!* ¡Mira el agua!",
+  "seg": 6.59
  },
  "c5_5": {
   "quien": "w",
-  "texto": "Whoosh! The water goes down very fast. Sandy soil does not hold water.",
-  "seg": 8.47
+  "texto": "*Whoosh!* El agua baja muy rápido. El *sandy soil* no guarda el agua.",
+  "seg": 6.83
  },
  "c5_6": {
   "quien": "n",
-  "texto": "Sandy soil dries out quickly, and it has very little humus. Many plants do not like it.",
-  "seg": 7.81
+  "texto": "El suelo de arena se seca rápido y tiene poco *humus*. A muchas plantas no les gusta.",
+  "seg": 6.16
  },
  "c5_7": {
   "quien": "w",
-  "texto": "But some plants love sandy soil! Like the cactus, and the coconut palm. They do not need a lot of water.",
-  "seg": 10.36
+  "texto": "¡Pero a algunas plantas les encanta! Como el *cactus* y la palmera de coco, la *coconut palm*. No necesitan mucha agua.",
+  "seg": 11.1
  },
  "c5_8": {
   "quien": "w",
-  "texto": "Touch the sand grains and make them sparkle!",
-  "seg": 3.72
+  "texto": "*Touch the sand!* Toca los granos y hazlos brillar.",
+  "seg": 3.52
  },
  "c5_9": {
   "quien": "w",
-  "texto": "Remember: *sandy soil* is rough, dry, and the water goes through fast!",
-  "seg": 6.55
+  "texto": "*Remember: sandy soil is rough and dry.* Recuerda: el suelo de arena es áspero, seco, y el agua pasa rápido.",
+  "seg": 9.87
  },
  "c6_1": {
   "quien": "n",
-  "texto": "Now we are next to a river. Here we find *clay soil*.",
-  "seg": 5.18
+  "texto": "Ahora estamos junto a un río. Aquí encontramos el *clay soil*, el suelo de arcilla.",
+  "seg": 6.68
  },
  "c6_2": {
   "quien": "w",
-  "texto": "Clay is made of tiny, tiny pieces. They are much smaller than sand!",
-  "seg": 7.19
+  "texto": "La *clay*, la arcilla, tiene pedacitos diminutos. ¡Mucho más pequeños que la arena!",
+  "seg": 7.65
  },
  "c6_3": {
   "quien": "w",
-  "texto": "When clay is wet, it feels *sticky*. Squish, squish! When clay is dry, it gets very hard.",
-  "seg": 10.95
+  "texto": "Mojada, la arcilla es pegajosa: *sticky!* *Squish, squish!* Y cuando se seca, se pone muy dura.",
+  "seg": 9.35
  },
  "c6_4": {
   "quien": "w",
-  "texto": "Clay pieces are so small that they stick together. Water cannot go through easily. Watch!",
-  "seg": 8.75
+  "texto": "Sus pedacitos están tan juntos que el agua casi no puede pasar. *Watch!* ¡Mira!",
+  "seg": 6.11
  },
  "c6_5": {
   "quien": "w",
-  "texto": "Splash! A puddle! Clay soil *holds water*.",
-  "seg": 6.46
+  "texto": "*Splash!* ¡Un charco! El *clay soil* guarda el agua: *it holds water*.",
+  "seg": 7.15
  },
  "c6_6": {
   "quien": "n",
-  "texto": "Some plants, like rice, grow well in wet clay soil.",
+  "texto": "Algunas plantas, como el arroz, crecen bien en el suelo de arcilla mojado.",
   "seg": 5.23
  },
  "c6_7": {
   "quien": "w",
-  "texto": "People also use clay to make things: pots, plates, and bricks for houses!",
-  "seg": 7.62
+  "texto": "Con la *clay* hacemos cosas: ollas, platos y ladrillos para las casas. *Pots and bricks!*",
+  "seg": 8
  },
  "c6_8": {
   "quien": "w",
-  "texto": "Let’s make a pot! Touch the clay!",
-  "seg": 4.18
+  "texto": "*Let’s make a pot!* ¡Hagamos una olla! Toca la arcilla.",
+  "seg": 5.03
  },
  "c6_9": {
   "quien": "w",
-  "texto": "Wow! You made a beautiful pot!",
-  "seg": 4.02
+  "texto": "*Wow!* ¡Hiciste una olla hermosa!",
+  "seg": 2.55
  },
  "c6_10": {
   "quien": "w",
-  "texto": "Remember: *clay soil* is sticky and smooth, and it holds a lot of water.",
-  "seg": 6.7
+  "texto": "*Remember: clay soil is sticky.* Recuerda: el suelo de arcilla es pegajoso y guarda mucha agua.",
+  "seg": 8.12
  },
  "c7_1": {
   "quien": "n",
-  "texto": "Our last stop is a farm in the mountains of Ecuador. Here we find *loamy soil*.",
-  "seg": 6.53
+  "texto": "Nuestra última parada es una granja en las montañas del Ecuador. Aquí está el *loamy soil*, la tierra de cultivo.",
+  "seg": 8.42
  },
  "c7_2": {
   "quien": "w",
-  "texto": "Loam is my favorite! Loam is a mix of sand, clay, a fine powder called *silt*, and lots of humus.",
-  "seg": 10.25
+  "texto": "¡El *loam* es mi favorito! Es una mezcla de *sand*, de *clay*, de *silt*, que es un polvito fino, y de mucho *humus*.",
+  "seg": 11.84
  },
  "c7_3": {
   "quien": "w",
-  "texto": "Loam is dark brown. It feels *soft* and crumbly, like cake crumbs!",
-  "seg": 7.18
+  "texto": "El *loam* es café oscuro. Es suave: *soft!* Se desmorona como migas de pastel.",
+  "seg": 7.99
  },
  "c7_4": {
   "quien": "w",
-  "texto": "Loam holds *just the right* amount of water and air. Not too much, not too little. Just right!",
-  "seg": 9.82
+  "texto": "Guarda la cantidad justa de agua y de aire: ni mucha, ni poca. *Just right!*",
+  "seg": 6.37
  },
  "c7_5": {
   "quien": "n",
-  "texto": "That is why farmers love loamy soil. Most plants grow very well in it.",
-  "seg": 6.09
+  "texto": "Por eso a los agricultores les encanta el *loamy soil*. Casi todas las plantas crecen muy bien en él.",
+  "seg": 6.73
  },
  "c7_6": {
   "quien": "w",
-  "texto": "Corn, potatoes, beans, lettuce, and many fruits grow in loam. Yum, yum!",
+  "texto": "Maíz, papas, fréjoles, lechuga y muchas frutas crecen en el *loam*. *Yum, yum!*",
   "seg": 8.32
  },
  "c7_7": {
   "quien": "w",
-  "texto": "Let’s plant some seeds! Touch the little holes to plant them.",
-  "seg": 5.95
+  "texto": "*Let’s plant!* ¡Vamos a sembrar! Toca los huequitos para poner las semillas.",
+  "seg": 6.32
  },
  "c7_8": {
   "quien": "w",
-  "texto": "Look! Your seeds are growing! You are a great farmer!",
-  "seg": 6.43
+  "texto": "*Look!* ¡Tus semillas están creciendo! *You are a great farmer!* ¡Eres un gran agricultor!",
+  "seg": 6.39
  },
  "c7_9": {
   "quien": "w",
-  "texto": "Remember: *loamy soil* is dark, soft, and just right for plants.",
-  "seg": 6.29
+  "texto": "*Remember: loamy soil is soft.* Recuerda: la tierra de cultivo es oscura, suave y perfecta para las plantas.",
+  "seg": 9.71
  },
  "c8_1": {
   "quien": "n",
-  "texto": "Now we are back in the classroom. Let’s do a science experiment!",
-  "seg": 5.66
+  "texto": "Volvimos al aula. *Let’s do an experiment!* ¡Hagamos un experimento!",
+  "seg": 4.7
  },
  "c8_2": {
   "quien": "w",
-  "texto": "Here are three pots. One has *sand*, one has *clay*, and one has *loam*.",
-  "seg": 7.74
+  "texto": "Aquí hay tres macetas: una con *sand*, otra con *clay* y otra con *loam*.",
+  "seg": 7.08
  },
  "c8_3": {
   "quien": "w",
-  "texto": "We will pour the same water into each pot. The water that goes through falls into the glass below.",
-  "seg": 7.85
+  "texto": "Vamos a echar la misma cantidad de agua en cada una. El agua que pasa cae al vaso de abajo.",
+  "seg": 7.16
  },
  "c8_4": {
   "quien": "w",
-  "texto": "Think! In which pot will the water go through the fastest? Choose one!",
-  "seg": 7.61
+  "texto": "*Think!* ¡Piensa! ¿En cuál pasará el agua más rápido? *Choose one!* ¡Elige una!",
+  "seg": 6.91
  },
  "c8_5": {
   "quien": "n",
-  "texto": "Let’s watch carefully.",
-  "seg": 2.23
+  "texto": "*Let’s watch!* Miremos con atención.",
+  "seg": 2.61
  },
  "c8_6": {
   "quien": "w",
-  "texto": "Look at the sand! The water runs through very fast. The glass is full!",
-  "seg": 7.67
+  "texto": "¡Mira la *sand*! El agua pasa rapidísimo. ¡El vaso está lleno!",
+  "seg": 5.89
  },
  "c8_7": {
   "quien": "w",
-  "texto": "The loam lets some water through, but it keeps some for the plants.",
-  "seg": 5.47
+  "texto": "El *loam* deja pasar un poco de agua, pero guarda otro poco para las plantas.",
+  "seg": 6.44
  },
  "c8_8": {
   "quien": "w",
-  "texto": "And the clay? Only a few little drops! Clay holds the water.",
-  "seg": 7.04
+  "texto": "¿Y la *clay*? ¡Solo unas gotitas! La arcilla guarda el agua.",
+  "seg": 5.67
  },
  "c8_9": {
   "quien": "n",
-  "texto": "So: *sand* drains fast, *clay* holds water, and *loam* is just right!",
-  "seg": 6.54
+  "texto": "Entonces: la *sand* deja pasar el agua rápido, la *clay* la guarda, y el *loam* está *just right*, justo bien.",
+  "seg": 10.24
  },
  "c9_1": {
   "quien": "w",
-  "texto": "Do you know who helps the soil? Me! Worms are *soil helpers*!",
-  "seg": 7.25
+  "texto": "¿Sabes quién ayuda al suelo? ¡Yo! Los gusanos somos *soil helpers*, ayudantes del suelo.",
+  "seg": 9.14
  },
  "c9_2": {
   "quien": "w",
-  "texto": "I dig tunnels. Air and water go into my tunnels.",
-  "seg": 4.2
+  "texto": "Yo hago túneles. Por mis túneles entran el aire y el agua.",
+  "seg": 5.12
  },
  "c9_3": {
   "quien": "w",
-  "texto": "I eat old leaves, and my poop makes the soil healthy. Ha ha!",
-  "seg": 6.69
+  "texto": "Como hojas viejas, ¡y mi popó hace que el suelo esté sano! *Ha ha!*",
+  "seg": 5.23
  },
  "c9_4": {
   "quien": "w",
-  "texto": "Ants, beetles and tiny bacteria help, too. They turn dead leaves into humus.",
-  "seg": 8.31
+  "texto": "Las hormigas, los escarabajos y unos bichitos diminutos también ayudan: convierten las hojas en *humus*.",
+  "seg": 8.5
  },
  "c9_5": {
   "quien": "n",
-  "texto": "We can help the soil, too! Here are three ways.",
-  "seg": 5.12
+  "texto": "Nosotros también podemos ayudar al suelo. *Three ways!* ¡De tres formas!",
+  "seg": 5.02
  },
  "c9_6": {
   "quien": "w",
-  "texto": "One: don’t throw trash on the ground. Help me clean up! Touch the trash to put it in the trash can!",
-  "seg": 10
+  "texto": "*One:* uno, no botes basura al suelo. *Clean up!* Toca la basura para ponerla en el tacho.",
+  "seg": 7.28
  },
  "c9_7": {
   "quien": "w",
-  "texto": "Thank you! Clean soil is happy soil!",
-  "seg": 4.85
+  "texto": "*Thank you!* ¡Gracias! *Clean soil is happy soil!* ¡Suelo limpio, suelo feliz!",
+  "seg": 6.89
  },
  "c9_8": {
   "quien": "w",
-  "texto": "Two: plant trees and plants. Their roots hold the soil, so the rain and the wind cannot take it away.",
-  "seg": 9.39
+  "texto": "*Two:* dos, siembra árboles y plantas. Sus raíces sujetan el suelo para que la lluvia y el viento no se lo lleven.",
+  "seg": 9.37
  },
  "c9_9": {
   "quien": "w",
-  "texto": "Three: make *compost*! Fruit peels and old leaves can become new humus for the soil.",
-  "seg": 8.2
+  "texto": "*Three:* tres, haz *compost*, abono: las cáscaras de fruta y las hojas se convierten en *humus* nuevo.",
+  "seg": 9.58
  },
  "c9_10": {
   "quien": "w",
-  "texto": "You are great soil helpers!",
-  "seg": 2.92
+  "texto": "*You are great soil helpers!* ¡Son grandes ayudantes del suelo!",
+  "seg": 4.64
  },
  "c10_1": {
   "quien": "w",
-  "texto": "Now, let’s play a game! I describe a soil, and you choose the right one.",
-  "seg": 7.58
+  "texto": "*Let’s play!* ¡Juguemos! Yo describo un suelo y tú eliges el correcto.",
+  "seg": 6.34
  },
  "c10_2": {
   "quien": "w",
-  "texto": "This soil is rough and dry. The water goes through very fast. Which soil is it?",
-  "seg": 8.22
+  "texto": "Es áspero y seco, y el agua pasa muy rápido. *Which soil is it?* ¿Cuál es?",
+  "seg": 6.07
  },
  "c10_3": {
   "quien": "w",
-  "texto": "It’s *sand*!",
-  "seg": 1.87
+  "texto": "*It’s sand!* ¡Es la arena!",
+  "seg": 1.98
  },
  "c10_4": {
   "quien": "w",
-  "texto": "This soil is sticky when it is wet, and it makes puddles. Which soil is it?",
-  "seg": 7.18
+  "texto": "Es pegajoso cuando está mojado y forma charcos. *Which soil is it?* ¿Cuál es?",
+  "seg": 5.99
  },
  "c10_5": {
   "quien": "w",
-  "texto": "It’s *clay*!",
-  "seg": 1.79
+  "texto": "*It’s clay!* ¡Es la arcilla!",
+  "seg": 2.09
  },
  "c10_6": {
   "quien": "w",
-  "texto": "This soil is dark and soft, and it is just right for plants. Which soil is it?",
-  "seg": 7.73
+  "texto": "Es oscuro y suave, y es perfecto para las plantas. *Which soil is it?* ¿Cuál es?",
+  "seg": 6.52
  },
  "c10_7": {
   "quien": "w",
-  "texto": "It’s *loam*!",
-  "seg": 1.83
+  "texto": "*It’s loam!* ¡Es la tierra de cultivo!",
+  "seg": 2.72
  },
  "c10_8": {
   "quien": "w",
-  "texto": "Last one! Which of these is NOT part of soil?",
-  "seg": 5.08
+  "texto": "*Last one!* ¡La última! ¿Cuál de estos NO es parte del suelo?",
+  "seg": 5.45
  },
  "c10_9": {
   "quien": "w",
-  "texto": "*Plastic*! Plastic is trash. It does not belong in the soil.",
-  "seg": 7.57
+  "texto": "¡El *plastic*, el plástico! El plástico es basura y no pertenece al suelo.",
+  "seg": 7.14
  },
  "c10_10": {
   "quien": "w",
-  "texto": "Now, let’s sing the soil song! Repeat after me!",
-  "seg": 5.85
+  "texto": "*Let’s sing the soil song!* ¡Cantemos la canción del suelo! *Repeat after me!* Repite después de mí.",
+  "seg": 7.54
  },
  "c10_11": {
   "quien": "w",
-  "texto": "Sand is rough, and sand is dry!",
-  "seg": 3.91
+  "texto": "*Sand is rough, and sand is dry!*",
+  "seg": 3.33
  },
  "c10_12": {
   "quien": "w",
-  "texto": "Clay is sticky, oh my, oh my!",
-  "seg": 4.12
+  "texto": "*Clay is sticky, oh my, oh my!*",
+  "seg": 3.57
  },
  "c10_13": {
   "quien": "w",
-  "texto": "Loam is soft, and loam is just right!",
-  "seg": 4.19
+  "texto": "*Loam is soft, and loam is just right!*",
+  "seg": 3.61
  },
  "c10_14": {
   "quien": "w",
-  "texto": "Take care of soil, day and night!",
-  "seg": 3.56
+  "texto": "*Take care of soil, day and night!*",
+  "seg": 2.93
  },
  "c10_15": {
   "quien": "w",
-  "texto": "You are amazing soil scientists!",
-  "seg": 3.49
+  "texto": "*You are amazing soil scientists!* ¡Son unos científicos del suelo increíbles!",
+  "seg": 6
  },
  "c10_16": {
   "quien": "w",
-  "texto": "Remember: take care of the soil, and the soil will take care of us.",
-  "seg": 6.12
+  "texto": "Recuerda: *take care of the soil*, cuida el suelo, y el suelo te cuidará a ti.",
+  "seg": 5.97
  },
  "c10_17": {
   "quien": "w",
-  "texto": "Now I have to go back home. Bye-bye, friends! See you in the garden!",
-  "seg": 8.12
+  "texto": "Ahora tengo que volver a mi casa. *Bye-bye, friends!* ¡Adiós, amigos! *See you in the garden!*",
+  "seg": 7.93
  },
  "c10_18": {
   "quien": "n",
-  "texto": "The end. Thank you for watching!",
-  "seg": 3.68
+  "texto": "*The end!* Fin. *Thank you for watching!* ¡Gracias por ver!",
+  "seg": 3.88
  },
  "bien_1": {
   "quien": "w",
-  "texto": "Yes! Well done!",
-  "seg": 3.39
+  "texto": "*Yes! Well done!* ¡Muy bien!",
+  "seg": 3.61
  },
  "bien_2": {
   "quien": "w",
-  "texto": "Correct! Super!",
-  "seg": 3.4
+  "texto": "*Correct! Super!* ¡Correcto!",
+  "seg": 3.57
  },
  "bien_3": {
   "quien": "w",
-  "texto": "Great job!",
-  "seg": 1.85
+  "texto": "*Great job!* ¡Excelente!",
+  "seg": 2.08
  },
  "intento": {
   "quien": "w",
-  "texto": "Good try!",
-  "seg": 1.73
+  "texto": "*Good try!* ¡Buen intento!",
+  "seg": 2.04
  },
  "wow": {
   "quien": "w",
-  "texto": "Wow!",
-  "seg": 1.4
+  "texto": "*Wow!*",
+  "seg": 0.5
  },
  "c1_11": {
   "quien": "w",
-  "texto": "Here is a tip! When you see a yellow ring, point at it and press the trigger to touch it.",
-  "seg": 7.62
+  "texto": "Un consejo: cuando veas un anillo amarillo, apunta y presiona el gatillo para tocarlo. *Touch!*",
+  "seg": 7.74
  },
  "c1_12": {
   "quien": "w",
-  "texto": "Try it now! Touch the three little piles of soil!",
-  "seg": 5.27
+  "texto": "*Touch the soil!* Toca los tres montoncitos de tierra.",
+  "seg": 3.86
  },
  "c1_13": {
   "quien": "w",
-  "texto": "Great! You know how to play. Now, let’s fly on my magic leaf!",
-  "seg": 7.9
+  "texto": "*Great!* ¡Ya sabes jugar! Ahora sube conmigo a mi hoja mágica. *Let’s fly!*",
+  "seg": 6.89
  },
  "c2_16": {
   "quien": "n",
-  "texto": "Rock pieces make the soil feel rough or smooth. Humus makes it dark and rich. Water and air help the roots drink and breathe.",
-  "seg": 9.82
+  "texto": "Las rocas hacen la tierra áspera o suave. El *humus* la hace negra y rica. El agua y el aire ayudan a las raíces a beber y a respirar.",
+  "seg": 10.73
  },
  "c4_r1": {
   "quien": "w",
-  "texto": "Say it with me: topsoil!",
-  "seg": 3.4
+  "texto": "Repite conmigo: *topsoil!*",
+  "seg": 2.6
  },
  "c4_r2": {
   "quien": "w",
-  "texto": "Say it with me: subsoil!",
-  "seg": 3.53
+  "texto": "Repite conmigo: *subsoil!*",
+  "seg": 2.67
  },
  "c4_r3": {
   "quien": "w",
-  "texto": "Say it with me: bedrock!",
-  "seg": 3.31
+  "texto": "Repite conmigo: *bedrock!*",
+  "seg": 2.35
  },
  "c5_10": {
   "quien": "w",
-  "texto": "Beach sand comes from rocks and shells. The waves break them into tiny pieces, again and again.",
-  "seg": 8.81
+  "texto": "La arena de la playa viene de rocas y conchas que las olas rompen en pedacitos, una y otra vez.",
+  "seg": 6.86
  },
  "c5_11": {
   "quien": "w",
-  "texto": "Can you say sandy soil? Sandy soil!",
-  "seg": 5.04
+  "texto": "Repite conmigo: *sandy soil!*",
+  "seg": 2.78
  },
  "c6_11": {
   "quien": "w",
-  "texto": "Can you say clay soil? Clay soil!",
-  "seg": 4.61
+  "texto": "Repite conmigo: *clay soil!*",
+  "seg": 2.53
  },
  "c6_12": {
   "quien": "n",
-  "texto": "When clay soil dries in the sun, it cracks. Look at the ground around you!",
-  "seg": 6.63
+  "texto": "Cuando la arcilla se seca al sol, se agrieta. ¡Mira el suelo a tu alrededor!",
+  "seg": 5.86
  },
  "c7_10": {
   "quien": "n",
-  "texto": "In Ecuador, the volcanoes help, too! Long ago, volcanic ash fell on the land and made the soil very rich.",
-  "seg": 9.71
+  "texto": "¡En Ecuador los volcanes también ayudan! Hace mucho tiempo, su ceniza cayó sobre la tierra y la hizo muy rica.",
+  "seg": 8.01
  },
  "c7_11": {
   "quien": "w",
-  "texto": "That is why Ecuador grows so many yummy foods: corn, potatoes, beans, bananas, and cacao for chocolate!",
-  "seg": 9.48
+  "texto": "Por eso en Ecuador hay tantas comidas ricas: maíz, papas, fréjoles, guineos y cacao para el chocolate. *Yummy!*",
+  "seg": 9.59
  },
  "c7_12": {
   "quien": "w",
-  "texto": "Can you say loamy soil? Loamy soil!",
-  "seg": 4.72
+  "texto": "Repite conmigo: *loamy soil!*",
+  "seg": 2.62
  },
  "c9_11": {
   "quien": "w",
-  "texto": "Do you want to know a secret? I have no eyes, no ears and no legs!",
-  "seg": 6.93
+  "texto": "¿Quieres saber un secreto? ¡No tengo ojos, ni orejas, ni patas!",
+  "seg": 6.41
  },
  "c9_12": {
   "quien": "w",
-  "texto": "I breathe through my skin, so I like wet soil. When it rains a lot, I come up to the top!",
-  "seg": 8.73
+  "texto": "Respiro por la piel, por eso me gusta la tierra húmeda. ¡Cuando llueve mucho, salgo a la superficie!",
+  "seg": 8.57
  },
  "c10_19": {
   "quien": "n",
-  "texto": "Let’s review what we learned today.",
-  "seg": 2.68
+  "texto": "*Let’s review!* Repasemos lo que aprendimos hoy.",
+  "seg": 3.25
  },
  "c10_20": {
   "quien": "w",
-  "texto": "Soil is made of rock pieces, humus, water, air and living things.",
-  "seg": 6.48
+  "texto": "El *soil* tiene *rocks*, *humus*, *water*, *air* y *living things*.",
+  "seg": 7.7
  },
  "c10_21": {
   "quien": "w",
-  "texto": "Soil has layers: topsoil, subsoil and bedrock.",
-  "seg": 5.81
+  "texto": "El suelo tiene capas: *topsoil*, *subsoil* y *bedrock*.",
+  "seg": 6.13
  },
  "c10_22": {
   "quien": "w",
-  "texto": "And there are different types of soil: sandy soil, clay soil and loamy soil.",
-  "seg": 7.18
+  "texto": "Y hay tipos de suelo: *sandy soil*, *clay soil* y *loamy soil*.",
+  "seg": 6.29
  },
  "c10_23": {
   "quien": "w",
-  "texto": "Wave goodbye to me!",
-  "seg": 2.28
+  "texto": "*Wave goodbye!* ¡Dime adiós con tu mano!",
+  "seg": 2.81
  }
 }

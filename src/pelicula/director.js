@@ -742,7 +742,11 @@ function crearBrillo(radio) {
 function escribirRico(ctx, texto, x, y, maxAncho, maxAlto, progreso) {
   const palabras = [];
   texto.split('*').forEach((trozo, i) => {
-    for (const p of trozo.split(/\s+/).filter(Boolean)) palabras.push({ p, resaltada: i % 2 === 1 });
+    for (const p of trozo.split(/\s+/).filter(Boolean)) {
+      // La puntuación suelta entre tramos (", " o ".") se pega a la palabra anterior.
+      if (/^[,.;:!?…]+$/.test(p) && palabras.length) palabras.at(-1).p += p;
+      else palabras.push({ p, resaltada: i % 2 === 1 });
+    }
   });
   let tam = 48;
   let lineas;
