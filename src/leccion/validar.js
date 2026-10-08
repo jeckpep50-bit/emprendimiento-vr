@@ -1,4 +1,6 @@
-import { MODELOS, ENTORNOS, TIPOS_ESCENA, IDIOMAS, CARACTERES, EXPRESIONES, PELICULAS_DISPONIBLES, MODOS } from './catalogo.js';
+import { MODELOS, ENTORNOS, TIPOS_ESCENA, IDIOMAS, CARACTERES, EXPRESIONES, PELICULAS_DISPONIBLES, MODOS, ESCENARIOS_OBSERVACION, LUGARES_RECREO } from './catalogo.js';
+
+const ERRORES_PREGUNTA = ['cerrada', 'juzga', 'sugiere', 'irrelevante'];
 
 /**
  * Revisa que una lección (JSON) tenga la forma que espera el motor.
@@ -32,6 +34,10 @@ export function validarLeccion(l) {
     });
   }
   if (l.titulosMedalla !== undefined && !['oro', 'plata', 'bronce'].every((k) => l.titulosMedalla[k] === undefined || texto(l.titulosMedalla[k]))) err('titulosMedalla', 'oro, plata y bronce deben ser textos');
+  if (l.voces !== undefined) {
+    if (!texto(l.voces?.carpeta) || !/^[a-z0-9/_-]+$/.test(l.voces.carpeta)) err('voces.carpeta', 'debe ser una carpeta dentro de public (minúsculas, sin espacios)');
+    if (l.voces?.personajes !== undefined && typeof l.voces.personajes !== 'object') err('voces.personajes', 'debe ser un objeto { id: { tono, velocidad, reproduccion? } }');
+  }
   if (!lista(l.escenas, 1, 20, 'escenas')) return errores;
 
   l.escenas.forEach((e, i) => {
@@ -161,14 +167,26 @@ export function validarLeccion(l) {
     if (e.tipo === 'ordenar' && e.construccion !== undefined) modelo(e.construccion?.modelo, `${r}.construccion.modelo`);
 
     if (e.tipo === 'entrevista') {
-      const p = e.personaje;
-      if (!p || !texto(p.nombre)) err(`${r}.personaje.nombre`, 'falta el nombre del personaje');
-      if (p?.modelo !== undefined) modelo(p.modelo, `${r}.personaje.modelo`);
-      if (p?.expresion !== undefined && !EXPRESIONES.includes(p.expresion)) err(`${r}.personaje.expresion`, `debe ser ${EXPRESIONES.join(' | ')}`);
-      if (lista(e.preguntas, 3, 8, `${r}.preguntas`)) {
-        let buenas = 0;
-        e.preguntas.forEach((q, j) => {
-          const rr = `${r}.preguntas[${j}]`;
+      // Un personaje ("personaje") o varios ("personajes", cada uno con id).
+      const personajes = e.personajes ?? (e.personaje ? [e.personaje] : []);
+      if (e.personajes !== undefined) {
+        lista(e.personajes, 1, 4, `${r}.personajes`);
+        const ids = new Set(e.personajes.map((p) => p.id));
+        if (ids.size !== e.personajes.length || e.personajes.some((p) => !texto(p.id))) err(`${r}.personajes`, 'cada personaje necesita un id único');
+      }
+      if (!personajes.length) err(`${r}.personaje`, 'falta el personaje');
+      personajes.forEach((p, k) => {
+        const rp = e.personajes ? `${r}.personajes[${k}]` : `${r}.personaje`;
+        if (!texto(p?.nombre)) err(`${rp}.nombre`, 'falta el nombre del personaje');
+        if (p?.modelo !== undefined) modelo(p.modelo, `${rp}.modelo`);
+        if (p?.expresion !== undefined && !EXPRESIONES.includes(p.expresion)) err(`${rp}.expresion`, `debe ser ${EXPRESIONES.join(' | ')}`);
+      });
+      const idsPersonajes = new Set(personajes.map((p) => p?.id).filter(Boolean));
+      let buenas = 0;
+      const revisar = (preguntas, ruta, min, max) => {
+        if (!lista(preguntas, min, max, ruta)) return;
+        preguntas.forEach((q, j) => {
+          const rr = `${ruta}[${j}]`;
           if (!texto(q.texto)) err(`${rr}.texto`, 'falta la pregunta');
           if (!['buena', 'mala'].includes(q.tipo)) err(`${rr}.tipo`, 'debe ser "buena" o "mala"');
           if (q.tipo === 'buena') {
@@ -176,20 +194,102 @@ export function validarLeccion(l) {
             if (texto(q.hallazgo)) buenas++;
           }
           if (q.tipo === 'mala' && !texto(q.retro)) err(`${rr}.retro`, 'explica por qué la pregunta no sirve');
+          if (q.error !== undefined && !ERRORES_PREGUNTA.includes(q.error)) err(`${rr}.error`, `debe ser ${ERRORES_PREGUNTA.join(' | ')}`);
+          if (q.a !== undefined && !idsPersonajes.has(q.a)) err(`${rr}.a`, `"${q.a}" no es el id de un personaje`);
           if (q.expresion !== undefined && !EXPRESIONES.includes(q.expresion)) err(`${rr}.expresion`, `debe ser ${EXPRESIONES.join(' | ')}`);
+          if (q.sigue !== undefined) revisar(q.sigue, `${rr}.sigue`, 1, 3);
         });
+      };
+      revisar(e.preguntas, `${r}.preguntas`, 3, 12);
+      if (Array.isArray(e.preguntas)) {
         if (buenas === 0) err(`${r}.preguntas`, 'debe haber al menos una pregunta buena con hallazgo');
         if (e.minimo !== undefined && !(Number.isInteger(e.minimo) && e.minimo >= 1 && e.minimo <= buenas)) err(`${r}.minimo`, 'fuera de rango');
       }
     }
 
-    if (e.tipo === 'lluvia' && lista(e.ideas, 4, 10, `${r}.ideas`)) {
+    if (e.tipo === 'lluvia' && lista(e.ideas, 4, 12, `${r}.ideas`)) {
+      const elige = e.elegir !== false;
+      if (e.elegir !== undefined && typeof e.elegir !== 'boolean') err(`${r}.elegir`, 'debe ser true o false');
+      if (e.chispas !== undefined && lista(e.chispas, 1, 4, `${r}.chispas`)) e.chispas.forEach((c, j) => texto(c.texto) || err(`${r}.chispas[${j}].texto`, 'falta el texto de la chispa'));
       e.ideas.forEach((idea, j) => {
         if (!texto(idea.texto)) err(`${r}.ideas[${j}].texto`, 'falta el texto de la idea');
-        if (typeof idea.correcta !== 'boolean') err(`${r}.ideas[${j}].correcta`, 'debe ser true o false');
-        if (idea.correcta === false && !texto(idea.retro)) err(`${r}.ideas[${j}].retro`, 'explica por qué no se elige');
+        if (elige && typeof idea.correcta !== 'boolean') err(`${r}.ideas[${j}].correcta`, 'debe ser true o false');
+        if (elige && idea.correcta === false && !texto(idea.retro)) err(`${r}.ideas[${j}].retro`, 'explica por qué no se elige');
+        if (e.chispas && !(Number.isInteger(idea.chispa) && idea.chispa >= 0 && idea.chispa < e.chispas.length)) err(`${r}.ideas[${j}].chispa`, 'debe ser el índice de una chispa');
       });
-      if (!e.ideas.some((i) => i.correcta === true)) err(`${r}.ideas`, 'al menos una idea debe ser correcta');
+      if (elige && !e.ideas.some((i) => i.correcta === true)) err(`${r}.ideas`, 'al menos una idea debe ser correcta');
+    }
+
+    if (e.frases !== undefined) {
+      if (typeof e.frases !== 'object' || Array.isArray(e.frases)) err(`${r}.frases`, 'debe ser un objeto { clave: { quien, texto } }');
+      else for (const [k, f] of Object.entries(e.frases)) if (!texto(f?.quien) || !texto(f?.texto)) err(`${r}.frases.${k}`, 'necesita quien y texto');
+    }
+
+    if (e.tipo === 'observacion') {
+      if (!ESCENARIOS_OBSERVACION.includes(e.escenario)) err(`${r}.escenario`, `debe ser ${ESCENARIOS_OBSERVACION.join(' | ')}`);
+      if (lista(e.observaciones, 3, 16, `${r}.observaciones`)) {
+        e.observaciones.forEach((o, j) => {
+          const rr = `${r}.observaciones[${j}]`;
+          if (e.escenario === 'recreo' && !LUGARES_RECREO.includes(o.lugar)) err(`${rr}.lugar`, `debe ser ${LUGARES_RECREO.join(' | ')}`);
+          if (!texto(o.texto)) err(`${rr}.texto`, 'falta lo que se observa');
+          if (typeof o.relevante !== 'boolean') err(`${rr}.relevante`, 'debe ser true o false');
+          if (!texto(o.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+        });
+        if (!e.observaciones.some((o) => o.relevante)) err(`${r}.observaciones`, 'al menos una debe ser importante');
+      }
+    }
+
+    if (e.tipo === 'frase') {
+      const opcionesValidas = (ops, ruta) => {
+        if (!lista(ops, 2, 4, ruta)) return;
+        ops.forEach((o, j) => {
+          if (!texto(o.texto)) err(`${ruta}[${j}].texto`, 'falta el texto');
+          if (typeof o.correcta !== 'boolean') err(`${ruta}[${j}].correcta`, 'debe ser true o false');
+          if (!o.correcta && !texto(o.retro)) err(`${ruta}[${j}].retro`, 'explica por qué no sirve');
+        });
+        if (ops.filter((o) => o.correcta).length !== 1) err(ruta, 'debe haber exactamente una opción correcta');
+      };
+      if (lista(e.partes, 1, 5, `${r}.partes`)) {
+        e.partes.forEach((p, j) => {
+          if (!texto(p.etiqueta)) err(`${r}.partes[${j}].etiqueta`, 'falta la etiqueta');
+          opcionesValidas(p.opciones, `${r}.partes[${j}].opciones`);
+        });
+      }
+      if (e.pregunta !== undefined) opcionesValidas(e.pregunta?.opciones, `${r}.pregunta.opciones`);
+    }
+
+    if (e.tipo === 'matriz' && lista(e.criterios, 2, 5, `${r}.criterios`) && lista(e.ideas, 2, 5, `${r}.ideas`)) {
+      e.criterios.forEach((c, j) => texto(c.texto) || err(`${r}.criterios[${j}].texto`, 'falta el texto'));
+      e.ideas.forEach((idea, j) => {
+        const rr = `${r}.ideas[${j}]`;
+        if (!texto(idea.texto)) err(`${rr}.texto`, 'falta el texto');
+        if (!(Array.isArray(idea.cumple) && idea.cumple.length === e.criterios.length && idea.cumple.every((v) => typeof v === 'boolean'))) err(`${rr}.cumple`, `debe tener ${e.criterios.length} valores true/false`);
+        if (idea.porque !== undefined && !(Array.isArray(idea.porque) && idea.porque.length === e.criterios.length)) err(`${rr}.porque`, `debe tener ${e.criterios.length} textos`);
+      });
+      if (e.ideas.filter((i) => i.cumple?.every?.(Boolean)).length !== 1) err(`${r}.ideas`, 'exactamente una idea debe cumplir todos los criterios');
+    }
+
+    if (e.tipo === 'prototipo') {
+      if (lista(e.materiales, 2, 12, `${r}.materiales`)) {
+        e.materiales.forEach((m, j) => {
+          const rr = `${r}.materiales[${j}]`;
+          if (!(m.modelo in MODELOS)) err(`${rr}.modelo`, `modelo desconocido "${m.modelo}"`);
+          if (!texto(m.nombre)) err(`${rr}.nombre`, 'falta el nombre');
+          if (typeof m.sirve !== 'boolean') err(`${rr}.sirve`, 'debe ser true o false');
+          if (!texto(m.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+        });
+        if (!e.materiales.some((m) => m.sirve)) err(`${r}.materiales`, 'al menos un material debe servir');
+      }
+      if (lista(e.medidas, 2, 5, `${r}.medidas`)) {
+        e.medidas.forEach((m, j) => {
+          const rr = `${r}.medidas[${j}]`;
+          if (!texto(m.texto)) err(`${rr}.texto`, 'falta el texto');
+          if (!(Number.isFinite(m.alto) && m.alto > 0 && m.alto <= 0.6)) err(`${rr}.alto`, 'debe estar entre 0 y 0,6 m');
+          if (typeof m.correcta !== 'boolean') err(`${rr}.correcta`, 'debe ser true o false');
+          if (!texto(m.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+        });
+        if (e.medidas.filter((m) => m.correcta).length !== 1) err(`${r}.medidas`, 'exactamente una medida debe ser correcta');
+      }
     }
 
     if (e.tipo === 'atrapar') {

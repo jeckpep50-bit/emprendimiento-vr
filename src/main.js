@@ -81,7 +81,7 @@ function volverALista() {
 
 async function empezar(enVR) {
   audio.desbloquear();
-  motor.cargar(leccionActual);
+  const voces = motor.cargar(leccionActual);
   $('portada').hidden = true;
   const inicio = Math.max(0, Number(parametros.get('escena') ?? 1) - 1);
   if (enVR) {
@@ -99,6 +99,7 @@ async function empezar(enVR) {
     app.rig.position.set(0, 0, 0);
     $('ayuda-pantalla').hidden = false;
   }
+  await voces;
   motor.irA(Math.min(inicio, leccionActual.escenas.length - 1));
 }
 

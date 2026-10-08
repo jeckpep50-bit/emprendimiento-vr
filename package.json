@@ -11,7 +11,8 @@
     "preview": "vite preview --host",
     "validar": "node scripts/validar-lecciones.mjs",
     "generar": "node scripts/generar-leccion.mjs",
-    "narracion": "node scripts/generar-narracion.mjs"
+    "narracion": "node scripts/generar-narracion.mjs",
+    "voces": "node scripts/generar-voces.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",

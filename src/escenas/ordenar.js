@@ -9,7 +9,7 @@ import { liberar } from '../mundo/materiales.js';
 /**
  * Ordenar: tocar las tarjetas en el orden correcto de una secuencia.
  * datos: { titulo, instruccion, pasos: [{ texto, emoji?, pista? }] }  (en el orden correcto)
- * Opcional: construccion: { modelo, escala? } — un modelo que admite la opción
+ * Opcional: construccion: { modelo, escala?, opciones? } — un modelo que admite la opción
  * "etapa" (1..N) se va armando sobre una mesa a medida que se ordenan los pasos.
  */
 export class EscenaOrdenar extends EscenaBase {
@@ -113,6 +113,7 @@ export class EscenaOrdenar extends EscenaBase {
         this.m.audio.exito();
         this.m.fx.confeti(this.posMundo(this.cabecera).add(new THREE.Vector3(0, -0.4, 0.4)), 80);
         this.cabecera.mensaje(this.datos.mensajeFinal || this.t('todoOrdenado'), COLORES.verde);
+        if (this.datos.mensajeFinal) this.voz(this.datos.mensajeFinal);
         this.mostrarContinuar(new THREE.Vector3(0, this.H + 0.02, -1.35));
       });
     }
@@ -157,12 +158,12 @@ export class EscenaOrdenar extends EscenaBase {
 
   /** Reemplaza la maqueta por la de la etapa indicada, con un pequeño festejo. */
   _construir(etapa) {
-    const { modelo, escala = 1 } = this.datos.construccion;
+    const { modelo, escala = 1, opciones = {} } = this.datos.construccion;
     for (const hijo of [...this.soporteModelo.children]) {
       this.soporteModelo.remove(hijo);
       liberar(hijo);
     }
-    const maqueta = this.modelo(modelo, { normalizar: false, escala, etapa });
+    const maqueta = this.modelo(modelo, { ...opciones, normalizar: false, escala, etapa });
     this.soporteModelo.add(maqueta);
     this.m.fx.aparecer(maqueta, 0.45);
     const pos = this.posMundo(this.soporteModelo).add(new THREE.Vector3(0, 0.2, 0));

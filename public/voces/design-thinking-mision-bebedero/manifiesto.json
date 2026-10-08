@@ -1,0 +1,317 @@
+{
+ "guia-1h7vvn2": {
+  "quien": "guia",
+  "texto": "¡Bienvenidos al Laboratorio de Innovación! Soy Valeria, su coach. Desde hoy ustedes forman el Equipo de Innovación de la escuela.",
+  "seg": 9.02
+ },
+ "guia-0e1ltsu": {
+  "quien": "guia",
+  "texto": "Los diseñadores resuelven problemas con el Design Thinking: primero entienden a las personas y solo después inventan soluciones.",
+  "seg": 7.3
+ },
+ "guia-107l0we": {
+  "quien": "guia",
+  "texto": "Hoy recorrerán cuatro fases: EMPATIZAR, DEFINIR, IDEAR y PROTOTIPAR. La quinta fase, Testear, será su próxima misión.",
+  "seg": 9.3
+ },
+ "guia-1bsds02": {
+  "quien": "guia",
+  "texto": "Llegó un mensaje de la profe Andrea, de segundo de básica: «Camila casi no toma agua en el recreo y regresa al aula con sed y cansada. ¿Nos ayudan?»",
+  "seg": 9.68
+ },
+ "guia-124fd6k": {
+  "quien": "guia",
+  "texto": "Regla de oro del diseñador: todavía NO inventen soluciones. Primero hay que entender a Camila de verdad. ¡Vamos al patio, que ya empieza el recreo!",
+  "seg": 10.14
+ },
+ "guia-1wpq1yp": {
+  "quien": "guia",
+  "texto": "👀 ¡Es la hora del recreo! Observa como un diseñador: gira y mira a tu alrededor. Toca cada 👁️ y decide si lo que ves ayuda a entender por qué Camila no toma agua.",
+  "seg": 10.77
+ },
+ "guia-0cdn732": {
+  "quien": "guia",
+  "texto": "🎉 ¡Excelente observación! Un buen diseñador mira con atención antes de opinar. Tu bitácora ya tiene pistas muy valiosas.",
+  "seg": 8.38
+ },
+ "camila-0xgbwr8": {
+  "quien": "camila",
+  "texto": "¡Ay, me mojé toda!",
+  "seg": 1.63
+ },
+ "camila-083oc99": {
+  "quien": "camila",
+  "texto": "No alcanzo… mejor me voy.",
+  "seg": 2.24
+ },
+ "camila-0yv37y8": {
+  "quien": "camila",
+  "texto": "Tengo mucha sed…",
+  "seg": 1
+ },
+ "mateo-1ihsgk4": {
+  "quien": "mateo",
+  "texto": "¡Uy! ¡Casi me caigo!",
+  "seg": 2.03
+ },
+ "andres-00n6btl": {
+  "quien": "andres",
+  "texto": "¡Ahhh, qué rica el agua!",
+  "seg": 1.43
+ },
+ "rosa-1azmf8c": {
+  "quien": "rosa",
+  "texto": "¡Cuidado, mijos, que el piso está mojado!",
+  "seg": 3.36
+ },
+ "nino-13gn5s3": {
+  "quien": "nino",
+  "texto": "¡Pásala, pásala!",
+  "seg": 1.25
+ },
+ "nino-1btlk4m": {
+  "quien": "nino",
+  "texto": "¡Gooool!",
+  "seg": 0.52
+ },
+ "nina-0fuykm9": {
+  "quien": "nina",
+  "texto": "¡Uno, dos, tres, cuatro, cinco!",
+  "seg": 2.91
+ },
+ "guia-1ahrmih": {
+  "quien": "guia",
+  "texto": "🎤 Conversa con Camila. Elige preguntas abiertas, que empiecen con «¿Cómo…?», «¿Qué…?» o «Cuéntame…», y no la juzgues. Las buenas respuestas abren preguntas para PROFUNDIZAR (↪).",
+  "seg": 11.57
+ },
+ "guia-1p2ueb4": {
+  "quien": "guia",
+  "texto": "🎉 ¡Entrevista profunda! Escuchaste, preguntaste y profundizaste: así se EMPATIZA de verdad.",
+  "seg": 6.69
+ },
+ "camila-1qpqlm7": {
+  "quien": "camila",
+  "texto": "Hola… Soy Camila, de segundo de básica. ¿Ustedes son de séptimo? ¡Qué grandes!",
+  "seg": 7.98
+ },
+ "camila-0qgbp4c": {
+  "quien": "camila",
+  "texto": "Me siento cansada y un poco triste. Después de jugar me da muchísima sed.",
+  "seg": 5.58
+ },
+ "camila-1lqesam": {
+  "quien": "camila",
+  "texto": "Me duele un poquito la cabeza y no puedo poner atención. La profe dice que tome agua, pero ya no hay tiempo.",
+  "seg": 7.96
+ },
+ "camila-1wtb7r0": {
+  "quien": "camila",
+  "texto": "¡Es muy alto! Me paro de puntitas y el agua me cae en la ropa.",
+  "seg": 4.78
+ },
+ "camila-07rppcc": {
+  "quien": "camila",
+  "texto": "Me da vergüenza… los de quinto se ríen. Por eso prefiero ya no intentarlo.",
+  "seg": 5.85
+ },
+ "camila-1llz2k5": {
+  "quien": "camila",
+  "texto": "Me voy a la banca. Mateo se sube a un ladrillo, pero a mí me da miedo caerme.",
+  "seg": 6.02
+ },
+ "camila-1c0gy7p": {
+  "quien": "camila",
+  "texto": "Poder hacerlo sola, sin que nadie me cargue… ¡y sin caerme!",
+  "seg": 4.25
+ },
+ "camila-169wn9v": {
+  "quien": "camila",
+  "texto": "Mi lonchera… y a veces mi botella. Pero hoy se me olvidó en la casa.",
+  "seg": 5.4
+ },
+ "camila-10mmhl5": {
+  "quien": "camila",
+  "texto": "Sí.",
+  "seg": 0.37
+ },
+ "camila-0v3ng4r": {
+  "quien": "camila",
+  "texto": "Es que… me da vergüenza.",
+  "seg": 1.82
+ },
+ "camila-0jbuyeb": {
+  "quien": "camila",
+  "texto": "Eh… sí, creo…",
+  "seg": 1.53
+ },
+ "camila-1v95rlg": {
+  "quien": "camila",
+  "texto": "¡Los de dinosaurios!",
+  "seg": 1.39
+ },
+ "guia-04ta65k": {
+  "quien": "guia",
+  "texto": "👥 Un buen diseñador escucha a varias personas. Pregunta a la profe Andrea y a Doña Rosa, la conserje. El dibujo de cada pregunta indica a quién va dirigida.",
+  "seg": 10.45
+ },
+ "guia-06fw25o": {
+  "quien": "guia",
+  "texto": "🎉 ¡Muy bien! Escuchaste a varias personas y descubriste cosas que Camila no sabía: el piso resbaloso, los materiales de la bodega y que el bebedero no se puede mover.",
+  "seg": 10.33
+ },
+ "profe-04epryi": {
+  "quien": "profe",
+  "texto": "¡Hola, chicos de séptimo! Qué bueno que vienen a ayudar a mis estudiantes.",
+  "seg": 5.58
+ },
+ "rosa-0cejtpp": {
+  "quien": "rosa",
+  "texto": "Buenos días, jóvenes. Yo cuido este patio desde hace veinte años. Pregunten nomás.",
+  "seg": 7.69
+ },
+ "profe-1p07b7c": {
+  "quien": "profe",
+  "texto": "Varios niños de segundo regresan con sed y cansados, y les cuesta concentrarse. No solo le pasa a Camila.",
+  "seg": 8.04
+ },
+ "profe-19acxtr": {
+  "quien": "profe",
+  "texto": "Lo pusieron cuando la escuela era solo para los grandes. Por eso está hecho a la medida de los estudiantes mayores.",
+  "seg": 7.71
+ },
+ "profe-0oyytqf": {
+  "quien": "profe",
+  "texto": "Les recuerdo traer botella, pero muchos la olvidan. Y yo no puedo cargar a todos en el recreo.",
+  "seg": 6.95
+ },
+ "rosa-1pvvxbd": {
+  "quien": "rosa",
+  "texto": "Como el agua salpica, se hace un charco. La semana pasada un pequeñito se resbaló.",
+  "seg": 6.59
+ },
+ "rosa-184vaws": {
+  "quien": "rosa",
+  "texto": "¡Uy, peligrosísimo! Los ladrillos se mueven. Yo los guardo, pero ellos los vuelven a traer.",
+  "seg": 8.02
+ },
+ "rosa-1kg8qqe": {
+  "quien": "rosa",
+  "texto": "Hay cajas de cartón grueso, botellas plásticas con tapa y cinta de embalaje del reciclaje. ¡Todo eso se puede usar!",
+  "seg": 8.6
+ },
+ "rosa-19azqoo": {
+  "quien": "rosa",
+  "texto": "No, mijo: está conectado a la tubería. Cambiarlo cuesta mucho dinero y necesita un plomero.",
+  "seg": 7.5
+ },
+ "profe-0vilhca": {
+  "quien": "profe",
+  "texto": "Mmm… no sé. Ustedes son los diseñadores.",
+  "seg": 4.63
+ },
+ "rosa-0m2qcni": {
+  "quien": "rosa",
+  "texto": "Hago lo que puedo, joven… somos pocos para todo el patio.",
+  "seg": 4.39
+ },
+ "profe-16i397d": {
+  "quien": "profe",
+  "texto": "Sí, es muy buena.",
+  "seg": 1.48
+ },
+ "guia-044zg8j": {
+  "quien": "guia",
+  "texto": "🗺️ Organiza lo que descubriste en el mapa de empatía de Camila: ¿qué DICE, qué PIENSA, qué HACE y qué SIENTE? Agarra cada tarjeta y suéltala en su cuadrante.",
+  "seg": 10.17
+ },
+ "guia-15byqhu": {
+  "quien": "guia",
+  "texto": "🗺️ ¡Mapa de empatía completo! Ahora conoces a Camila por fuera y por dentro.",
+  "seg": 5.01
+ },
+ "guia-1fjd5k8": {
+  "quien": "guia",
+  "texto": "🎯 Una NECESIDAD dice lo que la persona quiere LOGRAR. Si ya nombra un objeto o a otra persona que lo resuelve, es una SOLUCIÓN DISFRAZADA. Clasifica cada tarjeta.",
+  "seg": 10.9
+ },
+ "guia-1t3rtw8": {
+  "quien": "guia",
+  "texto": "🎯 ¡Muy bien! Los diseñadores separan lo que la persona NECESITA de las soluciones que se nos ocurren demasiado rápido.",
+  "seg": 7.13
+ },
+ "guia-00zmyro": {
+  "quien": "guia",
+  "texto": "✍️ Arma el PUNTO DE VISTA del equipo: elige la mejor opción para cada parte. Una buena frase dice QUIÉN es la persona, qué NECESITA y POR QUÉ.",
+  "seg": 9.04
+ },
+ "guia-1n6hwqv": {
+  "quien": "guia",
+  "texto": "❓ Último paso: convierte el reto en una pregunta para idear. ¿Cuál es la mejor pregunta «¿Cómo podríamos…?»?",
+  "seg": 6.77
+ },
+ "guia-0fvpf0o": {
+  "quien": "guia",
+  "texto": "🎯 ¡Reto definido! Con esta pregunta, el equipo está listo para IDEAR.",
+  "seg": 4.94
+ },
+ "guia-0trbpdt": {
+  "quien": "guia",
+  "texto": "💡 ¡A idear! Cada bombilla es una CHISPA: una pregunta «¿Y si…?» para inventar ideas. Tócalas todas hasta llenar el muro. En una lluvia de ideas vale todo: ¡todavía no juzgamos!",
+  "seg": 12.77
+ },
+ "guia-045zws1": {
+  "quien": "guia",
+  "texto": "🎉 ¡Doce ideas en el muro! Muchas ideas, incluso las más locas, ayudan a encontrar una genial. Ahora toca elegir con criterio.",
+  "seg": 9.44
+ },
+ "guia-16i5zeh": {
+  "quien": "guia",
+  "texto": "📊 Ubica cada idea en la matriz: ¿cuánto AYUDA a Camila (impacto) y qué tan FÁCIL es hacerla nosotros? Agarra cada nota y suéltala en su cuadrante.",
+  "seg": 10.09
+ },
+ "guia-0m0wbbe": {
+  "quien": "guia",
+  "texto": "📊 ¡Matriz lista! Las ideas de arriba son las que más ayudan a Camila. Ahora las compararemos con lupa.",
+  "seg": 7.04
+ },
+ "guia-001cq7p": {
+  "quien": "guia",
+  "texto": "⚖️ Evalúa las cuatro ideas finalistas con los criterios que salieron de las entrevistas. Toca cada casilla para marcar ✅ si cumple o ❌ si no cumple, y luego toca «Comprobar».",
+  "seg": 10.78
+ },
+ "guia-1ds9ed4": {
+  "quien": "guia",
+  "texto": "🏆 ¡El escalón firme cumple los cinco criterios! Es la idea que vamos a PROTOTIPAR.",
+  "seg": 5.31
+ },
+ "guia-1vhvm89": {
+  "quien": "guia",
+  "texto": "🧰 Un prototipo es una versión simple para probar la idea. Revisa el estante: toca cada material y decide si sirve para un escalón FIRME y SEGURO.",
+  "seg": 9.27
+ },
+ "guia-0b2wwt3": {
+  "quien": "guia",
+  "texto": "📏 Ahora la altura. Prueba cada medida en la simulación y observa a Camila: ¿con cuál alcanza el chorro cómoda y segura?",
+  "seg": 7.41
+ },
+ "guia-1fxfvs0": {
+  "quien": "guia",
+  "texto": "📐 ¡Plan listo! Materiales seguros y una altura de veintidós centímetros. ¡A construir!",
+  "seg": 6.31
+ },
+ "camila-1ws1yhv": {
+  "quien": "camila",
+  "texto": "¡Sí alcanzo! ¡Y sin mojarme!",
+  "seg": 2.81
+ },
+ "guia-1dqnsv8": {
+  "quien": "guia",
+  "texto": "🛠️ Construye el prototipo en orden. Toca los pasos uno por uno y mira a tu DERECHA cómo se arma en la mesa de trabajo.",
+  "seg": 7.15
+ },
+ "guia-1d8m13b": {
+  "quien": "guia",
+  "texto": "🎉 ¡Prototipo listo! No es perfecto, y no tiene que serlo: sirve para PROBAR la idea con Camila.",
+  "seg": 6.66
+ }
+}

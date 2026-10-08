@@ -3,6 +3,7 @@ import { crearModelo } from '../mundo/prefabs/index.js';
 import { liberar } from '../mundo/materiales.js';
 import { crearBoton, crearEtiqueta } from '../ui/componentes.js';
 import { PanelLienzo, COLORES, escribir, tarjeta, pastilla, fuente } from '../ui/lienzo.js';
+import { claveVoz } from '../leccion/voces.js';
 
 let texturaHalo = null;
 
@@ -35,6 +36,51 @@ export class EscenaBase {
       if (sonido) this.m.fx.tween({ duracion: 0.01, retardo }).then(() => !this._destruida && this.m.audio.burbuja(this.posMundo(obj)));
     }
     this._presentaciones = [];
+    this.vozInicial();
+  }
+
+  /**
+   * Al empezar, la guía lee la instrucción de la escena (solo si la lección tiene
+   * voces grabadas). Las escenas con diálogos propios pueden cambiarlo.
+   */
+  vozInicial() {
+    const texto = this.datos.instruccion;
+    if (!texto || this.datos.vozInstruccion === false || !this.m.leccion?.voces) return Promise.resolve(false);
+    return this.esperar(0.6).then(() => (this._destruida ? false : this.voz(texto, this.datos.vozInstruccion ?? 'guia')));
+  }
+
+  /** Promesa que se cumple tras `segundos` (se cancela sola al cambiar de escena). */
+  esperar(segundos) {
+    return this.m.fx.tween({ duracion: Math.max(0.01, segundos) });
+  }
+
+  /** ¿Hay audio grabado para este texto dicho por `quien`? */
+  tieneVoz(texto, quien = 'guia') {
+    return Boolean(texto) && this.m.audio.tieneVoz(claveVoz(quien, texto));
+  }
+
+  /** Segundos que dura la línea grabada (o una estimación si no hay audio). */
+  duracionVoz(texto, quien = 'guia') {
+    const v = this.m.leccion?.voces?.personajes?.[quien]?.reproduccion ?? 1;
+    const seg = this.m.audio.duracionVoz(claveVoz(quien, texto), v);
+    return seg || Math.max(1.2, String(texto ?? '').split(/s+/).length * 0.38);
+  }
+
+  /**
+   * Dice un texto con la voz grabada de `quien` (guia, camila, profe…). Con `pos`
+   * (Vector3 en el mundo) la voz sale de ese punto. Si no hay grabación, usa la
+   * narración del navegador cuando la lección la tiene activada.
+   * Devuelve una promesa: true si la línea sonó completa.
+   */
+  voz(texto, quien = 'guia', { pos = null, canal = 'principal' } = {}) {
+    if (this._destruida || !texto) return Promise.resolve(false);
+    const clave = claveVoz(quien, texto);
+    if (!this.m.audio.tieneVoz(clave)) {
+      if (canal === 'principal') this.narrar(texto);
+      return Promise.resolve(false);
+    }
+    const velocidad = this.m.leccion?.voces?.personajes?.[quien]?.reproduccion ?? 1;
+    return this.m.audio.decirVoz(clave, { pos, velocidad, canal });
   }
 
   terminar() {

@@ -236,11 +236,12 @@ function cajaAbierta(g, w, h, d, solapas) {
   g.add(malla(new THREE.BoxGeometry(w * 0.6, 0.015, 0.002), mat(CARTON_OSCURO), [0, h * 0.7, d / 2 + 0.005]));
 }
 
-export function botella_plastica({ color = '#8fd3ff' } = {}) {
+export function botella_plastica({ color = '#8fd3ff', tapa = true } = {}) {
   return estatico((g) => {
     g.add(malla(new THREE.CylinderGeometry(0.032, 0.032, 0.16, 18), mat(color, { opacidad: 0.6 }), [0, 0.08, 0]));
     g.add(malla(new THREE.CylinderGeometry(0.013, 0.032, 0.05, 18), mat(color, { opacidad: 0.6 }), [0, 0.185, 0]));
-    g.add(malla(new THREE.CylinderGeometry(0.015, 0.015, 0.02, 14), mat('#2f8be6'), [0, 0.218, 0]));
+    if (tapa) g.add(malla(new THREE.CylinderGeometry(0.015, 0.015, 0.02, 14), mat('#2f8be6'), [0, 0.218, 0]));
+    else g.add(malla(new THREE.TorusGeometry(0.013, 0.003, 6, 14), mat(color), [0, 0.21, 0], [Math.PI / 2, 0, 0]));
     g.add(malla(new THREE.CylinderGeometry(0.0325, 0.0325, 0.05, 18), mat('#ffffff'), [0, 0.09, 0]));
   });
 }
@@ -258,7 +259,7 @@ export function cinta_adhesiva({ color = '#ff9f43' } = {}) {
  * 1 caja abierta · 2 rellena con botellas · 3 cerrada y forrada con cinta ·
  * 4 decorada con colores · 5 con caucho antideslizante y cartel.
  */
-export function maqueta_escalon({ etapa = 5 } = {}) {
+export function maqueta_escalon({ etapa = 5, cartelEn = 5 } = {}) {
   const [w, h, d] = [0.5, 0.22, 0.36];
   const g = new THREE.Group();
   const s = new THREE.Group();
@@ -283,11 +284,11 @@ export function maqueta_escalon({ etapa = 5 } = {}) {
   if (etapa >= 5) {
     s.add(malla(new RoundedBoxGeometry(w * 0.92, 0.018, d * 0.88, 2, 0.006), mat('#2b2b33'), [0, h + 0.009, 0]));
     for (let i = 0; i < 6; i++) s.add(malla(new THREE.BoxGeometry(w * 0.85, 0.006, 0.012), mat('#4a4a55'), [0, h + 0.02, -d * 0.36 + i * d * 0.145]));
-    s.add(malla(new THREE.CylinderGeometry(0.008, 0.008, 0.3, 8), mat('#8d6e63'), [w / 2 - 0.03, h + 0.15, -d / 2 + 0.03]));
   }
+  if (etapa >= cartelEn) s.add(malla(new THREE.CylinderGeometry(0.008, 0.008, 0.3, 8), mat('#8d6e63'), [w / 2 - 0.03, h + 0.15, -d / 2 + 0.03]));
   fusionar(s);
   g.add(s);
-  if (etapa >= 5) {
+  if (etapa >= cartelEn) {
     const cartel = letrero('¡Para los pequeños!', 0.24, 0.09, { fondo: '#ffffff', color: '#2f4a8a', tam: 60 });
     cartel.position.set(w / 2 - 0.03, h + 0.26, -d / 2 + 0.04);
     g.add(cartel);
@@ -347,6 +348,161 @@ export function globo_dialogo({ color = '#22b8cf' } = {}) {
   return animado(g, (hijo, t) => (hijo.rotation.z = Math.sin(t * 1.5) * 0.08));
 }
 
+// ── Patio en el recreo (7.º) ───────────────────────────────────────────────
+
+/**
+ * Bebedero doble de pared, alto (borde a 1,08 m): hecho a la medida de los grandes.
+ * API: userData.setAgua(lado: 0 | 1, encendida) enciende el chorro de cada lado;
+ * userData.boquillas: posiciones locales de las dos boquillas.
+ */
+export function bebedero_doble() {
+  const g = estatico((b) => {
+    const metal = mat('#b8c4d6');
+    b.add(malla(new RoundedBoxGeometry(1.3, 1.6, 0.12, 2, 0.03), mat('#e8dcc0'), [0, 0.8, -0.32]));
+    b.add(malla(new RoundedBoxGeometry(1.3, 0.12, 0.14, 2, 0.03), mat('#2f8be6'), [0, 1.62, -0.3]));
+    for (const x of [-0.32, 0.32]) {
+      b.add(malla(new RoundedBoxGeometry(0.2, 1.0, 0.2, 3, 0.04), metal, [x, 0.5, -0.17]));
+      b.add(malla(new RoundedBoxGeometry(0.5, 0.1, 0.42, 3, 0.04), mat('#c9d2de'), [x, 1.03, -0.06]));
+      b.add(malla(new RoundedBoxGeometry(0.42, 0.03, 0.32, 2, 0.012), mat('#5d6b7d'), [x, 1.08, -0.05]));
+      b.add(malla(new THREE.CylinderGeometry(0.018, 0.022, 0.06, 12), mat('#7b8798'), [x + 0.05, 1.11, -0.08]));
+      b.add(malla(new THREE.CylinderGeometry(0.03, 0.03, 0.03, 16), mat('#e5484d'), [x + 0.19, 1.04, 0.16], [Math.PI / 2, 0, 0]));
+      b.add(malla(new THREE.BoxGeometry(0.12, 0.08, 0.005), mat('#2f8be6'), [x, 0.6, -0.065]));
+    }
+  });
+  const chorros = [-0.32, 0.32].map((x) => {
+    const curva = new THREE.QuadraticBezierCurve3(new THREE.Vector3(x + 0.05, 1.14, -0.08), new THREE.Vector3(x + 0.02, 1.27, -0.02), new THREE.Vector3(x - 0.04, 1.1, 0.04));
+    const chorro = malla(new THREE.TubeGeometry(curva, 16, 0.008, 6), mat('#8fd3ff', { tipo: 'basica', opacidad: 0.75 }));
+    chorro.visible = false;
+    g.add(chorro);
+    return chorro;
+  });
+  g.userData.boquillas = [new THREE.Vector3(-0.27, 1.14, -0.08), new THREE.Vector3(0.37, 1.14, -0.08)];
+  g.userData.setAgua = (lado, v) => (chorros[lado].visible = v);
+  g.userData.animar = (t) => chorros.forEach((c, i) => (c.scale.y = 1 + Math.sin(t * 12 + i) * 0.04));
+  g.userData.anclaje = 'base';
+  return g;
+}
+
+export function ladrillo() {
+  return estatico((g) => {
+    g.add(malla(new RoundedBoxGeometry(0.24, 0.1, 0.13, 2, 0.01), mat('#b5533c'), [0, 0.05, 0]));
+    for (const x of [-0.06, 0.06]) g.add(malla(new THREE.CylinderGeometry(0.025, 0.025, 0.004, 12), mat('#7f3524'), [x, 0.101, 0]));
+  });
+}
+
+/** Mochila escolar. opciones: { color, abierta, botella } */
+export function mochila({ color = '#8b5cf6', abierta = true, botella = false } = {}) {
+  const g = estatico((m) => {
+    m.add(malla(new RoundedBoxGeometry(0.3, 0.36, 0.16, 3, 0.05), mat(color), [0, 0.18, 0]));
+    m.add(malla(new RoundedBoxGeometry(0.22, 0.14, 0.06, 2, 0.03), mat('#ffc23c'), [0, 0.12, 0.09]));
+    for (const lado of [-1, 1]) m.add(malla(new THREE.TorusGeometry(0.1, 0.012, 6, 16, Math.PI), mat('#3a2a5a'), [lado * 0.08, 0.24, -0.09], [0, Math.PI / 2, 0]));
+    if (abierta) {
+      m.add(malla(new THREE.BoxGeometry(0.26, 0.012, 0.14), mat('#2b1d3a'), [0, 0.36, 0]));
+      m.add(malla(new RoundedBoxGeometry(0.28, 0.02, 0.1, 2, 0.008), mat(color), [0, 0.39, -0.1], [-0.8, 0, 0]));
+      m.add(malla(new RoundedBoxGeometry(0.18, 0.12, 0.02, 2, 0.006), mat('#ffffff'), [-0.04, 0.38, 0.0], [0.15, 0, 0.1]));
+      m.add(malla(new RoundedBoxGeometry(0.16, 0.1, 0.02, 2, 0.006), mat('#4f7cff'), [0.05, 0.37, 0.03], [0.1, 0, -0.08]));
+    }
+  });
+  if (botella) {
+    const b = botella_plastica({ color: '#ff8fd1' });
+    b.position.set(0.17, 0, 0.02);
+    g.add(b);
+  }
+  return g;
+}
+
+/** Trapeador (palo y mopa). La mano lo sostiene cerca del extremo superior. */
+export function trapeador() {
+  return estatico((g) => {
+    g.add(malla(new THREE.CylinderGeometry(0.014, 0.014, 1.2, 8), mat('#3d7bd9'), [0, 0.62, 0]));
+    g.add(malla(new RoundedBoxGeometry(0.3, 0.04, 0.08, 2, 0.015), mat('#9aa7b8'), [0, 0.04, 0]));
+    for (let i = 0; i < 9; i++) g.add(malla(new THREE.CapsuleGeometry(0.012, 0.06, 3, 6), mat('#f1ead8'), [-0.13 + i * 0.033, 0.015, 0.035 * ((i % 2) * 2 - 1)], [Math.PI / 2 - 0.3, 0, 0]));
+  });
+}
+
+export function balon() {
+  return estatico((b) => {
+    b.add(malla(new THREE.IcosahedronGeometry(0.11, 1), mat('#ffffff')));
+    const parche = new THREE.CircleGeometry(0.038, 5);
+    const pos = new THREE.IcosahedronGeometry(0.11, 0).attributes.position;
+    for (let i = 0; i < pos.count; i += 3) {
+      const v = new THREE.Vector3().fromBufferAttribute(pos, i).normalize();
+      const p = malla(parche, mat('#1d1d27'), v.clone().multiplyScalar(0.111).toArray());
+      p.lookAt(v.clone().multiplyScalar(2));
+      b.add(p);
+    }
+  }, 'centro');
+}
+
+export function charco() {
+  const g = new THREE.Group();
+  const m = malla(new THREE.CircleGeometry(0.4, 28), mat('#7fc8ff', { tipo: 'basica', opacidad: 0.45 }), [0, 0.004, 0], [-Math.PI / 2, 0, 0], [1, 0.6, 1]);
+  m.userData.noFusionar = true;
+  g.add(m);
+  g.userData.anclaje = 'base';
+  return g;
+}
+
+// ── Materiales para prototipar ─────────────────────────────────────────────
+
+export function periodico() {
+  return estatico((g) => {
+    for (let i = 0; i < 5; i++) g.add(malla(new THREE.BoxGeometry(0.3, 0.008, 0.22), mat(i % 2 ? '#e9e4d8' : '#f5f1e6'), [((i * 7) % 3) * 0.006, 0.004 + i * 0.009, ((i * 5) % 3) * 0.006], [0, (i - 2) * 0.05, 0]));
+    for (let j = 0; j < 4; j++) g.add(malla(new THREE.BoxGeometry(0.24, 0.002, 0.012), mat('#5b6886'), [0, 0.05, -0.07 + j * 0.035]));
+    g.add(malla(new THREE.BoxGeometry(0.12, 0.002, 0.06), mat('#c9d2de'), [0.06, 0.05, 0.06]));
+  });
+}
+
+export function frasco_vidrio() {
+  return estatico((g) => {
+    g.add(malla(new THREE.CylinderGeometry(0.05, 0.05, 0.14, 18), mat('#cfefff', { opacidad: 0.45 }), [0, 0.07, 0]));
+    g.add(malla(new THREE.CylinderGeometry(0.04, 0.05, 0.02, 18), mat('#cfefff', { opacidad: 0.45 }), [0, 0.15, 0]));
+    g.add(malla(new THREE.CylinderGeometry(0.042, 0.042, 0.025, 18), mat('#9aa7b8'), [0, 0.168, 0]));
+    g.add(malla(new THREE.BoxGeometry(0.004, 0.05, 0.004), mat('#ffffff', { tipo: 'basica' }), [0.03, 0.09, 0.045], [0, 0, 0.5]));
+  });
+}
+
+export function clavos() {
+  return estatico((g) => {
+    g.add(malla(new RoundedBoxGeometry(0.14, 0.05, 0.09, 2, 0.01), mat('#e5484d'), [0, 0.025, 0]));
+    for (let i = 0; i < 7; i++) {
+      const x = -0.05 + (i % 4) * 0.033;
+      const z = i < 4 ? -0.015 : 0.02;
+      g.add(malla(new THREE.CylinderGeometry(0.003, 0.003, 0.09, 6), mat('#8a94a3'), [x, 0.08, z], [0.3 * ((i % 3) - 1), 0, 0.25 * ((i % 2) * 2 - 1)]));
+      g.add(malla(new THREE.CylinderGeometry(0.008, 0.008, 0.003, 10), mat('#8a94a3'), [x + 0.01 * ((i % 2) * 2 - 1), 0.125, z]));
+    }
+  });
+}
+
+export function tapete_caucho() {
+  return estatico((g) => {
+    g.add(malla(new THREE.CylinderGeometry(0.06, 0.06, 0.32, 20), mat('#2b2b33'), [0, 0.06, 0], [0, 0, Math.PI / 2]));
+    g.add(malla(new RoundedBoxGeometry(0.32, 0.012, 0.18, 2, 0.005), mat('#2b2b33'), [0, 0.006, 0.12]));
+    for (let i = 0; i < 6; i++) g.add(malla(new THREE.BoxGeometry(0.3, 0.004, 0.01), mat('#4a4a55'), [0, 0.014, 0.05 + i * 0.026]));
+  });
+}
+
+export function pintura() {
+  return estatico((g) => {
+    ['#e5484d', '#2dbe78', '#4f7cff'].forEach((c, i) => {
+      const x = -0.09 + i * 0.09;
+      g.add(malla(new THREE.CylinderGeometry(0.04, 0.04, 0.08, 18), mat('#c9d2de'), [x, 0.04, 0]));
+      g.add(malla(new THREE.CylinderGeometry(0.036, 0.036, 0.005, 18), mat(c), [x, 0.082, 0]));
+      g.add(malla(new THREE.BoxGeometry(0.081, 0.03, 0.004), mat(c), [x, 0.04, 0.04]));
+    });
+    g.add(malla(new THREE.CylinderGeometry(0.006, 0.006, 0.16, 8), mat('#b5835a'), [0.02, 0.1, 0.07], [0, 0, 1.0]));
+    g.add(malla(new RoundedBoxGeometry(0.03, 0.035, 0.012, 2, 0.004), mat('#ffc23c'), [-0.05, 0.065, 0.07], [0, 0, 1.0]));
+  });
+}
+
+export function plastico_liso() {
+  return estatico((g) => {
+    g.add(malla(new THREE.BoxGeometry(0.3, 0.006, 0.24), mat('#dff4ff', { opacidad: 0.7 }), [0, 0.003, 0], [0, 0.1, 0]));
+    g.add(malla(new THREE.BoxGeometry(0.28, 0.006, 0.22), mat('#cdeaff', { opacidad: 0.7 }), [0.01, 0.01, 0.01], [0, -0.08, 0]));
+    g.add(malla(new THREE.BoxGeometry(0.12, 0.002, 0.012), mat('#ffffff', { tipo: 'basica' }), [-0.04, 0.015, -0.03], [0, 0.5, 0]));
+  });
+}
+
 export const diseno = {
   estudiante,
   bebedero,
@@ -361,4 +517,16 @@ export const diseno = {
   portapapeles,
   lapiz,
   globo_dialogo,
+  bebedero_doble,
+  ladrillo,
+  mochila,
+  trapeador,
+  balon,
+  charco,
+  periodico,
+  frasco_vidrio,
+  clavos,
+  tapete_caucho,
+  pintura,
+  plastico_liso,
 };

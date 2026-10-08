@@ -354,6 +354,117 @@ export class Audio {
 
   callar() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    this.callarVoz();
+  }
+
+  // ── Voces grabadas (MP3 generados con npm run voces) ─────────────────────
+
+  /** Carga el manifiesto de voces de una lección. Sin carpeta (o si falla) no hay voces. */
+  async cargarVoces(carpeta) {
+    this.callarVoz();
+    this._voces = null;
+    if (!carpeta) return;
+    try {
+      const r = await fetch(`./${carpeta}/manifiesto.json`, { cache: 'no-cache' });
+      if (r.ok) this._voces = { carpeta, lista: await r.json(), buffers: new Map() };
+    } catch {
+      this._voces = null;
+    }
+  }
+
+  tieneVoz(clave) {
+    return Boolean(this._voces?.lista?.[clave]);
+  }
+
+  /** Duración (s) de una línea grabada, o 0 si no existe. */
+  duracionVoz(clave, velocidad = 1) {
+    return (this._voces?.lista?.[clave]?.seg ?? 0) / velocidad;
+  }
+
+  _bufferVoz(clave) {
+    const v = this._voces;
+    if (!v.buffers.has(clave)) {
+      v.buffers.set(
+        clave,
+        fetch(`./${v.carpeta}/${clave}.mp3`)
+          .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(r.status))))
+          .then((b) => this.ctx.decodeAudioData(b))
+          .catch(() => null),
+      );
+    }
+    return v.buffers.get(clave);
+  }
+
+  /** Descarga por adelantado las líneas de una escena (así suenan sin demora). */
+  precargarVoces(claves) {
+    if (!this.ctx || !this._voces) return;
+    for (const c of claves) if (this.tieneVoz(c)) this._bufferVoz(c);
+  }
+
+  /**
+   * Dice una línea grabada. Canal "principal": corta la línea anterior y alimenta
+   * nivelVoz() (boca de los personajes). Canal "ambiente": voces de fondo que no
+   * interrumpen. Resuelve true al terminar, o false si no hay audio o se interrumpió.
+   */
+  async decirVoz(clave, { pos = null, velocidad = 1, volumen = 1, canal = 'principal' } = {}) {
+    if (!this.ctx || !this.tieneVoz(clave)) return false;
+    const principal = canal === 'principal';
+    if (principal) this.callarVoz();
+    const turno = principal ? this._turnoVoz : null;
+    const buffer = await this._bufferVoz(clave);
+    if (!buffer || (principal && turno !== this._turnoVoz)) return false;
+    const ctx = this.ctx;
+    const fuente = ctx.createBufferSource();
+    fuente.buffer = buffer;
+    fuente.playbackRate.value = velocidad;
+    const ganancia = ctx.createGain();
+    ganancia.gain.value = volumen;
+    fuente.connect(ganancia);
+    let salida = ganancia;
+    if (principal) {
+      const analizador = ctx.createAnalyser();
+      analizador.fftSize = 512;
+      ganancia.connect(analizador);
+      salida = analizador;
+      this._vozActual = { fuente, analizador, datos: new Uint8Array(analizador.fftSize), turno };
+    }
+    this._conectar(salida, pos);
+    fuente.start();
+    return new Promise((resolver) => {
+      fuente.onended = () => {
+        const interrumpida = principal && this._vozActual?.fuente !== fuente;
+        if (principal && !interrumpida) this._vozActual = null;
+        resolver(!interrumpida);
+      };
+    });
+  }
+
+  callarVoz() {
+    this._turnoVoz = (this._turnoVoz ?? 0) + 1;
+    const v = this._vozActual;
+    this._vozActual = null;
+    try {
+      v?.fuente.stop();
+    } catch {
+      // ya había terminado
+    }
+  }
+
+  get hablando() {
+    return Boolean(this._vozActual);
+  }
+
+  /** Volumen (0..1) de la línea que suena ahora: mueve la boca del personaje que habla. */
+  nivelVoz() {
+    const v = this._vozActual;
+    if (!v) return 0;
+    v.analizador.getByteTimeDomainData(v.datos);
+    let suma = 0;
+    for (let i = 0; i < v.datos.length; i++) {
+      const x = (v.datos[i] - 128) / 128;
+      suma += x * x;
+    }
+    return Math.min(1, Math.sqrt(suma / v.datos.length) * 5);
   }
 
   _voz(idioma) {

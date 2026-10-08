@@ -1,0 +1,994 @@
+{
+  "id": "design-thinking-mision-bebedero",
+  "titulo": "Misión Bebedero: Design Thinking de Empatizar a Prototipar",
+  "materia": "Emprendimiento",
+  "grado": "7.º EGB",
+  "idioma": "es",
+  "duracionMinutos": 38,
+  "emoji": "🛠️",
+  "narracion": false,
+  "gamificacion": true,
+  "voces": {
+    "carpeta": "voces/design-thinking-mision-bebedero",
+    "personajes": {
+      "guia": { "tono": "+4%", "velocidad": "-4%" },
+      "camila": { "tono": "+55%", "velocidad": "-6%" },
+      "mateo": { "tono": "+38%", "velocidad": "-2%" },
+      "andres": { "tono": "+20%", "velocidad": "+0%" },
+      "profe": { "tono": "+6%", "velocidad": "-6%" },
+      "rosa": { "tono": "-20%", "velocidad": "-12%" },
+      "nino": { "tono": "+30%", "velocidad": "+6%" },
+      "nina": { "tono": "+48%", "velocidad": "+6%" }
+    }
+  },
+  "rangos": [
+    { "nombre": "Aprendiz de diseño", "emoji": "🌱", "puntos": 0 },
+    { "nombre": "Observador/a", "emoji": "👀", "puntos": 3000 },
+    { "nombre": "Investigador/a", "emoji": "🔍", "puntos": 6500 },
+    { "nombre": "Inventor/a", "emoji": "💡", "puntos": 10500 },
+    { "nombre": "Maker", "emoji": "🛠️", "puntos": 15000 },
+    { "nombre": "Innovador/a líder", "emoji": "🚀", "puntos": 20000 }
+  ],
+  "titulosMedalla": {
+    "oro": "¡Medalla de oro! Innovador/a legendario/a",
+    "plata": "¡Medalla de plata! Diseñador/a experto/a",
+    "bronce": "¡Medalla de bronce! Diseñador/a en formación"
+  },
+  "descripcion": "Los estudiantes de 7.º forman el Equipo de Innovación de la escuela y recorren cuatro fases del Design Thinking con un reto real: Camila, de 2.º de básica, casi no toma agua en el recreo. Observan el recreo en vivo (360°), entrevistan a Camila, a su profesora y a la conserje con preguntas para profundizar, arman el mapa de empatía, separan necesidades de soluciones disfrazadas, escriben el reto y la pregunta «¿Cómo podríamos…?», generan ideas con chispas creativas, las priorizan en una matriz 2×2, eligen con una matriz de decisión, planifican el prototipo (materiales y medida en una simulación a tamaño real) y lo construyen. Con voces, puntos, rangos e insignias. La fase 5, Testear, queda para la siguiente misión.",
+  "objetivos": [
+    "Observar una situación real como diseñador, separando la información importante de la que no lo es.",
+    "Entrevistar con preguntas abiertas y de profundización, reconociendo preguntas cerradas, que juzgan o que sugieren la respuesta.",
+    "Escuchar a varias personas relacionadas con el problema y organizar lo descubierto en un mapa de empatía (dice, hace, piensa, siente).",
+    "Distinguir una necesidad real de una solución disfrazada y redactar el reto (punto de vista) y la pregunta «¿Cómo podríamos…?».",
+    "Generar muchas ideas con técnicas creativas y priorizarlas según su impacto y su facilidad.",
+    "Elegir la mejor idea con una matriz de decisión basada en criterios.",
+    "Planificar y construir un prototipo seguro con material reciclado, eligiendo materiales y medidas con argumentos."
+  ],
+  "escenas": [
+    {
+      "tipo": "narrativa",
+      "entorno": "taller",
+      "titulo": "🚀 Misión Bebedero",
+      "presentador": {
+        "posicion": [1.25, 0, -1.45],
+        "opciones": {
+          "estatura": 1.62,
+          "peinado": "cola",
+          "cabello": "#3b2416",
+          "piel": "#c98b5e",
+          "superior": "#ff9f43",
+          "inferior": "#23304a",
+          "falda": false,
+          "cuello": "#ffffff"
+        }
+      },
+      "pasos": [
+        {
+          "emoji": "👋",
+          "texto": "¡Bienvenidos al Laboratorio de Innovación! Soy Valeria, su coach. Desde hoy ustedes forman el Equipo de Innovación de la escuela.",
+          "modelo": "bombilla"
+        },
+        {
+          "emoji": "🧠",
+          "texto": "Los diseñadores resuelven problemas con el Design Thinking: primero entienden a las personas y solo después inventan soluciones.",
+          "modelo": "corazon"
+        },
+        {
+          "emoji": "🗺️",
+          "texto": "Hoy recorrerán cuatro fases: EMPATIZAR, DEFINIR, IDEAR y PROTOTIPAR. La quinta fase, Testear, será su próxima misión.",
+          "modelo": "pieza_rompecabezas"
+        },
+        {
+          "emoji": "📩",
+          "texto": "Llegó un mensaje de la profe Andrea, de segundo de básica: «Camila casi no toma agua en el recreo y regresa al aula con sed y cansada. ¿Nos ayudan?»",
+          "modelo": "globo_dialogo"
+        },
+        {
+          "emoji": "⚠️",
+          "texto": "Regla de oro del diseñador: todavía NO inventen soluciones. Primero hay que entender a Camila de verdad. ¡Vamos al patio, que ya empieza el recreo!",
+          "modelo": "binoculares"
+        }
+      ]
+    },
+    {
+      "tipo": "observacion",
+      "entorno": "recreo",
+      "escenario": "recreo",
+      "titulo": "Fase 1 · Empatizar: observa el recreo",
+      "instruccion": "👀 ¡Es la hora del recreo! Observa como un diseñador: gira y mira a tu alrededor. Toca cada 👁️ y decide si lo que ves ayuda a entender por qué Camila no toma agua.",
+      "mensajeFinal": "🎉 ¡Excelente observación! Un buen diseñador mira con atención antes de opinar. Tu bitácora ya tiene pistas muy valiosas.",
+      "observaciones": [
+        {
+          "lugar": "puntitas",
+          "texto": "Camila se para de puntitas y estira el cuello, pero no alcanza el chorro del bebedero.",
+          "corto": "No alcanza el chorro, aunque se pare de puntitas.",
+          "relevante": true,
+          "explicacion": "Es el centro del problema: el bebedero está más alto de lo que ella alcanza."
+        },
+        {
+          "lugar": "mojada",
+          "texto": "Cuando por fin sale el agua, el chorro le salpica el uniforme y Camila se seca la ropa con las manos.",
+          "corto": "El chorro le moja el uniforme.",
+          "relevante": true,
+          "explicacion": "Además de no alcanzar, se moja. Eso la hace sentir incómoda."
+        },
+        {
+          "lugar": "grande",
+          "texto": "Andrés, un estudiante grande, se inclina y toma agua sin ningún problema.",
+          "corto": "Los grandes beben sin problema: el bebedero está hecho a su medida.",
+          "relevante": true,
+          "explicacion": "¡Clave! El bebedero sí funciona… pero solo para los grandes. Fue diseñado pensando en otras personas."
+        },
+        {
+          "lugar": "mateo",
+          "texto": "Mateo, compañero de Camila, se sube a un ladrillo flojo para alcanzar el agua. ¡Se tambalea!",
+          "corto": "Mateo se sube a un ladrillo flojo: es peligroso.",
+          "relevante": true,
+          "explicacion": "Otros niños pequeños tienen el mismo problema y lo resuelven de forma peligrosa. La solución tendrá que ser segura."
+        },
+        {
+          "lugar": "charco",
+          "texto": "Doña Rosa trapea un charco junto al bebedero: el piso queda mojado y resbaloso.",
+          "corto": "Junto al bebedero hay un charco: el piso resbala.",
+          "relevante": true,
+          "explicacion": "La seguridad también es parte del problema: cerca del bebedero alguien se puede resbalar."
+        },
+        {
+          "lugar": "banca",
+          "texto": "Camila se rinde, se sienta en la banca y se abanica con la mano, con cara de tristeza.",
+          "corto": "Se rinde y se queda con sed en la banca.",
+          "relevante": true,
+          "explicacion": "Muestra lo que siente: frustración y sed. Las emociones también son información para el diseñador."
+        },
+        {
+          "lugar": "mochila",
+          "texto": "La mochila de Camila está abierta: hoy no trajo botella de agua.",
+          "corto": "Hoy no trajo botella: depende del bebedero.",
+          "relevante": true,
+          "explicacion": "Sin botella, el bebedero es su única forma de tomar agua en el recreo."
+        },
+        {
+          "lugar": "sol",
+          "texto": "Es mediodía en Quito y el sol pica fuerte: todos sudan y buscan agua.",
+          "corto": "Al mediodía hace calor: se necesita más agua.",
+          "relevante": true,
+          "explicacion": "El contexto importa: a 2 850 metros de altura el sol es fuerte y los niños necesitan hidratarse."
+        },
+        {
+          "lugar": "futbol",
+          "texto": "Unos estudiantes juegan fútbol en la cancha.",
+          "relevante": false,
+          "explicacion": "Es parte del recreo, pero no explica por qué Camila no toma agua."
+        },
+        {
+          "lugar": "bandera",
+          "texto": "La bandera del Ecuador ondea en el asta.",
+          "relevante": false,
+          "explicacion": "Es parte del patio, pero no tiene que ver con el reto."
+        },
+        {
+          "lugar": "cuerda",
+          "texto": "Unas niñas saltan la cuerda y cuentan en voz alta.",
+          "relevante": false,
+          "explicacion": "Están jugando: no nos dice nada sobre el problema del agua."
+        },
+        {
+          "lugar": "rayuela",
+          "texto": "Hay una rayuela de colores pintada en el piso.",
+          "relevante": false,
+          "explicacion": "Es un detalle bonito del patio, pero no ayuda a entender el problema de Camila."
+        }
+      ],
+      "frases": {
+        "camilaMojada": { "quien": "camila", "texto": "¡Ay, me mojé toda!" },
+        "camilaNoAlcanzo": { "quien": "camila", "texto": "No alcanzo… mejor me voy." },
+        "camilaSed": { "quien": "camila", "texto": "Tengo mucha sed…" },
+        "mateoUy": { "quien": "mateo", "texto": "¡Uy! ¡Casi me caigo!" },
+        "andresRica": { "quien": "andres", "texto": "¡Ahhh, qué rica el agua!" },
+        "rosaCuidado": { "quien": "rosa", "texto": "¡Cuidado, mijos, que el piso está mojado!" },
+        "futbolPasala": { "quien": "nino", "texto": "¡Pásala, pásala!" },
+        "futbolGol": { "quien": "nino", "texto": "¡Gooool!" },
+        "cuerdaCuenta": { "quien": "nina", "texto": "¡Uno, dos, tres, cuatro, cinco!" }
+      }
+    },
+    {
+      "tipo": "entrevista",
+      "entorno": "recreo",
+      "titulo": "Fase 1 · Empatizar: entrevista a Camila",
+      "instruccion": "🎤 Conversa con Camila. Elige preguntas abiertas, que empiecen con «¿Cómo…?», «¿Qué…?» o «Cuéntame…», y no la juzgues. Las buenas respuestas abren preguntas para PROFUNDIZAR (↪).",
+      "saludo": "Hola… Soy Camila, de segundo de básica. ¿Ustedes son de séptimo? ¡Qué grandes!",
+      "mensajeFinal": "🎉 ¡Entrevista profunda! Escuchaste, preguntaste y profundizaste: así se EMPATIZA de verdad.",
+      "minimo": 6,
+      "personaje": {
+        "nombre": "Camila",
+        "modelo": "persona",
+        "voz": "camila",
+        "expresion": "triste",
+        "posicion": [0, 0, -1.55],
+        "opciones": { "peinado": "colitas", "estatura": 1.12, "superior": "#2f4a8a", "inferior": "#4d5566", "cuello": "#ffffff" }
+      },
+      "preguntas": [
+        {
+          "texto": "¿Cómo te sientes cuando tienes sed en el recreo?",
+          "tipo": "buena",
+          "respuesta": "Me siento cansada y un poco triste. Después de jugar me da muchísima sed.",
+          "hallazgo": "Se siente cansada y triste cuando tiene sed.",
+          "expresion": "triste",
+          "sigue": [
+            {
+              "texto": "¿Qué pasa cuando regresas al aula con sed?",
+              "tipo": "buena",
+              "respuesta": "Me duele un poquito la cabeza y no puedo poner atención. La profe dice que tome agua, pero ya no hay tiempo.",
+              "hallazgo": "Con sed le cuesta concentrarse en clase.",
+              "expresion": "triste"
+            }
+          ]
+        },
+        {
+          "texto": "¿Qué pasa cuando intentas usar el bebedero?",
+          "tipo": "buena",
+          "respuesta": "¡Es muy alto! Me paro de puntitas y el agua me cae en la ropa.",
+          "hallazgo": "El bebedero es muy alto y el agua la moja.",
+          "expresion": "sorpresa",
+          "sigue": [
+            {
+              "texto": "Cuéntame, ¿cómo te sientes cuando el agua te moja?",
+              "tipo": "buena",
+              "respuesta": "Me da vergüenza… los de quinto se ríen. Por eso prefiero ya no intentarlo.",
+              "hallazgo": "Siente vergüenza cuando se moja frente a otros.",
+              "expresion": "triste"
+            }
+          ]
+        },
+        {
+          "texto": "¿Qué haces cuando no alcanzas el agua?",
+          "tipo": "buena",
+          "respuesta": "Me voy a la banca. Mateo se sube a un ladrillo, pero a mí me da miedo caerme.",
+          "hallazgo": "Le dan miedo las soluciones inseguras, como el ladrillo.",
+          "expresion": "neutral",
+          "sigue": [
+            {
+              "texto": "¿Qué te daría confianza para tomar agua?",
+              "tipo": "buena",
+              "respuesta": "Poder hacerlo sola, sin que nadie me cargue… ¡y sin caerme!",
+              "hallazgo": "Quiere tomar agua sola y sentirse segura.",
+              "expresion": "feliz"
+            }
+          ]
+        },
+        {
+          "texto": "¿Qué llevas en tu mochila para el recreo?",
+          "tipo": "buena",
+          "respuesta": "Mi lonchera… y a veces mi botella. Pero hoy se me olvidó en la casa.",
+          "hallazgo": "A veces olvida su botella: depende del bebedero.",
+          "expresion": "neutral"
+        },
+        {
+          "texto": "¿Te gusta el agua?",
+          "tipo": "mala",
+          "error": "cerrada",
+          "respuesta": "Sí.",
+          "expresion": "neutral",
+          "retro": "solo se responde con «sí» o «no» y no aprendemos nada nuevo."
+        },
+        {
+          "texto": "¿Por qué no le pides a alguien que te cargue?",
+          "tipo": "mala",
+          "error": "juzga",
+          "respuesta": "Es que… me da vergüenza.",
+          "expresion": "triste",
+          "retro": "hace sentir que Camila tiene la culpa. Para empatizar escuchamos sin juzgar."
+        },
+        {
+          "texto": "¿Verdad que lo mejor sería un banquito?",
+          "tipo": "mala",
+          "error": "sugiere",
+          "respuesta": "Eh… sí, creo…",
+          "expresion": "neutral",
+          "retro": "le pone la solución en la boca. Primero hay que entender el problema, no proponer soluciones."
+        },
+        {
+          "texto": "¿Cuál es tu dibujo animado favorito?",
+          "tipo": "mala",
+          "error": "irrelevante",
+          "respuesta": "¡Los de dinosaurios!",
+          "expresion": "feliz",
+          "retro": "es simpática, pero no nos ayuda a entender el problema del agua."
+        }
+      ],
+      "utileria": [
+        { "modelo": "bebedero_doble", "posicion": [1.25, 0, -3], "rotacion": -25 },
+        { "modelo": "ladrillo", "posicion": [1.5, 0, -2.55], "rotacion": -10 }
+      ]
+    },
+    {
+      "tipo": "entrevista",
+      "entorno": "recreo",
+      "titulo": "Fase 1 · Empatizar: otras voces",
+      "instruccion": "👥 Un buen diseñador escucha a varias personas. Pregunta a la profe Andrea y a Doña Rosa, la conserje. El dibujo de cada pregunta indica a quién va dirigida.",
+      "mensajeFinal": "🎉 ¡Muy bien! Escuchaste a varias personas y descubriste cosas que Camila no sabía: el piso resbaloso, los materiales de la bodega y que el bebedero no se puede mover.",
+      "minimo": 5,
+      "personajes": [
+        {
+          "id": "profe",
+          "nombre": "Profe Andrea",
+          "emoji": "👩‍🏫",
+          "modelo": "persona",
+          "voz": "profe",
+          "expresion": "feliz",
+          "saludo": "¡Hola, chicos de séptimo! Qué bueno que vienen a ayudar a mis estudiantes.",
+          "posicion": [-0.7, 0, -2],
+          "opciones": {
+            "edad": "adulto",
+            "estatura": 1.6,
+            "peinado": "largo",
+            "cabello": "#2b1d14",
+            "piel": "#c98b5e",
+            "superior": "#e85d8a",
+            "inferior": "#3a4256",
+            "falda": true,
+            "cuello": null,
+            "lentes": true
+          }
+        },
+        {
+          "id": "rosa",
+          "nombre": "Doña Rosa",
+          "emoji": "🧹",
+          "modelo": "persona",
+          "voz": "rosa",
+          "expresion": "feliz",
+          "saludo": "Buenos días, jóvenes. Yo cuido este patio desde hace veinte años. Pregunten nomás.",
+          "posicion": [0.7, 0, -2],
+          "opciones": {
+            "edad": "adulto",
+            "estatura": 1.55,
+            "peinado": "mono",
+            "cabello": "#7a7a80",
+            "piel": "#a8704a",
+            "superior": "#3d6fb5",
+            "inferior": "#2f3b52",
+            "falda": false,
+            "cuello": null,
+            "delantal": "#9fd3ff"
+          }
+        }
+      ],
+      "preguntas": [
+        {
+          "a": "profe",
+          "texto": "¿Qué ha notado en sus estudiantes después del recreo?",
+          "tipo": "buena",
+          "respuesta": "Varios niños de segundo regresan con sed y cansados, y les cuesta concentrarse. No solo le pasa a Camila.",
+          "hallazgo": "No es solo Camila: varios niños de 2.º regresan con sed.",
+          "expresion": "neutral",
+          "sigue": [
+            {
+              "texto": "¿Para quiénes se instaló este bebedero?",
+              "tipo": "buena",
+              "respuesta": "Lo pusieron cuando la escuela era solo para los grandes. Por eso está hecho a la medida de los estudiantes mayores.",
+              "hallazgo": "El bebedero se diseñó para estudiantes grandes.",
+              "expresion": "sorpresa"
+            }
+          ]
+        },
+        {
+          "a": "profe",
+          "texto": "¿Qué ha intentado usted para ayudarlos?",
+          "tipo": "buena",
+          "respuesta": "Les recuerdo traer botella, pero muchos la olvidan. Y yo no puedo cargar a todos en el recreo.",
+          "hallazgo": "Recordar la botella no basta: muchos la olvidan.",
+          "expresion": "triste"
+        },
+        {
+          "a": "rosa",
+          "texto": "¿Qué pasa con el piso junto al bebedero?",
+          "tipo": "buena",
+          "respuesta": "Como el agua salpica, se hace un charco. La semana pasada un pequeñito se resbaló.",
+          "hallazgo": "El piso mojado es peligroso: un niño ya se resbaló.",
+          "expresion": "triste",
+          "sigue": [
+            {
+              "texto": "¿Qué opina de que los niños se suban a ladrillos?",
+              "tipo": "buena",
+              "respuesta": "¡Uy, peligrosísimo! Los ladrillos se mueven. Yo los guardo, pero ellos los vuelven a traer.",
+              "hallazgo": "Los niños inventan soluciones peligrosas: hace falta una segura.",
+              "expresion": "sorpresa"
+            }
+          ]
+        },
+        {
+          "a": "rosa",
+          "texto": "¿Qué materiales hay en la bodega de la escuela?",
+          "tipo": "buena",
+          "respuesta": "Hay cajas de cartón grueso, botellas plásticas con tapa y cinta de embalaje del reciclaje. ¡Todo eso se puede usar!",
+          "hallazgo": "En la bodega hay cajas, botellas con tapa y cinta.",
+          "expresion": "feliz"
+        },
+        {
+          "a": "rosa",
+          "texto": "¿Se podría cambiar el bebedero de lugar o de altura?",
+          "tipo": "buena",
+          "respuesta": "No, mijo: está conectado a la tubería. Cambiarlo cuesta mucho dinero y necesita un plomero.",
+          "hallazgo": "El bebedero no se puede mover: cuesta mucho y necesita plomero.",
+          "expresion": "neutral"
+        },
+        {
+          "a": "profe",
+          "texto": "¿Usted también cree que la solución es poner un banco?",
+          "tipo": "mala",
+          "error": "sugiere",
+          "respuesta": "Mmm… no sé. Ustedes son los diseñadores.",
+          "expresion": "neutral",
+          "retro": "le pide a la profe que apruebe una solución que todavía no hemos pensado. Primero escuchamos."
+        },
+        {
+          "a": "rosa",
+          "texto": "¿Por qué no limpia más rápido el charco?",
+          "tipo": "mala",
+          "error": "juzga",
+          "respuesta": "Hago lo que puedo, joven… somos pocos para todo el patio.",
+          "expresion": "triste",
+          "retro": "culpa a Doña Rosa. Para empatizar con todos, preguntamos sin culpar."
+        },
+        {
+          "a": "profe",
+          "texto": "¿Camila es buena estudiante?",
+          "tipo": "mala",
+          "error": "cerrada",
+          "respuesta": "Sí, es muy buena.",
+          "expresion": "feliz",
+          "retro": "se responde con «sí» o «no» y no tiene que ver con el problema del agua."
+        }
+      ],
+      "utileria": [
+        { "modelo": "bebedero_doble", "posicion": [0, 0, -3.35] },
+        { "modelo": "charco", "posicion": [0.1, 0, -2.75] }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "taller",
+      "titulo": "Fase 1 · Empatizar: mapa de empatía",
+      "instruccion": "🗺️ Organiza lo que descubriste en el mapa de empatía de Camila: ¿qué DICE, qué PIENSA, qué HACE y qué SIENTE? Agarra cada tarjeta y suéltala en su cuadrante.",
+      "mensajeFinal": "🗺️ ¡Mapa de empatía completo! Ahora conoces a Camila por fuera y por dentro.",
+      "insignia": { "emoji": "❤️", "nombre": "Maestro/a de la empatía" },
+      "tablero": {
+        "columnas": 2,
+        "centro": { "emoji": "👧", "texto": "Camila" }
+      },
+      "categorias": [
+        { "id": "dice", "nombre": "Dice", "emoji": "💬", "color": "#1c9ab8" },
+        { "id": "piensa", "nombre": "Piensa", "emoji": "💭", "color": "#8b5cf6" },
+        { "id": "hace", "nombre": "Hace", "emoji": "🏃", "color": "#21a366" },
+        { "id": "siente", "nombre": "Siente", "emoji": "❤️", "color": "#e8457f" }
+      ],
+      "elementos": [
+        {
+          "nombre": "«¡El bebedero es muy alto para mí!»",
+          "emoji": "🗣️",
+          "categoria": "dice",
+          "explicacion": "Son sus propias palabras: va en DICE.",
+          "pista": "¿Son palabras que dijo en voz alta?"
+        },
+        {
+          "nombre": "«Quiero tomar agua sola, como los grandes»",
+          "emoji": "🗣️",
+          "categoria": "dice",
+          "explicacion": "Lo dijo en la entrevista: es lo que DICE.",
+          "pista": "Fíjate en las comillas: alguien lo dijo."
+        },
+        {
+          "nombre": "«Si me subo al ladrillo, me puedo caer»",
+          "emoji": "🧠",
+          "categoria": "piensa",
+          "explicacion": "Es una idea que da vueltas en su cabeza: va en PIENSA.",
+          "pista": "¿Es algo que pasa por su cabeza?"
+        },
+        {
+          "nombre": "«Si me mojo, los grandes se van a reír»",
+          "emoji": "🧠",
+          "categoria": "piensa",
+          "explicacion": "Es una preocupación que tiene: va en PIENSA.",
+          "pista": "¿Es algo que imagina o se preocupa?"
+        },
+        {
+          "nombre": "Se para de puntitas y estira el cuello",
+          "emoji": "🦶",
+          "categoria": "hace",
+          "explicacion": "Es una acción que observamos: va en HACE.",
+          "pista": "¿Es algo que la vimos hacer?"
+        },
+        {
+          "nombre": "Se rinde y se sienta en la banca",
+          "emoji": "🪑",
+          "categoria": "hace",
+          "explicacion": "Lo vimos en el recreo: es algo que HACE.",
+          "pista": "¿Es una acción?"
+        },
+        {
+          "nombre": "Trae lonchera, pero olvida la botella",
+          "emoji": "🎒",
+          "categoria": "hace",
+          "explicacion": "Es una costumbre, algo que HACE.",
+          "pista": "¿Es algo que hace (o deja de hacer)?"
+        },
+        {
+          "nombre": "Vergüenza cuando el agua la moja",
+          "emoji": "😳",
+          "categoria": "siente",
+          "explicacion": "Es una emoción: va en SIENTE.",
+          "pista": "¿Es una emoción?"
+        },
+        {
+          "nombre": "Cansancio y sed al volver al aula",
+          "emoji": "😓",
+          "categoria": "siente",
+          "explicacion": "Es lo que siente su cuerpo: va en SIENTE.",
+          "pista": "¿Es algo que siente?"
+        },
+        {
+          "nombre": "Frustración al ver que los grandes sí pueden",
+          "emoji": "😤",
+          "categoria": "siente",
+          "explicacion": "Es una emoción fuerte: va en SIENTE.",
+          "pista": "¿Es una emoción?"
+        }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "taller",
+      "titulo": "Fase 2 · Definir: ¿necesidad o solución disfrazada?",
+      "instruccion": "🎯 Una NECESIDAD dice lo que la persona quiere LOGRAR. Si ya nombra un objeto o a otra persona que lo resuelve, es una SOLUCIÓN DISFRAZADA. Clasifica cada tarjeta.",
+      "mensajeFinal": "🎯 ¡Muy bien! Los diseñadores separan lo que la persona NECESITA de las soluciones que se nos ocurren demasiado rápido.",
+      "categorias": [
+        { "id": "necesidad", "nombre": "Necesidad real", "emoji": "🎯", "color": "#21a366" },
+        { "id": "solucion", "nombre": "Solución disfrazada", "emoji": "🎭", "color": "#ff9f43" },
+        { "id": "nada", "nombre": "No es el problema", "emoji": "💭", "color": "#7b8798" }
+      ],
+      "elementos": [
+        {
+          "nombre": "Tomar agua sola, sin depender de nadie",
+          "emoji": "🙋‍♀️",
+          "categoria": "necesidad",
+          "explicacion": "Dice lo que quiere lograr: ser independiente.",
+          "pista": "¿Dice lo que quiere LOGRAR, sin nombrar un objeto?"
+        },
+        {
+          "nombre": "Sentirse segura al tomar agua",
+          "emoji": "🛡️",
+          "categoria": "necesidad",
+          "explicacion": "Necesita no caerse ni resbalar.",
+          "pista": "¿Nombra un objeto o un logro?"
+        },
+        {
+          "nombre": "Hidratarse en el recreo aunque olvide la botella",
+          "emoji": "💧",
+          "categoria": "necesidad",
+          "explicacion": "Necesita una forma confiable de tomar agua.",
+          "pista": "¿Es algo que quiere lograr?"
+        },
+        {
+          "nombre": "Necesita un banquito rojo",
+          "emoji": "🪑",
+          "categoria": "solucion",
+          "explicacion": "Ya trae un objeto: es una solución disfrazada de necesidad.",
+          "pista": "¿Ya nombra un objeto?"
+        },
+        {
+          "nombre": "Necesita que cambien el bebedero",
+          "emoji": "🚰",
+          "categoria": "solucion",
+          "explicacion": "Es una solución… y además el bebedero no se puede mover.",
+          "pista": "¿Ya dice cómo resolverlo?"
+        },
+        {
+          "nombre": "Necesita que un adulto la cargue",
+          "emoji": "🧍",
+          "categoria": "solucion",
+          "explicacion": "Es una solución, y Camila quiere hacerlo sola.",
+          "pista": "¿Ya dice quién lo resuelve?"
+        },
+        {
+          "nombre": "Su color favorito es el morado",
+          "emoji": "🎨",
+          "categoria": "nada",
+          "explicacion": "Nos ayuda a conocerla, pero no es el problema.",
+          "pista": "¿Tiene que ver con tomar agua?"
+        },
+        {
+          "nombre": "Tiene un perrito llamado Coco",
+          "emoji": "🐶",
+          "categoria": "nada",
+          "explicacion": "Es un dato simpático, pero no es parte del reto.",
+          "pista": "¿Explica por qué no toma agua?"
+        },
+        {
+          "nombre": "Le encantan los dibujos de dinosaurios",
+          "emoji": "🦕",
+          "categoria": "nada",
+          "explicacion": "No cambia lo que pasa en el recreo.",
+          "pista": "¿Tiene que ver con el bebedero?"
+        }
+      ]
+    },
+    {
+      "tipo": "frase",
+      "entorno": "taller",
+      "titulo": "Fase 2 · Definir: el reto en una frase",
+      "instruccion": "✍️ Arma el PUNTO DE VISTA del equipo: elige la mejor opción para cada parte. Una buena frase dice QUIÉN es la persona, qué NECESITA y POR QUÉ.",
+      "mensajeFinal": "🎯 ¡Reto definido! Con esta pregunta, el equipo está listo para IDEAR.",
+      "insignia": { "emoji": "🎯", "nombre": "Definidor/a de retos" },
+      "partes": [
+        {
+          "etiqueta": "👧 QUIÉN",
+          "opciones": [
+            { "texto": "Camila, una niña de 7 años de segundo de básica, ", "correcta": true, "retro": "Nombramos a la persona real que entrevistamos." },
+            { "texto": "Todos los estudiantes de la escuela", "correcta": false, "retro": "Es demasiado general: perdemos a la persona real que conocimos." },
+            { "texto": "El bebedero del patio", "correcta": false, "retro": "El usuario es una persona, no un objeto." }
+          ]
+        },
+        {
+          "etiqueta": "🎯 NECESITA",
+          "opciones": [
+            { "texto": "necesita tomar agua sola y segura durante el recreo", "correcta": true, "retro": "Es una necesidad: dice lo que quiere lograr." },
+            { "texto": "necesita un banquito de plástico rojo", "correcta": false, "retro": "Es una solución disfrazada: ya trae un objeto." },
+            { "texto": "necesita jugar más tiempo en el recreo", "correcta": false, "retro": "No es lo que descubrimos al empatizar." }
+          ]
+        },
+        {
+          "etiqueta": "💡 PORQUE",
+          "opciones": [
+            {
+              "texto": "porque el bebedero está hecho para los grandes y le da vergüenza mojarse o pedir ayuda.",
+              "correcta": true,
+              "retro": "Es un insight: une lo que observamos con lo que ella siente."
+            },
+            {
+              "texto": "porque es muy pequeña y no sabe tomar agua.",
+              "correcta": false,
+              "retro": "Juzga a Camila. El problema es el diseño del bebedero, no ella."
+            },
+            { "texto": "porque a los niños no les gusta el agua.", "correcta": false, "retro": "Es una suposición: Camila nos dijo que tiene mucha sed." }
+          ]
+        }
+      ],
+      "pregunta": {
+        "instruccion": "❓ Último paso: convierte el reto en una pregunta para idear. ¿Cuál es la mejor pregunta «¿Cómo podríamos…?»?",
+        "opciones": [
+          {
+            "texto": "¿Cómo podríamos ayudar a Camila a tomar agua sola y segura en el recreo?",
+            "correcta": true,
+            "retro": "¡Perfecta! Ni muy amplia ni muy estrecha: deja espacio para muchas ideas."
+          },
+          {
+            "texto": "¿Cómo podríamos arreglar todos los problemas de la escuela?",
+            "correcta": false,
+            "retro": "Es demasiado amplia: no sabríamos por dónde empezar."
+          },
+          {
+            "texto": "¿Cómo podríamos construir un banco rojo de 20 cm?",
+            "correcta": false,
+            "retro": "Es demasiado estrecha: ya trae la solución y no deja idear."
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "lluvia",
+      "entorno": "taller",
+      "titulo": "Fase 3 · Idear: lluvia de ideas",
+      "instruccion": "💡 ¡A idear! Cada bombilla es una CHISPA: una pregunta «¿Y si…?» para inventar ideas. Tócalas todas hasta llenar el muro. En una lluvia de ideas vale todo: ¡todavía no juzgamos!",
+      "mensajeFinal": "🎉 ¡Doce ideas en el muro! Muchas ideas, incluso las más locas, ayudan a encontrar una genial. Ahora toca elegir con criterio.",
+      "elegir": false,
+      "chispas": [
+        { "texto": "¿Y si Camila subiera?", "emoji": "🪜" },
+        { "texto": "¿Y si el agua bajara?", "emoji": "🚰" },
+        { "texto": "¿Y si fuera una idea loca?", "emoji": "🚀" }
+      ],
+      "ideas": [
+        { "texto": "Un escalón firme junto al bebedero", "emoji": "🪜", "chispa": 0 },
+        { "texto": "Una plataforma de cemento con pasamanos", "emoji": "🧱", "chispa": 0 },
+        { "texto": "Zancos para niños pequeños", "emoji": "🦒", "chispa": 0 },
+        { "texto": "Que un adulto la cargue siempre", "emoji": "🧍", "chispa": 0 },
+        { "texto": "Un bebedero más bajito", "emoji": "🚰", "chispa": 1 },
+        { "texto": "Un dispensador con vasitos a su altura", "emoji": "🥤", "chispa": 1 },
+        { "texto": "Una botella con su nombre en el aula", "emoji": "🧴", "chispa": 1 },
+        { "texto": "Una manguera con boquilla bajita", "emoji": "🌀", "chispa": 1 },
+        { "texto": "Un dron que le lleve agua", "emoji": "🚁", "chispa": 2 },
+        { "texto": "Un tobogán que termine en el bebedero", "emoji": "🛝", "chispa": 2 },
+        { "texto": "Un robot mesero de agua", "emoji": "🤖", "chispa": 2 },
+        { "texto": "Una alarma que le recuerde tomar agua", "emoji": "⏰", "chispa": 2 }
+      ]
+    },
+    {
+      "tipo": "clasificar",
+      "entorno": "taller",
+      "titulo": "Fase 3 · Idear: prioriza las ideas",
+      "instruccion": "📊 Ubica cada idea en la matriz: ¿cuánto AYUDA a Camila (impacto) y qué tan FÁCIL es hacerla nosotros? Agarra cada nota y suéltala en su cuadrante.",
+      "mensajeFinal": "📊 ¡Matriz lista! Las ideas de arriba son las que más ayudan a Camila. Ahora las compararemos con lupa.",
+      "tablero": { "columnas": 2, "ejeX": "Más fácil de hacer ➡", "ejeY": "Más impacto para Camila ➡" },
+      "categorias": [
+        { "id": "dificil", "nombre": "Gran impacto, pero difícil", "emoji": "🏔️", "color": "#4f7cff" },
+        { "id": "estrella", "nombre": "Gran impacto y fácil", "emoji": "⭐", "color": "#21a366" },
+        { "id": "descartar", "nombre": "Difícil y poco impacto", "emoji": "🗑️", "color": "#7b8798" },
+        { "id": "rapida", "nombre": "Fácil, pero poco impacto", "emoji": "🧸", "color": "#f08c00" }
+      ],
+      "elementos": [
+        {
+          "nombre": "Escalón firme junto al bebedero",
+          "emoji": "🪜",
+          "categoria": "estrella",
+          "explicacion": "Ayuda muchísimo y lo podemos hacer con material reciclado.",
+          "pista": "¿Ayuda mucho? ¿Lo podemos hacer nosotros?"
+        },
+        {
+          "nombre": "Dispensador con vasitos a su altura",
+          "emoji": "🥤",
+          "categoria": "estrella",
+          "explicacion": "Ayuda mucho y se arma con un bidón y una mesa bajita.",
+          "pista": "Con un bidón y una mesa bajita… ¿es difícil?"
+        },
+        {
+          "nombre": "Bebedero más bajito",
+          "emoji": "🚰",
+          "categoria": "dificil",
+          "explicacion": "Ayudaría mucho, pero necesita plomero, tuberías y dinero.",
+          "pista": "Doña Rosa dijo que cambiarlo cuesta mucho…"
+        },
+        {
+          "nombre": "Plataforma de cemento con pasamanos",
+          "emoji": "🧱",
+          "categoria": "dificil",
+          "explicacion": "Ayudaría, pero necesita albañil y cemento.",
+          "pista": "¿Podemos trabajar con cemento nosotros?"
+        },
+        {
+          "nombre": "Botella con su nombre en el aula",
+          "emoji": "🧴",
+          "categoria": "rapida",
+          "explicacion": "Es fácil, pero si la olvida o se acaba el agua, no resuelve el problema.",
+          "pista": "Es fácil… pero ¿qué pasa si la olvida?"
+        },
+        {
+          "nombre": "Alarma que le recuerde tomar agua",
+          "emoji": "⏰",
+          "categoria": "rapida",
+          "explicacion": "Es fácil, pero igual no alcanzaría el bebedero.",
+          "pista": "Le recuerda… pero ¿alcanza el agua?"
+        },
+        {
+          "nombre": "Dron que le lleve agua",
+          "emoji": "🚁",
+          "categoria": "descartar",
+          "explicacion": "Es carísimo, difícil y no es seguro en un patio lleno de niños.",
+          "pista": "¿Es fácil o barato tener un dron?"
+        },
+        {
+          "nombre": "Tobogán que termine en el bebedero",
+          "emoji": "🛝",
+          "categoria": "descartar",
+          "explicacion": "Es divertido, pero difícil de construir y peligroso.",
+          "pista": "¿Sería fácil y seguro?"
+        }
+      ]
+    },
+    {
+      "tipo": "matriz",
+      "entorno": "taller",
+      "titulo": "Fase 3 · Idear: matriz de decisión",
+      "instruccion": "⚖️ Evalúa las cuatro ideas finalistas con los criterios que salieron de las entrevistas. Toca cada casilla para marcar ✅ si cumple o ❌ si no cumple, y luego toca «Comprobar».",
+      "mensajeFinal": "🏆 ¡El escalón firme cumple los cinco criterios! Es la idea que vamos a PROTOTIPAR.",
+      "insignia": { "emoji": "💡", "nombre": "Fábrica de ideas" },
+      "criterios": [
+        { "texto": "La usa SOLA", "emoji": "🙋‍♀️" },
+        { "texto": "Es SEGURA", "emoji": "🛡️" },
+        { "texto": "La hacemos NOSOTROS", "emoji": "♻️" },
+        { "texto": "Sirve TODOS los días", "emoji": "📅" },
+        { "texto": "Cuesta POCO", "emoji": "💲" }
+      ],
+      "ideas": [
+        {
+          "texto": "Escalón firme",
+          "emoji": "🪜",
+          "cumple": [true, true, true, true, true],
+          "porque": [
+            "Camila se sube sola, sin pedir ayuda.",
+            "Con caucho antideslizante y bien relleno, es seguro.",
+            "Lo hacemos con cajas, botellas y cinta de la bodega.",
+            "Está siempre junto al bebedero, aunque olvide la botella.",
+            "El material reciclado es gratis."
+          ]
+        },
+        {
+          "texto": "Dispensador con vasitos",
+          "emoji": "🥤",
+          "cumple": [true, true, true, false, true],
+          "porque": [
+            "Camila se sirve sola.",
+            "Un bidón con llave a su altura es seguro.",
+            "Lo armamos con un bidón reciclado y una mesa.",
+            "No sirve todos los días por sí solo: alguien tiene que llenarlo y lavar los vasos.",
+            "Un bidón reciclado cuesta poco."
+          ]
+        },
+        {
+          "texto": "Bebedero más bajito",
+          "emoji": "🚰",
+          "cumple": [true, true, false, true, false],
+          "porque": [
+            "Camila lo usaría sola.",
+            "Un bebedero bajito es seguro.",
+            "No lo podemos hacer nosotros: necesita plomero y tuberías.",
+            "Una vez instalado, funciona todos los días.",
+            "Cambiar tuberías cuesta mucho dinero."
+          ]
+        },
+        {
+          "texto": "Plataforma de cemento",
+          "emoji": "🧱",
+          "cumple": [true, true, false, true, false],
+          "porque": [
+            "Camila se subiría sola.",
+            "Con pasamanos, es segura.",
+            "No la podemos hacer nosotros: necesita albañil y cemento.",
+            "Una vez hecha, sirve todos los días.",
+            "El cemento y el pasamanos cuestan bastante."
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "prototipo",
+      "entorno": "taller",
+      "titulo": "Fase 4 · Prototipar: planifica el prototipo",
+      "instruccion": "🧰 Un prototipo es una versión simple para probar la idea. Revisa el estante: toca cada material y decide si sirve para un escalón FIRME y SEGURO.",
+      "instruccionMedida": "📏 Ahora la altura. Prueba cada medida en la simulación y observa a Camila: ¿con cuál alcanza el chorro cómoda y segura?",
+      "mensajeFinal": "📐 ¡Plan listo! Materiales seguros y una altura de veintidós centímetros. ¡A construir!",
+      "materiales": [
+        {
+          "modelo": "caja_carton",
+          "nombre": "Caja de cartón grueso",
+          "sirve": true,
+          "explicacion": "Es la base: firme, gratis y fácil de cortar a la medida."
+        },
+        {
+          "modelo": "botella_plastica",
+          "opciones": { "tapa": true },
+          "nombre": "Botellas con tapa",
+          "sirve": true,
+          "explicacion": "Tapadas y apretadas dentro de la caja, la hacen muy resistente."
+        },
+        { "modelo": "cinta_adhesiva", "nombre": "Cinta de embalaje", "sirve": true, "explicacion": "Cierra y refuerza la caja para que no se abra." },
+        { "modelo": "tapete_caucho", "nombre": "Caucho antideslizante", "sirve": true, "explicacion": "Evita resbalones, sobre todo con el piso mojado." },
+        {
+          "modelo": "pintura",
+          "nombre": "Pintura de colores",
+          "sirve": true,
+          "explicacion": "Hace que los pequeños lo vean y lo quieran usar. ¡El diseño también importa!"
+        },
+        { "modelo": "periodico", "nombre": "Papel periódico", "sirve": false, "explicacion": "Se aplasta y se rompe con el peso: el escalón no sería firme." },
+        {
+          "modelo": "botella_plastica",
+          "opciones": { "tapa": false, "color": "#ffb26b" },
+          "nombre": "Botellas sin tapa",
+          "sirve": false,
+          "explicacion": "Sin tapa se aplastan al pisarlas: el escalón se hundiría."
+        },
+        {
+          "modelo": "frasco_vidrio",
+          "nombre": "Frascos de vidrio",
+          "sirve": false,
+          "explicacion": "El vidrio se puede romper y cortar: ¡nada de vidrio para niños!"
+        },
+        { "modelo": "clavos", "nombre": "Clavos", "sirve": false, "explicacion": "Las puntas pueden lastimar. Con cinta de embalaje es suficiente." },
+        { "modelo": "plastico_liso", "nombre": "Plástico liso", "sirve": false, "explicacion": "Es resbaloso: alguien se podría caer al subir." }
+      ],
+      "medidas": [
+        { "texto": "8 cm", "alto": 0.08, "correcta": false, "explicacion": "Con 8 cm sigue de puntitas: todavía no alcanza el chorro." },
+        { "texto": "15 cm", "alto": 0.15, "correcta": false, "explicacion": "Casi… pero tiene que estirarse mucho y el agua la puede salpicar." },
+        { "texto": "22 cm", "alto": 0.22, "correcta": true, "explicacion": "¡Perfecto! Con 22 cm su boca queda sobre el chorro y bebe cómoda." },
+        { "texto": "35 cm", "alto": 0.35, "correcta": false, "explicacion": "Demasiado alto: tiene que agacharse mucho, y subir y bajar es peligroso." }
+      ],
+      "frases": {
+        "logro": { "quien": "camila", "texto": "¡Sí alcanzo! ¡Y sin mojarme!" }
+      }
+    },
+    {
+      "tipo": "ordenar",
+      "entorno": "taller",
+      "titulo": "Fase 4 · Prototipar: construye el escalón",
+      "instruccion": "🛠️ Construye el prototipo en orden. Toca los pasos uno por uno y mira a tu DERECHA cómo se arma en la mesa de trabajo.",
+      "mensajeFinal": "🎉 ¡Prototipo listo! No es perfecto, y no tiene que serlo: sirve para PROBAR la idea con Camila.",
+      "insignia": { "emoji": "🛠️", "nombre": "Maker del prototipo" },
+      "construccion": {
+        "modelo": "maqueta_escalon",
+        "opciones": { "cartelEn": 6 }
+      },
+      "pasos": [
+        { "emoji": "📏", "texto": "Cortar la caja a 22 cm de alto", "pista": "Primero se prepara la base a la medida." },
+        { "emoji": "🧴", "texto": "Rellenarla con botellas tapadas y apretadas", "pista": "Antes de cerrarla hay que hacerla fuerte por dentro." },
+        { "emoji": "📦", "texto": "Cerrarla y forrarla con cinta de embalaje", "pista": "Ya está rellena: ¿qué falta para que no se abra?" },
+        { "emoji": "🎨", "texto": "Pintarla con colores llamativos", "pista": "Primero se arma y después se decora." },
+        { "emoji": "🦶", "texto": "Pegar caucho antideslizante arriba", "pista": "Es el toque final de seguridad." },
+        { "emoji": "🏷️", "texto": "Ponerle un cartel: «¡Para los pequeños!»", "pista": "Al final, una señal para que todos sepan para quién es." }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "entorno": "taller",
+      "titulo": "Desafío final: Equipo de Innovación",
+      "insignia": { "emoji": "🚀", "nombre": "Equipo de Innovación" },
+      "preguntas": [
+        {
+          "pregunta": "¿Por qué el Design Thinking empieza por EMPATIZAR?",
+          "opciones": ["Para entender a la persona antes de inventar soluciones", "Porque es la fase más corta", "Porque primero hay que construir algo"],
+          "correcta": 0,
+          "explicacion": "Si no entendemos a la persona, podemos resolver un problema que no existe.",
+          "modelo": "corazon"
+        },
+        {
+          "pregunta": "En la observación del recreo, ¿qué dato era importante para el reto?",
+          "opciones": ["La bandera ondeaba en el asta", "Mateo se subía a un ladrillo flojo para alcanzar el agua", "Unos chicos jugaban fútbol"],
+          "correcta": 1,
+          "explicacion": "Mostraba que otros niños tienen el mismo problema y lo resuelven de forma peligrosa.",
+          "modelo": "binoculares"
+        },
+        {
+          "pregunta": "¿Cuál es una buena pregunta para PROFUNDIZAR en una entrevista?",
+          "opciones": ["¿Te gusta el agua?", "¿Verdad que necesitas un banquito?", "Cuéntame, ¿cómo te sientes cuando el agua te moja?"],
+          "correcta": 2,
+          "explicacion": "Es abierta, no juzga y nos lleva a las emociones de la persona.",
+          "modelo": "globo_dialogo"
+        },
+        {
+          "pregunta": "En el mapa de empatía, «le da vergüenza mojarse» va en…",
+          "opciones": ["Dice", "Siente", "Hace"],
+          "correcta": 1,
+          "explicacion": "La vergüenza es una emoción: va en SIENTE.",
+          "modelo": "corazon"
+        },
+        {
+          "pregunta": "«Camila necesita un banquito» es…",
+          "opciones": ["Una necesidad real", "Una solución disfrazada", "Una observación"],
+          "correcta": 1,
+          "explicacion": "Ya trae un objeto. La necesidad real es tomar agua sola y segura.",
+          "modelo": "pieza_rompecabezas"
+        },
+        {
+          "pregunta": "¿Cuál es la mejor pregunta «¿Cómo podríamos…?»?",
+          "opciones": [
+            "¿Cómo podríamos ayudar a Camila a tomar agua sola y segura?",
+            "¿Cómo podríamos arreglar la escuela?",
+            "¿Cómo podríamos comprar un banco rojo?"
+          ],
+          "correcta": 0,
+          "explicacion": "No es tan amplia que no sepamos por dónde empezar, ni tan estrecha que ya traiga la solución.",
+          "modelo": "bombilla"
+        },
+        {
+          "pregunta": "¿Por qué el bebedero más bajito NO ganó en la matriz de decisión?",
+          "opciones": ["Porque no ayudaba a Camila", "Porque no lo podemos hacer nosotros y cuesta mucho", "Porque era una idea loca"],
+          "correcta": 1,
+          "explicacion": "Ayudaría, pero necesita plomero y dinero. Los criterios nos ayudan a elegir con argumentos.",
+          "modelo": "bebedero"
+        },
+        {
+          "pregunta": "¿Qué es un PROTOTIPO?",
+          "opciones": ["El producto final perfecto", "Una versión simple de la idea para probarla y mejorarla", "Un dibujo que guardamos en secreto"],
+          "correcta": 1,
+          "explicacion": "Se hace rápido y barato para aprender de él antes de hacer la versión final.",
+          "modelo": "maqueta_escalon"
+        },
+        {
+          "pregunta": "¿Qué hará el equipo en la próxima misión, TESTEAR?",
+          "opciones": ["Probar el escalón con Camila y escuchar su opinión para mejorarlo", "Venderlo en la tienda escolar", "Guardarlo sin mostrarlo a nadie"],
+          "correcta": 0,
+          "explicacion": "Testear es probar con la persona real, escuchar y mejorar. ¡Esa será su próxima misión!",
+          "modelo": "portapapeles"
+        }
+      ]
+    }
+  ]
+}

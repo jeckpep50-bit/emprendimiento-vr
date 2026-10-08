@@ -19,6 +19,7 @@ const AMBIENTES = {
   espacio: { frecuencia: 140, volumen: 0.05, oleaje: 0.05 },
   taller: { frecuencia: 480, volumen: 0.012 },
   patio: { frecuencia: 900, filtro: 'bandpass', volumen: 0.025, oleaje: 0.15 },
+  recreo: { frecuencia: 1100, filtro: 'bandpass', volumen: 0.035, oleaje: 0.45 },
   laboratorio: { frecuencia: 160, volumen: 0.04, oleaje: 0.08 },
   mercado: { frecuencia: 700, filtro: 'bandpass', volumen: 0.04, oleaje: 0.35 },
   planta: { frecuencia: 140, volumen: 0.05, oleaje: 0.6 },
@@ -971,6 +972,12 @@ const VIDA = {
     motas(g, ctx, { caja: [-4, 4, 0.4, 2.8, 2, 4.2], cantidad: 120 });
   },
   patio(g, ctx) {
+    banderaEcuador(g, ctx);
+    nubes(g, ctx);
+    mariposas(g, ctx);
+    motas(g, ctx, { caja: [-5, 5, 0.2, 2.5, -5, 3], cantidad: 70, color: '#fffbd0', tam: 0.03 });
+  },
+  recreo(g, ctx) {
     banderaEcuador(g, ctx);
     nubes(g, ctx);
     mariposas(g, ctx);

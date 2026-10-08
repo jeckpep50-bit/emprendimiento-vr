@@ -40,9 +40,33 @@ compila y publica; en los pull requests solo valida y compila. La dirección es:
 
 En cada gafa, abre esa dirección y guárdala en favoritos. La portada muestra las actividades:
 **Types of Soil** (3.º EGB, película bilingüe), **Microorganismos en los alimentos** (5.º EGB), **Guardianes de los alimentos** (6.º EGB),
-**Evaluación: Detectives de microbios** (6.º EGB), **Operación Alimento Seguro** (7.º EGB) y
+**Evaluación: Detectives de microbios** (6.º EGB), **Operación Alimento Seguro** (7.º EGB),
+**Misión Bebedero: Design Thinking de Empatizar a Prototipar** (7.º EGB) y
 **Design Thinking: el reto del bebedero** (6.º EGB).
 También se puede abrir una directamente, por ejemplo con `?leccion=operacion-alimento-seguro`.
+
+### Misión Bebedero (7.º EGB, ~38 min)
+
+`?leccion=design-thinking-mision-bebedero`. Es la versión avanzada del reto del bebedero. Cubre solo las fases 1 a 4
+(Empatizar, Definir, Idear y Prototipar), y Testear queda para la siguiente misión. Tiene 13 partes:
+
+1. Valeria, la coach, presenta la misión (con voz y gestos).
+2. Observación del recreo en 360°: Camila no alcanza el bebedero, Mateo se sube a un ladrillo, Doña Rosa trapea
+   el charco, otros juegan fútbol o saltan la cuerda. Se anota en la bitácora lo importante y se descarta lo demás.
+3. Entrevista a Camila, con preguntas para profundizar (↪) y preguntas malas de cuatro tipos (cerrada, que juzga,
+   que sugiere la respuesta o que no ayuda).
+4. Entrevista a la profe Andrea y a Doña Rosa, la conserje.
+5. Mapa de empatía (dice, piensa, hace, siente).
+6. ¿Necesidad real o solución disfrazada?
+7. El reto en una frase (punto de vista) y la pregunta «¿Cómo podríamos…?».
+8. Lluvia de ideas con tres chispas («¿Y si…?»).
+9. Matriz de impacto y facilidad (2×2).
+10. Matriz de decisión: 4 ideas × 5 criterios.
+11. Taller de prototipo: materiales que sirven y medida del escalón, probada en una simulación a tamaño real.
+12. Construcción del escalón.
+13. Desafío final.
+
+Los personajes hablan con voces grabadas (ver «Voces de los personajes»). Hay puntos, rachas, 6 rangos y 5 insignias.
 
 Si una lección tiene errores, el validador detiene la publicación y la versión anterior sigue en línea.
 
@@ -65,6 +89,19 @@ La narración está en `public/peliculas/types-of-soil/` (un MP3 por línea). El
 `src/pelicula/guion-suelos.js`. Lo que va entre `*asteriscos*` se dice en inglés (voz Microsoft Zira) y el resto en español
 (voz Microsoft Sabina). Al cambiar un texto, `npm run narracion` vuelve a grabar solo esas líneas. También se puede grabar una voz real con el mismo nombre de archivo.
 La coreografía de cada capítulo está en `src/pelicula/suelos.js`, y el reproductor (director) en `src/pelicula/director.js`.
+
+## Voces de los personajes
+
+Una lección puede tener voces grabadas con `"voces": { "carpeta": "voces/<id>", "personajes": { "camila": { "tono": "+55%", "velocidad": "-6%" } } }`.
+Con eso:
+
+- la guía (`guia`) lee la instrucción de cada escena, los pasos de las narrativas y los mensajes finales;
+- en las entrevistas, cada personaje (`"voz": "camila"`) dice su saludo y sus respuestas, y su boca se mueve con la voz;
+- las escenas animadas (`observacion`) usan `frases: { clave: { quien, texto } }`.
+
+`npm run voces` graba con las voces de Windows (Microsoft Sabina) solo lo nuevo o cambiado. El tono distingue a los
+personajes (Camila suena como una niña). Cada línea se guarda como `public/<carpeta>/<clave>.mp3`, y la clave sale de
+quién habla y del texto. Si se corrige un texto, se vuelve a grabar solo esa línea. Las líneas sin audio se omiten sin error.
 
 ## Controles dentro de la VR
 
@@ -154,6 +191,23 @@ Actividades de 7.º (ver `operacion-alimento-seguro.json`):
   `{ duracion, vidas, meta, categorias, incidentes: [{ modelo, nombre, categoria, explicacion, resuelto: { modelo } }] }`.
 - `utileria` (en cualquier escena): objetos colocados en la escena, p. ej. `{ modelo, posicion: [x, y, z], opciones }`.
 
+Actividades de Design Thinking para 7.º (ver `design-thinking-mision-bebedero.json`):
+
+- `observacion` (entorno `recreo`, `escenario: "recreo"`): el recreo animado alrededor del estudiante, con marcas 👁️.
+  `observaciones: [{ lugar, texto, corto, relevante, explicacion }]`. Los lugares están en `LUGARES_RECREO` del catálogo.
+- `entrevista` con varios personajes: `personajes: [{ id, nombre, emoji, modelo: "persona", opciones, voz, saludo }]`.
+  Cada pregunta indica a quién va (`a`) y puede abrir preguntas de seguimiento (`sigue: [...]`). Las malas pueden llevar
+  `error: "cerrada" | "juzga" | "sugiere" | "irrelevante"`.
+- `clasificar` con `tablero: { columnas, centro: { emoji, texto }, ejeX, ejeY }`: las categorías son zonas de un tablero
+  (mapa de empatía o matriz 2×2).
+- `frase`: `partes: [{ etiqueta, opciones: [{ texto, correcta, retro }] }]` y `pregunta: { instruccion, opciones }`.
+- `lluvia` con `chispas: [{ texto, emoji }]` (cada idea lleva `chispa`) y `elegir: false`.
+- `matriz`: `criterios: [{ texto, emoji }]` e `ideas: [{ texto, emoji, cumple: [bool…], porque: [texto…] }]`.
+- `prototipo`: `materiales: [{ modelo, nombre, sirve, explicacion }]`, `instruccionMedida` y
+  `medidas: [{ texto, alto, correcta, explicacion }]`.
+- `narrativa` con `presentador: { opciones, posicion }`: una persona de tamaño real cuenta la historia.
+- Modelo `persona`: niños o adultos articulados (`edad`, `estatura`, `peinado`, colores de ropa, `delantal`, `lentes`…).
+
 - Modelos 3D disponibles y entornos: [`src/leccion/catalogo.js`](src/leccion/catalogo.js).
 - `npm run validar` revisa todas las lecciones.
 
@@ -164,13 +218,15 @@ Actividades de 7.º (ver `operacion-alimento-seguro.json`):
 | `src/core/` | Renderizador y sesión WebXR, entrada (mandos, manos y ratón), audio espacial, efectos y textos de la interfaz |
 | `src/ui/` | Paneles, botones y tarjetas dibujados en canvas |
 | `src/mundo/` | Entornos y modelos 3D generados por código (sin archivos externos) |
-| `src/escenas/` | Los tipos de actividad y la pantalla final |
-| `src/leccion/` | Motor que reproduce la lección, catálogo y validador |
-| `scripts/` | Generador con IA, validador y servidor local |
+| `src/escenas/` | Los tipos de actividad y la pantalla final (`escenarios/recreo.js`: la coreografía del recreo) |
+| `src/leccion/` | Motor que reproduce la lección, catálogo, validador y voces (`voces.js`) |
+| `scripts/` | Generador con IA, validador, voces y narración grabadas, y servidor local |
 
 ## Rendimiento en Quest 2
 
 - Los modelos y decorados se fusionan con colores por vértice: casi siempre 1 o 2 llamadas de dibujo por modelo.
-- Las escenas usan entre 12 y 60 llamadas de dibujo y hasta ~60.000 triángulos.
+- Las escenas usan entre 12 y 60 llamadas de dibujo y hasta ~60.000 triángulos. El recreo animado de 7.º, con 10
+  personas, llega a unas 70.
+- Las personas lejanas (fútbol, cuerda) usan `detalle: "bajo"`, sin articulaciones.
 - Tiene *foveated rendering* activado y ninguna sombra en tiempo real.
 - Todo se genera por código, así que la app pesa ~200 KB comprimida y carga rápido con 20 gafas en el mismo Wi-Fi.
