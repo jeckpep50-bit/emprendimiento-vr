@@ -93,6 +93,21 @@ export const MODELOS = {
   vendedor: 'Persona adulta de tamaño real con delantal (vendedor o cocinero). Opciones: camisa, delantal, piel, cabello, gorro ("sombrero" | "gorra" | "ninguno"), expresion.',
   globulo_blanco: 'Glóbulo blanco: célula de defensa del cuerpo.',
   globulo_rojo: 'Glóbulo rojo (disco rojo).',
+  // Personas articuladas y el recreo (Design Thinking de 7.º)
+  persona:
+    'Persona articulada de tamaño real (brazos, piernas y boca que se mueve al hablar). Opciones: edad ("nino" | "adulto"), estatura, peinado ("colitas" | "corto" | "cola" | "mono" | "largo"), piel, cabello, superior, inferior, falda (bool), cuello, delantal, mochila, lentes, gorra, expresion.',
+  bebedero_doble: 'Bebedero doble de pared, alto (borde a 1,08 m): hecho a la medida de los estudiantes grandes.',
+  ladrillo: 'Ladrillo suelto (inestable para pararse encima).',
+  mochila: 'Mochila escolar. Opciones: color, abierta (bool), botella (bool).',
+  trapeador: 'Trapeador (palo y mopa).',
+  balon: 'Balón de fútbol.',
+  charco: 'Charco de agua en el piso.',
+  periodico: 'Pila de papel periódico.',
+  frasco_vidrio: 'Frasco de vidrio.',
+  clavos: 'Caja de clavos.',
+  tapete_caucho: 'Rollo de caucho antideslizante.',
+  pintura: 'Tarros de pintura de colores con brocha.',
+  plastico_liso: 'Láminas de plástico liso y resbaloso.',
 };
 
 export const ENTORNOS = {
@@ -105,6 +120,7 @@ export const ENTORNOS = {
   taller: 'Laboratorio de innovación: pizarra con las 5 fases del Design Thinking, muro de notas adhesivas y estantes con material reciclado.',
   laboratorio: 'Laboratorio de microbiología futurista: mesones con microscopios, pantallas animadas y un proyector holográfico de microbios.',
   patio: 'Patio de una escuela ecuatoriana: bebedero al frente, cancha, bancas, edificio escolar, bandera del Ecuador y volcanes al fondo.',
+  recreo: 'El mismo patio a la hora del recreo (sin bebedero fijo: lo pone la escena), con rayuela, tienda escolar y sol de mediodía de Quito. Lo usa la escena "observacion" con escenario "recreo".',
   mercado: 'Mercado ecuatoriano con 4 puestos bajo toldos alrededor del usuario: frutas (al frente, mesón en z = -2,6), carnes y mariscos (izquierda, x = -2,6), comidas y jugos (derecha, x = 2,6) y lácteos y abarrotes (atrás, z = 2,4). Los mesones miden 0,9 m de alto.',
   planta: 'Planta procesadora de alimentos: nave industrial con tanques, tuberías, robot empacador y luces de seguridad.',
   ninguno: 'Sin decorado (lo pone la propia escena; p. ej. una película en realidad aumentada).',
@@ -126,8 +142,19 @@ export const TIPOS_ESCENA = {
   viaje: 'Viaje por el cuerpo humano (entorno cuerpo): paradas en boca, estómago, intestino y defensas; en cada una hay una acción interactiva y una pregunta. Campos: estaciones [{ zona, nombre, texto, tarea, pregunta, opciones, correcta, explicacion }].',
   caos: 'Minijuego contra reloj: aparecen problemas alrededor del estudiante y debe tocar cada uno y elegir la clave (categoría) que lo soluciona antes de que se acabe su tiempo. Campos: categorias, incidentes [{ modelo, nombre, categoria, explicacion, resuelto? }], duracion, vidas, meta.',
   pelicula: 'Película inmersiva que avanza sola (narración, subtítulos, música y momentos para participar). Campo: guion (id de la película, ver PELICULAS_DISPONIBLES).',
-  lluvia: 'Lluvia de ideas: al tocar una bombilla salen ideas en notas adhesivas; luego se elige la que cumple los criterios.',
+  lluvia: 'Lluvia de ideas: al tocar una bombilla salen ideas en notas adhesivas; luego se elige la que cumple los criterios. Con "chispas" hay varias bombillas (técnicas "¿Y si…?") y cada idea dice su chispa; con elegir: false no se elige (se hace en otra actividad).',
+  observacion:
+    'Observación en una escena viva (escenario "recreo"): marcas 👁️ alrededor del estudiante; al tocar una decide si lo que ve es importante para el reto (bitácora) o no. Campos: escenario, observaciones [{ lugar, texto, corto?, relevante, explicacion, pista? }], frases { clave: { quien, texto } }.',
+  frase: 'Armar una frase por partes eligiendo la opción correcta de cada parte (p. ej. el reto: QUIÉN · NECESITA · PORQUE) y, opcionalmente, la mejor pregunta "¿Cómo podríamos…?". Campos: partes [{ etiqueta, opciones [{ texto, correcta, retro }] }], pregunta? { instruccion, opciones }.',
+  matriz: 'Matriz de decisión: ideas (filas) × criterios (columnas); el estudiante marca ✅/❌ en cada casilla y comprueba. Campos: criterios [{ texto, emoji? }], ideas [{ texto, emoji?, cumple [bool], porque [texto] }].',
+  prototipo:
+    'Taller de prototipo: (1) elegir en un estante los materiales que sirven; (2) probar alturas del escalón en una simulación a tamaño real con Camila frente al bebedero. Campos: materiales [{ modelo, nombre, sirve, explicacion, pista? }], instruccionMedida, medidas [{ texto, alto, correcta, explicacion }], frases? { logro }.',
 };
+
+/** Escenarios vivos de la escena "observacion". */
+export const ESCENARIOS_OBSERVACION = ['recreo'];
+/** Lugares del escenario "recreo" donde pueden ir las marcas 👁️. */
+export const LUGARES_RECREO = ['puntitas', 'mojada', 'grande', 'mateo', 'charco', 'banca', 'mochila', 'sol', 'futbol', 'bandera', 'cuerda', 'rayuela'];
 
 export const PELICULAS_DISPONIBLES = ['tipos-de-suelo'];
 export const MODOS = ['vr', 'ar'];

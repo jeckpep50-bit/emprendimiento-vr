@@ -45,6 +45,15 @@
     "emoji": "🚨"
   },
   {
+    "id": "design-thinking-mision-bebedero",
+    "titulo": "Misión Bebedero: Design Thinking de Empatizar a Prototipar",
+    "materia": "Emprendimiento",
+    "grado": "7.º EGB",
+    "duracionMinutos": 38,
+    "idioma": "es",
+    "emoji": "🛠️"
+  },
+  {
     "id": "design-thinking-reto-bebedero",
     "titulo": "Design Thinking: el reto del bebedero",
     "materia": "Emprendimiento",

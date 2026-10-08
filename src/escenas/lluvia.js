@@ -12,7 +12,11 @@ const COLORES_NOTA = ['#ffe066', '#ff9ccf', '#9fdcff', '#b6f09c', '#ffc48a'];
  *  2. Elegir: con los criterios a la vista, el estudiante escoge la idea que
  *     mejor resuelve el problema. Las demás explican por qué no.
  * datos: { titulo, instruccion?, instruccionElegir, mensajeFinal?,
- *          ideas: [{ texto, emoji?, correcta: bool, retro }] }
+ *          ideas: [{ texto, emoji?, correcta: bool, retro, chispa? }],
+ *          chispas?: [{ texto, emoji? }], elegir?: bool }
+ * Con "chispas" hay varias bombillas, cada una con una técnica para generar ideas
+ * ("¿Y si…?"); cada idea dice de qué chispa sale. Con elegir: false, la escena
+ * termina al generar todas las ideas (la elección se hace en otra actividad).
  */
 export class EscenaLluvia extends EscenaBase {
   construir() {
@@ -24,6 +28,7 @@ export class EscenaLluvia extends EscenaBase {
 
     this.cabecera = this.encabezado({ instruccion: this.datos.instruccion || this.t('lluviaGenerar') });
     this.cabecera.derecha(this.t('ideasProgreso', { n: 0, total: this.ideas.length }));
+    if (this.datos.chispas?.length) return this._construirChispas();
 
     // Bombilla gigante en el centro
     this.foco = new THREE.Group();
@@ -58,13 +63,67 @@ export class EscenaLluvia extends EscenaBase {
         for (const lado of [-1, 1]) this.lugares.push({ angulo: THREE.MathUtils.degToRad(a * lado), y: H + 0.12 - fila * 0.34 });
   }
 
-  _generar() {
+  /** Varias bombillas ("chispas"), cada una con una técnica para inventar ideas. */
+  _construirChispas() {
+    const { H } = this;
+    const chispas = this.datos.chispas;
+    const n = chispas.length;
+    this.chispas = chispas.map((c, k) => {
+      const foco = new THREE.Group();
+      const angulo = THREE.MathUtils.degToRad((k - (n - 1) / 2) * 23);
+      foco.position.set(Math.sin(angulo) * 1.3, H - 0.1, -Math.cos(angulo) * 1.3);
+      const bombilla = this.modelo('bombilla', { tamano: 0.34 });
+      const brillo = this.halo(0.72, COLORES_NOTA[k % COLORES_NOTA.length]);
+      brillo.position.z = -0.1;
+      foco.add(brillo, bombilla);
+      const letrero = this.etiqueta(`${c.emoji ?? '💡'} ${c.texto}`, { ancho: 0.46, alto: 0.12, tam: 32, fondo: COLORES.amarillo });
+      letrero.position.set(0, -0.27, 0.05);
+      foco.add(letrero);
+      foco.lookAt(0, foco.position.y, 0);
+      this.raiz.add(foco);
+      this.presentar(foco, 0.3 + k * 0.15, true);
+      const pendientes = this.ideas.filter((idea) => (idea.chispa ?? 0) === k);
+      const chispa = { foco, bombilla, brillo, letrero, pendientes, encima: false };
+      this.interactivo(foco, {
+        proxy: true,
+        alPasar: (v) => {
+          chispa.encima = v;
+          bombilla.scale.setScalar(v ? 1.1 : 1);
+        },
+        alSeleccionar: () => this._generar(chispa),
+      });
+      return chispa;
+    });
+    this.cadaCuadro((_dt, t) => {
+      this.chispas.forEach((c, k) => {
+        c.brillo.userData.encendido = c.pendientes.length > 0 && (Math.sin(t * 3 + k * 2) > 0.3 || c.encima);
+      });
+    });
+    // Muro de ideas a ambos lados de las chispas, en dos filas.
+    this.lugares = [];
+    for (const a of [40, 57, 74])
+      for (const fila of [0, 1])
+        for (const lado of [-1, 1]) this.lugares.push({ angulo: THREE.MathUtils.degToRad(a * lado), y: H + 0.12 - fila * 0.34 });
+  }
+
+  _generar(chispa = null) {
     if (this.fase !== 'generar' || this.generadas >= this.ideas.length) return;
+    if (chispa && !chispa.pendientes.length) {
+      this.m.audio.error(this.posMundo(chispa.foco));
+      this.cabecera.mensaje(this.t('chispaAgotada'), COLORES.naranja);
+      return;
+    }
+    const origen = chispa?.foco ?? this.foco;
     const i = this.generadas++;
-    const idea = this.ideas[i];
+    const idea = chispa ? chispa.pendientes.shift() : this.ideas[i];
+    if (chispa && !chispa.pendientes.length) {
+      chispa.letrero.actualizar({ fondo: '#d5dcec' });
+      this.m.fx.escalarA(chispa.bombilla, 0.8, 0.4);
+    }
+    if (chispa) this.ganar(origen, 40);
     const lugar = this.lugares[i % this.lugares.length];
     const nota = this._crearNota(idea, COLORES_NOTA[i % COLORES_NOTA.length]);
-    const inicio = this.foco.position.clone().add(new THREE.Vector3(0, 0.15, 0.1));
+    const inicio = origen.position.clone().add(new THREE.Vector3(0, 0.15, 0.1));
     const destino = new THREE.Vector3(Math.sin(lugar.angulo) * 1.55, lugar.y, -Math.cos(lugar.angulo) * 1.55);
     nota.position.copy(inicio);
     nota.lookAt(0, inicio.y, 0);
@@ -91,27 +150,51 @@ export class EscenaLluvia extends EscenaBase {
     });
     nota.userData.reposo = tmp.quaternion.clone();
 
-    this.m.fx.latido(this.foco, 0.12);
-    this.m.fx.confeti(this.posMundo(this.foco).add(new THREE.Vector3(0, 0.2, 0)), 12);
-    this.m.audio.pop(this.posMundo(this.foco));
+    this.m.fx.latido(origen, 0.12);
+    this.m.fx.confeti(this.posMundo(origen).add(new THREE.Vector3(0, 0.2, 0)), 12);
+    this.m.audio.pop(this.posMundo(origen));
     this.m.audio.burbuja(destino.clone().applyMatrix4(this.raiz.matrixWorld));
     this.cabecera.derecha(this.t('ideasProgreso', { n: this.generadas, total: this.ideas.length }));
     this.cabecera.mensaje(`${idea.emoji ?? '💡'} ${idea.texto}`, COLORES.primario);
 
     if (this.generadas === this.ideas.length) {
-      this.m.fx.tween({ duracion: 1.4 }).then(() => !this._destruida && this._pasarAElegir());
+      this.m.fx.tween({ duracion: 1.4 }).then(() => {
+        if (this._destruida) return;
+        if (this.datos.elegir === false) this._terminarSinElegir();
+        else this._pasarAElegir();
+      });
     }
+  }
+
+  /** Todas las ideas están en el muro: se celebra y se continúa (la elección viene después). */
+  _terminarSinElegir() {
+    this.fase = 'lista';
+    for (const c of this.chispas ?? []) {
+      c.brillo.userData.encendido = false;
+      this.m.entrada.habilitar(c.foco, false);
+    }
+    if (this.foco) this.m.entrada.habilitar(this.foco, false);
+    this.m.audio.exito();
+    this.m.fx.confeti(this.posMundo(this.cabecera).add(new THREE.Vector3(0, -0.4, 0.4)), 90);
+    this.cabecera.mensaje(this.datos.mensajeFinal ?? this.t('ideasListas'), COLORES.verde);
+    if (this.datos.mensajeFinal) this.voz(this.datos.mensajeFinal);
+    this.mostrarContinuar(new THREE.Vector3(0, this.H - 0.5, -1.2));
   }
 
   _pasarAElegir() {
     this.fase = 'elegir';
-    this.brillo.userData.encendido = false;
-    this.m.entrada.habilitar(this.foco, false);
-    this.letrero.visible = false;
-    this.m.fx.escalarA(this.foco, 0.6, 0.6);
-    this.m.fx.moverA(this.foco, this.foco.position.clone().add(new THREE.Vector3(0, -0.25, 0)), 0.6);
+    const focos = this.chispas ? this.chispas.map((c) => c.foco) : [this.foco];
+    for (const c of this.chispas ?? []) c.brillo.userData.encendido = false;
+    if (this.brillo) this.brillo.userData.encendido = false;
+    if (this.letrero) this.letrero.visible = false;
+    for (const foco of focos) {
+      this.m.entrada.habilitar(foco, false);
+      this.m.fx.escalarA(foco, 0.6, 0.6);
+      this.m.fx.moverA(foco, foco.position.clone().add(new THREE.Vector3(0, -0.25, 0)), 0.6);
+    }
     this.m.audio.exito();
     this.cabecera.instruccion(this.datos.instruccionElegir || this.t('lluviaElegir'));
+    if (this.datos.instruccionElegir) this.voz(this.datos.instruccionElegir);
     this.cabecera.mensaje(this.t('ahoraElige'), COLORES.morado);
     for (const nota of this.notas) {
       this.interactivo(nota, {
@@ -152,7 +235,7 @@ export class EscenaLluvia extends EscenaBase {
     this.m.fx.escalarA(nota, 1.25, 0.8);
     this.m.fx.tween({ duracion: 0.8, alActualizar: (k) => nota.quaternion.slerpQuaternions(q0, tmp.quaternion, k) });
     this.m.audio.exito();
-    this.m.fx.confeti(this.posMundo(this.foco).add(new THREE.Vector3(0, 0.6, 0.3)), 100);
+    this.m.fx.confeti(this.posMundo(nota).add(new THREE.Vector3(0, 0.2, 0.1)), 100);
     this.cabecera.mensaje(`✅ ${idea.retro || this.t('buenaEleccion')}`, COLORES.verde);
 
     this.m.fx.tween({ duracion: 1.6 }).then(() => !this._destruida && this.mostrarContinuar(new THREE.Vector3(0, this.H - 0.52, -0.95)));

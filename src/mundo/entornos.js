@@ -243,6 +243,96 @@ export function volcanes(g, lista) {
   }
 }
 
+/** Patio de una escuela ecuatoriana (con { recreo: true }: versión del recreo de 7.º). */
+function patioEscolar(g, { recreo = false } = {}) {
+  g.add(cielo('#4aa8f0', '#e6f6ff'));
+  g.add(malla(new THREE.CircleGeometry(45, 48), mat('#7cc36b', { tipo: 'lambert' }), [0, -0.01, 0], [-Math.PI / 2, 0, 0]));
+  g.add(malla(new THREE.PlaneGeometry(20, 15), mat('#d6d1c8', { tipo: 'lambert' }), [0, 0, -1.5], [-Math.PI / 2, 0, 0]));
+  // Cancha a la izquierda
+  g.add(malla(new THREE.PlaneGeometry(6, 9), mat('#3d9be9', { tipo: 'lambert' }), [-6.5, 0.003, -1.5], [-Math.PI / 2, 0, 0]));
+  const linea = mat('#ffffff', { tipo: 'basica' });
+  for (const [w, d, x, z] of [[6, 0.06, -6.5, -6], [6, 0.06, -6.5, 3], [0.06, 9, -9.5, -1.5], [0.06, 9, -3.5, -1.5], [6, 0.06, -6.5, -1.5]]) g.add(malla(new THREE.PlaneGeometry(w, d), linea, [x, 0.006, z], [-Math.PI / 2, 0, 0]));
+  g.add(malla(new THREE.RingGeometry(0.9, 0.96, 40), linea, [-6.5, 0.006, -1.5], [-Math.PI / 2, 0, 0]));
+
+  // Edificio de la escuela
+  g.add(malla(new THREE.BoxGeometry(17, 4.4, 1.2), mat('#f3d27a', { tipo: 'lambert' }), [0, 2.2, -8.6]));
+  g.add(malla(new THREE.BoxGeometry(17.4, 0.3, 1.5), mat('#c0543c'), [0, 4.5, -8.5]));
+  for (const piso of [1.2, 3.1])
+    for (let i = -3; i <= 3; i++) {
+      if (piso === 1.2 && i === 0) continue;
+      g.add(malla(new THREE.PlaneGeometry(1.3, 1.0), mat('#a9dcff', { tipo: 'basica' }), [i * 2.2, piso, -7.98]));
+      g.add(malla(new THREE.BoxGeometry(1.4, 0.08, 0.1), mat('#ffffff'), [i * 2.2, piso - 0.54, -7.95]));
+    }
+  g.add(malla(new THREE.BoxGeometry(1.4, 2.2, 0.1), mat('#8d5a3b'), [0, 1.1, -7.95]));
+  const letrero = texturaLienzo(1200, 200, (x, w, h) => {
+    x.fillStyle = '#2f4a8a';
+    x.beginPath();
+    x.roundRect(0, 0, w, h, 40);
+    x.fill();
+    x.fillStyle = '#ffffff';
+    x.font = `800 100px ${FUENTE_TIZA}`;
+    x.textAlign = 'center';
+    x.fillText('UNIDAD EDUCATIVA', w / 2, 135);
+  });
+  g.add(malla(new THREE.PlaneGeometry(3.6, 0.6), new THREE.MeshBasicMaterial({ map: letrero, transparent: true }), [0, 2.55, -7.94]));
+  // Mural de colores
+  ['#ff5aa5', '#22b8cf', '#ffc23c', '#2dbe78', '#8b5cf6'].forEach((c, i) => g.add(malla(new THREE.CircleGeometry(0.35, 32), mat(c, { tipo: 'lambert' }), [5.2 + (i % 3) * 0.8, 0.9 + Math.floor(i / 3) * 0.8, -7.97])));
+
+  // Bebedero frente al usuario (en el recreo, el bebedero doble lo pone la escena)
+  if (!recreo) {
+    const beb = diseno.bebedero();
+    beb.position.set(0, 0, -2.6);
+    g.add(beb);
+  } else {
+    // Rayuela pintada en el piso, a la derecha
+    const centro = mat('#ffffff', { tipo: 'basica' });
+    [[0, 0], [0, 1], [-0.5, 2], [0.5, 2], [0, 3], [-0.5, 4], [0.5, 4], [0, 5]].forEach(([cx, cz], i) => {
+      const x = 3.6 + cx * 0.95;
+      const z = 0.6 - cz * 0.5;
+      g.add(malla(new THREE.PlaneGeometry(0.46, 0.46), mat(['#ff5aa5', '#ffc23c', '#22b8cf', '#2dbe78'][i % 4], { tipo: 'lambert' }), [x, 0.004, z], [-Math.PI / 2, 0, 0]));
+      g.add(malla(new THREE.CircleGeometry(0.05, 4), centro, [x, 0.006, z], [-Math.PI / 2, 0, Math.PI / 4]));
+    });
+    // Sol de mediodía (en Quito, a 2 850 m, el sol pica fuerte)
+    for (const [r, color, opacidad, d] of [[2.2, '#fff6c2', 1, 0], [3.4, '#fff2a8', 0.35, 0.05]]) {
+      const disco = malla(new THREE.CircleGeometry(r, 32), mat(color, { tipo: 'basica', opacidad }), [-9 * (1 + d / 30), 24 * (1 + d / 30), -22 * (1 + d / 30)]);
+      disco.lookAt(0, 1.5, 0);
+      g.add(disco);
+    }
+    // Tienda escolar (bar) junto al edificio
+    g.add(malla(new THREE.BoxGeometry(2.6, 2.4, 1.4), mat('#ffffff', { tipo: 'lambert' }), [-5.2, 1.2, -7.15]));
+    g.add(malla(new THREE.BoxGeometry(2.2, 0.9, 0.05), mat('#3d2a20'), [-5.2, 1.35, -6.43]));
+    g.add(malla(new THREE.BoxGeometry(2.9, 0.12, 1.7), mat('#e5484d'), [-5.2, 2.45, -7.05]));
+  }
+
+  // Bancas
+  for (const lado of [-1, 1]) {
+    const banca = new THREE.Group();
+    banca.add(malla(new RoundedBoxGeometry(1.4, 0.06, 0.4, 2, 0.02), mat('#b5835a'), [0, 0.45, 0]));
+    banca.add(malla(new RoundedBoxGeometry(1.4, 0.3, 0.05, 2, 0.02), mat('#b5835a'), [0, 0.7, -0.18]));
+    for (const x of [-0.6, 0.6]) banca.add(malla(new THREE.BoxGeometry(0.06, 0.45, 0.35), mat('#555c66'), [x, 0.225, 0]));
+    banca.position.set(lado * 2.8, 0, -1.4);
+    banca.rotation.y = -lado * Math.PI / 2;
+    g.add(banca);
+  }
+  // Árboles
+  const tronco = new THREE.CylinderGeometry(0.15, 0.22, 2, 8);
+  const copa = new THREE.SphereGeometry(1.1, 14, 10);
+  for (const [x, z] of [[6.5, 1.5], [7.5, -4.5], [-10.5, 2.5], [-11, -5.5], [3.5, 5.5], [-3.5, 6]]) {
+    g.add(malla(tronco, mat('#8d6e63'), [x, 1, z]));
+    g.add(malla(copa, mat('#43a047'), [x, 2.6, z], [0, 0, 0], [1, 1.1, 1]));
+    g.add(malla(copa, mat('#2e7d32'), [x + 0.5, 2.3, z + 0.3], [0, 0, 0], 0.7));
+  }
+  // Volcanes nevados a lo lejos
+  for (const [x, z, h, r] of [[-18, -32, 11, 9], [8, -36, 14, 10], [26, -26, 9, 8], [-30, -10, 8, 8]]) {
+    g.add(malla(new THREE.ConeGeometry(r, h, 24), mat('#6d8a96', { tipo: 'lambert' }), [x, h / 2, z]));
+    g.add(malla(new THREE.ConeGeometry(r * 0.3, h * 0.3, 24), mat('#ffffff', { tipo: 'lambert' }), [x, h * 0.85 + 0.01, z]));
+  }
+  // Asta de la bandera (la bandera ondea en vida.js)
+  g.add(malla(new THREE.CylinderGeometry(0.04, 0.05, 5, 10), mat('#c9d2de'), [3.8, 2.5, -5.2]));
+  g.add(malla(new THREE.SphereGeometry(0.08, 12, 10), mat('#ffc23c'), [3.8, 5.05, -5.2]));
+  return { fondo: '#bfe6ff', niebla: ['#d5efff', 25, 75], luz: [0xffffff, 0x8fb06a, 2.6] };
+}
+
 // ── Cuerpo humano: cuatro zonas, cada una fusionada por separado ─────────────
 
 const ZONAS_CUERPO = {
@@ -579,71 +669,12 @@ const ENTORNOS = {
   },
 
   patio(g) {
-    g.add(cielo('#4aa8f0', '#e6f6ff'));
-    g.add(malla(new THREE.CircleGeometry(45, 48), mat('#7cc36b', { tipo: 'lambert' }), [0, -0.01, 0], [-Math.PI / 2, 0, 0]));
-    g.add(malla(new THREE.PlaneGeometry(20, 15), mat('#d6d1c8', { tipo: 'lambert' }), [0, 0, -1.5], [-Math.PI / 2, 0, 0]));
-    // Cancha a la izquierda
-    g.add(malla(new THREE.PlaneGeometry(6, 9), mat('#3d9be9', { tipo: 'lambert' }), [-6.5, 0.003, -1.5], [-Math.PI / 2, 0, 0]));
-    const linea = mat('#ffffff', { tipo: 'basica' });
-    for (const [w, d, x, z] of [[6, 0.06, -6.5, -6], [6, 0.06, -6.5, 3], [0.06, 9, -9.5, -1.5], [0.06, 9, -3.5, -1.5], [6, 0.06, -6.5, -1.5]]) g.add(malla(new THREE.PlaneGeometry(w, d), linea, [x, 0.006, z], [-Math.PI / 2, 0, 0]));
-    g.add(malla(new THREE.RingGeometry(0.9, 0.96, 40), linea, [-6.5, 0.006, -1.5], [-Math.PI / 2, 0, 0]));
+    return patioEscolar(g);
+  },
 
-    // Edificio de la escuela
-    g.add(malla(new THREE.BoxGeometry(17, 4.4, 1.2), mat('#f3d27a', { tipo: 'lambert' }), [0, 2.2, -8.6]));
-    g.add(malla(new THREE.BoxGeometry(17.4, 0.3, 1.5), mat('#c0543c'), [0, 4.5, -8.5]));
-    for (const piso of [1.2, 3.1])
-      for (let i = -3; i <= 3; i++) {
-        if (piso === 1.2 && i === 0) continue;
-        g.add(malla(new THREE.PlaneGeometry(1.3, 1.0), mat('#a9dcff', { tipo: 'basica' }), [i * 2.2, piso, -7.98]));
-        g.add(malla(new THREE.BoxGeometry(1.4, 0.08, 0.1), mat('#ffffff'), [i * 2.2, piso - 0.54, -7.95]));
-      }
-    g.add(malla(new THREE.BoxGeometry(1.4, 2.2, 0.1), mat('#8d5a3b'), [0, 1.1, -7.95]));
-    const letrero = texturaLienzo(1200, 200, (x, w, h) => {
-      x.fillStyle = '#2f4a8a';
-      x.beginPath();
-      x.roundRect(0, 0, w, h, 40);
-      x.fill();
-      x.fillStyle = '#ffffff';
-      x.font = `800 100px ${FUENTE_TIZA}`;
-      x.textAlign = 'center';
-      x.fillText('UNIDAD EDUCATIVA', w / 2, 135);
-    });
-    g.add(malla(new THREE.PlaneGeometry(3.6, 0.6), new THREE.MeshBasicMaterial({ map: letrero, transparent: true }), [0, 2.55, -7.94]));
-    // Mural de colores
-    ['#ff5aa5', '#22b8cf', '#ffc23c', '#2dbe78', '#8b5cf6'].forEach((c, i) => g.add(malla(new THREE.CircleGeometry(0.35, 32), mat(c, { tipo: 'lambert' }), [5.2 + (i % 3) * 0.8, 0.9 + Math.floor(i / 3) * 0.8, -7.97])));
-
-    // Bebedero frente al usuario
-    const beb = diseno.bebedero();
-    beb.position.set(0, 0, -2.6);
-    g.add(beb);
-
-    // Bancas
-    for (const lado of [-1, 1]) {
-      const banca = new THREE.Group();
-      banca.add(malla(new RoundedBoxGeometry(1.4, 0.06, 0.4, 2, 0.02), mat('#b5835a'), [0, 0.45, 0]));
-      banca.add(malla(new RoundedBoxGeometry(1.4, 0.3, 0.05, 2, 0.02), mat('#b5835a'), [0, 0.7, -0.18]));
-      for (const x of [-0.6, 0.6]) banca.add(malla(new THREE.BoxGeometry(0.06, 0.45, 0.35), mat('#555c66'), [x, 0.225, 0]));
-      banca.position.set(lado * 2.8, 0, -1.4);
-      banca.rotation.y = -lado * Math.PI / 2;
-      g.add(banca);
-    }
-    // Árboles
-    const tronco = new THREE.CylinderGeometry(0.15, 0.22, 2, 8);
-    const copa = new THREE.SphereGeometry(1.1, 14, 10);
-    for (const [x, z] of [[6.5, 1.5], [7.5, -4.5], [-10.5, 2.5], [-11, -5.5], [3.5, 5.5], [-3.5, 6]]) {
-      g.add(malla(tronco, mat('#8d6e63'), [x, 1, z]));
-      g.add(malla(copa, mat('#43a047'), [x, 2.6, z], [0, 0, 0], [1, 1.1, 1]));
-      g.add(malla(copa, mat('#2e7d32'), [x + 0.5, 2.3, z + 0.3], [0, 0, 0], 0.7));
-    }
-    // Volcanes nevados a lo lejos
-    for (const [x, z, h, r] of [[-18, -32, 11, 9], [8, -36, 14, 10], [26, -26, 9, 8], [-30, -10, 8, 8]]) {
-      g.add(malla(new THREE.ConeGeometry(r, h, 24), mat('#6d8a96', { tipo: 'lambert' }), [x, h / 2, z]));
-      g.add(malla(new THREE.ConeGeometry(r * 0.3, h * 0.3, 24), mat('#ffffff', { tipo: 'lambert' }), [x, h * 0.85 + 0.01, z]));
-    }
-    // Asta de la bandera (la bandera ondea en vida.js)
-    g.add(malla(new THREE.CylinderGeometry(0.04, 0.05, 5, 10), mat('#c9d2de'), [3.8, 2.5, -5.2]));
-    g.add(malla(new THREE.SphereGeometry(0.08, 12, 10), mat('#ffc23c'), [3.8, 5.05, -5.2]));
-    return { fondo: '#bfe6ff', niebla: ['#d5efff', 25, 75], luz: [0xffffff, 0x8fb06a, 2.6] };
+  /** El mismo patio a la hora del recreo: bebedero doble alto, rayuela y sol de mediodía. */
+  recreo(g) {
+    return patioEscolar(g, { recreo: true });
   },
 
   laboratorio(g) {

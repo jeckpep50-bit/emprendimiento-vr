@@ -5,6 +5,7 @@ import { PanelLienzo, escribir } from '../ui/lienzo.js';
 import { actualizarHologramas } from '../mundo/holograma.js';
 import { crearEntorno } from '../mundo/entornos.js';
 import { liberar } from '../mundo/materiales.js';
+import { lineasDeEscena } from './voces.js';
 import { EscenaNarrativa } from '../escenas/narrativa.js';
 import { EscenaExploracion } from '../escenas/exploracion.js';
 import { EscenaClasificar } from '../escenas/clasificar.js';
@@ -20,6 +21,10 @@ import { EscenaCinta } from '../escenas/cinta.js';
 import { EscenaViaje } from '../escenas/viaje.js';
 import { EscenaCaos } from '../escenas/caos.js';
 import { EscenaPelicula } from '../escenas/pelicula.js';
+import { EscenaObservacion } from '../escenas/observacion.js';
+import { EscenaFrase } from '../escenas/frase.js';
+import { EscenaMatriz } from '../escenas/matriz.js';
+import { EscenaPrototipo } from '../escenas/prototipo.js';
 import { EscenaFinal } from '../escenas/final.js';
 
 const RADIO_MOVIMIENTO = 2.3;
@@ -40,6 +45,10 @@ const TIPOS = {
   viaje: EscenaViaje,
   caos: EscenaCaos,
   pelicula: EscenaPelicula,
+  observacion: EscenaObservacion,
+  frase: EscenaFrase,
+  matriz: EscenaMatriz,
+  prototipo: EscenaPrototipo,
 };
 
 /** Reproduce una lección: crea cada escena, cambia de entorno y hace las transiciones. */
@@ -71,6 +80,8 @@ export class Motor {
       this.marcador = null;
     }
     this._reiniciarPuntos();
+    // Voces grabadas de los personajes (si la lección las tiene). Devuelve la promesa de carga.
+    return this.audio.cargarVoces(leccion.voces?.carpeta);
   }
 
   // ── Gamificación (solo si la lección tiene "gamificacion": true) ─────────
@@ -268,6 +279,8 @@ export class Motor {
     this.entrada.reiniciar();
 
     const datos = this.leccion.escenas[indice];
+    // Las voces de esta escena y de la siguiente se descargan antes de necesitarlas.
+    this.audio.precargarVoces([...lineasDeEscena(datos), ...lineasDeEscena(this.leccion.escenas[indice + 1])].map((l) => l.clave));
     const nombreEntorno = datos?.entorno ?? this.nombreEntorno ?? 'aula';
     const entornoNuevo = nombreEntorno !== this.nombreEntorno;
     if (entornoNuevo) {
