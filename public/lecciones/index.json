@@ -1,5 +1,14 @@
 [
   {
+    "id": "reporteros-que-describen",
+    "titulo": "¡Al aire! Reporteros que describen",
+    "materia": "Lengua y Literatura",
+    "grado": "6.º EGB",
+    "duracionMinutos": 20,
+    "idioma": "es",
+    "emoji": "🎙️"
+  },
+  {
     "id": "types-of-soil",
     "titulo": "Types of Soil: an adventure with Wiggles",
     "materia": "Science",

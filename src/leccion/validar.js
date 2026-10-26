@@ -269,6 +269,92 @@ export function validarLeccion(l) {
       if (e.ideas.filter((i) => i.cumple?.every?.(Boolean)).length !== 1) err(`${r}.ideas`, 'exactamente una idea debe cumplir todos los criterios');
     }
 
+    if (e.tipo === 'moldear') {
+      if (lista(e.pasos, 1, 6, `${r}.pasos`)) {
+        e.pasos.forEach((p, j) => {
+          const rr = `${r}.pasos[${j}]`;
+          if (!texto(p.pregunta)) err(`${rr}.pregunta`, 'falta la pregunta');
+          if (!['tamano', 'color', 'lana', 'adorno', 'actitud'].includes(p.rasgo)) err(`${rr}.rasgo`, 'debe ser tamano | color | lana | adorno | actitud');
+          if (lista(p.opciones, 2, 4, `${rr}.opciones`)) p.opciones.forEach((o, k) => texto(o.texto) || err(`${rr}.opciones[${k}].texto`, 'falta el texto'));
+          const meta = e.reto?.objetivo?.[p.rasgo];
+          if (e.reto && !p.opciones?.some((o) => o.valor === meta)) err(`${rr}.opciones`, `ninguna opción coincide con reto.objetivo.${p.rasgo}`);
+        });
+      }
+      if (e.reto !== undefined && !(texto(e.reto?.instruccion) && texto(e.reto?.mensajeFinal))) err(`${r}.reto`, 'necesita instruccion y mensajeFinal');
+    }
+
+    if (e.tipo === 'retrato') {
+      const ids = new Set((e.candidatos ?? []).map((c) => c.id));
+      if (lista(e.candidatos, 2, 4, `${r}.candidatos`) && ids.size !== e.candidatos.length) err(`${r}.candidatos`, 'los id deben ser únicos');
+      if (!ids.has(e.heroina)) err(`${r}.heroina`, 'debe ser el id de un candidato');
+      if (lista(e.rasgos, 2, 8, `${r}.rasgos`)) {
+        e.rasgos.forEach((g, j) => {
+          const rr = `${r}.rasgos[${j}]`;
+          if (!texto(g.nombre)) err(`${rr}.nombre`, 'falta el nombre');
+          if (lista(g.opciones, 2, 4, `${rr}.opciones`)) {
+            g.opciones.forEach((o, k) => {
+              if (!texto(o.texto)) err(`${rr}.opciones[${k}].texto`, 'falta el texto');
+              if (!o.vago && !(Array.isArray(o.quedan) && o.quedan.every((id) => ids.has(id)))) err(`${rr}.opciones[${k}].quedan`, 'debe listar ids de candidatos (o marcar vago: true)');
+            });
+            if (!g.opciones.some((o) => !o.vago && o.quedan?.includes(e.heroina))) err(`${rr}.opciones`, 'falta una opción precisa que incluya a la heroína');
+          }
+        });
+        // Con todos los rasgos precisos debe quedar solo la heroína
+        const quedan = new Set(ids);
+        for (const g of e.rasgos) {
+          const o = g.opciones?.find((x) => !x.vago && x.quedan?.includes(e.heroina));
+          if (o) for (const id of [...quedan]) if (!o.quedan.includes(id)) quedan.delete(id);
+        }
+        if (quedan.size !== 1) err(`${r}.rasgos`, 'los rasgos precisos no alcanzan para distinguir a la heroína');
+      }
+      if (e.etopeya !== undefined && lista(e.etopeya?.preguntas, 1, 5, `${r}.etopeya.preguntas`)) {
+        e.etopeya.preguntas.forEach((q, j) => {
+          const rr = `${r}.etopeya.preguntas[${j}]`;
+          if (!texto(q.hecho)) err(`${rr}.hecho`, 'falta el hecho');
+          if (lista(q.opciones, 2, 4, `${rr}.opciones`) && !(Number.isInteger(q.correcta) && q.correcta >= 0 && q.correcta < q.opciones.length)) err(`${rr}.correcta`, 'índice fuera de rango');
+          if (!texto(q.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+        });
+      }
+    }
+
+    if (e.tipo === 'congelado') {
+      const ids = ['n1', 'n2', 'n3', 'n4', 'n5', 'n6'];
+      if (lista(e.busqueda?.rondas, 1, 6, `${r}.busqueda.rondas`)) {
+        e.busqueda.rondas.forEach((q, j) => {
+          if (!texto(q.texto)) err(`${r}.busqueda.rondas[${j}].texto`, 'falta el texto');
+          if (!ids.includes(q.objetivo)) err(`${r}.busqueda.rondas[${j}].objetivo`, `debe ser ${ids.join(' | ')}`);
+        });
+      }
+      const rondasOpciones = (grupo, ruta, minimo) => {
+        if (!lista(grupo?.rondas, minimo, 5, `${ruta}.rondas`)) return;
+        grupo.rondas.forEach((q, j) => {
+          const rr = `${ruta}.rondas[${j}]`;
+          if (lista(q.opciones, 2, 3, `${rr}.opciones`) && !(Number.isInteger(q.correcta) && q.correcta >= 0 && q.correcta < q.opciones.length)) err(`${rr}.correcta`, 'índice fuera de rango');
+          if (!texto(q.explicacion)) err(`${rr}.explicacion`, 'falta la explicación');
+        });
+      };
+      rondasOpciones(e.completar, `${r}.completar`, 1);
+      (e.completar?.rondas ?? []).forEach((q, j) => (texto(q.frase) && q.frase.includes('___')) || err(`${r}.completar.rondas[${j}].frase`, 'debe tener ___ donde va la respuesta'));
+      rondasOpciones(e.objetividad, `${r}.objetividad`, 1);
+    }
+
+    if (e.tipo === 'sentidos' && lista(e.sentidos, 1, 5, `${r}.sentidos`)) {
+      e.sentidos.forEach((s, j) => {
+        const rr = `${r}.sentidos[${j}]`;
+        if (!['vista', 'oido', 'olfato', 'tacto', 'gusto'].includes(s.id)) err(`${rr}.id`, 'debe ser vista | oido | olfato | tacto | gusto');
+        if (!texto(s.pregunta)) err(`${rr}.pregunta`, 'falta la pregunta');
+        if (lista(s.opciones, 2, 4, `${rr}.opciones`)) {
+          if (s.opciones.filter((o) => o.tipo === 'viva').length !== 1) err(`${rr}.opciones`, 'debe haber exactamente una descripción viva');
+          s.opciones.forEach((o, k) => ['viva', 'pobre', 'falsa'].includes(o.tipo) || err(`${rr}.opciones[${k}].tipo`, 'debe ser viva | pobre | falsa'));
+        }
+      });
+    }
+
+    if (e.tipo === 'transmision') {
+      for (const [k, l] of [['apertura', e.apertura], ['cierre', e.cierre]]) if (l !== undefined && !(texto(l?.quien) && texto(l?.texto))) err(`${r}.${k}`, 'necesita quien y texto');
+      if (lista(e.reporte, 1, 8, `${r}.reporte`)) e.reporte.forEach((l, j) => (texto(l.quien) && texto(l.texto)) || err(`${r}.reporte[${j}]`, 'necesita quien y texto'));
+    }
+
     if (e.tipo === 'prototipo') {
       if (lista(e.materiales, 2, 12, `${r}.materiales`)) {
         e.materiales.forEach((m, j) => {

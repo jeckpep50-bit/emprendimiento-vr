@@ -20,6 +20,9 @@ const AMBIENTES = {
   taller: { frecuencia: 480, volumen: 0.012 },
   patio: { frecuencia: 900, filtro: 'bandpass', volumen: 0.025, oleaje: 0.15 },
   recreo: { frecuencia: 1100, filtro: 'bandpass', volumen: 0.035, oleaje: 0.45 },
+  estudio: { frecuencia: 300, volumen: 0.01 },
+  plaza: { frecuencia: 800, filtro: 'bandpass', volumen: 0.03, oleaje: 0.25 },
+  volcan: { frecuencia: 85, volumen: 0.11, oleaje: 0.35 },
   laboratorio: { frecuencia: 160, volumen: 0.04, oleaje: 0.08 },
   mercado: { frecuencia: 700, filtro: 'bandpass', volumen: 0.04, oleaje: 0.35 },
   planta: { frecuencia: 140, volumen: 0.05, oleaje: 0.6 },
@@ -30,7 +33,7 @@ const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const azar = (a, b) => a + Math.random() * (b - a);
 
 let texturaPunto = null;
-function puntoSuave() {
+export function puntoSuave() {
   if (!texturaPunto) {
     const c = document.createElement('canvas');
     c.width = c.height = 64;
@@ -48,7 +51,7 @@ function puntoSuave() {
 }
 
 /** Ejecuta `fn` a intervalos al azar entre min y max segundos. */
-function cadaTanto(ctx, [min, max], fn) {
+export function cadaTanto(ctx, [min, max], fn) {
   let espera = azar(min, max);
   ctx.cada((dt) => {
     espera -= dt;
@@ -60,7 +63,7 @@ function cadaTanto(ctx, [min, max], fn) {
 }
 
 /** Motas de polvo o partículas flotando despacio dentro de una caja [x0,x1,y0,y1,z0,z1]. */
-function motas(g, ctx, { cantidad = 120, caja, color = '#fff6d8', tam = 0.025, opacidad = 0.7, velocidad = 0.04 }) {
+export function motas(g, ctx, { cantidad = 120, caja, color = '#fff6d8', tam = 0.025, opacidad = 0.7, velocidad = 0.04 }) {
   const [x0, x1, y0, y1, z0, z1] = caja;
   const pos = new Float32Array(cantidad * 3);
   const fases = new Float32Array(cantidad);
@@ -326,7 +329,7 @@ function mariposas(g, ctx) {
   });
 }
 
-function nubes(g, ctx) {
+export function nubes(g, ctx) {
   const geo = new THREE.SphereGeometry(1, 14, 10);
   for (let i = 0; i < 6; i++) {
     const nube = new THREE.Group();
@@ -664,7 +667,7 @@ function banderines(g, ctx) {
 }
 
 /** Palomas que caminan y picotean el piso. */
-function palomas(g, ctx) {
+export function palomas(g, ctx) {
   for (let i = 0; i < 2; i++) {
     const p = new THREE.Group();
     const cuerpo = new THREE.Group();

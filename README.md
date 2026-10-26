@@ -41,8 +41,8 @@ compila y publica; en los pull requests solo valida y compila. La dirección es:
 En cada gafa, abre esa dirección y guárdala en favoritos. La portada muestra las actividades:
 **Types of Soil** (3.º EGB, película bilingüe), **Microorganismos en los alimentos** (5.º EGB), **Guardianes de los alimentos** (6.º EGB),
 **Evaluación: Detectives de microbios** (6.º EGB), **Operación Alimento Seguro** (7.º EGB),
-**Misión Bebedero: Design Thinking de Empatizar a Prototipar** (7.º EGB) y
-**Design Thinking: el reto del bebedero** (6.º EGB).
+**Misión Bebedero: Design Thinking de Empatizar a Prototipar** (7.º EGB),
+**Design Thinking: el reto del bebedero** (6.º EGB) y **¡Al aire! Reporteros que describen** (6.º EGB, Lengua).
 También se puede abrir una directamente, por ejemplo con `?leccion=operacion-alimento-seguro`.
 
 ### Misión Bebedero (7.º EGB, ~38 min)
@@ -67,6 +67,25 @@ También se puede abrir una directamente, por ejemplo con `?leccion=operacion-al
 13. Desafío final.
 
 Los personajes hablan con voces grabadas (ver «Voces de los personajes»). Hay puntos, rachas, 6 rangos y 5 insignias.
+
+### ¡Al aire! Reporteros que describen (6.º EGB, ~20 min)
+
+`?leccion=reporteros-que-describen`. Lengua y Literatura: la descripción. El estudiante es reportero/a de
+«Quito en Vivo» por un día y describe **dentro** de cada noticia, sin micrófono:
+
+1. **Estudio de TV — Palabras que dan forma.** Una llama sin detalles cambia en vivo con cada palabra que se elige
+   (tamaño, color, lana, adorno, actitud). Luego el reto: describir exactamente la llama del monitor.
+2. **Plaza Grande — Retrato.** Una superheroína rescata el globo de una niña y se esconde entre cuatro personas
+   disfrazadas casi igual. Cada rasgo preciso descarta a alguien; los vagos no ayudan y los falsos no son lo que se
+   vio. Al final se describe cómo es por dentro (carácter).
+3. **Mercado Central — El instante congelado.** Un choque entre una bicicleta y un carrito de frutas se congela en el
+   aire. Se camina alrededor para buscar objetos por su ubicación (encima, debajo, entre, dentro), completar frases
+   observando y separar los hechos de las opiniones. Luego el tiempo sigue y nadie sale herido.
+4. **Mirador del Cotopaxi — Los cinco sentidos.** Con el volcán en erupción, cada sentido se activa (rayos, rugido,
+   olor a azufre, ceniza en la piel y en la boca) y se elige la descripción más viva entre una pobre y una falsa.
+5. **Estudio — ¡Al aire!** El reporte del estudiante sale al aire en la pared de LED y se repasa lo aprendido.
+
+Hay voces grabadas, puntos, rachas, 4 rangos (de Pasante a Presentador/a) y 4 insignias.
 
 Si una lección tiene errores, el validador detiene la publicación y la versión anterior sigue en línea.
 
@@ -207,6 +226,24 @@ Actividades de Design Thinking para 7.º (ver `design-thinking-mision-bebedero.j
   `medidas: [{ texto, alto, correcta, explicacion }]`.
 - `narrativa` con `presentador: { opciones, posicion }`: una persona de tamaño real cuenta la historia.
 - Modelo `persona`: niños o adultos articulados (`edad`, `estatura`, `peinado`, colores de ropa, `delantal`, `lentes`…).
+  Para superhéroes: `capa` (color, ondea con el viento), `antifaz`, `emblema: "condor" | "estrella" | "rayo"`, `botas`,
+  `mechon` y `peinado: "trenza"`.
+
+Actividades de descripción para 6.º (ver `reporteros-que-describen.json`; entornos `estudio`, `plaza`, `mercado`, `volcan`):
+
+- `moldear`: `pasos: [{ pregunta, clase, rasgo, opciones: [{ texto, valor }] }]` cambian el modelo `llama` en vivo;
+  `reto: { instruccion, objetivo: { rasgo: valor }, mensajeFinal }` pide describir la llama del monitor.
+- `retrato`: `candidatos: [{ id, opciones }]`, `heroina` (id verdadero) y
+  `rasgos: [{ nombre, emoji, opciones: [{ texto, quedan: [ids] | vago: true, retro }] }]`; luego
+  `etopeya: { instruccion, preguntas: [{ hecho, dice, opciones, correcta, explicacion }] }`.
+- `congelado`: `busqueda: { rondas: [{ texto, objetivo: "n1".."n6" }] }`,
+  `completar: { rondas: [{ frase (con ___), opciones, correcta }] }` y `objetividad: { rondas: [{ opciones, correcta }] }`.
+- `sentidos`: `sentidos: [{ id: "vista" | "oido" | "olfato" | "tacto" | "gusto", emoji, nombre, pregunta,
+  opciones: [{ texto, tipo: "viva" | "pobre" | "falsa", retro }] }]`; cada sentido activa un efecto del entorno `volcan`.
+- `transmision`: `apertura`, `reporte: [{ quien, texto, emoji }]`, `cierre` y `resumen: [textos]`; usa la pared de LED
+  del entorno `estudio`.
+- Modelos nuevos: `llama` (`color`, `lana`, `adorno`), `carrito_frutas`, `bicicleta`, `perro`, `sombrero`, `globo`,
+  `camara_tv`, `furgoneta_tv`.
 
 - Modelos 3D disponibles y entornos: [`src/leccion/catalogo.js`](src/leccion/catalogo.js).
 - `npm run validar` revisa todas las lecciones.

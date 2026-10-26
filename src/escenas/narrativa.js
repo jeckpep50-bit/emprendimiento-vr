@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { EscenaBase } from './base.js';
 import { liberar } from '../mundo/materiales.js';
-import { persona, posar } from '../mundo/prefabs/personas.js';
 import { PanelLienzo, COLORES, escribir, tarjeta, pastilla, fuente } from '../ui/lienzo.js';
 
 /**
@@ -102,34 +101,16 @@ export class EscenaNarrativa extends EscenaBase {
     const paso = this.pasos[this.paso];
     if (!paso) return;
     if (!this.tieneVoz(paso.texto, this._quien(paso))) return this.narrar(paso.texto);
-    const p = this.presentador;
-    if (p) p.userData.fuenteHabla = () => this.m.audio.nivelVoz();
-    const pos = p ? p.localToWorld(new THREE.Vector3(0, p.userData.alturaOjos, 0)) : null;
-    this.voz(paso.texto, this._quien(paso), { pos }).then(() => {
-      if (p && !this.m.audio.hablando) p.userData.fuenteHabla = null;
-    });
+    if (this.presentador) this.hablarPersona(this.presentador, paso.texto, this._quien(paso));
+    else this.voz(paso.texto, this._quien(paso));
   }
 
   /** La persona que narra, de pie junto al panel; gesticula mientras habla. */
   _crearPresentador({ opciones = {}, posicion = [1.2, 0, -1.75] }) {
-    const p = persona({ edad: 'adulto', expresion: 'feliz', ...opciones });
-    p.position.set(...posicion);
-    this.raiz.add(p);
+    const p = this.crearPersona({ edad: 'adulto', expresion: 'feliz', ...opciones }, posicion, { mirar: true });
     this.presentar(p, 0.2);
-    this.mirarAlUsuario([p]);
+    this.gestosAlHablar(p);
     this.presentador = p;
-    this.cadaCuadro((dt, t) => {
-      p.userData.animar(t);
-      const habla = Boolean(p.userData.fuenteHabla) && this.m.audio.hablando;
-      const s = Math.sin(t * 2.6);
-      posar(
-        p,
-        habla
-          ? { brazoD: [-0.9 + s * 0.35, 0.3, 0.25 + Math.sin(t * 1.7) * 0.15], brazoI: [-0.45 - s * 0.2, -0.2, -0.3], cabeza: [0.05, Math.sin(t * 0.9) * 0.12, 0] }
-          : { brazoI: [0, 0, -0.12], brazoD: [0, 0, 0.12] },
-        Math.min(1, dt * 4),
-      );
-    });
   }
 
   _dibujar(ctx, w, h) {
