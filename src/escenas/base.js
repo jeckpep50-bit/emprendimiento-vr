@@ -4,6 +4,7 @@ import { liberar } from '../mundo/materiales.js';
 import { crearBoton, crearEtiqueta } from '../ui/componentes.js';
 import { PanelLienzo, COLORES, escribir, tarjeta, pastilla, fuente } from '../ui/lienzo.js';
 import { claveVoz } from '../leccion/voces.js';
+import { persona, posar } from '../mundo/prefabs/personas.js';
 
 let texturaHalo = null;
 
@@ -81,6 +82,55 @@ export class EscenaBase {
     }
     const velocidad = this.m.leccion?.voces?.personajes?.[quien]?.reproduccion ?? 1;
     return this.m.audio.decirVoz(clave, { pos, velocidad, canal });
+  }
+
+  // ── Personas que hablan ──────────────────────────────────────────────────
+
+  /** Persona articulada de tamaño real (se anima cada cuadro). mirar: gira para ver al usuario. */
+  crearPersona(opciones = {}, [x = 0, y = 0, z = -2] = [], { mirar = false, ry = null, padre = this.raiz } = {}) {
+    const p = persona(opciones);
+    p.position.set(x, y, z);
+    if (ry !== null) p.rotation.y = ry;
+    padre.add(p);
+    this.cadaCuadro((_dt, t) => p.userData.animar(t));
+    if (mirar) this.mirarAlUsuario([p]);
+    return p;
+  }
+
+  /**
+   * La persona dice un texto con su voz grabada: la voz sale de su cabeza y la boca
+   * se mueve con el audio. Sin grabación, mueve la cabeza un rato. Resuelve al terminar.
+   */
+  hablarPersona(p, texto, quien) {
+    if (!texto || this._destruida) return Promise.resolve(false);
+    if (!this.tieneVoz(texto, quien)) {
+      const seg = this.duracionVoz(texto, quien);
+      p.userData.hablar?.(seg);
+      this.narrar(texto);
+      return this.esperar(seg).then(() => false);
+    }
+    p.userData.fuenteHabla = () => this.m.audio.nivelVoz();
+    const pos = p.localToWorld(new THREE.Vector3(0, (p.userData.alturaOjos ?? 1.5) / (p.scale.x || 1), 0));
+    return this.voz(texto, quien, { pos }).then((completa) => {
+      if (!this.m.audio.hablando) p.userData.fuenteHabla = null;
+      return completa;
+    });
+  }
+
+  /** Mientras la persona habla, mueve los brazos y la cabeza como quien explica algo. */
+  gestosAlHablar(p) {
+    this.cadaCuadro((dt, t) => {
+      if (p.userData.sinGestos) return;
+      const habla = Boolean(p.userData.fuenteHabla) && this.m.audio.hablando;
+      const s = Math.sin(t * 2.6);
+      posar(
+        p,
+        habla
+          ? { brazoD: [-0.9 + s * 0.35, 0.3, 0.25 + Math.sin(t * 1.7) * 0.15], brazoI: [-0.45 - s * 0.2, -0.2, -0.3], cabeza: [0.05, Math.sin(t * 0.9) * 0.12, 0] }
+          : { brazoI: [0, 0, -0.12], brazoD: [0, 0, 0.12] },
+        Math.min(1, dt * 4),
+      );
+    });
   }
 
   terminar() {

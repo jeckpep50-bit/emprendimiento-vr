@@ -1,0 +1,378 @@
+{
+  "id": "reporteros-que-describen",
+  "titulo": "¡Al aire! Reporteros que describen",
+  "materia": "Lengua y Literatura",
+  "grado": "6.º EGB",
+  "idioma": "es",
+  "duracionMinutos": 20,
+  "emoji": "🎙️",
+  "narracion": false,
+  "gamificacion": true,
+  "voces": {
+    "carpeta": "voces/reporteros-que-describen",
+    "personajes": {
+      "guia": { "tono": "+6%", "velocidad": "-4%" },
+      "heroina": { "tono": "-6%", "velocidad": "-6%" },
+      "nina": { "tono": "+55%", "velocidad": "-6%" },
+      "majo": { "tono": "+22%", "velocidad": "+0%" },
+      "vendedora": { "tono": "-12%", "velocidad": "-10%" },
+      "reportero": { "tono": "+14%", "velocidad": "-6%" }
+    }
+  },
+  "rangos": [
+    { "nombre": "Pasante", "emoji": "🎒", "puntos": 0 },
+    { "nombre": "Reportero/a", "emoji": "📝", "puntos": 1500 },
+    { "nombre": "Reportero/a estrella", "emoji": "⭐", "puntos": 4000 },
+    { "nombre": "Presentador/a", "emoji": "🎙️", "puntos": 7000 }
+  ],
+  "titulosMedalla": {
+    "oro": "¡Medalla de oro! Reportero/a estrella",
+    "plata": "¡Medalla de plata! Gran reportero/a",
+    "bronce": "¡Medalla de bronce! Reportero/a en formación"
+  },
+  "descripcion": "El estudiante es reportero/a de «Quito en Vivo» por un día y aprende a describir. En el estudio, sus palabras transforman una llama en vivo. En la Plaza Grande describe a una heroína con rasgos precisos hasta encontrarla entre cuatro disfrazados, y también cómo es por dentro. En el Mercado Central recorre un choque congelado en el tiempo para decir dónde está cada cosa y separar hechos de opiniones. Desde un mirador frente al Cotopaxi en erupción describe el lugar con los cinco sentidos. Al final sale al aire con su reporte.",
+  "objetivos": [
+    "Describir con adjetivos precisos y comparaciones para que otra persona imagine lo que no ve.",
+    "Hacer el retrato de una persona: cómo es por fuera (rasgos físicos) y por dentro (carácter).",
+    "Distinguir los rasgos precisos de los vagos y de los falsos.",
+    "Ubicar objetos con palabras de lugar: encima de, debajo de, entre, dentro de.",
+    "Diferenciar una descripción objetiva (hechos) de una opinión.",
+    "Describir un lugar con los cinco sentidos y lenguaje vivo."
+  ],
+  "escenas": [
+    {
+      "tipo": "moldear",
+      "entorno": "estudio",
+      "titulo": "Palabras que dan forma",
+      "presentador": {
+        "posicion": [0, 0, -2.85],
+        "opciones": { "estatura": 1.65, "peinado": "largo", "cabello": "#2b1d14", "piel": "#c98b5e", "superior": "#6d28d9", "inferior": "#23304a", "falda": false, "cuello": "#ffffff" }
+      },
+      "intro": [
+        "¡Bienvenido a Quito en Vivo! Soy Sofía, la presentadora. Hoy serás nuestro reportero o reportera estrella.",
+        "Un buen reportero DESCRIBE: cuenta cómo es algo con tantos detalles que el público lo imagina sin verlo. ¡Las palabras pintan imágenes!"
+      ],
+      "instruccion": "🦙 Esta llama no tiene detalles. Elige las palabras para describirla y mira cómo cambia con cada una.",
+      "insignia": { "emoji": "🦙", "nombre": "Palabras que pintan" },
+      "inicio": "Una llama",
+      "pasos": [
+        {
+          "pregunta": "¿De qué tamaño es?",
+          "clase": "Adjetivo de tamaño",
+          "rasgo": "tamano",
+          "pista": "Compara la llama con el niño de la toma: ¿es más grande o más pequeña que él?",
+          "opciones": [
+            { "texto": "pequeñita", "valor": 0.6 },
+            { "texto": "mediana", "valor": 1 },
+            { "texto": "gigantesca", "valor": 1.3 }
+          ]
+        },
+        {
+          "pregunta": "¿De qué color es su lana?",
+          "clase": "Color y comparación",
+          "rasgo": "color",
+          "pista": "Fíjate en el color de la lana en el monitor.",
+          "opciones": [
+            { "texto": "blanca como la nieve", "valor": "#f5f1e8" },
+            { "texto": "café como el chocolate", "valor": "#7a4a2a" },
+            { "texto": "negra como la noche", "valor": "#2b2b33" }
+          ]
+        },
+        {
+          "pregunta": "¿Cómo es su lana?",
+          "clase": "Textura",
+          "rasgo": "lana",
+          "pista": "¿Su lana se ve lisa o como una nube?",
+          "opciones": [
+            { "texto": "lisa y brillante", "valor": "lisa" },
+            { "texto": "esponjosa como una nube", "valor": "esponjosa" }
+          ]
+        },
+        {
+          "pregunta": "¿Qué lleva puesto?",
+          "clase": "Detalle",
+          "rasgo": "adorno",
+          "pista": "Mira qué lleva sobre la espalda o en las orejas.",
+          "opciones": [
+            { "texto": "con pompones de colores en las orejas", "valor": "pompones" },
+            { "texto": "con un poncho rojo", "valor": "poncho" },
+            { "texto": "sin adornos", "valor": "ninguno" }
+          ]
+        },
+        {
+          "pregunta": "¿Cómo se comporta?",
+          "clase": "Carácter",
+          "rasgo": "actitud",
+          "pista": "Observa qué hace: ¿salta, descansa o mira hacia todos lados?",
+          "opciones": [
+            { "texto": "y es tranquila como una laguna", "valor": "tranquila" },
+            { "texto": "y es juguetona como un cachorro", "valor": "juguetona" },
+            { "texto": "y es curiosa: todo lo quiere mirar", "valor": "curiosa" }
+          ]
+        }
+      ],
+      "frases": {
+        "tuLlama": { "quien": "guia", "texto": "¡Mírala! Con cada palabra, el público la imagina mejor. Los adjetivos y las comparaciones son tus pinceles." }
+      },
+      "reto": {
+        "instruccion": "🎥 Ahora el camarógrafo grabó OTRA llama. Mírala en el monitor y descríbela exactamente igual, palabra por palabra.",
+        "objetivo": { "tamano": 0.6, "color": "#7a4a2a", "lana": "lisa", "adorno": "poncho", "actitud": "curiosa" },
+        "mensajeFinal": "🎉 ¡Idénticas! Describiste con precisión: el público ve exactamente lo que tú ves."
+      }
+    },
+    {
+      "tipo": "retrato",
+      "entorno": "plaza",
+      "titulo": "Noticia 1: la heroína de la Plaza Grande",
+      "instruccion": "🦸 ¡Última hora en la Plaza Grande! Una heroína anda por el centro de Quito. Mira con atención lo que pasa: después tendrás que describirla.",
+      "instruccionRetrato": "🔍 ¡Hay un festival de disfraces y cuatro personas se parecen a la heroína! Descríbela rasgo por rasgo. Cada rasgo PRECISO descarta a quien no coincide.",
+      "mensajeFinal": "📝 ¡Retrato completo! Describiste cómo es por fuera, su aspecto, y por dentro, su carácter. Eso es un retrato.",
+      "insignia": { "emoji": "🦸", "nombre": "Retratista" },
+      "heroina": "c1",
+      "candidatos": [
+        { "id": "c1", "opciones": { "estatura": 1.78, "peinado": "trenza", "cabello": "#1d1d27", "piel": "#c98b5e", "superior": "#2f4a8a", "inferior": "#2f4a8a", "falda": false, "cuello": null, "antifaz": "#ffc23c", "emblema": "condor", "capa": "#d62839", "botas": "#ffffff", "mechon": true } },
+        { "id": "c2", "opciones": { "estatura": 1.76, "peinado": "corto", "cabello": "#1d1d27", "piel": "#b9794f", "superior": "#2f4a8a", "inferior": "#2f4a8a", "falda": false, "cuello": null, "antifaz": "#ffc23c", "emblema": "estrella", "capa": "#d62839", "botas": "#ffffff" } },
+        { "id": "c3", "opciones": { "estatura": 1.42, "peinado": "trenza", "cabello": "#1d1d27", "piel": "#d9a06f", "superior": "#2f4a8a", "inferior": "#2f4a8a", "falda": false, "cuello": null, "emblema": "condor", "capa": "#2f8be6", "botas": "#ffffff", "mechon": true } },
+        { "id": "c4", "opciones": { "estatura": 1.75, "peinado": "trenza", "cabello": "#1d1d27", "piel": "#a8704a", "superior": "#2f4a8a", "inferior": "#2f4a8a", "falda": false, "cuello": null, "antifaz": "#c9d2de", "emblema": "condor", "capa": "#d62839", "botas": "#1d1d27" } }
+      ],
+      "rasgos": [
+        {
+          "nombre": "Estatura",
+          "emoji": "📏",
+          "opciones": [
+            { "texto": "Es alta, más que los adultos de la plaza.", "quedan": ["c1", "c2", "c4"] },
+            { "texto": "Tiene una estatura normal.", "vago": true, "retro": "«Normal» no dice nada: ¿normal para quién? Usa un rasgo preciso." },
+            { "texto": "Es bajita, como una niña.", "quedan": ["c3"], "retro": "¡No! La heroína era alta. Mira otra vez la noticia." }
+          ]
+        },
+        {
+          "nombre": "Cabello",
+          "emoji": "💇",
+          "opciones": [
+            { "texto": "Tiene el cabello negro en una trenza larga.", "quedan": ["c1", "c3", "c4"] },
+            { "texto": "Tiene el pelo bonito.", "vago": true, "retro": "«Bonito» es una opinión y le queda a cualquiera. ¿Cómo era su cabello?" },
+            { "texto": "Tiene el pelo corto y rubio.", "quedan": [], "retro": "¡Eso no es lo que viste! Su cabello no era corto ni rubio." }
+          ]
+        },
+        {
+          "nombre": "Antifaz",
+          "emoji": "🎭",
+          "opciones": [
+            { "texto": "Usa un antifaz dorado con forma de alas.", "quedan": ["c1", "c2"] },
+            { "texto": "Usa algo en la cara.", "vago": true, "retro": "«Algo» es demasiado vago. ¿Qué era, de qué color y qué forma tenía?" },
+            { "texto": "Usa un casco plateado.", "quedan": [], "retro": "No llevaba casco. Fíjate en lo que cubría sus ojos." }
+          ]
+        },
+        {
+          "nombre": "Símbolo",
+          "emoji": "🦅",
+          "opciones": [
+            { "texto": "En el pecho lleva un cóndor dorado.", "quedan": ["c1", "c3", "c4"] },
+            { "texto": "Tiene un dibujo en el pecho.", "vago": true, "retro": "¿Qué dibujo? Si no lo dices, el público no lo imagina." },
+            { "texto": "Tiene una estrella en el pecho.", "quedan": ["c2"], "retro": "La heroína no tenía una estrella. ¿Qué animal de los Andes llevaba?" }
+          ]
+        },
+        {
+          "nombre": "Capa",
+          "emoji": "🧣",
+          "opciones": [
+            { "texto": "Su capa es roja y larga.", "quedan": ["c1", "c2", "c4"] },
+            { "texto": "Su capa es de un color fuerte.", "vago": true, "retro": "¿Qué color? «Fuerte» puede ser cualquiera." },
+            { "texto": "Su capa es azul.", "quedan": ["c3"], "retro": "Su capa no era azul. Mira otra vez la noticia." }
+          ]
+        },
+        {
+          "nombre": "Botas",
+          "emoji": "👢",
+          "opciones": [
+            { "texto": "Usa botas blancas hasta la rodilla.", "quedan": ["c1", "c2", "c3"] },
+            { "texto": "Usa zapatos.", "vago": true, "retro": "Todos usan zapatos. ¿Cómo eran los suyos?" },
+            { "texto": "Usa botas negras.", "quedan": ["c4"], "retro": "Sus botas no eran negras. Fíjate bien." }
+          ]
+        },
+        {
+          "nombre": "Seña particular",
+          "emoji": "✨",
+          "opciones": [
+            { "texto": "Tiene un mechón blanco en el flequillo.", "quedan": ["c1", "c3"] },
+            { "texto": "Se ve fuerte y genial.", "vago": true, "retro": "Es una opinión, no una seña. Una seña particular es un detalle único de su cuerpo." },
+            { "texto": "Tiene una cicatriz en la mejilla.", "quedan": [], "retro": "No tenía ninguna cicatriz. ¿Qué detalle tenía en el cabello?" }
+          ]
+        }
+      ],
+      "etopeya": {
+        "instruccion": "❤️ ¡La encontraste! Ahora describe cómo es POR DENTRO: su carácter. Lee lo que hizo y elige la palabra que mejor la describe.",
+        "preguntas": [
+          {
+            "hecho": "Voló hasta lo más alto de la Catedral para atrapar el globo, sin dudarlo.",
+            "opciones": ["valiente", "tímida", "perezosa"],
+            "correcta": 0,
+            "explicacion": "Hacer algo difícil sin dudar muestra que es valiente."
+          },
+          {
+            "hecho": "Le devolvió el globo a la niña y no pidió nada a cambio.",
+            "opciones": ["presumida", "generosa", "egoísta"],
+            "correcta": 1,
+            "explicacion": "Ayudar sin esperar nada muestra que es generosa."
+          },
+          {
+            "hecho": "No soy especial: cualquiera puede ayudar a los demás.",
+            "dice": true,
+            "voz": "heroina",
+            "opciones": ["orgullosa", "aburrida", "humilde"],
+            "correcta": 2,
+            "explicacion": "No presumir de lo que hace muestra que es humilde."
+          }
+        ]
+      },
+      "frases": {
+        "ninaGlobo": { "quien": "nina", "texto": "¡Mi globo! ¡Se me escapa!" },
+        "heroinaEntrega": { "quien": "heroina", "texto": "¡Aquí tienes, pequeña! Cuídalo mucho." },
+        "ninaGracias": { "quien": "nina", "texto": "¡Gracias, Cóndor Andina!" },
+        "heroinaHola": { "quien": "heroina", "texto": "¡Hola, Quito en Vivo! ¡Nos vemos pronto!" },
+        "escondida": { "quien": "guia", "texto": "¡Desapareció! Dicen que se escondió en el festival de disfraces de la plaza. ¡Vamos a buscarla!" },
+        "encontrada": { "quien": "heroina", "texto": "¡Me encontraste! Te fijaste en cada detalle. ¡Así describe un buen reportero!" }
+      }
+    },
+    {
+      "tipo": "congelado",
+      "entorno": "mercado",
+      "titulo": "Noticia 2: el instante congelado",
+      "instruccion": "⏸️ ¡Congelamos el instante del choque! Camina alrededor de la escena y obsérvala desde todos los lados. Un buen reportero describe DÓNDE está cada cosa.",
+      "mensajeFinal": "📰 ¡Gran reporte! Dijiste dónde estaba cada cosa y contaste solo hechos. Y lo mejor: ¡nadie salió herido!",
+      "insignia": { "emoji": "🔎", "nombre": "Ojo de detective" },
+      "busqueda": {
+        "rondas": [
+          { "texto": "Toca la naranja que está ENCIMA del sombrero.", "objetivo": "n1" },
+          { "texto": "Toca la naranja que está DEBAJO del carrito.", "objetivo": "n2" },
+          { "texto": "Toca la naranja que está ENTRE el perro y la bicicleta.", "objetivo": "n3" },
+          { "texto": "Toca la naranja que está DENTRO de la canasta de la bicicleta.", "objetivo": "n4" }
+        ]
+      },
+      "ubicaciones": {
+        "n1": "encima del sombrero",
+        "n2": "debajo del carrito",
+        "n3": "entre el perro y la bicicleta",
+        "n4": "dentro de la canasta de la bicicleta",
+        "n5": "en el aire, sobre el carrito",
+        "n6": "delante de la vendedora"
+      },
+      "completar": {
+        "instruccion": "✍️ Ahora completa la descripción de la escena. Mira bien antes de elegir.",
+        "rondas": [
+          { "frase": "Majo vuela ___ de su bicicleta.", "opciones": ["encima", "debajo", "dentro"], "correcta": 0, "explicacion": "Majo salió disparada y quedó encima de su bicicleta.", "pista": "Busca a Majo: ¿está más arriba o más abajo que su bicicleta?" },
+          { "frase": "La vendedora tiene las manos ___ la cabeza.", "opciones": ["sobre", "debajo de", "dentro de"], "correcta": 0, "explicacion": "Del susto, se puso las manos sobre la cabeza.", "pista": "Mira a la vendedora: ¿dónde tiene las manos?" },
+          { "frase": "Los panes vuelan ___ la bicicleta y el carrito.", "opciones": ["entre", "debajo de", "dentro de"], "correcta": 0, "explicacion": "Los panes quedaron en el aire, entre la bicicleta y el carrito.", "pista": "Busca los panes: ¿qué tienen a cada lado?" }
+        ]
+      },
+      "objetividad": {
+        "instruccion": "⚖️ El reporte de un accidente debe ser OBJETIVO: cuenta lo que se ve, sin opiniones ni exageraciones.",
+        "pregunta": "¿Cuál frase es objetiva?",
+        "rondas": [
+          { "opciones": ["La bicicleta azul quedó inclinada junto al carrito.", "La ciclista maneja como una loca."], "correcta": 0, "explicacion": "Describe lo que se ve. La otra es una opinión que además ofende.", "pista": "¿Cuál cuenta un hecho y cuál da una opinión?" },
+          { "opciones": ["¡Fue el peor accidente de la historia!", "Hay naranjas y panes suspendidos en el aire."], "correcta": 1, "explicacion": "Es un hecho que se puede ver. La otra exagera.", "pista": "¿Cuál exagera y cuál dice lo que se ve?" }
+        ]
+      },
+      "frases": {
+        "aviso": { "quien": "guia", "texto": "¡Atención! Te conectamos con el Mercado Central. ¡Algo está a punto de pasar!" },
+        "majoBien": { "quien": "majo", "texto": "¡Estoy bien! ¡Solo se me cayeron los panes!" },
+        "vendedoraAyuda": { "quien": "vendedora", "texto": "Tranquila, mija. ¡Recojamos todo juntas!" }
+      }
+    },
+    {
+      "tipo": "sentidos",
+      "entorno": "volcan",
+      "titulo": "Noticia 3: en vivo desde el Cotopaxi",
+      "instruccion": "🌋 ¡El Cotopaxi está en erupción! Estás en un mirador seguro, muy lejos del volcán. Describe el lugar con tus CINCO SENTIDOS: toca cada sentido y elige la descripción más viva.",
+      "mensajeFinal": "🎙️ ¡Qué reporte! Con los cinco sentidos, el público siente que está aquí contigo. ¡Volvamos al estudio para salir al aire!",
+      "insignia": { "emoji": "🌋", "nombre": "Reportero/a de los 5 sentidos" },
+      "sentidos": [
+        {
+          "id": "vista",
+          "emoji": "👀",
+          "nombre": "Vista",
+          "pregunta": "¿Qué VES? Toca el ojo.",
+          "opciones": [
+            { "texto": "Una columna de ceniza gris y gigantesca sube del cráter, como un algodón sucio que tapa el cielo.", "tipo": "viva" },
+            { "texto": "Veo una nube.", "tipo": "pobre" },
+            { "texto": "Veo una playa con palmeras.", "tipo": "falsa" }
+          ]
+        },
+        {
+          "id": "oido",
+          "emoji": "👂",
+          "nombre": "Oído",
+          "pregunta": "¿Qué ESCUCHAS? Toca el oído.",
+          "opciones": [
+            { "texto": "Un rugido grave retumba en el páramo, como un trueno que no se acaba.", "tipo": "viva" },
+            { "texto": "Se escucha un ruido.", "tipo": "pobre" },
+            { "texto": "Se escucha música alegre.", "tipo": "falsa" }
+          ]
+        },
+        {
+          "id": "olfato",
+          "emoji": "👃",
+          "nombre": "Olfato",
+          "pregunta": "¿Qué HUELES? Toca la nariz.",
+          "opciones": [
+            { "texto": "Huele a azufre, como a huevo podrido, y el aire pica en la nariz.", "tipo": "viva" },
+            { "texto": "Huele feo.", "tipo": "pobre" },
+            { "texto": "Huele a pan recién horneado.", "tipo": "falsa" }
+          ]
+        },
+        {
+          "id": "tacto",
+          "emoji": "✋",
+          "nombre": "Tacto",
+          "pregunta": "¿Qué SIENTES en la piel? Toca la mano.",
+          "opciones": [
+            { "texto": "Una ceniza fina y tibia cae sobre mis brazos, áspera como la arena.", "tipo": "viva" },
+            { "texto": "Cae algo.", "tipo": "pobre" },
+            { "texto": "Cae nieve fría y mojada.", "tipo": "falsa" }
+          ]
+        },
+        {
+          "id": "gusto",
+          "emoji": "👅",
+          "nombre": "Gusto",
+          "pregunta": "¿Qué SABOR sientes en la boca? Toca la lengua.",
+          "opciones": [
+            { "texto": "Siento un sabor amargo y polvoroso, como si hubiera masticado tiza.", "tipo": "viva" },
+            { "texto": "Sabe raro.", "tipo": "pobre" },
+            { "texto": "Sabe dulce, como un caramelo.", "tipo": "falsa" }
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "transmision",
+      "entorno": "estudio",
+      "titulo": "¡Al aire!",
+      "instruccion": "🔴 ¡Todo listo en el estudio! Toca el botón rojo y sal al aire con tu reporte desde el Cotopaxi.",
+      "mensajeFinal": "🎉 ¡Excelente trabajo, reportero estrella! Ahora sabes describir como un profesional.",
+      "presentador": {
+        "posicion": [0, 0, -2.85],
+        "opciones": { "estatura": 1.65, "peinado": "largo", "cabello": "#2b1d14", "piel": "#c98b5e", "superior": "#6d28d9", "inferior": "#23304a", "falda": false, "cuello": "#ffffff" }
+      },
+      "apertura": { "quien": "guia", "texto": "Buenas noches, Quito. Conectamos en vivo con nuestro reportero estrella, desde el mirador del Cotopaxi." },
+      "reporte": [
+        { "quien": "reportero", "emoji": "🌋", "texto": "Desde el mirador se ve el Cotopaxi en plena erupción." },
+        { "quien": "reportero", "emoji": "👀", "texto": "Una columna de ceniza gris y gigantesca sube del cráter, como un algodón sucio que tapa el cielo." },
+        { "quien": "reportero", "emoji": "👂", "texto": "Un rugido grave retumba en el páramo, como un trueno que no se acaba." },
+        { "quien": "reportero", "emoji": "👃", "texto": "Huele a azufre, como a huevo podrido, y el aire pica en la nariz." },
+        { "quien": "reportero", "emoji": "✋", "texto": "Una ceniza fina y tibia cae sobre mis brazos, áspera como la arena." },
+        { "quien": "reportero", "emoji": "👅", "texto": "Siento un sabor amargo y polvoroso, como si hubiera masticado tiza." },
+        { "quien": "reportero", "emoji": "🎙️", "texto": "Les habló su reportero estrella, en vivo desde el Cotopaxi." }
+      ],
+      "cierre": { "quien": "guia", "texto": "¡Gracias! Así se describe: con detalles, comparaciones y los cinco sentidos." },
+      "resumen": [
+        "Usa adjetivos precisos: «gigantesca», «esponjosa», «café».",
+        "Compara para crear imágenes: «blanca como la nieve».",
+        "Describe a las personas por fuera y por dentro: es un retrato.",
+        "Di dónde está cada cosa: encima de, debajo de, entre, dentro de.",
+        "Cuando informas, sé objetivo: hechos, no opiniones.",
+        "Usa los cinco sentidos para que el público sienta que está ahí."
+      ]
+    }
+  ]
+}

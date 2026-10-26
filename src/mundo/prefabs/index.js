@@ -6,6 +6,7 @@ import { diseno } from './diseno.js';
 import { laboratorio } from './laboratorio.js';
 import { mercado } from './mercado.js';
 import { persona } from './personas.js';
+import { noticias } from './noticias.js';
 import { crearTarjetaTexto } from '../../ui/componentes.js';
 import { cajaLocal } from '../../core/entrada.js';
 
@@ -17,6 +18,7 @@ const FABRICAS = {
   ...laboratorio,
   ...mercado,
   persona,
+  ...noticias,
   tarjeta: (op) => crearTarjetaTexto({ texto: op.texto ?? '', emoji: op.emoji ?? '', ancho: 0.3, alto: 0.22, color: op.color }),
 };
 

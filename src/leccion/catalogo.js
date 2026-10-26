@@ -108,6 +108,15 @@ export const MODELOS = {
   tapete_caucho: 'Rollo de caucho antideslizante.',
   pintura: 'Tarros de pintura de colores con brocha.',
   plastico_liso: 'Láminas de plástico liso y resbaloso.',
+  // Noticiero (lección de la descripción)
+  llama: 'Llama andina de tamaño real. Opciones: color (lana), lana ("lisa" | "esponjosa"), adorno ("ninguno" | "pompones" | "poncho"), gris (sin detalles).',
+  carrito_frutas: 'Carrito de frutas de madera lleno de naranjas.',
+  bicicleta: 'Bicicleta de reparto con canasta. Opción color.',
+  perro: 'Perro mestizo. Opciones: color, salto (patas estiradas).',
+  sombrero: 'Sombrero de paja toquilla.',
+  globo: 'Globo de helio con su piola. Opción color.',
+  camara_tv: 'Cámara de televisión sobre trípode.',
+  furgoneta_tv: 'Furgoneta del noticiero con antena satelital.',
 };
 
 export const ENTORNOS = {
@@ -120,6 +129,9 @@ export const ENTORNOS = {
   taller: 'Laboratorio de innovación: pizarra con las 5 fases del Design Thinking, muro de notas adhesivas y estantes con material reciclado.',
   laboratorio: 'Laboratorio de microbiología futurista: mesones con microscopios, pantallas animadas y un proyector holográfico de microbios.',
   patio: 'Patio de una escuela ecuatoriana: bebedero al frente, cancha, bancas, edificio escolar, bandera del Ecuador y volcanes al fondo.',
+  estudio: 'Estudio de televisión del noticiero «Quito en Vivo»: escritorio, cámaras, luces y una pared de LED que la escena puede dibujar.',
+  plaza: 'Plaza Grande de Quito: el monumento a la Independencia, Carondelet, la Catedral con sus cúpulas verdes, palmeras, bancas y palomas.',
+  volcan: 'Mirador del páramo frente al volcán Cotopaxi en erupción: columna de ceniza, rayos, ceniza que cae, azufre y rugidos (API para la escena "sentidos").',
   recreo: 'El mismo patio a la hora del recreo (sin bebedero fijo: lo pone la escena), con rayuela, tienda escolar y sol de mediodía de Quito. Lo usa la escena "observacion" con escenario "recreo".',
   mercado: 'Mercado ecuatoriano con 4 puestos bajo toldos alrededor del usuario: frutas (al frente, mesón en z = -2,6), carnes y mariscos (izquierda, x = -2,6), comidas y jugos (derecha, x = 2,6) y lácteos y abarrotes (atrás, z = 2,4). Los mesones miden 0,9 m de alto.',
   planta: 'Planta procesadora de alimentos: nave industrial con tanques, tuberías, robot empacador y luces de seguridad.',
@@ -147,6 +159,11 @@ export const TIPOS_ESCENA = {
     'Observación en una escena viva (escenario "recreo"): marcas 👁️ alrededor del estudiante; al tocar una decide si lo que ve es importante para el reto (bitácora) o no. Campos: escenario, observaciones [{ lugar, texto, corto?, relevante, explicacion, pista? }], frases { clave: { quien, texto } }.',
   frase: 'Armar una frase por partes eligiendo la opción correcta de cada parte (p. ej. el reto: QUIÉN · NECESITA · PORQUE) y, opcionalmente, la mejor pregunta "¿Cómo podríamos…?". Campos: partes [{ etiqueta, opciones [{ texto, correcta, retro }] }], pregunta? { instruccion, opciones }.',
   matriz: 'Matriz de decisión: ideas (filas) × criterios (columnas); el estudiante marca ✅/❌ en cada casilla y comprueba. Campos: criterios [{ texto, emoji? }], ideas [{ texto, emoji?, cumple [bool], porque [texto] }].',
+  moldear: 'Palabras que dan forma: una llama sin detalles cambia en vivo con cada palabra elegida (tamaño, color, textura, adorno, actitud); después hay que describir exactamente la llama de un monitor. Campos: intro, presentador, pasos [{ pregunta, clase, rasgo, pista, opciones [{ texto, valor }] }], reto { instruccion, objetivo, mensajeFinal }.',
+  retrato: 'Noticia en vivo (una heroína rescata un globo) y una fila de cuatro disfrazados: cada rasgo preciso descarta a quien no coincide; después se describe el carácter. Campos: heroina, candidatos, rasgos [{ nombre, emoji, opciones [{ texto, quedan | vago, retro }] }], etopeya, frases.',
+  congelado: 'Un choque en el mercado se congela en el tiempo: buscar objetos por su ubicación, completar la descripción y elegir lo objetivo. Campos: busqueda { rondas }, ubicaciones, completar, objetividad, frases.',
+  sentidos: 'Describir un lugar con los cinco sentidos (entorno volcan): cada sentido se activa y se elige la descripción viva. Campos: sentidos [{ id, emoji, nombre, pregunta, opciones [{ texto, tipo: viva | pobre | falsa, retro }] }].',
+  transmision: 'Salida al aire en el estudio: la presentadora y el reportero leen el reporte; al final, un resumen. Campos: presentador, apertura, reporte [{ quien, texto, emoji }], cierre, resumen.',
   prototipo:
     'Taller de prototipo: (1) elegir en un estante los materiales que sirven; (2) probar alturas del escalón en una simulación a tamaño real con Camila frente al bebedero. Campos: materiales [{ modelo, nombre, sirve, explicacion, pista? }], instruccionMedida, medidas [{ texto, alto, correcta, explicacion }], frases? { logro }.',
 };

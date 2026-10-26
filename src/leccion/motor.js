@@ -25,6 +25,11 @@ import { EscenaObservacion } from '../escenas/observacion.js';
 import { EscenaFrase } from '../escenas/frase.js';
 import { EscenaMatriz } from '../escenas/matriz.js';
 import { EscenaPrototipo } from '../escenas/prototipo.js';
+import { EscenaMoldear } from '../escenas/moldear.js';
+import { EscenaRetrato } from '../escenas/retrato.js';
+import { EscenaCongelado } from '../escenas/congelado.js';
+import { EscenaSentidos } from '../escenas/sentidos.js';
+import { EscenaTransmision } from '../escenas/transmision.js';
 import { EscenaFinal } from '../escenas/final.js';
 
 const RADIO_MOVIMIENTO = 2.3;
@@ -49,6 +54,11 @@ const TIPOS = {
   frase: EscenaFrase,
   matriz: EscenaMatriz,
   prototipo: EscenaPrototipo,
+  moldear: EscenaMoldear,
+  retrato: EscenaRetrato,
+  congelado: EscenaCongelado,
+  sentidos: EscenaSentidos,
+  transmision: EscenaTransmision,
 };
 
 /** Reproduce una lección: crea cada escena, cambia de entorno y hace las transiciones. */
@@ -62,7 +72,8 @@ export class Motor {
     this.nombreEntorno = null;
     this._ocupado = false;
     app.alActualizar((dt, t) => {
-      this.entorno?.actualizar?.(dt, t);
+      // Con el tiempo congelado (escena "congelado") el entorno deja de moverse.
+      if (!this.entornoPausado) this.entorno?.actualizar?.(dt, t);
       actualizarHologramas(t);
       audio.actualizarOyente(app.camara);
     });
@@ -277,6 +288,8 @@ export class Motor {
     }
     this.fx.limpiar();
     this.entrada.reiniciar();
+    this.entornoPausado = false;
+    this.audio.volumenAmbiente(1);
 
     const datos = this.leccion.escenas[indice];
     // Las voces de esta escena y de la siguiente se descargan antes de necesitarlas.

@@ -34,7 +34,7 @@ export function textoHablado(texto) {
     .replace(/✅/g, ' visto ')
     .replace(/❌/g, ' equis ')
     .replace(/👁️?/g, ' ojo ')
-    .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{20E3}]/gu, '')
+    .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{20E3}]/gu, '')
     .replace(/\b([1-7])\.º/g, (_, n) => ordinales[n])
     .replace(/[«»“”"*]/g, '')
     .replace(/\(\s*\)/g, '')
@@ -112,5 +112,18 @@ export function lineasDeEscena(e) {
     for (const q of todasLasPreguntas(e.preguntas)) agregar(vozDe(q.a), q.respuesta);
   }
   for (const f of Object.values(e.frases ?? {})) agregar(f.quien, f.texto);
+  // Lección de la descripción (noticiero)
+  for (const t of e.intro ?? []) agregar(guia, t);
+  if (e.tipo === 'moldear') for (const p of e.pasos ?? []) agregar(guia, p.pregunta);
+  agregar(guia, e.reto?.instruccion);
+  agregar(guia, e.reto?.mensajeFinal);
+  agregar(guia, e.instruccionRetrato);
+  agregar(guia, e.etopeya?.instruccion);
+  for (const q of e.etopeya?.preguntas ?? []) if (q.voz) agregar(q.voz, q.hecho);
+  for (const r of e.busqueda?.rondas ?? []) agregar(guia, r.texto);
+  agregar(guia, e.completar?.instruccion);
+  agregar(guia, e.objetividad?.instruccion);
+  for (const s of e.sentidos ?? []) agregar(guia, s.pregunta);
+  for (const l of [e.apertura, ...(e.reporte ?? []), e.cierre]) if (l) agregar(l.quien, l.texto);
   return [...lineas.values()];
 }

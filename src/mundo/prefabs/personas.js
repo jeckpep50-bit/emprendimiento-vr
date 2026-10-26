@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mat, malla, fusionar, ponerCara, liberar } from '../materiales.js';
+import { PanelLienzo } from '../../ui/lienzo.js';
 
 // Personas articuladas: brazos, piernas y cabeza se mueven por separado, así las
 // escenas pueden hacerlas caminar, estirarse, sentarse o hablar. Cada parte se
@@ -27,9 +28,11 @@ function parte(grupo) {
  *  zapatos, medias, cuello (color del cuello de camisa o null), delantal (color o null),
  *  mochila (color o null), lentes (bool), gorra (color o null), expresion,
  *  detalle: 'alto' (articulada) | 'bajo' (brazos y piernas fijos: para personajes lejanos)
+ *  Superhéroes: capa (color), antifaz (color), emblema ('condor' | 'estrella' | 'rayo'),
+ *  botas (color), mechon (mechón blanco en el flequillo), peinado 'trenza'.
  * API (userData): articulaciones { torso, cabeza, brazoI, brazoD, piernaI, piernaD },
  *  setExpresion(e), hablar(segundos), fuenteHabla (función 0..1 que mueve la boca),
- *  alturaOjos, alturaCadera.
+ *  alturaOjos, alturaCadera, capa (malla que ondea si se llama a ondearCapa(t, fuerza)).
  */
 export function persona({
   edad = 'nino',
@@ -49,6 +52,11 @@ export function persona({
   gorra = null,
   expresion = 'neutral',
   detalle = 'alto',
+  capa = null,
+  antifaz = null,
+  emblema = null,
+  botas = null,
+  mechon = false,
 } = {}) {
   const nino = edad !== 'adulto';
   // Medidas de la figura base (niño 1,15 m o adulto 1,62 m); después se escala a la estatura.
@@ -82,6 +90,24 @@ export function persona({
   }
   cuerpo.add(parte(torso));
 
+  // ── Accesorios de superhéroe: símbolo en el pecho y capa que ondea ──
+  if (emblema) {
+    const e = new PanelLienzo(D.rTorso * 1.05, D.rTorso * 1.05, (ctx, w, h) => dibujarEmblema(ctx, w, h, emblema), { pxPorMetro: 2000 });
+    e.position.set(0, D.yTorso + D.largoTorso * 0.18, D.rTorso * 0.77);
+    cuerpo.add(e);
+  }
+  let capaM = null;
+  const largoCapa = D.hombro - D.cadera * 0.3;
+  if (capa) {
+    const geo = new THREE.PlaneGeometry(D.rTorso * 2.7, largoCapa, 6, 10);
+    geo.translate(0, -largoCapa / 2, 0);
+    capaM = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: capa, side: THREE.DoubleSide }));
+    capaM.position.set(0, D.hombro + 0.02, -D.rTorso * 0.8);
+    capaM.userData.base = Float32Array.from(geo.attributes.position.array);
+    capaM.userData.noFusionar = true;
+    cuerpo.add(capaM);
+  }
+
   // ── Piernas (pivote en la cadera) ──
   const crearPierna = (lado) => {
     const p = pivote(lado * D.sepPierna, D.cadera);
@@ -96,7 +122,8 @@ export function persona({
       const tobillo = D.cadera - zy;
       p.add(malla(new THREE.CapsuleGeometry(D.rPierna, tobillo - D.rPierna * 2, 4, 10), colorPierna, [0, -tobillo / 2, 0]));
     }
-    p.add(malla(new RoundedBoxGeometry(zx, zy, zz, 2, zy * 0.4), mat(zapatos), [0, -D.cadera + zy / 2, zz * 0.18]));
+    p.add(malla(new RoundedBoxGeometry(zx, zy, zz, 2, zy * 0.4), mat(botas ?? zapatos), [0, -D.cadera + zy / 2, zz * 0.18]));
+    if (botas) p.add(malla(new THREE.CylinderGeometry(D.rPierna * 1.25, D.rPierna * 1.15, D.cadera * 0.38, 12), mat(botas), [0, -D.cadera + D.cadera * 0.19 + zy * 0.6, 0]));
     return parte(p);
   };
   // ── Brazos (pivote en el hombro; cuelgan hacia abajo) ──
@@ -136,6 +163,20 @@ export function persona({
     craneo.add(malla(new THREE.SphereGeometry(r * 0.42, 16, 12), pelo, [0, r * 0.55, -r * 0.75]));
   } else if (peinado === 'largo') {
     craneo.add(malla(new RoundedBoxGeometry(r * 1.9, r * 2.1, r * 0.5, 3, r * 0.2), pelo, [0, -r * 0.65, -r * 0.62]));
+  } else if (peinado === 'trenza') {
+    // Trenza larga que cae sobre el hombro izquierdo hasta la cintura (se ve de frente)
+    for (let i = 0; i < 11; i++) {
+      const k = i / 10;
+      craneo.add(malla(new THREE.SphereGeometry(r * (0.27 - k * 0.08), 10, 8), pelo, [-r * (0.8 + Math.min(k * 3, 1) * 0.55), -r * (0.1 + k * 4.4), r * (0.05 + Math.min(k * 2, 1) * 0.85)]));
+    }
+    craneo.add(malla(new THREE.SphereGeometry(r * 0.13, 8, 6), mat('#e5484d'), [-r * 1.35, -r * 4.6, r * 0.9]));
+  }
+  if (mechon) craneo.add(malla(new THREE.SphereGeometry(r * 0.42, 12, 8, 0, Math.PI * 2, 0, Math.PI * 0.5), mat('#ffffff', { emisivo: 0.2 }), [r * 0.3, r * 0.68, r * 0.62], [1.0, 0, -0.35], [1, 0.45, 0.75]));
+  if (antifaz) {
+    // Antifaz con forma de alas a la altura de los ojos
+    const am = mat(antifaz, { emisivo: 0.15 });
+    for (const lado of [-1, 1]) craneo.add(malla(new THREE.SphereGeometry(r * 0.36, 14, 10), am, [lado * r * 0.36, r * 0.18, r * 0.82], [0, lado * 0.35, lado * -0.25], [1.25, 0.6, 0.35]));
+    craneo.add(malla(new THREE.BoxGeometry(r * 0.3, r * 0.12, r * 0.15), am, [0, r * 0.2, r * 0.97]));
   }
   if (gorra) {
     craneo.add(malla(new THREE.SphereGeometry(r * 1.1, 22, 12, 0, Math.PI * 2, 0, Math.PI * 0.42), mat(gorra), [0, r * 0.18, 0]));
@@ -192,9 +233,26 @@ export function persona({
     alturaCadera: D.cadera * escala,
     escalaCuerpo: escala,
     anclaje: 'pies',
+    capa: capaM,
+    /** La capa ondea; fuerza 0 = quieta colgando, 1 = estirada hacia atrás (volando). */
+    ondearCapa: (t, fuerza = 0.15) => {
+      if (!capaM) return;
+      const pos = capaM.geometry.attributes.position;
+      const base = capaM.userData.base;
+      for (let i = 0; i < pos.count; i++) {
+        const x = base[i * 3];
+        const y = base[i * 3 + 1];
+        const k = -y / largoCapa;
+        pos.setY(i, y * (1 - fuerza * 0.55 * k));
+        pos.setZ(i, -k * fuerza * largoCapa * 0.85 - k * 0.04 + Math.sin(t * 7 + y * 9 + x * 4) * 0.035 * k * (0.4 + fuerza));
+      }
+      pos.needsUpdate = true;
+      capaM.geometry.computeVertexNormals();
+    },
   });
   g.userData.animar = (t) => {
     tActual = t;
+    if (g.userData.congelado) return;
     const nivel = g.userData.fuenteHabla ? g.userData.fuenteHabla() : t < hablaHasta ? Math.abs(Math.sin(t * 11)) * 0.8 : 0;
     const habla = nivel > 0.04;
     bocaHabla.visible = habla;
@@ -208,6 +266,44 @@ export function persona({
     );
   };
   return g;
+}
+
+/** Símbolo del pecho de un superhéroe: cóndor, estrella o rayo, dorado sobre un círculo. */
+function dibujarEmblema(ctx, w, h, tipo) {
+  ctx.fillStyle = '#23304a';
+  ctx.beginPath();
+  ctx.arc(w / 2, h / 2, w / 2 - 4, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = w * 0.05;
+  ctx.strokeStyle = '#ffc23c';
+  ctx.stroke();
+  ctx.fillStyle = '#ffc23c';
+  ctx.beginPath();
+  const cx = w / 2;
+  const cy = h / 2;
+  const r = w * 0.36;
+  if (tipo === 'estrella') {
+    for (let i = 0; i < 10; i++) {
+      const a = -Math.PI / 2 + (i * Math.PI) / 5;
+      const rr = i % 2 ? r * 0.45 : r;
+      ctx.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr);
+    }
+  } else if (tipo === 'rayo') {
+    [[0.1, -1], [-0.45, 0.1], [-0.02, 0.1], [-0.15, 1], [0.45, -0.15], [0.05, -0.15], [0.25, -1]].forEach(([x, y]) => ctx.lineTo(cx + x * r, cy + y * r));
+  } else {
+    // Cóndor con las alas abiertas
+    ctx.moveTo(cx, cy - r * 0.35);
+    ctx.quadraticCurveTo(cx - r * 0.5, cy - r * 0.75, cx - r * 1.05, cy - r * 0.3);
+    ctx.quadraticCurveTo(cx - r * 0.55, cy - r * 0.2, cx - r * 0.25, cy + r * 0.1);
+    ctx.lineTo(cx - r * 0.2, cy + r * 0.85);
+    ctx.lineTo(cx, cy + r * 0.6);
+    ctx.lineTo(cx + r * 0.2, cy + r * 0.85);
+    ctx.lineTo(cx + r * 0.25, cy + r * 0.1);
+    ctx.quadraticCurveTo(cx + r * 0.55, cy - r * 0.2, cx + r * 1.05, cy - r * 0.3);
+    ctx.quadraticCurveTo(cx + r * 0.5, cy - r * 0.75, cx, cy - r * 0.35);
+  }
+  ctx.closePath();
+  ctx.fill();
 }
 
 // ── Ayudas para animar personas ────────────────────────────────────────────

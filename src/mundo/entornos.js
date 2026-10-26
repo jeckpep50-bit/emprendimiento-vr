@@ -5,6 +5,7 @@ import { objetos, mesa } from './prefabs/objetos.js';
 import { diseno } from './prefabs/diseno.js';
 import { laboratorio as labPrefabs } from './prefabs/laboratorio.js';
 import { darVida } from './vida.js';
+import { entornosNoticias } from './entornos-noticias.js';
 import { FUENTE } from '../ui/lienzo.js';
 
 const FUENTE_TIZA = FUENTE;
@@ -969,6 +970,9 @@ const ENTORNOS = {
     contexto.cada((dt) => (planeta.rotation.y += dt * 0.05));
     return { fondo: '#02030a', luz: [0xdfe7ff, 0x1a1f3a, 2.2] };
   },
+
+  // Noticiero (lección de la descripción): estudio de TV, Plaza Grande y mirador del Cotopaxi
+  ...entornosNoticias,
 };
 
 /**

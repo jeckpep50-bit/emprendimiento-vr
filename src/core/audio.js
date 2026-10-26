@@ -255,7 +255,17 @@ export class Audio {
       lfo.connect(profundidad).connect(ganancia.gain);
       lfo.start();
     }
-    this._ambiente = { fuente, ganancia, lfo };
+    this._ambiente = { fuente, ganancia, lfo, volumen: config.volumen ?? 0.05 };
+  }
+
+  /** Sube o baja el sonido de fondo (1 = normal, 0 = silencio), con una transición suave. */
+  volumenAmbiente(factor = 1) {
+    const a = this._ambiente;
+    if (!a || !this.ctx) return;
+    const t = this.ctx.currentTime;
+    a.ganancia.gain.cancelScheduledValues(t);
+    a.ganancia.gain.setValueAtTime(a.ganancia.gain.value, t);
+    a.ganancia.gain.linearRampToValueAtTime(a.volumen * factor, t + 0.6);
   }
 
   detenerAmbiente() {
