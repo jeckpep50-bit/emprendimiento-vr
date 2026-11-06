@@ -54,8 +54,13 @@ export class EscenaCafe extends EscenaBase {
     this.ayuda = null;
     this.items = new Set();
     this.sostenidos = new Set();
-    this.reg = Object.fromEntries(METAS.map(([id]) => [id, { hecho: false, errores: 0, ayuda: false, repetir: 0, pistas: 0, traduccion: 0 }]));
-    this.inicio = performance.now();
+    // Al volver o repetir una parte, la escena se recarga desde esa parte y conserva el registro.
+    const previo = this.m.__cafe;
+    this.m.__cafe = null;
+    this.desde = previo?.desde ?? 0;
+    this.reg = previo?.reg ?? Object.fromEntries(METAS.map(([id]) => [id, { hecho: false, errores: 0, ayuda: false, repetir: 0, pistas: 0, traduccion: 0 }]));
+    this.inicio = previo?.inicio ?? performance.now();
+    this.pasoEs = false;
     this._ultimoElogio = null;
     this._ultimoGesto = null;
 
@@ -380,8 +385,10 @@ export class EscenaCafe extends EscenaBase {
       y += 156;
     }
     if (this.paso) {
-      y = escribir(ctx, this.paso.en, 30, y + 6, { tam: 44, tamMin: 30, peso: 800, color: '#ffe9a8', maxAncho: w - 60, maxAlto: this.traducir ? 110 : h - y - 20 });
-      if (this.traducir) escribir(ctx, this.paso.es, 30, y + 4, { tam: 28, peso: 600, color: '#c9d4ee', maxAncho: w - 60 });
+      // El español de la instrucción aparece con 🌐 o solo si el estudiante lleva un rato sin avanzar.
+      const conEs = this.traducir || this.pasoEs;
+      y = escribir(ctx, this.paso.en, 30, y + 6, { tam: 44, tamMin: 30, peso: 800, color: '#ffe9a8', maxAncho: w - 60, maxAlto: conEs ? 110 : h - y - 20 });
+      if (conEs) escribir(ctx, `🇪🇸 ${this.paso.es}`, 30, y + 4, { tam: 30, peso: 700, color: '#ffffff', maxAncho: w - 60 });
     }
   }
 
@@ -396,8 +403,8 @@ export class EscenaCafe extends EscenaBase {
   _crearHerramientas() {
     const { H } = this;
     const crear = (texto, accion, i, color) => {
-      const b = this.boton(texto, accion, { ancho: 0.22, alto: 0.075, color, tam: 28 });
-      b.position.set((i - 2) * 0.24, H - 0.5, -1.0 + Math.abs(i - 2) * 0.03);
+      const b = this.boton(texto, accion, { ancho: 0.2, alto: 0.075, color, tam: 27 });
+      b.position.set((i - 2.5) * 0.215, H - 0.5, -1.0 + Math.abs(i - 2.5) * 0.03);
       b.lookAt(0, H, 0.2);
       this.raiz.add(b);
       this.presentar(b, 0.5 + i * 0.05);
@@ -406,8 +413,47 @@ export class EscenaCafe extends EscenaBase {
     crear('🔊 Again', () => this.repetir(), 0, '#2f4a8a');
     this.btnTraducir = crear('🌐 Español', () => this.alternarTraduccion(), 1, '#5b6886');
     crear('💡 Help', () => this.pedirAyuda(), 2, '#d98a00');
-    this.btnReiniciar = crear('↺ Restart', () => this._reiniciar(), 3, '#5b6886');
-    crear('⏏ Exit', () => this.salir(), 4, '#a33a4a');
+    crear('⏮ Back', () => this._confirmar('atras'), 3, '#5b6886');
+    crear('↺ Restart', () => this._confirmar('repetir'), 4, '#5b6886');
+    crear('⏏ Exit', () => this.salir(), 5, '#a33a4a');
+  }
+
+  /** Pregunta antes de volver a la parte anterior o repetir la actual (con ✓ / ✗ grandes). */
+  _confirmar(accion) {
+    this.dialogo?.removeFromParent();
+    const { H } = this;
+    const destino = accion === 'atras' ? Math.max(0, this.fase - 1) : this.fase;
+    const g = new THREE.Group();
+    g.position.set(0, H - 0.2, -0.85);
+    g.lookAt(0, H, 0.2);
+    const titulo = new PanelLienzo(0.62, 0.11, (ctx, w, h) => {
+      tarjeta(ctx, w, h, { fondo: '#23304a', radio: 30 });
+      const en = accion === 'atras' ? `⏮ Go back to part ${destino + 1}?` : `↺ Start part ${destino + 1} again?`;
+      const es = accion === 'atras' ? `¿Volver a la parte ${destino + 1}?` : `¿Repetir la parte ${destino + 1}?`;
+      escribir(ctx, en, w / 2, h * 0.38, { tam: 40, peso: 800, color: '#ffffff', alinear: 'center', base: 'middle', maxAncho: w - 30 });
+      escribir(ctx, es, w / 2, h * 0.76, { tam: 26, color: '#c9d4ee', alinear: 'center', base: 'middle' });
+    });
+    titulo.position.set(0, 0.09, 0);
+    g.add(titulo);
+    const si = this.boton('✓ Yes', () => this._irAEtapa(destino), { ancho: 0.25, alto: 0.1, color: COLORES.verde, tam: 40 });
+    const no = this.boton('✗ No', () => {
+      this.m.entrada.desregistrar(si);
+      this.m.entrada.desregistrar(no);
+      g.removeFromParent();
+      this.dialogo = null;
+    }, { ancho: 0.25, alto: 0.1, color: '#a33a4a', tam: 40 });
+    si.position.set(-0.15, -0.03, 0.01);
+    no.position.set(0.15, -0.03, 0.01);
+    g.add(si, no);
+    this.raiz.add(g);
+    this.m.fx.aparecer(g, 0.3);
+    this.dialogo = g;
+  }
+
+  /** Vuelve a cargar la escena empezando en la parte `n`; conserva el registro y el tiempo. */
+  _irAEtapa(n) {
+    this.m.__cafe = { desde: n, reg: this.reg, inicio: this.inicio };
+    this.m.irA(this.indice, true);
   }
 
   repetir() {
@@ -431,19 +477,6 @@ export class EscenaCafe extends EscenaBase {
     this.reg[this.metaActual].pistas++;
     this.reg[this.metaActual].ayuda = true;
     this.ayuda();
-  }
-
-  _reiniciar() {
-    if (this._confirmarReinicio) return this.m.irA(this.indice, true);
-    this._confirmarReinicio = true;
-    this.btnReiniciar.estado.texto = '↺ Sure?';
-    this.btnReiniciar.redibujar();
-    this.esperar(3).then(() => {
-      if (this._destruida) return;
-      this._confirmarReinicio = false;
-      this.btnReiniciar.estado.texto = '↺ Restart';
-      this.btnReiniciar.redibujar();
-    });
   }
 
   salir() {
@@ -604,14 +637,16 @@ export class EscenaCafe extends EscenaBase {
   }
 
   /** Espera que el estudiante mueva la mano de lado a lado (o toque 👋 en la vista previa). */
-  _esperarOla() {
+  _esperarOla(clave = null) {
     return new Promise((resolver) => {
       const { H } = this;
       const historia = new Map();
       let hecho = false;
+      const parar = this._recordar({ clave, cada: 12 });
       const terminar = () => {
         if (hecho) return;
         hecho = true;
+        parar();
         if (boton) {
           this.m.entrada.desregistrar(boton);
           boton.removeFromParent();
@@ -750,10 +785,9 @@ export class EscenaCafe extends EscenaBase {
   }
 
   /** Late un objeto (tamaño normal 1) hasta llamar a la función devuelta. */
-  _pulsar(obj) {
+  _pulsar(obj, base = 1) {
     let activo = true;
-    // Siempre sobre el tamaño normal: si el objeto está apareciendo (escala ~0), no debe quedar invisible.
-    const base = 1;
+    // Siempre sobre un tamaño fijo: si el objeto está apareciendo (escala ~0), no debe quedar invisible.
     this.cadaCuadro((_dt, t) => {
       if (activo) obj.scale.setScalar(base * (1 + Math.max(0, Math.sin(t * 6)) * 0.08));
     });
@@ -783,6 +817,7 @@ export class EscenaCafe extends EscenaBase {
   _elegir(meta, grupo, { pregunta, alErrar } = {}) {
     this.metaActual = meta;
     const lista = barajar(this.datos.preguntas?.[grupo] ?? []).slice(0, 3);
+    const parar = this._recordar({ clave: pregunta, cada: 15 });
     return new Promise((resolver) => {
       let errores = 0;
       let bloqueado = false;
@@ -815,6 +850,7 @@ export class EscenaCafe extends EscenaBase {
           correctas.forEach((c) => c.resaltar(false));
           this.m.audio.acierto(this.posMundo(it.obj));
           this._logro(meta, it.obj, errores ? 50 : 100);
+          parar();
           await this.esperar(0.35);
           this._limpiarZona();
           resolver(op);
@@ -900,6 +936,8 @@ export class EscenaCafe extends EscenaBase {
         this.reg[meta].ayuda = true;
         resaltarCorrecta();
       };
+      const siguienteTarjeta = () => tarjetas.find((x) => x.texto === partes[siguiente()] && !x.puesta)?.obj;
+      let pararTarjetas = this._recordar({ clave: 'conTarjetas', objetivo: guias ? () => siguienteTarjeta()?.getWorldPosition(V(0, 0, 0)) ?? slots.getWorldPosition(V(0, 0, 0)) : null });
 
       const colocar = async (t, i, volver = () => t.obj.userData.volver?.()) => {
         if (i < 0) return;
@@ -931,11 +969,13 @@ export class EscenaCafe extends EscenaBase {
 
       const confirmar = () => {
         this.ayuda = null;
+        pararTarjetas();
         const b = this._opcion('✔ Ask Coco', 'Pedir', async () => {
           b.habilitar(false);
           b.marcar('correcto');
           await this.decir(pedido);
           this.m.audio.acierto(this.posMundo(b.obj));
+          pararTarjetas();
           this._logro(meta, b.obj, errores ? 60 : 150);
           await this.esperar(0.2);
           this._limpiarZona();
@@ -946,6 +986,7 @@ export class EscenaCafe extends EscenaBase {
         this.zona.add(b.obj);
         this.m.fx.aparecer(b.obj, 0.35);
         b.resaltar(true);
+        pararTarjetas = this._recordar({ objetivo: () => b.obj.getWorldPosition(V(0, 0, 0)), cada: 10 });
       };
     });
   }
@@ -976,20 +1017,124 @@ export class EscenaCafe extends EscenaBase {
   // ── Las cinco etapas ─────────────────────────────────────────────────────
 
   async vozInicial() {
+    const etapas = [() => this.llegada(), () => this.descubrir(), () => this.primerPedido(), () => this.misionFinal(), () => this.bandejaYDespedida()];
     try {
       await this.esperar(0.5);
-      await this.llegada();
-      await this.descubrir();
-      await this.primerPedido();
-      await this.misionFinal();
-      await this.bandejaYDespedida();
+      if (this.desde > 0) this._prepararDesde(this.desde);
+      for (let i = this.desde; i < etapas.length; i++) await etapas[i]();
     } catch (e) {
       if (!this._destruida) throw e;
     }
   }
 
+  /** Deja la cafetería como estaría al empezar la parte `n` (al volver o repetir una parte). */
+  _prepararDesde(n) {
+    this.alCampana = null;
+    this.m.entrada.desregistrar(this.campana);
+    this.cuerpoYaw = 0;
+    this.coco.rotation.y = 0;
+    this.pose = null;
+    this.revelado = true;
+    this._ponerCarta(this._crearCarta());
+    if (n >= 4) {
+      const mi = this.datos.mision;
+      this.mision = [mi.comida, mi.bebida].map((id) => ({ id, emoji: this.prod[id].emoji, ok: true }));
+      this._ponerTarjetaMision(this._crearTarjetaMision());
+      this.bandeja = this._nuevaBandeja();
+      this.bandeja.position.copy(PUESTO_BANDEJA);
+      this.raiz.add(this.bandeja);
+      for (const id of [mi.comida, mi.bebida]) {
+        const p = this.prod[id];
+        const hueco = this.bandeja.userData.huecos[this.bandeja.userData.contenido.length];
+        this._producto(id, hueco, { tam: p.tipo === 'bebida' ? 0.15 : 0.17, padre: this.bandeja });
+        this.bandeja.userData.contenido.push(id);
+      }
+    }
+    this.cabecera.redibujar();
+  }
+
+  _crearCarta() {
+    return new PanelLienzo(0.36, 0.26, (ctx, w, h) => {
+      tarjeta(ctx, w, h, { fondo: '#25302b', radio: 30, borde: '#c98a45', grosor: 10 });
+      escribir(ctx, 'MENU', w / 2, 46, { tam: 50, peso: 900, color: '#ffe9a8', alinear: 'center', base: 'middle' });
+      this.datos.productos.forEach((p, i) => {
+        const col = p.tipo === 'comida' ? 0 : 1;
+        const fila = this.datos.productos.filter((x, j) => x.tipo === p.tipo && j < i).length;
+        escribir(ctx, `${p.emoji} ${(p.tarjeta ?? p.nombre.en).replace(/\.$/, '').replace(/^an? /, '')}`, 30 + col * 180, 104 + fila * 40, { tam: 30, peso: 700, color: '#ffffff', base: 'middle' });
+      });
+    });
+  }
+
+  /** La carta queda de pie sobre el mostrador, mirando al estudiante; se puede tomar y acercar. */
+  _ponerCarta(carta) {
+    if (!carta.parent || carta.parent !== this.raiz) {
+      carta.position.set(-0.55, ALTO + 0.14, -1.12);
+      this.raiz.add(carta);
+    }
+    carta.lookAt(this.raiz.worldToLocal(this.m.app.camara.getWorldPosition(V(0, 0, 0))));
+    this._agarrable(carta, { alSoltar: (_d, { volver }) => volver() });
+    this.carta = carta;
+  }
+
+  _crearTarjetaMision() {
+    return new PanelLienzo(0.34, 0.17, (ctx, w, h) => {
+      tarjeta(ctx, w, h, { fondo: '#fffbea', radio: 26, borde: '#f2c45a', grosor: 10 });
+      escribir(ctx, `🎯 ${this.mision.map((m) => m.emoji).join(' + ')}`, w / 2, h / 2, { tam: 66, alinear: 'center', base: 'middle', maxAncho: w - 30 });
+    });
+  }
+
+  _ponerTarjetaMision(tarjetaMision) {
+    if (!tarjetaMision.parent || tarjetaMision.parent !== this.raiz) {
+      tarjetaMision.position.set(0.5, ALTO + 0.1, -1.12);
+      this.raiz.add(tarjetaMision);
+    }
+    tarjetaMision.lookAt(this.raiz.worldToLocal(this.m.app.camara.getWorldPosition(V(0, 0, 0))));
+    this._agarrable(tarjetaMision, { alSoltar: (_d, { volver }) => volver() });
+    this.tarjetaMision = tarjetaMision;
+  }
+
+  /**
+   * Recordatorio mientras el estudiante no avanza: una mano 👆 señala qué tocar y, cada
+   * `cada` segundos sin progreso, Coco repite la indicación (y señala) y la instrucción
+   * aparece también en español. Devuelve la función que lo detiene.
+   */
+  _recordar({ clave = null, objetivo = null, cada = 12 } = {}) {
+    let activo = true;
+    let senal = objetivo ? this._senal(objetivo()) : null;
+    let proximo = (this._t ?? 0) + cada;
+    this.cadaCuadro((_dt, t) => {
+      if (!activo) return;
+      const ocupado = this.m.audio.hablando || this.m.entrada.punteros.some((p) => p.agarrado) || this.dialogo;
+      if (ocupado) {
+        proximo = Math.max(proximo, t + 4);
+        return;
+      }
+      if (t < proximo) return;
+      proximo = t + cada;
+      this.pasoEs = true;
+      this.cabecera.redibujar();
+      this.m.fx.latido(this.cabecera, 0.05);
+      if (objetivo) {
+        const p = objetivo();
+        this.gesto('senalar', 2, p);
+        senal?.removeFromParent();
+        senal = this._senal(p);
+      }
+      if (clave) this.decir(clave);
+    });
+    return () => {
+      activo = false;
+      senal?.removeFromParent();
+      if (this.pasoEs) {
+        this.pasoEs = false;
+        this.cabecera.redibujar();
+      }
+    };
+  }
+
   _etapa(n) {
     this.fase = n;
+    this.paso = null;
     this.cabecera.redibujar();
     this.m.audio.tono(880, 0.1, { volumen: 0.06 });
     this.m.audio.tono(1320, 0.14, { volumen: 0.06, retardo: 0.1 });
@@ -1015,7 +1160,9 @@ export class EscenaCafe extends EscenaBase {
     this._ponerPaso('llegada');
     const senal = this._senal(this.posMundo(this.campana));
     this.m.fx.latido(this.campana, 0.2);
+    const pararCampana = this._recordar({ cada: 10 });
     await new Promise((r) => (this.alCampana = r));
+    pararCampana();
     this.alCampana = null;
     this.m.entrada.desregistrar(this.campana);
     senal.removeFromParent();
@@ -1031,26 +1178,16 @@ export class EscenaCafe extends EscenaBase {
     this.gesto('celebra1', 1);
     await this.decir('saludaConMano', { repetible: true });
     this._ponerPaso('ola');
-    await this._esperarOla();
+    await this._esperarOla('saludaConMano');
     this.gesto('saludo', 1.6);
     this.m.audio.acierto(this.posMundo(this.coco));
     this.ganar(this.coco, 50);
     // Coco ofrece la carta
-    const carta = new PanelLienzo(0.36, 0.26, (ctx, w, h) => {
-      tarjeta(ctx, w, h, { fondo: '#25302b', radio: 30, borde: '#c98a45', grosor: 10 });
-      escribir(ctx, 'MENU', w / 2, 46, { tam: 50, peso: 900, color: '#ffe9a8', alinear: 'center', base: 'middle' });
-      this.datos.productos.forEach((p, i) => {
-        const col = p.tipo === 'comida' ? 0 : 1;
-        const fila = this.datos.productos.filter((x, j) => x.tipo === p.tipo && j < i).length;
-        escribir(ctx, `${p.emoji} ${(p.tarjeta ?? p.nombre.en).replace(/\.$/, '').replace(/^an? /, '')}`, 30 + col * 180, 104 + fila * 40, { tam: 30, peso: 700, color: '#ffffff', base: 'middle' });
-      });
-    });
+    const carta = this._crearCarta();
     this.sostener(carta, -1);
     await this.decir('carta');
     await this.poner(carta, V(-0.55, ALTO + 0.14, -1.12), { lado: -1 });
-    carta.lookAt(this.raiz.worldToLocal(this.m.app.camara.getWorldPosition(V(0, 0, 0))));
-    this._agarrable(carta, { alSoltar: (_d, { volver }) => volver() });
-    this.carta = carta;
+    this._ponerCarta(carta);
   }
 
   async descubrir() {
@@ -1082,7 +1219,9 @@ export class EscenaCafe extends EscenaBase {
     });
     this.gesto('senalar', 1.6, this.posMundo(nodos[3]));
     await this.decir('toma', { repetible: true });
+    const pararToma = this._recordar({ clave: 'toma', objetivo: () => this.posMundo(nodos.find((n) => !vistos.has(n.userData.producto)) ?? nodos[0]) });
     await terminado;
+    pararToma();
     this._limpiarZona();
     nodos.forEach((n) => this._retirar(n));
 
@@ -1129,6 +1268,7 @@ export class EscenaCafe extends EscenaBase {
     this.revelado = false;
     this.pose = 'pedir';
     await this.decir('dame', { repetible: true });
+    const pararDame = this._recordar({ clave: 'dame', cada: 15 });
     const manoCoco = () => this.coco.userData.manos.D.getWorldPosition(V(0, 0, 0));
     let errores = 0;
     await new Promise((resolver) => {
@@ -1154,6 +1294,7 @@ export class EscenaCafe extends EscenaBase {
           this.sostener(nodo, 1);
           nodo.scale.setScalar(1);
           this.m.audio.acierto(manoCoco());
+          pararDame();
           this._logro('bebida', nodo, errores ? 50 : 100);
           this.pose = null;
           this.celebrar();
@@ -1213,7 +1354,9 @@ export class EscenaCafe extends EscenaBase {
       this._agarrable(n, { alTomar: elegir, alTocar: (volver) => volver(), alSoltar: (_d, { volver }) => volver() });
     }
     await this.decir('queQuiere', { repetible: true });
+    const pararComida = this._recordar({ clave: 'queQuiere', objetivo: () => this.posMundo(comidas[1]) });
     await terminado;
+    pararComida();
     const comida = this.prod[elegida];
     this._ponerPaso('ordena');
     await this.decir('conTarjetas', { repetible: true });
@@ -1256,11 +1399,23 @@ export class EscenaCafe extends EscenaBase {
     const op = await this._elegir(meta, grupo, { pregunta, alErrar });
     const pedida = op.producto === 'juice' ? jugo : agua;
     const otra = pedida === agua ? jugo : agua;
-    this.pose = { tipo: 'alcanzar', lado: pedida === agua ? -1 : 1, punto: this.posMundo(this.bandeja).add(V(0, 0.35, 0.25)) };
+    const lado = pedida === agua ? -1 : 1;
+    const oferta = V(lado * 0.17, ALTO + 0.3, -1.48);
     this._retirar(otra);
     this.sostenidos.delete(otra);
+    this.sostenidos.delete(pedida);
+    this.raiz.attach(pedida);
+    pedida.quaternion.identity();
+    this.pose = { tipo: 'alcanzar', lado, punto: this.raiz.localToWorld(oferta.clone()) };
+    const desdeAla = pedida.position.clone();
+    await this.m.fx.tween({ duracion: 0.45, alActualizar: (k) => {
+      pedida.position.lerpVectors(desdeAla, oferta, k);
+      pedida.scale.setScalar(1 + 0.35 * k);
+    } });
+    this._resaltar(pedida, true);
     this._ponerPaso('tomaBebida');
     await this.decir('tomala');
+    const pararBebida = this._recordar({ clave: 'tomala', objetivo: () => this.posMundo(pedida) });
     const hueco = () => this.bandeja.localToWorld(this.bandeja.userData.huecos[this.bandeja.userData.contenido.length].clone());
     let marcar = null;
     await new Promise((resolver) => {
@@ -1276,19 +1431,21 @@ export class EscenaCafe extends EscenaBase {
         await this.m.fx.tween({ duracion: 0.3, alActualizar: (k) => pedida.position.lerpVectors(ini, destino, k) });
         this.m.audio.tono(520, 0.06, { volumen: 0.12, pos: punto });
         marcar?.();
+        this._resaltar(pedida, false);
+        pararBebida();
         pedida.userData.ocultarNombre();
         resolver();
       };
-      marcar = this._pulsar(pedida);
+      marcar = this._pulsar(pedida, 1.35);
       this._agarrable(pedida, {
         alTomar: () => {
           marcar?.();
           marcar = null;
-          this.sostenidos.delete(pedida);
+          pedida.scale.setScalar(1);
           this.pose = null;
         },
         alTocar: colocar,
-        destinos: () => [{ id: 'bandeja', punto: this.posMundo(this.bandeja), radio: 0.3 }],
+        destinos: () => [{ id: 'bandeja', punto: this.posMundo(this.bandeja), radio: 0.3, resaltar: (v) => this._resaltar(this.bandeja, v) }],
         alSoltar: () => colocar(),
       });
     });
@@ -1307,16 +1464,11 @@ export class EscenaCafe extends EscenaBase {
       { id: mi.comida, emoji: this.prod[mi.comida].emoji, ok: false },
       { id: mi.bebida, emoji: this.prod[mi.bebida].emoji, ok: false },
     ];
-    const tarjetaMision = new PanelLienzo(0.34, 0.17, (ctx, w, h) => {
-      tarjeta(ctx, w, h, { fondo: '#fffbea', radio: 26, borde: '#f2c45a', grosor: 10 });
-      escribir(ctx, `🎯 ${this.mision.map((m) => m.emoji).join(' + ')}`, w / 2, h / 2, { tam: 66, alinear: 'center', base: 'middle', maxAncho: w - 30 });
-    });
+    const tarjetaMision = this._crearTarjetaMision();
     this.sostener(tarjetaMision, 1);
     await this.decir('tarjetaMision');
     await this.poner(tarjetaMision, V(0.5, ALTO + 0.1, -1.12), { lado: 1 });
-    tarjetaMision.lookAt(this.raiz.worldToLocal(this.m.app.camara.getWorldPosition(V(0, 0, 0))));
-    this._agarrable(tarjetaMision, { alSoltar: (_d, { volver }) => volver() });
-    this.tarjetaMision = tarjetaMision;
+    this._ponerTarjetaMision(tarjetaMision);
     this.cabecera.redibujar();
 
     this.bandeja = this._nuevaBandeja();
@@ -1363,6 +1515,7 @@ export class EscenaCafe extends EscenaBase {
     for (const id of mi.otraBandeja) await this._ponerEnBandeja(otra, id);
     this._ponerPaso('comprueba');
     await this.decir('cualBandeja', { repetible: true });
+    const pararBandeja = this._recordar({ clave: 'cualBandeja', cada: 15 });
     let errores = 0;
     await new Promise((resolver) => {
       let ocupado = false;
@@ -1383,6 +1536,7 @@ export class EscenaCafe extends EscenaBase {
           await this.m.fx.moverA(mia, V(0, ALTO, -1.08), 0.45);
           this.m.entrada.punteros.forEach((p) => p.activo && p.vibrar(0.4, 120));
           this.m.audio.acierto(this.posMundo(mia));
+          pararBandeja();
           this._logro('comprobar', mia, errores ? 50 : 100);
           resolver();
           return;
@@ -1412,7 +1566,7 @@ export class EscenaCafe extends EscenaBase {
     await this._elegir('despedirse', 'despedida', { pregunta: 'disfrutaComida' });
     await this.decir('despideMano');
     this._ponerPaso('olaAdios');
-    await this._esperarOla();
+    await this._esperarOla('despideMano');
     this.gesto('adios', 2.6);
     this._fiesta();
     await this.decir('adios');
