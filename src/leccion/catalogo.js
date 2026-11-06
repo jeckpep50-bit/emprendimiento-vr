@@ -123,6 +123,9 @@ export const MODELOS = {
   galleta: 'Galleta con chispas de chocolate (cookie).',
   muffin: 'Muffin de arándanos.',
   bebida: 'Vaso con bebida. Opción tipo: "agua" | "jugo" | "leche".',
+  bandeja: 'Bandeja de madera (≈42 × 30 cm). Opción color.',
+  campana: 'Campanilla de servicio para el mostrador.',
+  taza: 'Taza de cerámica con bebida caliente. Opciones color y bebida.',
 };
 
 export const ENTORNOS = {

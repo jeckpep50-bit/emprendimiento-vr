@@ -87,18 +87,15 @@ Los personajes hablan con voces grabadas (ver «Voces de los personajes»). Hay 
 
 Hay voces grabadas, puntos, rachas, 4 rangos (de Pasante a Presentador/a) y 4 insignias.
 
-### Coco's Café: pide en inglés (inglés A1, ~5 min)
+### Coco's Café: pide en inglés (inglés A1, ~4-5 min)
 
 `?leccion=cafe-ingles-a1`. Coco, un gallo camarero, atiende al estudiante en una cafetería (entorno `cafeteria`, escena `cafe`).
-Todo funciona sin micrófono: escuchar, elegir, ordenar tarjetas y tocar productos. Cinco etapas: saludo, escuchar la carta
-(4 comidas y 3 bebidas) y un pedido modelo, pedido con tarjetas y toda la ayuda, misión con menos ayuda («Anything else?») y
-comprobación del pedido con despedida. Máximo 3 opciones por intervención; ante un error, pista de Coco y repetición; al
-segundo, se muestra la respuesta. Botones 🔊 Repetir, 🌐 Español, 💡 Ayuda, ↺ Reiniciar y ⏏ Salir. Al final muestra por meta si
-se logró solo, con ayuda o con reintentos (solo en memoria). Voces en inglés con Microsoft Zira (`npm run voces -- cafe-ingles-a1`).
-
-Si una lección tiene errores, el validador detiene la publicación y la versión anterior sigue en línea.
-
-No hay cuentas ni se guardan datos de los estudiantes. Cada gafa funciona por su cuenta.
+Todo en primera persona y sin micrófono: tocar la campanilla, saludar moviendo la mano (se detecta el movimiento del mando;
+en la vista previa hay un botón 👋), tomar y acercar productos, entregarle a Coco la bebida que pide, arrastrar tarjetas para
+armar «Can I have … please?», tomar la bebida del ala de Coco y ponerla en la bandeja, elegir la bandeja correcta y despedirse.
+Coco sigue con la mirada, escucha lo que se apunta, sostiene y entrega objetos con las alas y varía sus gestos. Inglés primero:
+el español solo aparece con 🌐. Ayuda en 3 niveles (pista y repetición → Coco señala → modelo y traducción); 💡 sube un nivel.
+Registro por meta (solo en memoria): solo o con ayuda, reintentos y usos de 🔊 💡 🌐. Voces: `npm run voces -- cafe-ingles-a1`.
 
 ## Películas inmersivas en realidad aumentada
 

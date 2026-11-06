@@ -80,7 +80,7 @@ export function gallo() {
   torso.add(malla(new THREE.BoxGeometry(0.008, 0.06, 0.006), mat('#e3262c', { tipo: 'basica' }), [0.07, 0.27, 0.218], [-0.25, 0, -0.5]));
   // Bolso de cuero con libros
   const bolso = new THREE.Group();
-  bolso.position.set(0.19, 0.03, 0.12);
+  bolso.position.set(0.19, 0.1, 0.13);
   bolso.rotation.y = 0.45;
   bolso.add(malla(new RoundedBoxGeometry(0.2, 0.15, 0.08, 3, 0.025), mat('#c98a45'), [0, 0, 0]));
   bolso.add(malla(new RoundedBoxGeometry(0.205, 0.08, 0.02, 3, 0.01), mat('#b27735'), [0, 0.035, 0.043], [0.12, 0, 0]));
@@ -92,10 +92,19 @@ export function gallo() {
   const alas = [-1, 1].map((s) => {
     const ala = new THREE.Group();
     ala.position.set(s * 0.215, 0.32, 0.01);
-    ala.add(malla(esfera(1, 18), blanco, [s * 0.035, -0.13, 0.02], [0, 0, s * 0.12], [0.075, 0.19, 0.15]));
-    for (let k = 0; k < 3; k++) ala.add(malla(esfera(1, 10), crema, [s * 0.05, -0.29 + k * 0.012, 0.08 - k * 0.07], [0, 0, 0], [0.04, 0.07, 0.035]));
+    // Ala con hombro redondo y plumas largas en abanico (parece una mano emplumada)
+    ala.add(malla(esfera(1, 18), blanco, [s * 0.03, -0.09, 0.02], [0, 0, s * 0.1], [0.075, 0.13, 0.12]));
+    for (let k = 0; k < 5; k++) {
+      const largo = 0.15 - Math.abs(k - 2) * 0.018;
+      ala.add(malla(new THREE.CapsuleGeometry(0.024, largo, 4, 10), k % 2 ? crema : blanco, [s * 0.045, -0.2 - largo * 0.3, 0.08 - k * 0.04], [0.35 - k * 0.17, 0, s * 0.08], [1, 1, 0.55]));
+    }
+    // "Mano": punto donde Coco sostiene objetos (bandeja, vasos, la carta)
+    const mano = new THREE.Group();
+    mano.position.set(s * 0.05, -0.33, 0.06);
+    ala.add(mano);
     ala.rotation.z = s * 0.12;
     ala.userData.lado = s;
+    ala.userData.mano = mano;
     torso.add(parte(ala));
     return ala;
   });
@@ -112,7 +121,7 @@ export function gallo() {
   ].forEach(([r, abanico, m, grosor]) => {
     const pluma = new THREE.Group();
     pluma.rotation.set(0, Math.PI / 2, abanico);
-    pluma.add(malla(new THREE.TorusGeometry(r, grosor, 8, 24, 2.5), m, [0, 0, 0], [0, 0, -1.05], [1, 1, 0.55]));
+    pluma.add(malla(new THREE.TorusGeometry(r, grosor, 8, 24, 2.5), m, [0, 0, 0], [0, 0, -1.05], [1, 1, 1.6]));
     pluma.position.y = r - 0.2;
     cola.add(pluma);
   });
@@ -185,6 +194,8 @@ export function gallo() {
     neutral: { ceja: 0.05, alto: 0.29, ojo: 1 },
   };
   g.userData.articulaciones = { torso, cabeza, alaI: alas[0], alaD: alas[1], cola, picoInf, boina };
+  g.userData.manos = { I: alas[0].userData.mano, D: alas[1].userData.mano };
+  cabeza.rotation.order = 'YXZ';
   g.userData.alturaOjos = 0.3 + 0.45 + 0.21;
   g.userData.hablar = (seg) => (hablaHasta = tActual + seg);
   g.userData.setExpresion = (e) => (expresion = POSES[e] ? e : 'neutral');
@@ -265,6 +276,8 @@ function bebida({ tipo = 'agua' } = {}) {
     g.add(malla(new THREE.CylinderGeometry(0.055, 0.045, 0.16, 24, 1, true), mat('#e8f6ff', { opacidad: 0.35, lados: THREE.DoubleSide }), [0, 0.08, 0]));
     g.add(malla(new THREE.CylinderGeometry(0.045, 0.045, 0.008, 24), mat('#dff2ff', { opacidad: 0.5 }), [0, 0.004, 0]));
     g.add(malla(new THREE.CylinderGeometry(0.05, 0.044, 0.12, 24), mat(liquido[0], { opacidad: liquido[1] }), [0, 0.068, 0]));
+    // Brillo del vidrio (franja clara, sin reflejos costosos)
+    g.add(malla(new THREE.PlaneGeometry(0.012, 0.12), mat('#ffffff', { tipo: 'basica', opacidad: 0.55 }), [-0.03, 0.085, 0.046], [0, -0.55, 0]));
     if (tipo === 'agua') {
       for (const [x, z, r] of [[0.015, 0.01, 0.3], [-0.016, -0.006, 0.9]]) g.add(malla(new THREE.BoxGeometry(0.03, 0.028, 0.03), mat('#ffffff', { opacidad: 0.7 }), [x, 0.12, z], [r, r, 0]));
     }
@@ -275,4 +288,37 @@ function bebida({ tipo = 'agua' } = {}) {
   });
 }
 
-export const cafe = { gallo, pizza, galleta, muffin, bebida };
+/** Bandeja de madera con borde (≈42 × 30 cm). Opción color. */
+function bandeja({ color = '#b5773f' } = {}) {
+  return estatico((g) => {
+    g.add(malla(new RoundedBoxGeometry(0.42, 0.018, 0.3, 2, 0.008), mat(color), [0, 0.009, 0]));
+    const borde = mat(new THREE.Color(color).multiplyScalar(0.8).getStyle());
+    for (const [x, z, w, d] of [[0, 0.145, 0.42, 0.014], [0, -0.145, 0.42, 0.014], [0.205, 0, 0.014, 0.3], [-0.205, 0, 0.014, 0.3]]) {
+      g.add(malla(new THREE.BoxGeometry(w, 0.03, d), borde, [x, 0.025, z]));
+    }
+    g.add(malla(new THREE.PlaneGeometry(0.3, 0.012), mat('#ffffff', { tipo: 'basica', opacidad: 0.25 }), [-0.02, 0.0185, -0.06], [-Math.PI / 2, 0, 0.3]));
+  });
+}
+
+/** Campanilla de servicio (la que se toca en el mostrador). */
+function campana() {
+  return estatico((g) => {
+    g.add(malla(new THREE.CylinderGeometry(0.07, 0.075, 0.018, 28), mat('#3b2a20'), [0, 0.009, 0]));
+    g.add(malla(new THREE.SphereGeometry(0.058, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), mat('#e8c25a', { emisivo: 0.12 }), [0, 0.018, 0]));
+    g.add(malla(new THREE.CylinderGeometry(0.008, 0.008, 0.02, 10), mat('#c9ccd4'), [0, 0.085, 0]));
+    g.add(malla(new THREE.SphereGeometry(0.013, 12, 8), mat('#c9ccd4'), [0, 0.098, 0]));
+    g.add(malla(new THREE.PlaneGeometry(0.02, 0.04), mat('#ffffff', { tipo: 'basica', opacidad: 0.6 }), [-0.03, 0.05, 0.04], [0, -0.6, 0.4]));
+  });
+}
+
+/** Taza de cerámica con bebida caliente (el vapor lo pone la escena o el entorno). */
+function taza({ color = '#f6f1e8', bebida = '#6b3e22' } = {}) {
+  return estatico((g) => {
+    g.add(malla(new THREE.CylinderGeometry(0.045, 0.038, 0.085, 24), mat(color), [0, 0.0425, 0]));
+    g.add(malla(new THREE.CylinderGeometry(0.04, 0.04, 0.004, 24), mat(bebida), [0, 0.08, 0]));
+    g.add(malla(new THREE.TorusGeometry(0.022, 0.007, 8, 16), mat(color), [0.05, 0.045, 0], [0, 0, 0]));
+    g.add(malla(new THREE.CylinderGeometry(0.065, 0.06, 0.008, 24), mat(color), [0, 0.004, 0]));
+  });
+}
+
+export const cafe = { gallo, pizza, galleta, muffin, bebida, bandeja, campana, taza };

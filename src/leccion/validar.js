@@ -359,9 +359,10 @@ export function validarLeccion(l) {
       const lineas = e.lineas ?? {};
       const linea = (l, ruta) => (l && texto(l.quien) && texto(l.en) && texto(l.es)) || err(ruta, 'necesita quien, en y es');
       const requeridas = [
-        'hola', 'saludoRetro', 'encantado', 'mira', 'otroCliente', 'clientePide', 'seguro', 'clienteGracias', 'escucha', 'escuchaRetro', 'bien',
-        'queQuiere', 'conTarjetas', 'pista1', 'pista2', 'pista3', 'aguaOJugo', 'aquiTiene', 'disfruta', 'mision', 'misionComidaRetro', 'beber',
-        'algoMas', 'entrega', 'esTuPedido', 'noPediste', 'siEsTuPedido', 'disfrutaComida', 'adios',
+        'hola', 'saludoRetro', 'saludaConMano', 'carta', 'toma', 'otroCliente', 'clientePide', 'seguro', 'clienteGracias', 'dame', 'graciasJugo',
+        'bandeja', 'queQuiere', 'conTarjetas', 'pista1', 'pista2', 'pista3', 'aguaOJugo', 'tomala', 'disfruta', 'tarjetaMision', 'mision',
+        'misionComidaRetro', 'beber', 'algoMas', 'entrega', 'cualBandeja', 'noEsTuya', 'lograste', 'disfrutaComida', 'despideMano', 'adios',
+        'mira', 'elogio1', 'elogio2', 'elogio3', 'elogio4',
       ];
       for (const k of requeridas) linea(lineas[k], `${r}.lineas.${k}`);
       const ids = new Set();
@@ -385,7 +386,7 @@ export function validarLeccion(l) {
       if (lista(e.guiado?.comidas, 1, 3, `${r}.guiado.comidas`)) e.guiado.comidas.forEach((id) => conPedido(id, `${r}.guiado.comidas`));
       if (!texto(e.guiado?.inicio) || !texto(e.guiado?.fin)) err(`${r}.guiado`, 'necesita inicio y fin');
       conPedido(e.mision?.comida, `${r}.mision.comida`);
-      for (const k of ['bebida', 'extra']) if (!ids.has(e.mision?.[k])) err(`${r}.mision.${k}`, 'debe ser un producto');
+      if (!ids.has(e.mision?.bebida)) err(`${r}.mision.bebida`, 'debe ser un producto');
       if (lista(e.mision?.opcionesComida, 2, 3, `${r}.mision.opcionesComida`) && !e.mision.opcionesComida.includes(e.mision.comida)) err(`${r}.mision.opcionesComida`, 'debe incluir la comida de la misión');
       if (lista(e.escucha?.opciones, 2, 3, `${r}.escucha.opciones`) && !e.escucha.opciones.includes(e.escucha.objetivo)) err(`${r}.escucha`, 'el objetivo debe estar entre las opciones');
       if (!ids.has(e.modelo?.producto)) err(`${r}.modelo.producto`, 'debe ser un producto');
@@ -401,6 +402,9 @@ export function validarLeccion(l) {
         });
       }
       if (!(Array.isArray(e.fases) && e.fases.length === 5)) err(`${r}.fases`, 'deben ser 5 { en, es }');
+      for (const [k, p] of Object.entries(e.pasos ?? {})) if (!texto(p?.en) || !texto(p?.es)) err(`${r}.pasos.${k}`, 'necesita en y es');
+      if (!e.escucha?.objetivo || !e.productos?.find((p) => p.id === e.escucha.objetivo)) err(`${r}.escucha.objetivo`, 'debe ser un producto');
+      for (const id of e.mision?.otraBandeja ?? []) if (!ids.has(id)) err(`${r}.mision.otraBandeja`, `"${id}" no es un producto`);
     }
 
     if (e.tipo === 'prototipo') {
