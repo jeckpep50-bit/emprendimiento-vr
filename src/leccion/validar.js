@@ -355,6 +355,54 @@ export function validarLeccion(l) {
       if (lista(e.reporte, 1, 8, `${r}.reporte`)) e.reporte.forEach((l, j) => (texto(l.quien) && texto(l.texto)) || err(`${r}.reporte[${j}]`, 'necesita quien y texto'));
     }
 
+    if (e.tipo === 'cafe') {
+      const lineas = e.lineas ?? {};
+      const linea = (l, ruta) => (l && texto(l.quien) && texto(l.en) && texto(l.es)) || err(ruta, 'necesita quien, en y es');
+      const requeridas = [
+        'hola', 'saludoRetro', 'encantado', 'mira', 'otroCliente', 'clientePide', 'seguro', 'clienteGracias', 'escucha', 'escuchaRetro', 'bien',
+        'queQuiere', 'conTarjetas', 'pista1', 'pista2', 'pista3', 'aguaOJugo', 'aquiTiene', 'disfruta', 'mision', 'misionComidaRetro', 'beber',
+        'algoMas', 'entrega', 'esTuPedido', 'noPediste', 'siEsTuPedido', 'disfrutaComida', 'adios',
+      ];
+      for (const k of requeridas) linea(lineas[k], `${r}.lineas.${k}`);
+      const ids = new Set();
+      if (lista(e.productos, 3, 8, `${r}.productos`)) {
+        e.productos.forEach((p, j) => {
+          const rr = `${r}.productos[${j}]`;
+          if (!texto(p.id)) err(`${rr}.id`, 'falta el id');
+          ids.add(p.id);
+          if (!(p.modelo in MODELOS)) err(`${rr}.modelo`, `modelo desconocido "${p.modelo}"`);
+          if (!['comida', 'bebida'].includes(p.tipo)) err(`${rr}.tipo`, 'debe ser comida | bebida');
+          linea(p.nombre, `${rr}.nombre`);
+        });
+      }
+      const conPedido = (id, ruta) => {
+        const p = e.productos?.find((x) => x.id === id);
+        if (!p) return err(ruta, `"${id}" no es un producto`);
+        if (!texto(p.tarjeta)) err(ruta, `"${id}" necesita tarjeta`);
+        linea(p.pedido, `${ruta} (${id}).pedido`);
+        linea(p.confirma, `${ruta} (${id}).confirma`);
+      };
+      if (lista(e.guiado?.comidas, 1, 3, `${r}.guiado.comidas`)) e.guiado.comidas.forEach((id) => conPedido(id, `${r}.guiado.comidas`));
+      if (!texto(e.guiado?.inicio) || !texto(e.guiado?.fin)) err(`${r}.guiado`, 'necesita inicio y fin');
+      conPedido(e.mision?.comida, `${r}.mision.comida`);
+      for (const k of ['bebida', 'extra']) if (!ids.has(e.mision?.[k])) err(`${r}.mision.${k}`, 'debe ser un producto');
+      if (lista(e.mision?.opcionesComida, 2, 3, `${r}.mision.opcionesComida`) && !e.mision.opcionesComida.includes(e.mision.comida)) err(`${r}.mision.opcionesComida`, 'debe incluir la comida de la misión');
+      if (lista(e.escucha?.opciones, 2, 3, `${r}.escucha.opciones`) && !e.escucha.opciones.includes(e.escucha.objetivo)) err(`${r}.escucha`, 'el objetivo debe estar entre las opciones');
+      if (!ids.has(e.modelo?.producto)) err(`${r}.modelo.producto`, 'debe ser un producto');
+      for (const g of ['saludo', 'aguaOJugo', 'misionBebida', 'algoMas', 'despedida']) {
+        const ops = e.preguntas?.[g];
+        const rr = `${r}.preguntas.${g}`;
+        if (!lista(ops, 2, 3, rr)) continue;
+        if (!ops.some((o) => o.correcta === true)) err(rr, 'al menos una opción correcta');
+        ops.forEach((o, j) => {
+          linea(o, `${rr}[${j}]`);
+          if (!o.correcta && !lineas[o.retro]) err(`${rr}[${j}].retro`, 'debe ser una clave de lineas');
+          if (o.producto !== undefined && !ids.has(o.producto)) err(`${rr}[${j}].producto`, 'debe ser un producto');
+        });
+      }
+      if (!(Array.isArray(e.fases) && e.fases.length === 5)) err(`${r}.fases`, 'deben ser 5 { en, es }');
+    }
+
     if (e.tipo === 'prototipo') {
       if (lista(e.materiales, 2, 12, `${r}.materiales`)) {
         e.materiales.forEach((m, j) => {
