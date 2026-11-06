@@ -1,0 +1,292 @@
+{
+ "camarero-0y5snmj": {
+  "quien": "camarero",
+  "texto": "Hello! Welcome to Coco's Café!",
+  "seg": 3.07
+ },
+ "camarero-053xtz7": {
+  "quien": "camarero",
+  "texto": "Hmm… you just arrived! Say hello.",
+  "seg": 3.73
+ },
+ "camarero-1c7ykow": {
+  "quien": "camarero",
+  "texto": "Nice to see you!",
+  "seg": 1.12
+ },
+ "camarero-05yinf5": {
+  "quien": "camarero",
+  "texto": "Look at the menu. Touch the food and the drinks!",
+  "seg": 3.57
+ },
+ "camarero-0fzi9ao": {
+  "quien": "camarero",
+  "texto": "Great! Now listen to a customer.",
+  "seg": 3.07
+ },
+ "cliente-1uc5kca": {
+  "quien": "cliente",
+  "texto": "Can I have a cookie, please?",
+  "seg": 2.21
+ },
+ "camarero-1sfylmo": {
+  "quien": "camarero",
+  "texto": "Sure! Here you are.",
+  "seg": 2.37
+ },
+ "cliente-1y83zff": {
+  "quien": "cliente",
+  "texto": "Thank you!",
+  "seg": 0.67
+ },
+ "camarero-1faxbev": {
+  "quien": "camarero",
+  "texto": "Listen. Where is the juice?",
+  "seg": 2.77
+ },
+ "camarero-1ueqpg2": {
+  "quien": "camarero",
+  "texto": "Listen again: juice. Juice is orange.",
+  "seg": 3.9
+ },
+ "camarero-0j9sqyh": {
+  "quien": "camarero",
+  "texto": "Very good!",
+  "seg": 0.77
+ },
+ "camarero-1seep19": {
+  "quien": "camarero",
+  "texto": "What would you like?",
+  "seg": 0.97
+ },
+ "camarero-0nnwc3m": {
+  "quien": "camarero",
+  "texto": "Good! Now ask me with the cards.",
+  "seg": 3.1
+ },
+ "camarero-0tjkgcs": {
+  "quien": "camarero",
+  "texto": "Start with: Can I have…",
+  "seg": 2.16
+ },
+ "camarero-1woq9cx": {
+  "quien": "camarero",
+  "texto": "Now say the food.",
+  "seg": 1.18
+ },
+ "camarero-10govjc": {
+  "quien": "camarero",
+  "texto": "Finish with: please.",
+  "seg": 1.94
+ },
+ "camarero-0d6emp2": {
+  "quien": "camarero",
+  "texto": "Water or juice?",
+  "seg": 1.12
+ },
+ "camarero-0m2uvhk": {
+  "quien": "camarero",
+  "texto": "Water or juice? Choose one, please!",
+  "seg": 3.82
+ },
+ "camarero-0fkm86x": {
+  "quien": "camarero",
+  "texto": "Here you are!",
+  "seg": 0.84
+ },
+ "camarero-1ec3m0b": {
+  "quien": "camarero",
+  "texto": "Enjoy! Now, a mission for you!",
+  "seg": 3.36
+ },
+ "camarero-0z2acrr": {
+  "quien": "camarero",
+  "texto": "Hi again! What would you like?",
+  "seg": 2.59
+ },
+ "camarero-1xsoxxs": {
+  "quien": "camarero",
+  "texto": "Look at your mission card.",
+  "seg": 1.45
+ },
+ "camarero-0jdlbuy": {
+  "quien": "camarero",
+  "texto": "And to drink?",
+  "seg": 0.9
+ },
+ "camarero-1lhyjqt": {
+  "quien": "camarero",
+  "texto": "Look at your mission card. What drink?",
+  "seg": 3.09
+ },
+ "camarero-1k41d1p": {
+  "quien": "camarero",
+  "texto": "Anything else?",
+  "seg": 1.08
+ },
+ "camarero-1dfo29x": {
+  "quien": "camarero",
+  "texto": "Hmm… Do you want more food? Yes or no?",
+  "seg": 4.55
+ },
+ "camarero-1gsn9sc": {
+  "quien": "camarero",
+  "texto": "You already said hello!",
+  "seg": 1.43
+ },
+ "camarero-0412oyf": {
+  "quien": "camarero",
+  "texto": "All right! A sandwich and water. Here you are!",
+  "seg": 4.8
+ },
+ "camarero-06ubw4t": {
+  "quien": "camarero",
+  "texto": "Is this your order? Touch your food and your drink.",
+  "seg": 3.69
+ },
+ "camarero-0if4fe2": {
+  "quien": "camarero",
+  "texto": "Did you order that? Look at your mission.",
+  "seg": 3.14
+ },
+ "camarero-0acz4j5": {
+  "quien": "camarero",
+  "texto": "Yes! That's your order.",
+  "seg": 2.48
+ },
+ "camarero-1ws3qts": {
+  "quien": "camarero",
+  "texto": "Enjoy your food!",
+  "seg": 1.08
+ },
+ "camarero-0852rn7": {
+  "quien": "camarero",
+  "texto": "Hmm… Now we say goodbye.",
+  "seg": 2.72
+ },
+ "camarero-002d36j": {
+  "quien": "camarero",
+  "texto": "That's what I say! You are the customer.",
+  "seg": 3.12
+ },
+ "camarero-10pfcjd": {
+  "quien": "camarero",
+  "texto": "Goodbye! See you soon!",
+  "seg": 2.46
+ },
+ "estudiante-1b7efoe": {
+  "quien": "estudiante",
+  "texto": "Hello!",
+  "seg": 0.52
+ },
+ "estudiante-1ugyo77": {
+  "quien": "estudiante",
+  "texto": "Goodbye!",
+  "seg": 0.6
+ },
+ "estudiante-0e8zx38": {
+  "quien": "estudiante",
+  "texto": "Water, please.",
+  "seg": 1.59
+ },
+ "estudiante-17ox95t": {
+  "quien": "estudiante",
+  "texto": "Juice, please.",
+  "seg": 1.61
+ },
+ "estudiante-1s5na9w": {
+  "quien": "estudiante",
+  "texto": "Yes, please.",
+  "seg": 1.56
+ },
+ "estudiante-00p68k2": {
+  "quien": "estudiante",
+  "texto": "Milk, please.",
+  "seg": 1.53
+ },
+ "estudiante-1yn7xgl": {
+  "quien": "estudiante",
+  "texto": "No, thank you.",
+  "seg": 1.46
+ },
+ "estudiante-1jjnxe7": {
+  "quien": "estudiante",
+  "texto": "Yes, I am.",
+  "seg": 1.5
+ },
+ "estudiante-1qem71g": {
+  "quien": "estudiante",
+  "texto": "Thank you. Goodbye!",
+  "seg": 2.12
+ },
+ "estudiante-1seep19": {
+  "quien": "estudiante",
+  "texto": "What would you like?",
+  "seg": 0.97
+ },
+ "camarero-17reyvt": {
+  "quien": "camarero",
+  "texto": "A sandwich.",
+  "seg": 1.02
+ },
+ "estudiante-0uuhc7b": {
+  "quien": "estudiante",
+  "texto": "Can I have a sandwich, please?",
+  "seg": 2.47
+ },
+ "camarero-1jr23i3": {
+  "quien": "camarero",
+  "texto": "A sandwich. Great!",
+  "seg": 2.47
+ },
+ "camarero-17i671o": {
+  "quien": "camarero",
+  "texto": "A pizza.",
+  "seg": 0.87
+ },
+ "estudiante-15gndxg": {
+  "quien": "estudiante",
+  "texto": "Can I have a pizza, please?",
+  "seg": 2.29
+ },
+ "camarero-0m0a8t4": {
+  "quien": "camarero",
+  "texto": "A pizza. Great!",
+  "seg": 2.31
+ },
+ "camarero-1fmavn8": {
+  "quien": "camarero",
+  "texto": "A cookie.",
+  "seg": 0.71
+ },
+ "camarero-0ewnr5h": {
+  "quien": "camarero",
+  "texto": "A muffin.",
+  "seg": 0.8
+ },
+ "estudiante-0qcw0rb": {
+  "quien": "estudiante",
+  "texto": "Can I have a muffin, please?",
+  "seg": 2.21
+ },
+ "camarero-1fj0jt3": {
+  "quien": "camarero",
+  "texto": "A muffin. Great!",
+  "seg": 2.24
+ },
+ "camarero-1mt9ry2": {
+  "quien": "camarero",
+  "texto": "Water.",
+  "seg": 0.56
+ },
+ "camarero-0f7ocdf": {
+  "quien": "camarero",
+  "texto": "Juice.",
+  "seg": 0.76
+ },
+ "camarero-1o52v7o": {
+  "quien": "camarero",
+  "texto": "Milk.",
+  "seg": 0.5
+ }
+}

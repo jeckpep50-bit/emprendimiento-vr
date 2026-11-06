@@ -125,5 +125,16 @@ export function lineasDeEscena(e) {
   agregar(guia, e.objetividad?.instruccion);
   for (const s of e.sentidos ?? []) agregar(guia, s.pregunta);
   for (const l of [e.apertura, ...(e.reporte ?? []), e.cierre]) if (l) agregar(l.quien, l.texto);
+  // Cafetería de inglés: toda línea { quien, en } (diálogos, opciones y productos) lleva voz.
+  if (e.tipo === 'cafe') {
+    const recorrer = (v) => {
+      if (Array.isArray(v)) v.forEach(recorrer);
+      else if (v && typeof v === 'object') {
+        if (typeof v.quien === 'string' && typeof v.en === 'string') agregar(v.quien, v.en);
+        Object.values(v).forEach(recorrer);
+      }
+    };
+    recorrer([e.lineas, e.preguntas, e.productos]);
+  }
   return [...lineas.values()];
 }

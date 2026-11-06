@@ -1,5 +1,14 @@
 [
   {
+    "id": "cafe-ingles-a1",
+    "titulo": "Coco's Café: pide en inglés",
+    "materia": "Inglés",
+    "grado": "Nivel A1",
+    "duracionMinutos": 5,
+    "idioma": "es",
+    "emoji": "☕"
+  },
+  {
     "id": "reporteros-que-describen",
     "titulo": "¡Al aire! Reporteros que describen",
     "materia": "Lengua y Literatura",

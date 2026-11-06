@@ -117,6 +117,12 @@ export const MODELOS = {
   globo: 'Globo de helio con su piola. Opción color.',
   camara_tv: 'Cámara de televisión sobre trípode.',
   furgoneta_tv: 'Furgoneta del noticiero con antena satelital.',
+  // Cafetería (inglés A1)
+  gallo: 'Coco, gallo camarero de caricatura con boina azul, cinta tricolor, brújula y bolso (≈1,2 m). Habla moviendo el pico y aletea.',
+  pizza: 'Porción de pizza con pepperoni.',
+  galleta: 'Galleta con chispas de chocolate (cookie).',
+  muffin: 'Muffin de arándanos.',
+  bebida: 'Vaso con bebida. Opción tipo: "agua" | "jugo" | "leche".',
 };
 
 export const ENTORNOS = {
@@ -135,6 +141,7 @@ export const ENTORNOS = {
   recreo: 'El mismo patio a la hora del recreo (sin bebedero fijo: lo pone la escena), con rayuela, tienda escolar y sol de mediodía de Quito. Lo usa la escena "observacion" con escenario "recreo".',
   mercado: 'Mercado ecuatoriano con 4 puestos bajo toldos alrededor del usuario: frutas (al frente, mesón en z = -2,6), carnes y mariscos (izquierda, x = -2,6), comidas y jugos (derecha, x = 2,6) y lácteos y abarrotes (atrás, z = 2,4). Los mesones miden 0,9 m de alto.',
   planta: 'Planta procesadora de alimentos: nave industrial con tanques, tuberías, robot empacador y luces de seguridad.',
+  cafeteria: 'Coco\'s Café: cafetería acogedora con mostrador al frente (a ~1 m), pizarra con la carta en inglés, vitrina, cafetera, lámparas y mesas. La usa la escena "cafe".',
   ninguno: 'Sin decorado (lo pone la propia escena; p. ej. una película en realidad aumentada).',
   cuerpo: 'Interior del cuerpo humano en cuatro zonas: boca, estómago (lago de ácido), intestino (vellosidades y microbiota) y vaso sanguíneo (glóbulos rojos). Lo usa la escena "viaje".',
 };
@@ -164,6 +171,7 @@ export const TIPOS_ESCENA = {
   congelado: 'Un choque en el mercado se congela en el tiempo: buscar objetos por su ubicación, completar la descripción y elegir lo objetivo. Campos: busqueda { rondas }, ubicaciones, completar, objetividad, frases.',
   sentidos: 'Describir un lugar con los cinco sentidos (entorno volcan): cada sentido se activa y se elige la descripción viva. Campos: sentidos [{ id, emoji, nombre, pregunta, opciones [{ texto, tipo: viva | pobre | falsa, retro }] }].',
   transmision: 'Salida al aire en el estudio: la presentadora y el reportero leen el reporte; al final, un resumen. Campos: presentador, apertura, reporte [{ quien, texto, emoji }], cierre, resumen.',
+  cafe: 'Cafetería de inglés A1 con Coco, el gallo camarero (entorno cafeteria): saludar, escuchar la carta, armar el pedido con tarjetas, pedir con menos ayuda, comprobar el pedido y despedirse. Registra logros independientes o con ayuda. Campos: productos, lineas { clave: { quien, en, es } }, preguntas.',
   prototipo:
     'Taller de prototipo: (1) elegir en un estante los materiales que sirven; (2) probar alturas del escalón en una simulación a tamaño real con Camila frente al bebedero. Campos: materiales [{ modelo, nombre, sirve, explicacion, pista? }], instruccionMedida, medidas [{ texto, alto, correcta, explicacion }], frases? { logro }.',
 };

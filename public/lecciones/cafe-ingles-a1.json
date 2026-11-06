@@ -1,0 +1,161 @@
+{
+  "id": "cafe-ingles-a1",
+  "titulo": "Coco's Café: pide en inglés",
+  "materia": "Inglés",
+  "grado": "Nivel A1",
+  "idioma": "es",
+  "duracionMinutos": 5,
+  "emoji": "☕",
+  "narracion": false,
+  "gamificacion": true,
+  "descripcion": "Coco, un gallo camarero muy simpático, atiende al estudiante en su cafetería. Escucha los nombres de la comida y las bebidas, arma su pedido con tarjetas, pide una misión con menos ayuda, comprueba lo que recibe y se despide. Sin micrófono: todo se hace escuchando y eligiendo.",
+  "objetivos": [
+    "Reconocer y elegir saludos y despedidas corteses (Hello!, Thank you. Goodbye!).",
+    "Pedir un alimento con la frase Can I have…, please?",
+    "Identificar al escuchar el nombre de una bebida y pedirla (Water, please).",
+    "Responder a preguntas sencillas del camarero (Water or juice?, Anything else?)."
+  ],
+  "voces": {
+    "carpeta": "voces/cafe-ingles-a1",
+    "personajes": {
+      "camarero": { "voz": "Microsoft Zira Desktop", "idioma": "en-US", "tono": "-10%", "velocidad": "-14%" },
+      "cliente": { "voz": "Microsoft Zira Desktop", "idioma": "en-US", "tono": "+28%", "velocidad": "-10%" },
+      "estudiante": { "voz": "Microsoft Zira Desktop", "idioma": "en-US", "tono": "+14%", "velocidad": "-14%" }
+    }
+  },
+  "rangos": [
+    { "nombre": "New customer", "emoji": "🙂", "puntos": 0 },
+    { "nombre": "Good customer", "emoji": "☕", "puntos": 900 },
+    { "nombre": "Café star", "emoji": "⭐", "puntos": 1800 }
+  ],
+  "titulosMedalla": {
+    "oro": "¡Medalla de oro! You can order in English!",
+    "plata": "¡Medalla de plata! Very good customer!",
+    "bronce": "¡Medalla de bronce! Good start!"
+  },
+  "escenas": [
+    {
+      "tipo": "cafe",
+      "entorno": "cafeteria",
+      "titulo": "Coco's Café",
+      "instruccion": "☕ Visita la cafetería de Coco y pide en inglés.",
+      "vozInstruccion": false,
+      "insignia": { "emoji": "☕", "nombre": "Cliente de Coco's Café" },
+      "fases": [
+        { "en": "Welcome", "es": "Bienvenida" },
+        { "en": "Listen and touch", "es": "Escucha y toca" },
+        { "en": "Order", "es": "Pide con ayuda" },
+        { "en": "Your mission", "es": "Tu misión" },
+        { "en": "Check and goodbye", "es": "Comprueba y despídete" }
+      ],
+      "pasos": {
+        "controles": "👉 Apunta con el rayo y aprieta el GATILLO para elegir.",
+        "saludo": "Coco te saluda. Elige tu respuesta.",
+        "explora": "Toca la comida y las bebidas para escuchar sus nombres.",
+        "modelo": "Mira y escucha cómo pide un cliente.",
+        "escucha": "Escucha a Coco y toca la bebida correcta.",
+        "eligeComida": "¿Qué quieres comer? Toca una comida.",
+        "ordena": "Toca las tarjetas en orden para pedir.",
+        "bebida": "Responde a Coco.",
+        "misionComida": "Mira tu misión. ¿Qué comida pides?",
+        "misionOrdena": "Ordena tu pedido.",
+        "misionBebida": "¿Qué bebida pide tu misión?",
+        "algoMas": "Responde a Coco.",
+        "comprueba": "Toca tu comida y tu bebida.",
+        "despedida": "Despídete de Coco."
+      },
+      "productos": [
+        { "id": "sandwich", "modelo": "sandwich", "tipo": "comida", "emoji": "🥪", "tarjeta": "a sandwich",
+          "nombre": { "quien": "camarero", "en": "A sandwich.", "es": "Un sándwich." },
+          "pedido": { "quien": "estudiante", "en": "Can I have a sandwich, please?", "es": "¿Me da un sándwich, por favor?" },
+          "confirma": { "quien": "camarero", "en": "A sandwich. Great!", "es": "Un sándwich. ¡Genial!" } },
+        { "id": "pizza", "modelo": "pizza", "tipo": "comida", "emoji": "🍕", "tarjeta": "a pizza",
+          "nombre": { "quien": "camarero", "en": "A pizza.", "es": "Una pizza." },
+          "pedido": { "quien": "estudiante", "en": "Can I have a pizza, please?", "es": "¿Me da una pizza, por favor?" },
+          "confirma": { "quien": "camarero", "en": "A pizza. Great!", "es": "Una pizza. ¡Genial!" } },
+        { "id": "cookie", "modelo": "galleta", "tipo": "comida", "emoji": "🍪", "tarjeta": "a cookie",
+          "nombre": { "quien": "camarero", "en": "A cookie.", "es": "Una galleta." } },
+        { "id": "muffin", "modelo": "muffin", "tipo": "comida", "emoji": "🧁", "tarjeta": "a muffin",
+          "nombre": { "quien": "camarero", "en": "A muffin.", "es": "Un muffin (magdalena)." },
+          "pedido": { "quien": "estudiante", "en": "Can I have a muffin, please?", "es": "¿Me da un muffin, por favor?" },
+          "confirma": { "quien": "camarero", "en": "A muffin. Great!", "es": "Un muffin. ¡Genial!" } },
+        { "id": "water", "modelo": "bebida", "opciones": { "tipo": "agua" }, "tipo": "bebida", "emoji": "💧",
+          "nombre": { "quien": "camarero", "en": "Water.", "es": "Agua." } },
+        { "id": "juice", "modelo": "bebida", "opciones": { "tipo": "jugo" }, "tipo": "bebida", "emoji": "🧃",
+          "nombre": { "quien": "camarero", "en": "Juice.", "es": "Jugo." } },
+        { "id": "milk", "modelo": "bebida", "opciones": { "tipo": "leche" }, "tipo": "bebida", "emoji": "🥛",
+          "nombre": { "quien": "camarero", "en": "Milk.", "es": "Leche." } }
+      ],
+      "guiado": { "comidas": ["sandwich", "pizza", "muffin"], "inicio": "Can I have", "fin": "please?" },
+      "escucha": { "objetivo": "juice", "opciones": ["water", "juice", "milk"] },
+      "modelo": {
+        "producto": "cookie",
+        "cliente": { "edad": "nino", "estatura": 1.2, "peinado": "cola", "cabello": "#2b1d14", "piel": "#c98b5e", "superior": "#2dbe78", "inferior": "#23304a", "falda": false, "cuello": null, "mochila": "#e5484d" }
+      },
+      "mision": { "comida": "sandwich", "bebida": "water", "opcionesComida": ["sandwich", "pizza", "cookie"], "extra": "pizza" },
+      "lineas": {
+        "hola": { "quien": "camarero", "en": "Hello! Welcome to Coco's Café!", "es": "¡Hola! ¡Bienvenido a Coco's Café!" },
+        "saludoRetro": { "quien": "camarero", "en": "Hmm… you just arrived! Say hello.", "es": "Mmm… ¡recién llegas! Saluda." },
+        "encantado": { "quien": "camarero", "en": "Nice to see you!", "es": "¡Qué gusto verte!" },
+        "mira": { "quien": "camarero", "en": "Look at the menu. Touch the food and the drinks!", "es": "Mira la carta. ¡Toca la comida y las bebidas!" },
+        "otroCliente": { "quien": "camarero", "en": "Great! Now listen to a customer.", "es": "¡Genial! Ahora escucha a un cliente." },
+        "clientePide": { "quien": "cliente", "en": "Can I have a cookie, please?", "es": "¿Me da una galleta, por favor?" },
+        "seguro": { "quien": "camarero", "en": "Sure! Here you are.", "es": "¡Claro! Aquí tiene." },
+        "clienteGracias": { "quien": "cliente", "en": "Thank you!", "es": "¡Gracias!" },
+        "escucha": { "quien": "camarero", "en": "Listen. Where is the juice?", "es": "Escucha. ¿Dónde está el jugo?" },
+        "escuchaRetro": { "quien": "camarero", "en": "Listen again: juice. Juice is orange.", "es": "Escucha otra vez: juice. El jugo es anaranjado." },
+        "bien": { "quien": "camarero", "en": "Very good!", "es": "¡Muy bien!" },
+        "queQuiere": { "quien": "camarero", "en": "What would you like?", "es": "¿Qué te gustaría?" },
+        "conTarjetas": { "quien": "camarero", "en": "Good! Now ask me with the cards.", "es": "¡Bien! Ahora pídemelo con las tarjetas." },
+        "pista1": { "quien": "camarero", "en": "Start with: Can I have…", "es": "Empieza con: Can I have… (¿Me da…?)" },
+        "pista2": { "quien": "camarero", "en": "Now say the food.", "es": "Ahora di la comida." },
+        "pista3": { "quien": "camarero", "en": "Finish with: please.", "es": "Termina con: please (por favor)." },
+        "aguaOJugo": { "quien": "camarero", "en": "Water or juice?", "es": "¿Agua o jugo?" },
+        "aguaRetro": { "quien": "camarero", "en": "Water or juice? Choose one, please!", "es": "¿Agua o jugo? ¡Elige uno, por favor!" },
+        "aquiTiene": { "quien": "camarero", "en": "Here you are!", "es": "¡Aquí tiene!" },
+        "disfruta": { "quien": "camarero", "en": "Enjoy! Now, a mission for you!", "es": "¡Buen provecho! Ahora, ¡una misión para ti!" },
+        "mision": { "quien": "camarero", "en": "Hi again! What would you like?", "es": "¡Hola otra vez! ¿Qué te gustaría?" },
+        "misionComidaRetro": { "quien": "camarero", "en": "Look at your mission card.", "es": "Mira tu tarjeta de misión." },
+        "beber": { "quien": "camarero", "en": "And to drink?", "es": "¿Y para tomar?" },
+        "misionBebidaRetro": { "quien": "camarero", "en": "Look at your mission card. What drink?", "es": "Mira tu misión. ¿Qué bebida?" },
+        "algoMas": { "quien": "camarero", "en": "Anything else?", "es": "¿Algo más?" },
+        "algoMasRetro": { "quien": "camarero", "en": "Hmm… Do you want more food? Yes or no?", "es": "Mmm… ¿Quieres más comida? ¿Sí o no?" },
+        "yaSaludaste": { "quien": "camarero", "en": "You already said hello!", "es": "¡Ya saludaste!" },
+        "entrega": { "quien": "camarero", "en": "All right! A sandwich and water. Here you are!", "es": "¡Muy bien! Un sándwich y agua. ¡Aquí tiene!" },
+        "esTuPedido": { "quien": "camarero", "en": "Is this your order? Touch your food and your drink.", "es": "¿Es tu pedido? Toca tu comida y tu bebida." },
+        "noPediste": { "quien": "camarero", "en": "Did you order that? Look at your mission.", "es": "¿Pediste eso? Mira tu misión." },
+        "siEsTuPedido": { "quien": "camarero", "en": "Yes! That's your order.", "es": "¡Sí! Ese es tu pedido." },
+        "disfrutaComida": { "quien": "camarero", "en": "Enjoy your food!", "es": "¡Buen provecho!" },
+        "despedidaRetro": { "quien": "camarero", "en": "Hmm… Now we say goodbye.", "es": "Mmm… Ahora nos despedimos." },
+        "soyCamarero": { "quien": "camarero", "en": "That's what I say! You are the customer.", "es": "¡Eso lo digo yo! Tú eres el cliente." },
+        "adios": { "quien": "camarero", "en": "Goodbye! See you soon!", "es": "¡Adiós! ¡Hasta pronto!" }
+      },
+      "preguntas": {
+        "saludo": [
+          { "quien": "estudiante", "en": "Hello!", "es": "¡Hola!", "correcta": true },
+          { "quien": "estudiante", "en": "Goodbye!", "es": "¡Adiós!", "correcta": false, "retro": "saludoRetro" }
+        ],
+        "aguaOJugo": [
+          { "quien": "estudiante", "en": "Water, please.", "es": "Agua, por favor.", "correcta": true, "producto": "water" },
+          { "quien": "estudiante", "en": "Juice, please.", "es": "Jugo, por favor.", "correcta": true, "producto": "juice" },
+          { "quien": "estudiante", "en": "Yes, please.", "es": "Sí, por favor.", "correcta": false, "retro": "aguaRetro" }
+        ],
+        "misionBebida": [
+          { "quien": "estudiante", "en": "Water, please.", "es": "Agua, por favor.", "correcta": true, "producto": "water" },
+          { "quien": "estudiante", "en": "Milk, please.", "es": "Leche, por favor.", "correcta": false, "retro": "misionBebidaRetro" },
+          { "quien": "estudiante", "en": "Juice, please.", "es": "Jugo, por favor.", "correcta": false, "retro": "misionBebidaRetro" }
+        ],
+        "algoMas": [
+          { "quien": "estudiante", "en": "No, thank you.", "es": "No, gracias.", "correcta": true },
+          { "quien": "estudiante", "en": "Yes, I am.", "es": "Sí, lo soy.", "correcta": false, "retro": "algoMasRetro" },
+          { "quien": "estudiante", "en": "Hello!", "es": "¡Hola!", "correcta": false, "retro": "yaSaludaste" }
+        ],
+        "despedida": [
+          { "quien": "estudiante", "en": "Thank you. Goodbye!", "es": "Gracias. ¡Adiós!", "correcta": true },
+          { "quien": "estudiante", "en": "Hello!", "es": "¡Hola!", "correcta": false, "retro": "despedidaRetro" },
+          { "quien": "estudiante", "en": "What would you like?", "es": "¿Qué te gustaría?", "correcta": false, "retro": "soyCamarero" }
+        ]
+      }
+    }
+  ]
+}
