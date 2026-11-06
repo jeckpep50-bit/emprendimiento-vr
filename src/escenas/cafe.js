@@ -749,9 +749,11 @@ export class EscenaCafe extends EscenaBase {
     };
   }
 
+  /** Late un objeto (tamaño normal 1) hasta llamar a la función devuelta. */
   _pulsar(obj) {
     let activo = true;
-    const base = obj.scale.x || 1;
+    // Siempre sobre el tamaño normal: si el objeto está apareciendo (escala ~0), no debe quedar invisible.
+    const base = 1;
     this.cadaCuadro((_dt, t) => {
       if (activo) obj.scale.setScalar(base * (1 + Math.max(0, Math.sin(t * 6)) * 0.08));
     });
