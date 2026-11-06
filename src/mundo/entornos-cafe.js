@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { mat, malla } from './materiales.js';
+import { mat, malla, fusionar } from './materiales.js';
 import { texturaLienzo, matTextura, habitacion, cartel } from './entornos.js';
 import { cafe } from './prefabs/cafe.js';
 import { laboratorio } from './prefabs/laboratorio.js';
@@ -13,7 +13,14 @@ import { motas, cadaTanto } from './vida.js';
 /** Medidas que usa la escena para poner productos sobre el mostrador. */
 export const MOSTRADOR = { alto: 0.86, z: -1.32, frente: -1.02, ancho: 3.4 };
 
-const TIZA = '"Comic Sans MS", "Segoe Print", "Chalkboard SE", system-ui, sans-serif';
+/** Fusiona un grupo animado aparte para que el entorno no lo junte con lo estático. */
+function fusionarAparte(grupo) {
+  fusionar(grupo);
+  grupo.userData.noFusionar = true;
+  return grupo;
+}
+
+const TIZA ='"Comic Sans MS", "Segoe Print", "Chalkboard SE", system-ui, sans-serif';
 
 function pizarraCarta() {
   const tex = texturaLienzo(1000, 760, (x, w, h) => {
@@ -181,6 +188,34 @@ function cafeteria(g, ctx) {
     g.add(malla(new THREE.PlaneGeometry(0.48, 0.62), mat(c, { tipo: 'lambert' }), [3.935, 1.75, zz], [0, -Math.PI / 2, 0]));
   }
 
+  // Puerta de entrada (pared derecha, adelante): por aquí llegan los clientes
+  const puerta = { x: 3.95, z: 1.7 };
+  g.add(malla(new THREE.BoxGeometry(0.08, 2.25, 1.15), mat('#5b3a22'), [puerta.x, 1.125, puerta.z]));
+  g.add(malla(new THREE.BoxGeometry(0.06, 2.1, 1.0), mat('#8a5a36'), [puerta.x - 0.03, 1.05, puerta.z]));
+  g.add(malla(new THREE.PlaneGeometry(0.7, 0.8), cieloVentana, [puerta.x - 0.065, 1.45, puerta.z], [0, -Math.PI / 2, 0]));
+  g.add(malla(new THREE.SphereGeometry(0.035, 12, 8), mat('#e8c25a'), [puerta.x - 0.08, 1.05, puerta.z - 0.38]));
+  g.add(malla(new THREE.ConeGeometry(0.05, 0.08, 16, 1, true), mat('#e8c25a', { lados: THREE.DoubleSide }), [puerta.x - 0.1, 2.3, puerta.z - 0.45]));
+  // Caja registradora y una taza caliente con vapor sobre el mostrador
+  g.add(malla(new RoundedBoxGeometry(0.34, 0.16, 0.26, 2, 0.02), mat('#3b4a6b'), [-1.42, alto + 0.08, z - 0.08]));
+  g.add(malla(new THREE.BoxGeometry(0.26, 0.1, 0.02), mat('#9fe0c9', { tipo: 'basica' }), [-1.42, alto + 0.2, z - 0.18], [-0.4, 0, 0]));
+  const tazaCaliente = cafe.taza();
+  tazaCaliente.position.set(-1.05, alto, z + 0.05);
+  g.add(tazaCaliente);
+  motas(g, ctx, { caja: [-1.08, -1.02, alto + 0.09, alto + 0.35, z + 0.03, z + 0.07], cantidad: 10, color: '#ffffff', tam: 0.03, opacidad: 0.4, velocidad: 0.1 });
+
+  // Ventilador de techo que gira despacio
+  const ventilador = new THREE.Group();
+  ventilador.position.set(0.2, 2.95, 0.6);
+  ventilador.add(malla(new THREE.CylinderGeometry(0.012, 0.012, 0.25, 8), mat('#3b2a20'), [0, 0.12, 0]));
+  ventilador.add(malla(new THREE.CylinderGeometry(0.09, 0.07, 0.1, 16), mat('#3b2a20')));
+  for (let i = 0; i < 4; i++) {
+    const a = (i / 4) * Math.PI * 2;
+    ventilador.add(malla(new THREE.BoxGeometry(0.55, 0.012, 0.12), mat('#8a5a36'), [Math.cos(a) * 0.33, -0.02, Math.sin(a) * 0.33], [0, -a, 0.06]));
+  }
+  fusionarAparte(ventilador);
+  g.add(ventilador);
+  ctx.cada((dt) => (ventilador.rotation.y += dt * 1.6));
+
   // Vapor suave sobre la cafetera y brillo cálido en el aire
   motas(g, ctx, { caja: [1.05, 1.35, 1.45, 2.0, -2.75, -2.55], cantidad: 18, color: '#ffffff', tam: 0.04, opacidad: 0.35, velocidad: 0.12 });
   motas(g, ctx, { caja: [-3, 3, 0.6, 2.8, -2.6, 2.5], cantidad: 60, color: '#ffe9b0', tam: 0.018, opacidad: 0.45, velocidad: 0.02 });
@@ -191,7 +226,7 @@ function cafeteria(g, ctx) {
     ctx.audio?.tono(3100 + Math.random() * 400, 0.06, { volumen: 0.012, retardo: 0.09, pos });
   });
 
-  return { fondo: '#3b2a20', luz: [0xfff1dc, 0x7a5236, 2.6], api: { mostrador: MOSTRADOR } };
+  return { fondo: '#3b2a20', luz: [0xfff1dc, 0x7a5236, 2.6], api: { mostrador: MOSTRADOR, puerta: new THREE.Vector3(puerta.x - 0.5, 0, puerta.z) } };
 }
 
 export const entornosCafe = { cafeteria };

@@ -1,33 +1,8 @@
 {
- "camarero-0y5snmj": {
-  "quien": "camarero",
-  "texto": "Hello! Welcome to Coco's Café!",
-  "seg": 3.07
- },
  "camarero-053xtz7": {
   "quien": "camarero",
   "texto": "Hmm… you just arrived! Say hello.",
   "seg": 3.73
- },
- "camarero-1c7ykow": {
-  "quien": "camarero",
-  "texto": "Nice to see you!",
-  "seg": 1.12
- },
- "camarero-05yinf5": {
-  "quien": "camarero",
-  "texto": "Look at the menu. Touch the food and the drinks!",
-  "seg": 3.57
- },
- "camarero-0fzi9ao": {
-  "quien": "camarero",
-  "texto": "Great! Now listen to a customer.",
-  "seg": 3.07
- },
- "cliente-1uc5kca": {
-  "quien": "cliente",
-  "texto": "Can I have a cookie, please?",
-  "seg": 2.21
  },
  "camarero-1sfylmo": {
   "quien": "camarero",
@@ -39,40 +14,15 @@
   "texto": "Thank you!",
   "seg": 0.67
  },
- "camarero-1faxbev": {
-  "quien": "camarero",
-  "texto": "Listen. Where is the juice?",
-  "seg": 2.77
- },
- "camarero-1ueqpg2": {
-  "quien": "camarero",
-  "texto": "Listen again: juice. Juice is orange.",
-  "seg": 3.9
- },
- "camarero-0j9sqyh": {
-  "quien": "camarero",
-  "texto": "Very good!",
-  "seg": 0.77
- },
  "camarero-1seep19": {
   "quien": "camarero",
   "texto": "What would you like?",
   "seg": 0.97
  },
- "camarero-0nnwc3m": {
-  "quien": "camarero",
-  "texto": "Good! Now ask me with the cards.",
-  "seg": 3.1
- },
  "camarero-0tjkgcs": {
   "quien": "camarero",
   "texto": "Start with: Can I have…",
   "seg": 2.16
- },
- "camarero-1woq9cx": {
-  "quien": "camarero",
-  "texto": "Now say the food.",
-  "seg": 1.18
  },
  "camarero-10govjc": {
   "quien": "camarero",
@@ -89,11 +39,6 @@
   "texto": "Water or juice? Choose one, please!",
   "seg": 3.82
  },
- "camarero-0fkm86x": {
-  "quien": "camarero",
-  "texto": "Here you are!",
-  "seg": 0.84
- },
  "camarero-1ec3m0b": {
   "quien": "camarero",
   "texto": "Enjoy! Now, a mission for you!",
@@ -109,16 +54,6 @@
   "texto": "Look at your mission card.",
   "seg": 1.45
  },
- "camarero-0jdlbuy": {
-  "quien": "camarero",
-  "texto": "And to drink?",
-  "seg": 0.9
- },
- "camarero-1lhyjqt": {
-  "quien": "camarero",
-  "texto": "Look at your mission card. What drink?",
-  "seg": 3.09
- },
  "camarero-1k41d1p": {
   "quien": "camarero",
   "texto": "Anything else?",
@@ -133,26 +68,6 @@
   "quien": "camarero",
   "texto": "You already said hello!",
   "seg": 1.43
- },
- "camarero-0412oyf": {
-  "quien": "camarero",
-  "texto": "All right! A sandwich and water. Here you are!",
-  "seg": 4.8
- },
- "camarero-06ubw4t": {
-  "quien": "camarero",
-  "texto": "Is this your order? Touch your food and your drink.",
-  "seg": 3.69
- },
- "camarero-0if4fe2": {
-  "quien": "camarero",
-  "texto": "Did you order that? Look at your mission.",
-  "seg": 3.14
- },
- "camarero-0acz4j5": {
-  "quien": "camarero",
-  "texto": "Yes! That's your order.",
-  "seg": 2.48
  },
  "camarero-1ws3qts": {
   "quien": "camarero",
@@ -234,11 +149,6 @@
   "texto": "Can I have a sandwich, please?",
   "seg": 2.47
  },
- "camarero-1jr23i3": {
-  "quien": "camarero",
-  "texto": "A sandwich. Great!",
-  "seg": 2.47
- },
  "camarero-17i671o": {
   "quien": "camarero",
   "texto": "A pizza.",
@@ -248,11 +158,6 @@
   "quien": "estudiante",
   "texto": "Can I have a pizza, please?",
   "seg": 2.29
- },
- "camarero-0m0a8t4": {
-  "quien": "camarero",
-  "texto": "A pizza. Great!",
-  "seg": 2.31
  },
  "camarero-1fmavn8": {
   "quien": "camarero",
@@ -269,11 +174,6 @@
   "texto": "Can I have a muffin, please?",
   "seg": 2.21
  },
- "camarero-1fj0jt3": {
-  "quien": "camarero",
-  "texto": "A muffin. Great!",
-  "seg": 2.24
- },
  "camarero-1mt9ry2": {
   "quien": "camarero",
   "texto": "Water.",
@@ -288,5 +188,185 @@
   "quien": "camarero",
   "texto": "Milk.",
   "seg": 0.5
+ },
+ "camarero-1pe2wel": {
+  "quien": "camarero",
+  "texto": "Oh! Hello! Welcome to Coco's Café!",
+  "seg": 4.26
+ },
+ "camarero-1spw743": {
+  "quien": "camarero",
+  "texto": "Nice to see you! Wave to me!",
+  "seg": 2.74
+ },
+ "camarero-1ctb701": {
+  "quien": "camarero",
+  "texto": "Here is the menu.",
+  "seg": 1.12
+ },
+ "camarero-1fh62zq": {
+  "quien": "camarero",
+  "texto": "Pick up the food. Look!",
+  "seg": 2.41
+ },
+ "camarero-0a0elyx": {
+  "quien": "camarero",
+  "texto": "Great! Oh, look, a customer!",
+  "seg": 3.77
+ },
+ "cliente-0sy0kb9": {
+  "quien": "cliente",
+  "texto": "Hello! Can I have a cookie, please?",
+  "seg": 3.58
+ },
+ "camarero-0jszliu": {
+  "quien": "camarero",
+  "texto": "Now listen. Please, give me the juice.",
+  "seg": 3.84
+ },
+ "camarero-0iir1rp": {
+  "quien": "camarero",
+  "texto": "Thank you! Juice. Mmm!",
+  "seg": 3.9
+ },
+ "camarero-0w8h7v8": {
+  "quien": "camarero",
+  "texto": "This is your tray.",
+  "seg": 1.08
+ },
+ "camarero-1n1uhku": {
+  "quien": "camarero",
+  "texto": "Ask me with the cards.",
+  "seg": 1.48
+ },
+ "camarero-1b1ieaq": {
+  "quien": "camarero",
+  "texto": "Now the food.",
+  "seg": 0.88
+ },
+ "camarero-0vp1lgr": {
+  "quien": "camarero",
+  "texto": "Here you are. Take it!",
+  "seg": 2.28
+ },
+ "camarero-0gvyct6": {
+  "quien": "camarero",
+  "texto": "Here is your mission card.",
+  "seg": 1.48
+ },
+ "camarero-0jg4tqr": {
+  "quien": "camarero",
+  "texto": "And to drink? Water or juice?",
+  "seg": 2.92
+ },
+ "camarero-1int6sp": {
+  "quien": "camarero",
+  "texto": "Juice? Look at your mission card.",
+  "seg": 3.05
+ },
+ "camarero-0c6grfs": {
+  "quien": "camarero",
+  "texto": "Milk? I have water or juice.",
+  "seg": 2.86
+ },
+ "camarero-13n3ko9": {
+  "quien": "camarero",
+  "texto": "All right! A sandwich and water.",
+  "seg": 3.1
+ },
+ "camarero-165ewpm": {
+  "quien": "camarero",
+  "texto": "Which tray is yours? Take your tray!",
+  "seg": 3.29
+ },
+ "camarero-1rdcvmg": {
+  "quien": "camarero",
+  "texto": "That one is for table two. Look at your mission.",
+  "seg": 3.69
+ },
+ "camarero-0mq8udn": {
+  "quien": "camarero",
+  "texto": "You did it! That's your order.",
+  "seg": 2.61
+ },
+ "camarero-0kyrgj0": {
+  "quien": "camarero",
+  "texto": "Bye-bye! Wave goodbye!",
+  "seg": 2.32
+ },
+ "camarero-1o40clb": {
+  "quien": "camarero",
+  "texto": "Look here!",
+  "seg": 0.68
+ },
+ "camarero-1gmtcvx": {
+  "quien": "camarero",
+  "texto": "Great!",
+  "seg": 0.6
+ },
+ "camarero-1dx0jp9": {
+  "quien": "camarero",
+  "texto": "Perfect!",
+  "seg": 0.85
+ },
+ "camarero-1azjmdj": {
+  "quien": "camarero",
+  "texto": "Nice!",
+  "seg": 0.62
+ },
+ "camarero-0tr918i": {
+  "quien": "camarero",
+  "texto": "Well done!",
+  "seg": 0.72
+ },
+ "camarero-10tf0yp": {
+  "quien": "camarero",
+  "texto": "That's a sandwich!",
+  "seg": 1.18
+ },
+ "camarero-08wy75g": {
+  "quien": "camarero",
+  "texto": "A sandwich. Coming up!",
+  "seg": 2.54
+ },
+ "camarero-12tqemi": {
+  "quien": "camarero",
+  "texto": "That's a pizza!",
+  "seg": 1.02
+ },
+ "camarero-1gmjy3n": {
+  "quien": "camarero",
+  "texto": "A pizza. Coming up!",
+  "seg": 2.38
+ },
+ "camarero-0znr8z0": {
+  "quien": "camarero",
+  "texto": "That's a cookie!",
+  "seg": 0.91
+ },
+ "camarero-0pwux7p": {
+  "quien": "camarero",
+  "texto": "That's a muffin!",
+  "seg": 0.95
+ },
+ "camarero-0vcptlc": {
+  "quien": "camarero",
+  "texto": "A muffin. Coming up!",
+  "seg": 2.31
+ },
+ "camarero-0lxgfh0": {
+  "quien": "camarero",
+  "texto": "That's water!",
+  "seg": 0.82
+ },
+ "camarero-1pdnd0x": {
+  "quien": "camarero",
+  "texto": "That's juice!",
+  "seg": 0.88
+ },
+ "camarero-1w36p0w": {
+  "quien": "camarero",
+  "texto": "That's milk!",
+  "seg": 0.75
  }
 }
