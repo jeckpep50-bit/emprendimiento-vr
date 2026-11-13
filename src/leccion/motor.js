@@ -31,6 +31,7 @@ import { EscenaCongelado } from '../escenas/congelado.js';
 import { EscenaSentidos } from '../escenas/sentidos.js';
 import { EscenaTransmision } from '../escenas/transmision.js';
 import { EscenaCafe } from '../escenas/cafe.js';
+import { EscenaMaison } from '../escenas/maison.js';
 import { EscenaFinal } from '../escenas/final.js';
 
 const RADIO_MOVIMIENTO = 2.3;
@@ -61,6 +62,7 @@ const TIPOS = {
   sentidos: EscenaSentidos,
   transmision: EscenaTransmision,
   cafe: EscenaCafe,
+  maison: EscenaMaison,
 };
 
 /** Reproduce una lección: crea cada escena, cambia de entorno y hace las transiciones. */

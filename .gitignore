@@ -1,3 +1,6 @@
 node_modules
 dist
 .env
+
+# Entorno local para generar voces con Kokoro (npm run voces)
+.voces/

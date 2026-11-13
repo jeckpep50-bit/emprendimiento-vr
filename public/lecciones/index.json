@@ -1,5 +1,14 @@
 [
   {
+    "id": "chez-coco-francais-a1",
+    "titulo": "Chez Coco : la casa en francés",
+    "materia": "Francés",
+    "grado": "Nivel A1",
+    "duracionMinutos": 5,
+    "idioma": "es",
+    "emoji": "🏠"
+  },
+  {
     "id": "cafe-ingles-a1",
     "titulo": "Coco's Café: pide en inglés",
     "materia": "Inglés",

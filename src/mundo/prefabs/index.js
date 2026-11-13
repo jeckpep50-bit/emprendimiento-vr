@@ -8,6 +8,7 @@ import { mercado } from './mercado.js';
 import { persona } from './personas.js';
 import { noticias } from './noticias.js';
 import { cafe } from './cafe.js';
+import { maison } from './maison.js';
 import { crearTarjetaTexto } from '../../ui/componentes.js';
 import { cajaLocal } from '../../core/entrada.js';
 
@@ -21,6 +22,7 @@ const FABRICAS = {
   persona,
   ...noticias,
   ...cafe,
+  ...maison,
   tarjeta: (op) => crearTarjetaTexto({ texto: op.texto ?? '', emoji: op.emoji ?? '', ancho: 0.3, alto: 0.22, color: op.color }),
 };
 

@@ -23,6 +23,7 @@ const AMBIENTES = {
   estudio: { frecuencia: 300, volumen: 0.01 },
   plaza: { frecuencia: 800, filtro: 'bandpass', volumen: 0.03, oleaje: 0.25 },
   cafeteria: { frecuencia: 650, filtro: 'bandpass', volumen: 0.022, oleaje: 0.2 },
+  appartement: { frecuencia: 300, volumen: 0.008 },
   volcan: { frecuencia: 85, volumen: 0.11, oleaje: 0.35 },
   laboratorio: { frecuencia: 160, volumen: 0.04, oleaje: 0.08 },
   mercado: { frecuencia: 700, filtro: 'bandpass', volumen: 0.04, oleaje: 0.35 },

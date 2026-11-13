@@ -29,7 +29,7 @@ export function rectRedondeado(ctx, x, y, w, h, r) {
 export function envolver(ctx, texto, maxAncho) {
   const lineas = [];
   for (const parrafo of String(texto).split('\n')) {
-    const palabras = parrafo.split(/\s+/).filter(Boolean);
+    const palabras = parrafo.split(/[ \t\r\f\v]+/).filter(Boolean);
     let linea = '';
     for (const palabra of palabras) {
       const prueba = linea ? `${linea} ${palabra}` : palabra;
