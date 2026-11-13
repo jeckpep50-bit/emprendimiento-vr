@@ -136,5 +136,16 @@ export function lineasDeEscena(e) {
     };
     recorrer([e.lineas, e.preguntas, e.productos]);
   }
+  // Departamento de francés: toda línea { quien, fr } lleva voz (órdenes, cuartos y objetos).
+  if (e.tipo === 'maison') {
+    const recorrer = (v) => {
+      if (Array.isArray(v)) v.forEach(recorrer);
+      else if (v && typeof v === 'object') {
+        if (typeof v.quien === 'string' && typeof v.fr === 'string') agregar(v.quien, v.fr);
+        Object.values(v).forEach(recorrer);
+      }
+    };
+    recorrer([e.lineas, e.pieces, e.objets]);
+  }
   return [...lineas.values()];
 }

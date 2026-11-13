@@ -97,6 +97,30 @@ Coco sigue con la mirada, escucha lo que se apunta, sostiene y entrega objetos c
 el español solo aparece con 🌐. Ayuda en 3 niveles (pista y repetición → Coco señala → modelo y traducción); 💡 sube un nivel.
 Registro por meta (solo en memoria): solo o con ayuda, reintentos y usos de 🔊 💡 🌐. Voces: `npm run voces -- cafe-ingles-a1`.
 
+### Chez Coco: la casa en francés (francés A1, ~4-5 min)
+
+`?leccion=chez-coco-francais-a1`. Coco, ahora con camiseta marinera y pañuelo rojo, es el acompañante: camina con el
+estudiante por su departamento (entorno `appartement`, escena `maison`) y le da órdenes en francés. Sin micrófono: es
+comprensión oral con respuesta física. El estudiante **se desplaza**: apunta a las huellas 👣 del piso y pulsa para caminar
+(un fundido corto lo deja en el lugar, mirando al frente; la palanca solo gira). Del pasillo salen cuatro puertas en abanico.
+
+1. **Bienvenue**: saludar con la mano y dar los primeros pasos hasta Coco.
+2. **La visite**: tocar las cuatro puertas para conocer los cuartos (`la chambre`, `le salon`, `la cuisine`,
+   `la salle de bain`) y repetir en voz alta («Répète : …»; no se graba nada).
+3. **Cuatro misiones con ayuda decreciente** (`appui`): `accompagne` (Coco va delante y señala) → `indices` (letreros y
+   nombres a la vista) → `seul` × 2 (sin letreros: de memoria y por lo que se ve en cada cuarto).
+   - *Va dans la chambre et éteins la tablette*: tomar la tablet y pulsar ⏻.
+   - *Va dans le salon et baisse le volume de la télé*: tomar el control y pulsar − tres veces.
+   - *Va dans la cuisine et allume la lumière*: la cocina está a oscuras; encontrar el interruptor.
+   - *Ferme la porte de la salle de bain*: agarrar la manija y empujar la puerta hasta cerrarla.
+4. **Fête**: estrellas por meta y un mensaje de cierre opcional (`cierre` en el JSON).
+
+Entrar a otro cuarto o tocar otro objeto cuenta como error («Non. Ça, c'est le salon.») y activa la ayuda en 3 niveles
+(se repite la orden → Coco señala y aparecen los nombres → traducción, que se quita sola al terminar la misión).
+Herramientas: 🔊 Encore · 🌐 Español · 💡 Aide · ⏮ Retour · ↺ Rejouer · ⏏ Sortir. El plano del departamento (dónde se para el
+estudiante en cada lugar, puertas y objetos) está en `MAISON`, en `src/mundo/entornos-maison.js`.
+Voces: `npm run voces -- chez-coco-francais-a1` (voz francesa con Kokoro; ver «Voces de los personajes»).
+
 ## Películas inmersivas en realidad aumentada
 
 **Types of Soil** (`?leccion=types-of-soil`) es una película de unos 18 minutos para 3.º EGB, con narración híbrida
@@ -121,12 +145,31 @@ Una lección puede tener voces grabadas con `"voces": { "carpeta": "voces/<id>",
 Con eso:
 
 - la guía (`guia`) lee la instrucción de cada escena, los pasos de las narrativas y los mensajes finales;
+- en las escenas `cafe` y `maison`, toda línea `{ quien, en | fr, es }` lleva voz;
 - en las entrevistas, cada personaje (`"voz": "camila"`) dice su saludo y sus respuestas, y su boca se mueve con la voz;
 - las escenas animadas (`observacion`) usan `frases: { clave: { quien, texto } }`.
 
 `npm run voces` graba con las voces de Windows (Microsoft Sabina) solo lo nuevo o cambiado. El tono distingue a los
 personajes (Camila suena como una niña). Cada línea se guarda como `public/<carpeta>/<clave>.mp3`, y la clave sale de
 quién habla y del texto. Si se corrige un texto, se vuelve a grabar solo esa línea. Las líneas sin audio se omiten sin error.
+
+### Voces con Kokoro (francés y otros idiomas)
+
+Windows solo trae voces en español e inglés. Para otros idiomas, la lección puede pedir la voz neuronal local
+[Kokoro-82M](https://github.com/thewh1teagle/kokoro-onnx) con `"voces": { "motor": "kokoro", "personajes": { "coco":
+{ "voz": "ff_siwis", "idioma": "fr-fr", "tono": "-4%", "velocidad": "-14%" } } }`. Preparación (una sola vez por PC):
+
+```bash
+# 1. Python con las bibliotecas (en la carpeta del proyecto; .voces/ no se sube al repositorio)
+python -m venv .voces/venv
+.voces/venv/Scripts/python -m pip install kokoro-onnx soundfile
+# 2. Descargar el modelo (~340 MB): lo hace hyperframes la primera vez que genera una voz
+HYPERFRAMES_PYTHON=.voces/venv/Scripts/python.exe npx hyperframes tts "Bonjour" --voice ff_siwis --output prueba.wav
+```
+
+Después `npm run voces -- <id>` funciona igual que con las voces de Windows. Usar el Python instalado desde python.org:
+el que descarga `uv` puede quedar bloqueado por el Control de aplicaciones de Windows. Otras rutas: `VOCES_PYTHON`,
+`KOKORO_MODELO` y `KOKORO_VOCES`.
 
 ## Controles dentro de la VR
 

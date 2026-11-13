@@ -13,6 +13,8 @@ const GRAVEDAD = 9.8;
  *  - Vista previa en el PC: WASD o flechas para caminar.
  * El movimiento queda limitado a un círculo alrededor del contenido de la escena
  * (app.limites) para que nadie se aleje de la actividad.
+ * Con app.soloGiro = true (escenas que se recorren por huellas, con paredes) la palanca
+ * solo gira: no hay arco de teletransporte ni caminata con el teclado.
  */
 export class Locomocion {
   constructor(app, entrada, audio, fx) {
@@ -95,6 +97,11 @@ export class Locomocion {
       }
 
       // Teletransporte
+      if (this.app.soloGiro) {
+        e.apuntando = false;
+        p.suspendido = false;
+        continue;
+      }
       if (y < -0.7 && !p.agarrado) e.apuntando = true;
       if (e.apuntando) {
         if (y > -0.3) {
@@ -175,6 +182,7 @@ export class Locomocion {
   }
 
   _actualizarTeclado(dt) {
+    if (this.app.soloGiro) return;
     const t = this._teclas;
     const adelante = (t.has('KeyW') || t.has('ArrowUp') ? 1 : 0) - (t.has('KeyS') || t.has('ArrowDown') ? 1 : 0);
     const lado = (t.has('KeyD') || t.has('ArrowRight') ? 1 : 0) - (t.has('KeyA') || t.has('ArrowLeft') ? 1 : 0);

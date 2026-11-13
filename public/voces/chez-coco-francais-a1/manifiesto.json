@@ -1,0 +1,212 @@
+{
+ "coco-1kxfny8": {
+  "quien": "coco",
+  "texto": "Bonjour ! Je m’appelle Coco. Bienvenue chez moi !",
+  "seg": 2.74
+ },
+ "coco-1pf4i4k": {
+  "quien": "coco",
+  "texto": "Dis bonjour de la main !",
+  "seg": 1.37
+ },
+ "coco-0hwwwgj": {
+  "quien": "coco",
+  "texto": "Entre ! Viens ici !",
+  "seg": 1.25
+ },
+ "coco-1y30ys4": {
+  "quien": "coco",
+  "texto": "Voici ma maison. Touche les portes !",
+  "seg": 2.18
+ },
+ "coco-0dxoqaf": {
+  "quien": "coco",
+  "texto": "Oh là là ! J’ai des problèmes. Aide-moi, s’il te plaît !",
+  "seg": 2.94
+ },
+ "coco-1iy9xdc": {
+  "quien": "coco",
+  "texto": "Suis-moi !",
+  "seg": 0.83
+ },
+ "coco-1fysz82": {
+  "quien": "coco",
+  "texto": "Regarde !",
+  "seg": 0.96
+ },
+ "coco-0bog3lo": {
+  "quien": "coco",
+  "texto": "Va dans la chambre et éteins la tablette.",
+  "seg": 2.49
+ },
+ "coco-0lpjzv4": {
+  "quien": "coco",
+  "texto": "Voici la tablette. Prends la tablette !",
+  "seg": 2.35
+ },
+ "coco-1gom2lk": {
+  "quien": "coco",
+  "texto": "Éteins la tablette !",
+  "seg": 1.27
+ },
+ "coco-184cjeo": {
+  "quien": "coco",
+  "texto": "Merci ! La tablette est éteinte.",
+  "seg": 1.97
+ },
+ "coco-1jpxaij": {
+  "quien": "coco",
+  "texto": "Va dans le salon et baisse le volume de la télé.",
+  "seg": 2.81
+ },
+ "coco-0x6x8ze": {
+  "quien": "coco",
+  "texto": "Encore ! Baisse le volume.",
+  "seg": 1.62
+ },
+ "coco-1b93n5y": {
+  "quien": "coco",
+  "texto": "Aïe ! C’est trop fort ! Baisse le volume.",
+  "seg": 2.25
+ },
+ "coco-04lhi3r": {
+  "quien": "coco",
+  "texto": "Non, non. Baisse le volume.",
+  "seg": 1.55
+ },
+ "coco-1i3q1fx": {
+  "quien": "coco",
+  "texto": "Merci ! C’est mieux comme ça.",
+  "seg": 1.53
+ },
+ "coco-07zm89r": {
+  "quien": "coco",
+  "texto": "Va dans la cuisine et allume la lumière.",
+  "seg": 2.57
+ },
+ "coco-1x3k1ld": {
+  "quien": "coco",
+  "texto": "Oh ! Il fait noir ici.",
+  "seg": 1.35
+ },
+ "coco-1ng7k2f": {
+  "quien": "coco",
+  "texto": "Merci ! Maintenant, je vois bien.",
+  "seg": 1.9
+ },
+ "coco-08wcxbb": {
+  "quien": "coco",
+  "texto": "Ferme la porte de la salle de bain.",
+  "seg": 2
+ },
+ "coco-0eohwjt": {
+  "quien": "coco",
+  "texto": "Non. Ça, c’est la porte de la chambre.",
+  "seg": 2.16
+ },
+ "coco-1yx90yl": {
+  "quien": "coco",
+  "texto": "Merci ! La porte est fermée.",
+  "seg": 1.76
+ },
+ "coco-1eg4fbc": {
+  "quien": "coco",
+  "texto": "Bravo !",
+  "seg": 0.8
+ },
+ "coco-08fuluv": {
+  "quien": "coco",
+  "texto": "Super !",
+  "seg": 0.91
+ },
+ "coco-05dwm5r": {
+  "quien": "coco",
+  "texto": "Très bien !",
+  "seg": 0.82
+ },
+ "coco-1e78zt3": {
+  "quien": "coco",
+  "texto": "Parfait !",
+  "seg": 0.83
+ },
+ "coco-0o75pqr": {
+  "quien": "coco",
+  "texto": "Merci beaucoup ! La maison est parfaite. Bravo !",
+  "seg": 2.78
+ },
+ "coco-0pbif9q": {
+  "quien": "coco",
+  "texto": "Au revoir ! À bientôt !",
+  "seg": 1.42
+ },
+ "coco-17h7w26": {
+  "quien": "coco",
+  "texto": "Voici la chambre. Répète : la chambre !",
+  "seg": 2.42
+ },
+ "coco-04m6lfj": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est la chambre.",
+  "seg": 1.45
+ },
+ "coco-1uni3o0": {
+  "quien": "coco",
+  "texto": "Voici le salon. Répète : le salon !",
+  "seg": 2.28
+ },
+ "coco-0a5yidk": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est le salon.",
+  "seg": 1.39
+ },
+ "coco-0kkfumu": {
+  "quien": "coco",
+  "texto": "Voici la cuisine. Répète : la cuisine !",
+  "seg": 2.81
+ },
+ "coco-1i3o4x9": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est la cuisine.",
+  "seg": 1.6
+ },
+ "coco-0n8qgbi": {
+  "quien": "coco",
+  "texto": "Voici la salle de bain. Répète : la salle de bain !",
+  "seg": 3.14
+ },
+ "coco-0ooosuf": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est la salle de bain.",
+  "seg": 1.72
+ },
+ "coco-086kpch": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est le livre.",
+  "seg": 1.51
+ },
+ "coco-0gbze58": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est la lampe.",
+  "seg": 1.45
+ },
+ "coco-1w9mzkv": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est le canapé.",
+  "seg": 1.48
+ },
+ "coco-1wouewk": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est le frigo.",
+  "seg": 1.42
+ },
+ "coco-06d3jkg": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est le robinet.",
+  "seg": 1.5
+ },
+ "coco-01tvhqz": {
+  "quien": "coco",
+  "texto": "Non. Ça, c'est la baignoire.",
+  "seg": 1.52
+ }
+}

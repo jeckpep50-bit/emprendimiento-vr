@@ -118,7 +118,7 @@ export const MODELOS = {
   camara_tv: 'Cámara de televisión sobre trípode.',
   furgoneta_tv: 'Furgoneta del noticiero con antena satelital.',
   // Cafetería (inglés A1)
-  gallo: 'Coco, gallo camarero de caricatura con boina azul, cinta tricolor, brújula y bolso (≈1,2 m). Habla moviendo el pico y aletea.',
+  gallo: 'Coco, gallo camarero de caricatura con boina azul, cinta tricolor, brújula y bolso (≈1,2 m). Habla moviendo el pico y aletea. Opción estilo: "frances" (camiseta marinera, pañuelo rojo y baguette).',
   pizza: 'Porción de pizza con pepperoni.',
   galleta: 'Galleta con chispas de chocolate (cookie).',
   muffin: 'Muffin de arándanos.',
@@ -126,6 +126,11 @@ export const MODELOS = {
   bandeja: 'Bandeja de madera (≈42 × 30 cm). Opción color.',
   campana: 'Campanilla de servicio para el mostrador.',
   taza: 'Taza de cerámica con bebida caliente. Opciones color y bebida.',
+  // Departamento (francés A1)
+  tablette: 'Tablet de pie (30 × 20 cm) con pantalla que la escena puede dibujar.',
+  telecommande: 'Control remoto de televisión.',
+  interrupteur: 'Interruptor de pared grande con lucecita piloto.',
+  porte: 'Hoja de puerta (88 cm × 2 m) con la bisagra en el origen. Opciones color y panel.',
 };
 
 export const ENTORNOS = {
@@ -145,6 +150,7 @@ export const ENTORNOS = {
   mercado: 'Mercado ecuatoriano con 4 puestos bajo toldos alrededor del usuario: frutas (al frente, mesón en z = -2,6), carnes y mariscos (izquierda, x = -2,6), comidas y jugos (derecha, x = 2,6) y lácteos y abarrotes (atrás, z = 2,4). Los mesones miden 0,9 m de alto.',
   planta: 'Planta procesadora de alimentos: nave industrial con tanques, tuberías, robot empacador y luces de seguridad.',
   cafeteria: 'Coco\'s Café: cafetería acogedora con mostrador al frente (a ~1 m), pizarra con la carta en inglés, vitrina, cafetera, lámparas y mesas. La usa la escena "cafe".',
+  appartement: 'Chez Coco: departamento con pasillo de entrada y cuatro cuartos en abanico (la chambre, le salon, la cuisine, la salle de bain), amoblados y con vista a París. Se recorre por huellas. Lo usa la escena "maison".',
   ninguno: 'Sin decorado (lo pone la propia escena; p. ej. una película en realidad aumentada).',
   cuerpo: 'Interior del cuerpo humano en cuatro zonas: boca, estómago (lago de ácido), intestino (vellosidades y microbiota) y vaso sanguíneo (glóbulos rojos). Lo usa la escena "viaje".',
 };
@@ -175,6 +181,8 @@ export const TIPOS_ESCENA = {
   sentidos: 'Describir un lugar con los cinco sentidos (entorno volcan): cada sentido se activa y se elige la descripción viva. Campos: sentidos [{ id, emoji, nombre, pregunta, opciones [{ texto, tipo: viva | pobre | falsa, retro }] }].',
   transmision: 'Salida al aire en el estudio: la presentadora y el reportero leen el reporte; al final, un resumen. Campos: presentador, apertura, reporte [{ quien, texto, emoji }], cierre, resumen.',
   cafe: 'Cafetería de inglés A1 con Coco, el gallo camarero (entorno cafeteria): saludar, escuchar la carta, armar el pedido con tarjetas, pedir con menos ayuda, comprobar el pedido y despedirse. Registra logros independientes o con ayuda. Campos: productos, lineas { clave: { quien, en, es } }, preguntas.',
+  maison:
+    'Departamento de francés A1 con Coco como acompañante (entorno appartement): el estudiante camina por huellas, conoce los cuartos y cumple órdenes en francés con ayuda decreciente (ir al cuarto y apagar la tablet, bajar el volumen, encender la luz, cerrar la puerta). Campos: pieces [{ id, emoji, nom, voici, non }], objets, missions [{ id, ordre, merci, appui }], lineas { clave: { quien, fr, es } }, pasos, fases, cierre.',
   prototipo:
     'Taller de prototipo: (1) elegir en un estante los materiales que sirven; (2) probar alturas del escalón en una simulación a tamaño real con Camila frente al bebedero. Campos: materiales [{ modelo, nombre, sirve, explicacion, pista? }], instruccionMedida, medidas [{ texto, alto, correcta, explicacion }], frases? { logro }.',
 };

@@ -7,6 +7,7 @@ import { laboratorio as labPrefabs } from './prefabs/laboratorio.js';
 import { darVida } from './vida.js';
 import { entornosNoticias } from './entornos-noticias.js';
 import { entornosCafe } from './entornos-cafe.js';
+import { entornosMaison } from './entornos-maison.js';
 import { FUENTE } from '../ui/lienzo.js';
 
 const FUENTE_TIZA = FUENTE;
@@ -975,6 +976,7 @@ const ENTORNOS = {
   // Noticiero (lección de la descripción): estudio de TV, Plaza Grande y mirador del Cotopaxi
   ...entornosNoticias,
   ...entornosCafe,
+  ...entornosMaison,
 };
 
 /**

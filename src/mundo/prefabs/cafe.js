@@ -30,8 +30,11 @@ const esfera = (r = 1, s = 20) => new THREE.SphereGeometry(r, s, Math.round(s * 
  * userData: articulaciones { torso, cabeza, alaI, alaD, cola, picoInf, boina },
  *  animar(t), hablar(segundos), fuenteHabla (0..1 abre el pico), setExpresion(e),
  *  alturaOjos. Las alas se posan con rotation.z (positivo = levantar, signo por lado).
+ * Opción estilo: "frances" lo viste con camiseta marinera de rayas, pañuelo rojo al cuello
+ *  y una baguette en el bolso (acompañante de la lección de francés).
  */
-export function gallo() {
+export function gallo({ estilo = 'camarero' } = {}) {
+  const frances = estilo === 'frances';
   const g = new THREE.Group();
   const blanco = mat('#f6f1e8');
   const crema = mat('#e9dfd0');
@@ -73,11 +76,24 @@ export function gallo() {
   correa.rotation.z = -0.62;
   correa.add(malla(new THREE.TorusGeometry(0.262, 0.013, 6, 40), mat('#3a3a42'), [0, 0, 0], [0, Math.PI / 2, 0], [1, 1.08, 0.93]));
   torso.add(correa);
-  // Brújula dorada colgada de la correa
-  torso.add(malla(new THREE.TorusGeometry(0.042, 0.008, 8, 24), mat('#d9a520', { emisivo: 0.15 }), [0.07, 0.27, 0.21], [-0.25, 0, 0]));
-  torso.add(malla(new THREE.CylinderGeometry(0.038, 0.038, 0.008, 24), blancoOjo, [0.07, 0.27, 0.212], [Math.PI / 2 - 0.25, 0, 0]));
-  torso.add(malla(new THREE.BoxGeometry(0.008, 0.06, 0.006), mat('#2347b8', { tipo: 'basica' }), [0.07, 0.27, 0.218], [-0.25, 0, 0.5]));
-  torso.add(malla(new THREE.BoxGeometry(0.008, 0.06, 0.006), mat('#e3262c', { tipo: 'basica' }), [0.07, 0.27, 0.218], [-0.25, 0, -0.5]));
+  if (frances) {
+    // Camiseta marinera: rayas azul marino alrededor del cuerpo
+    for (const h of [-0.14, -0.07, 0, 0.07, 0.14]) {
+      const r = Math.sqrt(1 - (h / 0.28) ** 2) * 1.012;
+      torso.add(malla(new THREE.CylinderGeometry(1, 1, 0.03, 36, 1, true), marino, [0, 0.2 + h, 0], [0, 0, 0], [0.25 * r, 1, 0.23 * r]));
+    }
+    // Pañuelo rojo al cuello con el nudo a un lado
+    torso.add(malla(new THREE.TorusGeometry(0.135, 0.03, 10, 30), rojo, [0, 0.415, 0.02], [Math.PI / 2 - 0.12, 0, 0], [1, 0.92, 1]));
+    torso.add(malla(new THREE.ConeGeometry(0.035, 0.11, 10), rojo, [-0.07, 0.35, 0.155], [0.25, 0, 0.55]));
+    torso.add(malla(new THREE.ConeGeometry(0.03, 0.09, 10), rojo, [-0.035, 0.345, 0.165], [0.25, 0, -0.1]));
+    torso.add(malla(esfera(0.026, 10), rojo, [-0.055, 0.395, 0.15]));
+  } else {
+    // Brújula dorada colgada de la correa
+    torso.add(malla(new THREE.TorusGeometry(0.042, 0.008, 8, 24), mat('#d9a520', { emisivo: 0.15 }), [0.07, 0.27, 0.21], [-0.25, 0, 0]));
+    torso.add(malla(new THREE.CylinderGeometry(0.038, 0.038, 0.008, 24), blancoOjo, [0.07, 0.27, 0.212], [Math.PI / 2 - 0.25, 0, 0]));
+    torso.add(malla(new THREE.BoxGeometry(0.008, 0.06, 0.006), mat('#2347b8', { tipo: 'basica' }), [0.07, 0.27, 0.218], [-0.25, 0, 0.5]));
+    torso.add(malla(new THREE.BoxGeometry(0.008, 0.06, 0.006), mat('#e3262c', { tipo: 'basica' }), [0.07, 0.27, 0.218], [-0.25, 0, -0.5]));
+  }
   // Bolso de cuero con libros
   const bolso = new THREE.Group();
   bolso.position.set(0.19, 0.1, 0.13);
@@ -85,7 +101,13 @@ export function gallo() {
   bolso.add(malla(new RoundedBoxGeometry(0.2, 0.15, 0.08, 3, 0.025), mat('#c98a45'), [0, 0, 0]));
   bolso.add(malla(new RoundedBoxGeometry(0.205, 0.08, 0.02, 3, 0.01), mat('#b27735'), [0, 0.035, 0.043], [0.12, 0, 0]));
   bolso.add(malla(new THREE.BoxGeometry(0.035, 0.03, 0.01), mat('#c9ccd4'), [0, 0.0, 0.056]));
-  ['#c43a3a', '#2f9c8f', '#7a2f45'].forEach((c, i) => bolso.add(malla(new THREE.BoxGeometry(0.035, 0.12, 0.06), mat(c), [-0.05 + i * 0.045, 0.09, -0.005], [0, 0, (i - 1) * 0.08])));
+  if (frances) {
+    // Una baguette asoma del bolso
+    bolso.add(malla(new THREE.CapsuleGeometry(0.026, 0.3, 4, 10), mat('#d9a35c'), [0.02, 0.17, -0.005], [0, 0, -0.22]));
+    for (let i = 0; i < 4; i++) bolso.add(malla(new THREE.BoxGeometry(0.04, 0.008, 0.012), mat('#b9803f'), [0.035 + i * 0.016, 0.13 + i * 0.07, 0.021], [0, 0, 0.5]));
+  } else {
+    ['#c43a3a', '#2f9c8f', '#7a2f45'].forEach((c, i) => bolso.add(malla(new THREE.BoxGeometry(0.035, 0.12, 0.06), mat(c), [-0.05 + i * 0.045, 0.09, -0.005], [0, 0, (i - 1) * 0.08])));
+  }
   torso.add(bolso);
 
   // Alas (giran en el hombro)

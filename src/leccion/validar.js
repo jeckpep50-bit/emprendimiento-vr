@@ -355,6 +355,44 @@ export function validarLeccion(l) {
       if (lista(e.reporte, 1, 8, `${r}.reporte`)) e.reporte.forEach((l, j) => (texto(l.quien) && texto(l.texto)) || err(`${r}.reporte[${j}]`, 'necesita quien y texto'));
     }
 
+    if (e.tipo === 'maison') {
+      const lineas = e.lineas ?? {};
+      const linea = (l, ruta) => (l && texto(l.quien) && texto(l.fr) && texto(l.es)) || err(ruta, 'necesita quien, fr y es');
+      const par = (l, ruta) => (l && texto(l.fr) && texto(l.es)) || err(ruta, 'necesita fr y es');
+      const requeridas = ['bonjour', 'saluerMain', 'entre', 'maison', 'aide', 'suisMoi', 'regarde', 'voiciTablette', 'eteins', 'encore', 'tropFort', 'pasEteindre', 'noir', 'nonPorte', 'elogio1', 'elogio2', 'elogio3', 'elogio4', 'fin', 'auRevoir'];
+      for (const k of requeridas) linea(lineas[k], `${r}.lineas.${k}`);
+      const cuartos = ['chambre', 'salon', 'cuisine', 'bain'];
+      if (lista(e.pieces, 4, 4, `${r}.pieces`)) {
+        for (const id of cuartos) {
+          const p = e.pieces.find((x) => x.id === id);
+          if (!p) {
+            err(`${r}.pieces`, `falta el cuarto "${id}"`);
+            continue;
+          }
+          par(p.nom, `${r}.pieces (${id}).nom`);
+          linea(p.voici, `${r}.pieces (${id}).voici`);
+          linea(p.non, `${r}.pieces (${id}).non`);
+        }
+      }
+      for (const k of ['tablette', 'livre', 'lampe', 'tele', 'telecommande', 'canape', 'interrupteur', 'frigo', 'robinet', 'baignoire']) {
+        const o = e.objets?.[k];
+        par(o, `${r}.objets.${k}`);
+        if (o?.non !== undefined) linea(o.non, `${r}.objets.${k}.non`);
+      }
+      if (lista(e.missions, 4, 4, `${r}.missions`)) {
+        e.missions.forEach((mi, j) => {
+          const rr = `${r}.missions[${j}]`;
+          if (mi.id !== cuartos[j]) err(`${rr}.id`, `debe ser "${cuartos[j]}" (las misiones van en ese orden)`);
+          for (const k of ['ordre', 'merci']) if (!lineas[mi[k]]) err(`${rr}.${k}`, 'debe ser una clave de lineas');
+          if (!['accompagne', 'indices', 'seul'].includes(mi.appui)) err(`${rr}.appui`, 'debe ser accompagne | indices | seul');
+        });
+      }
+      if (lista(e.fases, 6, 6, `${r}.fases`)) e.fases.forEach((f, j) => par(f, `${r}.fases[${j}]`));
+      for (const k of ['salue', 'avance', 'portes', 'ecoute', 'vaPiece', 'fais']) par(e.pasos?.[k], `${r}.pasos.${k}`);
+      if (e.couloir !== undefined) par(e.couloir, `${r}.couloir`);
+      if (e.cierre !== undefined && !texto(e.cierre)) err(`${r}.cierre`, 'debe ser un texto');
+    }
+
     if (e.tipo === 'cafe') {
       const lineas = e.lineas ?? {};
       const linea = (l, ruta) => (l && texto(l.quien) && texto(l.en) && texto(l.es)) || err(ruta, 'necesita quien, en y es');

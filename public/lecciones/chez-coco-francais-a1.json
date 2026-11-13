@@ -1,0 +1,432 @@
+{
+  "id": "chez-coco-francais-a1",
+  "titulo": "Chez Coco : la casa en francés",
+  "materia": "Francés",
+  "grado": "Nivel A1",
+  "idioma": "es",
+  "duracionMinutos": 5,
+  "emoji": "🏠",
+  "narracion": false,
+  "gamificacion": true,
+  "descripcion": "Coco, el gallo, te invita a su departamento y camina contigo. Lo saludas con la mano, recorres la casa por las huellas, conoces los cuartos y lo ayudas con cuatro misiones: apagar la tablet, bajar el volumen de la tele, encender la luz y cerrar una puerta. Todo en francés y sin micrófono: escuchas, caminas y haces.",
+  "objetivos": [
+    "Reconocer al escuchar los cuartos de la casa: la chambre, le salon, la cuisine, la salle de bain.",
+    "Comprender órdenes sencillas con Va dans… y los verbos éteins, baisse, allume y ferme.",
+    "Responder a una orden en francés con una acción física: ir al lugar y hacer lo pedido.",
+    "Saludar y despedirse (Bonjour !, Merci !, Au revoir !)."
+  ],
+  "voces": {
+    "motor": "kokoro",
+    "carpeta": "voces/chez-coco-francais-a1",
+    "personajes": {
+      "coco": {
+        "voz": "ff_siwis",
+        "idioma": "fr-fr",
+        "tono": "-4%",
+        "velocidad": "-14%"
+      }
+    }
+  },
+  "rangos": [
+    {
+      "nombre": "Invité",
+      "emoji": "🙂",
+      "puntos": 0
+    },
+    {
+      "nombre": "Ami de Coco",
+      "emoji": "🐓",
+      "puntos": 600
+    },
+    {
+      "nombre": "Champion de la maison",
+      "emoji": "⭐",
+      "puntos": 1500
+    }
+  ],
+  "titulosMedalla": {
+    "oro": "Médaille d’or ! Tu comprends le français !",
+    "plata": "Médaille d’argent ! Très bien !",
+    "bronce": "Médaille de bronze ! Bon début !"
+  },
+  "escenas": [
+    {
+      "tipo": "maison",
+      "entorno": "appartement",
+      "titulo": "Chez Coco",
+      "instruccion": "Escucha a Coco, camina por las huellas y haz lo que te pide.",
+      "vozInstruccion": false,
+      "cierre": "Entonces dime, ¿iniciamos este increíble proyecto? 😉",
+      "couloir": {
+        "fr": "🚪 le couloir",
+        "es": "el pasillo"
+      },
+      "fases": [
+        {
+          "fr": "Bienvenue",
+          "es": "Bienvenida"
+        },
+        {
+          "fr": "La visite",
+          "es": "La visita"
+        },
+        {
+          "fr": "Mission 1",
+          "es": "Misión 1"
+        },
+        {
+          "fr": "Mission 2",
+          "es": "Misión 2"
+        },
+        {
+          "fr": "Mission 3",
+          "es": "Misión 3"
+        },
+        {
+          "fr": "Mission 4",
+          "es": "Misión 4"
+        }
+      ],
+      "pasos": {
+        "salue": {
+          "fr": "Dis bonjour de la main 👋",
+          "es": "Saluda moviendo la mano de lado a lado."
+        },
+        "avance": {
+          "fr": "Vise les pas 👣 et appuie",
+          "es": "Apunta a las huellas 👣 y pulsa para caminar."
+        },
+        "portes": {
+          "fr": "Touche les quatre portes",
+          "es": "Apunta a cada puerta y púlsala para conocer los cuartos."
+        },
+        "ecoute": {
+          "fr": "Écoute Coco 👂",
+          "es": "Escucha lo que te pide Coco."
+        },
+        "vaPiece": {
+          "fr": "Va dans la bonne pièce 👣",
+          "es": "Camina por las huellas hasta el lugar que dijo Coco."
+        },
+        "fais": {
+          "fr": "Fais ce que dit Coco ✋",
+          "es": "Haz con tus manos lo que te pidió Coco."
+        }
+      },
+      "pieces": [
+        {
+          "id": "chambre",
+          "emoji": "🛏️",
+          "nom": {
+            "fr": "la chambre",
+            "es": "el cuarto"
+          },
+          "voici": {
+            "quien": "coco",
+            "fr": "Voici la chambre. Répète : la chambre !",
+            "es": "Este es el cuarto. Repite: la chambre."
+          },
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est la chambre.",
+            "es": "No. Este es el cuarto."
+          }
+        },
+        {
+          "id": "salon",
+          "emoji": "🛋️",
+          "nom": {
+            "fr": "le salon",
+            "es": "la sala"
+          },
+          "voici": {
+            "quien": "coco",
+            "fr": "Voici le salon. Répète : le salon !",
+            "es": "Esta es la sala. Repite: le salon."
+          },
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est le salon.",
+            "es": "No. Esta es la sala."
+          }
+        },
+        {
+          "id": "cuisine",
+          "emoji": "🍳",
+          "nom": {
+            "fr": "la cuisine",
+            "es": "la cocina"
+          },
+          "voici": {
+            "quien": "coco",
+            "fr": "Voici la cuisine. Répète : la cuisine !",
+            "es": "Esta es la cocina. Repite: la cuisine."
+          },
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est la cuisine.",
+            "es": "No. Esta es la cocina."
+          }
+        },
+        {
+          "id": "bain",
+          "emoji": "🛁",
+          "nom": {
+            "fr": "la salle de bain",
+            "es": "el baño"
+          },
+          "voici": {
+            "quien": "coco",
+            "fr": "Voici la salle de bain. Répète : la salle de bain !",
+            "es": "Este es el baño. Repite: la salle de bain."
+          },
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est la salle de bain.",
+            "es": "No. Este es el baño."
+          }
+        }
+      ],
+      "objets": {
+        "tablette": {
+          "fr": "la tablette",
+          "es": "la tablet"
+        },
+        "livre": {
+          "fr": "le livre",
+          "es": "el libro",
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est le livre.",
+            "es": "No. Eso es el libro."
+          }
+        },
+        "lampe": {
+          "fr": "la lampe",
+          "es": "la lámpara",
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est la lampe.",
+            "es": "No. Eso es la lámpara."
+          }
+        },
+        "tele": {
+          "fr": "la télé",
+          "es": "la tele"
+        },
+        "telecommande": {
+          "fr": "la télécommande",
+          "es": "el control remoto"
+        },
+        "canape": {
+          "fr": "le canapé",
+          "es": "el sofá",
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est le canapé.",
+            "es": "No. Eso es el sofá."
+          }
+        },
+        "interrupteur": {
+          "fr": "l’interrupteur",
+          "es": "el interruptor"
+        },
+        "frigo": {
+          "fr": "le frigo",
+          "es": "la refrigeradora",
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est le frigo.",
+            "es": "No. Eso es la refrigeradora."
+          }
+        },
+        "robinet": {
+          "fr": "le robinet",
+          "es": "la llave de agua",
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est le robinet.",
+            "es": "No. Eso es la llave de agua."
+          }
+        },
+        "baignoire": {
+          "fr": "la baignoire",
+          "es": "la tina",
+          "non": {
+            "quien": "coco",
+            "fr": "Non. Ça, c'est la baignoire.",
+            "es": "No. Eso es la tina."
+          }
+        }
+      },
+      "missions": [
+        {
+          "id": "chambre",
+          "ordre": "ordre1",
+          "merci": "merci1",
+          "appui": "accompagne"
+        },
+        {
+          "id": "salon",
+          "ordre": "ordre2",
+          "merci": "merci2",
+          "appui": "indices"
+        },
+        {
+          "id": "cuisine",
+          "ordre": "ordre3",
+          "merci": "merci3",
+          "appui": "seul"
+        },
+        {
+          "id": "bain",
+          "ordre": "ordre4",
+          "merci": "merci4",
+          "appui": "seul"
+        }
+      ],
+      "lineas": {
+        "bonjour": {
+          "quien": "coco",
+          "fr": "Bonjour ! Je m’appelle Coco. Bienvenue chez moi !",
+          "es": "¡Hola! Me llamo Coco. ¡Bienvenido a mi casa!"
+        },
+        "saluerMain": {
+          "quien": "coco",
+          "fr": "Dis bonjour de la main !",
+          "es": "¡Saluda con la mano!"
+        },
+        "entre": {
+          "quien": "coco",
+          "fr": "Entre ! Viens ici !",
+          "es": "¡Entra! ¡Ven aquí!"
+        },
+        "maison": {
+          "quien": "coco",
+          "fr": "Voici ma maison. Touche les portes !",
+          "es": "Esta es mi casa. ¡Toca las puertas!"
+        },
+        "aide": {
+          "quien": "coco",
+          "fr": "Oh là là ! J’ai des problèmes. Aide-moi, s’il te plaît !",
+          "es": "¡Ay, ay, ay! Tengo problemas. ¡Ayúdame, por favor!"
+        },
+        "suisMoi": {
+          "quien": "coco",
+          "fr": "Suis-moi !",
+          "es": "¡Sígueme!"
+        },
+        "regarde": {
+          "quien": "coco",
+          "fr": "Regarde !",
+          "es": "¡Mira!"
+        },
+        "ordre1": {
+          "quien": "coco",
+          "fr": "Va dans la chambre et éteins la tablette.",
+          "es": "Ve al cuarto y apaga la tablet."
+        },
+        "voiciTablette": {
+          "quien": "coco",
+          "fr": "Voici la tablette. Prends la tablette !",
+          "es": "Aquí está la tablet. ¡Toma la tablet!"
+        },
+        "eteins": {
+          "quien": "coco",
+          "fr": "Éteins la tablette !",
+          "es": "¡Apaga la tablet!"
+        },
+        "merci1": {
+          "quien": "coco",
+          "fr": "Merci ! La tablette est éteinte.",
+          "es": "¡Gracias! La tablet está apagada."
+        },
+        "ordre2": {
+          "quien": "coco",
+          "fr": "Va dans le salon et baisse le volume de la télé.",
+          "es": "Ve a la sala y baja el volumen de la tele."
+        },
+        "encore": {
+          "quien": "coco",
+          "fr": "Encore ! Baisse le volume.",
+          "es": "¡Otra vez! Baja el volumen."
+        },
+        "tropFort": {
+          "quien": "coco",
+          "fr": "Aïe ! C’est trop fort ! Baisse le volume.",
+          "es": "¡Ay! ¡Está muy fuerte! Baja el volumen."
+        },
+        "pasEteindre": {
+          "quien": "coco",
+          "fr": "Non, non. Baisse le volume.",
+          "es": "No, no. Baja el volumen."
+        },
+        "merci2": {
+          "quien": "coco",
+          "fr": "Merci ! C’est mieux comme ça.",
+          "es": "¡Gracias! Así está mejor."
+        },
+        "ordre3": {
+          "quien": "coco",
+          "fr": "Va dans la cuisine et allume la lumière.",
+          "es": "Ve a la cocina y enciende la luz."
+        },
+        "noir": {
+          "quien": "coco",
+          "fr": "Oh ! Il fait noir ici.",
+          "es": "¡Oh! Está oscuro aquí."
+        },
+        "merci3": {
+          "quien": "coco",
+          "fr": "Merci ! Maintenant, je vois bien.",
+          "es": "¡Gracias! Ahora veo bien."
+        },
+        "ordre4": {
+          "quien": "coco",
+          "fr": "Ferme la porte de la salle de bain.",
+          "es": "Cierra la puerta del baño."
+        },
+        "nonPorte": {
+          "quien": "coco",
+          "fr": "Non. Ça, c’est la porte de la chambre.",
+          "es": "No. Esa es la puerta del cuarto."
+        },
+        "merci4": {
+          "quien": "coco",
+          "fr": "Merci ! La porte est fermée.",
+          "es": "¡Gracias! La puerta está cerrada."
+        },
+        "elogio1": {
+          "quien": "coco",
+          "fr": "Bravo !",
+          "es": "¡Bravo!"
+        },
+        "elogio2": {
+          "quien": "coco",
+          "fr": "Super !",
+          "es": "¡Súper!"
+        },
+        "elogio3": {
+          "quien": "coco",
+          "fr": "Très bien !",
+          "es": "¡Muy bien!"
+        },
+        "elogio4": {
+          "quien": "coco",
+          "fr": "Parfait !",
+          "es": "¡Perfecto!"
+        },
+        "fin": {
+          "quien": "coco",
+          "fr": "Merci beaucoup ! La maison est parfaite. Bravo !",
+          "es": "¡Muchas gracias! La casa está perfecta. ¡Bravo!"
+        },
+        "auRevoir": {
+          "quien": "coco",
+          "fr": "Au revoir ! À bientôt !",
+          "es": "¡Adiós! ¡Hasta pronto!"
+        }
+      }
+    }
+  ]
+}
